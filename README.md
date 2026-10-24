@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/unfold-mark.png" width="128" height="128" alt="Unfold"></p>
+
 # Unfold
 
 **by we unfold · Open Intelligence**
