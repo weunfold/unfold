@@ -1,0 +1,9 @@
+{
+  "name": "@rth/dsh-sse",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Server-sent events for the RTH DSH plugins: a snapshot baseline then increments, honouring drain, with per-client pending bounds and a drain deadline",
+  "type": "module",
+  "main": "index.mjs",
+  "license": "MIT"
+}

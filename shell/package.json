@@ -1,0 +1,19 @@
+{
+  "name": "rth-shell",
+  "private": true,
+  "description": "The DSH web profile that hosts the Unfold plugins",
+  "type": "module",
+  "engines": {
+    "node": ">=22.19"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh": "0.2.1-rc.2"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  },
+  "scripts": {
+    "agentd": "node agentd/replay.mjs --auto",
+    "test": "node --test test/*.test.mjs"
+  }
+}

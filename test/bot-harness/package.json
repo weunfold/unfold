@@ -1,0 +1,10 @@
+{
+  "name": "rth-dsh-bot-test-harness",
+  "private": true,
+  "description": "The DeepSeek Harness packages the vendored Bot plugin's unit tests resolve against (DSH_HARNESS; see shell/vendor/omni-ui-dsh/test/harness-resolve.mjs). Same versions as shell/vendor/omni-ui-dsh/dev/harness/package.json, kept outside the vendored tree, which is read-only.",
+  "dependencies": {
+    "@deepseek-ai/dsh": "0.2.1-rc.2",
+    "jsdom": "29.1.1",
+    "oxlint": "1.76.0"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@rth/dsh-session",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RTH's single rolling session as one DSH root Session: composer submit -> typed command through the host control owner -> durable admission -> RTH reply as chat bubbles; DSH makes no root model call",
+  "keywords": [
+    "dsh-plugin",
+    "cordis-plugin"
+  ],
+  "type": "module",
+  "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@rth/dsh-events": "0.1.0",
+    "@rth/dsh-sse": "0.1.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ],
+      "external": [
+        "@automagik/omni-dsh/client"
+      ]
+    }
+  },
+  "scripts": {
+    "build:client": "node ../scripts/build-client.mjs dsh-session"
+  }
+}

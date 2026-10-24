@@ -1,0 +1,17 @@
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dependencies": {
+    "@rth/dsh-events": "link:../../../../plugins/dsh-events",
+    "@rth/dsh-capabilities": "link:../../../../plugins/dsh-capabilities",
+    "@rth/dsh-session": "link:../../../../plugins/dsh-session"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app"
+      ]
+    }
+  }
+}

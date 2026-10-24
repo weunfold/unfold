@@ -1,0 +1,42 @@
+{
+  "name": "@rth/dsh-capabilities",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The capability map for DSH: what RTH can do now and how well, per capability, modality and TML benchmark row, computed only from RTH-Bench results",
+  "keywords": [
+    "dsh-plugin",
+    "cordis-plugin"
+  ],
+  "type": "module",
+  "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "rth-capmap": "cli.mjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@rth/dsh-sse": "0.1.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "scripts": {
+    "build:client": "node ../scripts/build-client.mjs dsh-capabilities"
+  }
+}

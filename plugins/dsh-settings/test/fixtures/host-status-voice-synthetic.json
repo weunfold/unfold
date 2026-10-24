@@ -1,0 +1,156 @@
+{
+  "commands": {
+    "known": 3,
+    "unfinished": 0
+  },
+  "controller": {
+    "data": "/home/you/.local/share/rth",
+    "read": "lock-free (activation.json is replaced atomically)",
+    "recreate_pending": null,
+    "vm": "rth-core"
+  },
+  "deployment": {
+    "active": {
+      "artifact_id": "f78618552e77d0721609b2a77b5f90791d286870ff77a3b8d4776521ebe3db73",
+      "attestation": "self_verified",
+      "candidate": null,
+      "deployment_id": "dep-00014-f78618552e77",
+      "kind": "activate",
+      "manifest_sha256": "7905029e439c86a0839b143f24fd72f1aa69948b9f60f7bba5416ad9cf278642",
+      "receipt": {
+        "backend": "gemini-live@v1",
+        "backend_source": "hello+journal_boot_line",
+        "boot_id": "1a15f5d12ad-402",
+        "checked_utc_ms": 1792601297825,
+        "exe_sha256": "f78618552e77d0721609b2a77b5f90791d286870ff77a3b8d4776521ebe3db73",
+        "hello_deployment_id": "dep-00014-f78618552e77",
+        "identity_source": "hello",
+        "instance_id": "inst-d70aaabaeecc5076b8fa5830e80dc170",
+        "pid": 402,
+        "session_id": "sess-a52aeeb94af8e07deb6b47f4b85e429d",
+        "sha256": "26aba41dfdd3f42d90a5a7554d63b88233b579c41341d76f18924d87034911bc"
+      },
+      "record_generation": 16
+    },
+    "pending": null,
+    "record_generation": 16,
+    "vm": "rth-core"
+  },
+  "host": {
+    "backend_capabilities": {
+      "activity_admission": {
+        "automatic_server_vad": true,
+        "manual_activity_start_end": false,
+        "note": "realtimeInputConfig.automaticActivityDetection; manual activityStart/activityEnd is supported by the API but not wired"
+      },
+      "backend": "gemini-live@v1",
+      "context_truncation": {
+        "note": "contextWindowCompression slidingWindow only; no client-side truncation to the played sample",
+        "supported": false
+      },
+      "generation_cancellation": {
+        "note": "local fence only; the provider generates to its own turnComplete",
+        "per_turn_cancel": false
+      },
+      "provider_interrupts_on_speech": true,
+      "resumable_playout": false
+    },
+    "native_stop": "SIGUSR1 or Ctrl-X in the host terminal stops speech and cancels; SIGINT, SIGTERM or q quits",
+    "pid": 47767,
+    "uptime_ms": 305245,
+    "voice": "vpio",
+    "voice_device": {
+      "io": "vpio",
+      "phase": "running",
+      "options": {
+        "rate": 48000,
+        "agc": false,
+        "ducking": "min"
+      },
+      "attempt": 1,
+      "default_devices_at_start": {
+        "input": {
+          "id": 81,
+          "name": "MacBook Pro Microphone"
+        },
+        "output": {
+          "id": 74,
+          "name": "MacBook Pro Speakers"
+        }
+      },
+      "default_device_changes": [],
+      "mic_mode": {
+        "active": "voice_isolation",
+        "preferred": "standard",
+        "note": "chosen by the user in Control Center (Mic Mode) while voice processing runs; RTH reads it, never sets it"
+      },
+      "stalled": false
+    },
+    "voice_policy": {
+      "barge_in": "provider",
+      "chunk_ms": 40,
+      "echo_cancellation": "apple_voice_processing (see voice_device for the unit's own state)",
+      "echo_reference": "delay 120±40 ms, coupling -10.0 dB, margin 6.0 dB, tail 250 ms, hold 250 ms (gaps 2), floor -38.0 dBFS",
+      "local_gate_cuts": false,
+      "local_vad_cuts": false,
+      "provider_interrupted_flush": true,
+      "provider_tail_flush": true,
+      "queue_seconds": 60,
+      "talk": "open",
+      "turn_taking": "provider VAD (server automatic activity detection; replaceable baseline)",
+      "vad": {
+        "frame_ms": 20,
+        "hang_frames": 20,
+        "kind": "energy",
+        "onset_frames": 3,
+        "threshold_dbfs": -38
+      },
+      "voice_io": "vpio"
+    },
+    "mic": {
+      "state": "muting",
+      "muted": false,
+      "requested": {
+        "muted": true,
+        "generation": 3,
+        "ms_ago": 120
+      },
+      "applied": {
+        "muted": false,
+        "generation": 2,
+        "ms_ago": 90000,
+        "by": "the voice loop",
+        "in_flight_at_fence": 0
+      },
+      "in_flight_now": 1,
+      "writer_abort_unconfirmed": false,
+      "revoked_chunks": 0,
+      "partial_samples_discarded": 0
+    }
+  },
+  "link": {
+    "agent": "127.0.0.1:7700",
+    "backend": "gemini-live@v1",
+    "boot_id": "1a15f5d12ad-402",
+    "command_generation": 6,
+    "commands_supported": true,
+    "connects": 1,
+    "context": "not_restored",
+    "deployment": {
+      "artifact_id": "f78618552e77d0721609b2a77b5f90791d286870ff77a3b8d4776521ebe3db73",
+      "deployment_id": "dep-00014-f78618552e77",
+      "manifest_sha256": "7905029e439c86a0839b143f24fd72f1aa69948b9f60f7bba5416ad9cf278642"
+    },
+    "instance_id": "inst-d70aaabaeecc5076b8fa5830e80dc170",
+    "last_error": null,
+    "session_id": "sess-a52aeeb94af8e07deb6b47f4b85e429d",
+    "since_utc_ms": 1792614471073,
+    "state": "up"
+  },
+  "self_repo": {
+    "dirty": false,
+    "dirty_paths": [],
+    "dirty_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "head": "970a132c409a496cb782ec69eda1b51cf89709ed"
+  }
+}

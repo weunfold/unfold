@@ -1,0 +1,38 @@
+# Plain profile: the user patch layer of this DSH web profile (plain DSH 0.2.1-rc.2, no Bot
+# plugin). It adds the events and capabilities plugins by package name, linked into this
+# profile's node_modules (as `pnpm add link:` would; see package.json), so the row names survive
+# DSH rewriting this file. Their host halves serve /api/rth-* through DSH's connection.fetch, and
+# their built ./client bundles render the events tab and the "What I can do" panel.
+# The synthetic agentd listens on RTH_AGENTD_PORT (default 7787; never the real agentd).
+- insert:
+    - id: rth-events
+      name: '@rth/dsh-events'
+      config:
+        agentd:
+          enabled: true
+          host: 127.0.0.1
+          port: !!js Number(process.env.RTH_AGENTD_PORT || 7787)
+    - id: rth-capabilities
+      name: '@rth/dsh-capabilities'
+      config:
+        results: !!js process.env.RTH_BENCH_RESULTS || ''
+# The session adapter: the one rolling session as the DSH root Session
+# `rth-root`. Composer turns become typed commands through the host control owner (rth-host,
+# RTH_HOST_URL + RTH_HOST_TOKEN_FILE); replies are read from rth-agentd as an observer
+# (RTH_AGENTD_PORT). DSH runs no root loop: other root Sessions are refused, and the
+# first-prompt title model is off. RTH_SESSION_DROP_ACKS is a test-only fault injection.
+- id: session-title-llm
+  disabled: true
+- insert:
+    - id: rth-session
+      name: '@rth/dsh-session'
+      config:
+        host:
+          url: !!js process.env.RTH_HOST_URL || 'http://127.0.0.1:7781'
+          tokenFile: !!js process.env.RTH_HOST_TOKEN_FILE || ''
+        agentd:
+          host: 127.0.0.1
+          port: !!js Number(process.env.RTH_AGENTD_PORT || 7787)
+        faults:
+          dropAcks: !!js Number(process.env.RTH_SESSION_DROP_ACKS || 0)
+          route: !!js process.env.RTH_SESSION_FAULTS === '1'

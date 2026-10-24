@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "mainBotIds": ["rth-root"],
+  "bots": {
+    "rth-root": {
+      "id": "rth-root",
+      "name": "Unfold",
+      "role": "Unfold session",
+      "color": "deepseek",
+      "avatar": { "shape": "octopus" },
+      "instructions": "",
+      "createdAt": 1792540800000,
+      "createdBy": null,
+      "capabilities": []
+    }
+  },
+  "rooms": {},
+  "agents": {},
+  "capabilities": { "items": {} },
+  "exchanges": [],
+  "exchangeTurns": {},
+  "works": {},
+  "questions": {},
+  "prefs": {},
+  "revision": 1,
+  "whaleStored": true,
+  "octopusStored": true
+}

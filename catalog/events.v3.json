@@ -1,0 +1,77 @@
+{
+  "catalog_format": "rth.event-catalog/v1",
+  "catalog_version": 3,
+  "source": "the v2 -> v3 kind table",
+  "rules": [
+    "Append-only: an entry is never renamed or removed. A new meaning gets a new entry; a retired wire kind keeps its entry with status retired.",
+    "`wire` is the kind on the v2 protocol (crates/rth-protocol); `name` is the plain past-tense fact a person reads.",
+    "Old history is never rewritten: readers map wire kinds through this file.",
+    "`summary` is a template over the event's own fields; `{field}` is replaced, `values` maps raw field values to plain words."
+  ],
+  "phases": {
+    "connection": "who is attached",
+    "input": "something arrived from a person or a sense",
+    "decision": "the agent chose what to do",
+    "action": "the agent is doing it",
+    "result": "how it ended",
+    "agent": "the agent's own state and health"
+  },
+  "events": [
+    { "wire": "hello", "name": "agent_available", "phase": "connection", "status": "accepted", "summary": "{agent} {version} is available (boot {boot_id})" },
+    { "wire": "attach", "name": "connection_requested", "phase": "connection", "status": "accepted", "summary": "{attachment_id} asked to join as {role}" },
+    { "wire": "ready", "name": "connection_accepted", "phase": "connection", "status": "accepted", "summary": "{attachment_id} joined as {role}" },
+    { "wire": "rejected", "name": "request_rejected", "phase": "connection", "status": "accepted", "summary": "rejected: {reason}" },
+    { "wire": "heartbeat", "name": "agent_status_reported", "phase": "agent", "status": "accepted", "ephemeral": true, "summary": "up {uptime_ms} ms, {attachments} attached" },
+    { "wire": "log", "name": "note_added", "phase": "agent", "status": "accepted", "summary": "{level}: {msg}" },
+    { "wire": "journal_fault", "name": "history_save_failed", "phase": "agent", "status": "accepted", "summary": "history could not be saved: {detail}" },
+    { "wire": "user_text", "name": "message_submitted", "phase": "input", "status": "accepted", "summary": "{text}" },
+    { "wire": "cancel", "name": "message_stop_requested", "phase": "input", "status": "accepted", "summary": "stop {response_id}" },
+    { "wire": "decision", "name": "decision_made", "phase": "decision", "status": "accepted", "summary": "chose {selected} of {candidates} by {policy}" },
+    { "wire": "response_started", "name": "message_started", "phase": "action", "status": "accepted", "summary": "reply {response_id} to {request_id}" },
+    { "wire": "agent_delta", "name": "message_text_added", "phase": "action", "status": "accepted", "summary": "{text}", "coalesce": "response_id" },
+    {
+      "wire": "agent_audio",
+      "name": "message_audio_added",
+      "phase": "action",
+      "status": "accepted",
+      "note": "generated agent audio, not heard audio; added after the v3 table",
+      "media": true,
+      "summary": "audio for {response_id}",
+      "coalesce": "response_id"
+    },
+    {
+      "wire": "agent_done",
+      "name": "message_finished",
+      "phase": "result",
+      "status": "accepted",
+      "summary": "{response_id} {status}",
+      "values": { "status": { "completed": "completed", "cancelled": "stopped", "failed": "failed" } }
+        },
+    { "wire": "user_audio", "name": "input_audio_added", "phase": "input", "status": "accepted", "note": "captured input audio, silence and noise included; not evidence of speech or speaker", "media": true, "summary": "microphone audio for {stream_id}", "coalesce": "stream_id" },
+    { "wire": "user_audio_end", "name": "input_audio_ended", "phase": "input", "status": "accepted", "note": "a transport stream ended or paused, not necessarily an utterance; the ingress receipt says what arrived", "closes": "user_audio", "summary": "{stream_id} ended: {chunks} chunks produced, {dropped_chunks} dropped" },
+    { "wire": "audio_ingress", "name": "input_audio_received", "phase": "input", "status": "accepted", "note": "the guest receipt for a stream (counts and hash), not evidence the model heard it", "summary": "{stream_id} received: {chunks} chunks, {samples} samples, {gaps} gaps" },
+    { "wire": "input_transcript", "name": "speech_transcribed", "phase": "input", "status": "accepted", "note": "provider transcription, possibly incremental; implies neither finality nor speaker identity", "summary": "{text}" },
+    { "wire": "provider_signal", "name": "provider_turn_signaled", "phase": "result", "status": "accepted", "note": "observed provider state, separate from local completion", "summary": "provider said {signal} for {response_id}" },
+    { "wire": "playback", "name": "message_playback_reported", "phase": "action", "status": "accepted", "note": "one kind for started, finished and cleared; played_samples are samples handed to the device or sink, never proof of being heard", "summary": "{response_id} playback {phase}: {played_samples} samples handed to device, {dropped_samples} dropped" },
+    { "wire": "command_submitted", "name": "command_submitted", "phase": "input", "status": "accepted", "note": "a typed command for the rolling session, sent by the host control owner; a submission, not yet an admission, and a retry resends the identical frame", "summary": "{command_id}: {text}" },
+    { "wire": "command_admitted", "name": "command_admitted", "phase": "input", "status": "accepted", "note": "sent only after the command record is fsynced to the durable command log; admission proves neither that the effect ran nor that the reply finished. A retry (duplicate) reports the recorded state, which can be interrupted", "summary": "{command_id} {status} at generation {generation}", "values": { "status": { "admitted": "admitted", "dispatched": "dispatched", "completed": "completed", "cancelled": "stopped", "failed": "failed", "interrupted": "interrupted (agent restarted before a result was recorded)" } } },
+    { "wire": "media_stored", "name": "media_stored", "phase": "action", "status": "accepted", "note": "a durable, content-addressed copy of PCM (rth.media-ref/v1): written only after the blob and its directory entry were fsynced. Generated agent audio or captured microphone audio, never evidence of being played or heard. Chunks with no covering media_stored were never made durable", "summary": "{media} {sample_start}..{sample_end} of {response_id}{stream_id} stored ({bytes} bytes, sha256 {sha256})" },
+    { "wire": "context_restore", "name": "model_context_checked", "phase": "agent", "status": "accepted", "note": "what a boot did with the model's conversation context: restored = the backend state the previous process held, partial = a text-history approximation given to the provider, not_restored = empty context. History bytes are retained in every case and no effect is replayed", "summary": "model context {status} ({method}): {turns} turns, {tail_records} tail records; {detail}", "values": { "status": { "restored": "restored", "partial": "partly restored", "not_restored": "not restored" } } },
+    { "wire": "response_diagnostic", "name": "response_outcome_detailed", "phase": "result", "status": "accepted", "note": "the detail behind a reply's one terminal; never a terminal itself: message_finished stays the only one, and this follows it. cause is the reply's decision; terminal_event_id is the exact message_finished it details. provider_status is the provider's own open-ended string (incomplete maps to failed); provider_reason is null when the provider gave none and is never made up. outcome_source local means the provider gave no outcome (local_reason: cancel_unacknowledged, unassociated, create_rejected, session_ended, no_session); local_reason after_local_terminal marks a provider outcome that arrived after a local terminal, metadata only", "summary": "{response_id} ended {terminal_status_mapped}, {outcome_source}: provider status {provider_status}, reason {provider_reason}", "values": { "terminal_status_mapped": { "completed": "completed", "cancelled": "stopped", "failed": "failed" }, "outcome_source": { "provider": "as the provider reported", "local": "decided locally" }, "provider_status": { "null": "none" }, "provider_reason": { "null": "unknown" } } },
+    { "wire": "tasks_ready", "name": "task_ledger_ready", "phase": "agent", "status": "accepted", "note": "the agent's task ledger is open and recovered; sent once per connection, only by an agent built with delegation on. A separate kind, not a Hello field, so no Hello literal changes", "summary": "the task ledger is ready ({schema})" },
+    { "wire": "task_state", "name": "task_state_recorded", "phase": "decision", "status": "accepted", "note": "one committed ledger transition or refused update; record is the full task snapshot; cause is the task_update or executor_status it answers (the host owner's receipt)", "summary": "task {task_id} recorded" },
+    { "wire": "task_update", "name": "task_progress_reported", "phase": "action", "status": "accepted", "note": "an executor report forwarded by the host owner (POST /v1/tasks/<id>)", "summary": "the report worker reported progress on task {task_id}" },
+    { "wire": "executor_status", "name": "task_worker_status_reported", "phase": "agent", "status": "accepted", "note": "the executor lease, or a launcher exit receipt the host owner authenticated (the proof never crosses the link)", "summary": "the report worker's status was reported" },
+    { "wire": "memory_act", "name": "memory_act_recorded", "phase": "decision", "status": "accepted", "note": "one memory act (remember or correct) fsynced in the agent's memory ledger before its tool output went to the model. state committed changes the items; proposed (no trusted acceptance: not a typed request) and rejected (with a reason) change nothing. A correction appends a revision; nothing is rewritten. Provenance (provider call, typed command) is filled by the agent, never by the model", "summary": "memory act {act_id} {state}" },
+    { "wire": "memory_recall", "name": "memory_recalled", "phase": "action", "status": "accepted", "note": "a recall receipt. count and total are the saved items this recall selected locally from the memory ledger (ids and revisions, never their text); recall.status says what became of them: held, enqueued (queued for the backend), backend_closed or dropped_context_changed (not delivered), selected_by_backend (the backend selected the text; that receipt repeats no items), dropped_context_changed_at_backend. A receipt is not evidence that the model received or used anything", "summary": "recall receipt {call_id}: {count} of {total} saved items selected locally" }
+  ],
+  "field_notes": [
+    { "wire": "input_transcript", "added": ["utterance_id", "utterance_seq", "final", "response_id", "association", "boundary"], "source": "utterance identity", "note": "text is a delta; the utterance text is its parts concatenated in utterance_seq order. utterance_id is minted locally by the agent's backend adapter, never a provider id; boundaries come only from the provider's end-of-transcription flag (final), never from model turns; boundary=local marks an utterance that began at a local split. final is true only when the provider's flag was parsed. response_id with association=provider only with real identity evidence (the fake backend); Gemini parts are always association=unknown (arrival order is not evidence)" },
+    { "wire": "response_started", "added": ["utterance_id"], "source": "utterance identity", "note": "for a provider-opened response, the locally minted utterance it answers, only with identity evidence (absent for Gemini)" },
+    { "wire": "decision", "added": ["utterance_id"], "source": "utterance identity", "note": "for a provider-opened decision, the locally minted utterance it answers, only with identity evidence (absent for Gemini)" },
+    { "wire": "hello", "added": ["instance.context_restore"], "source": "context restore", "note": "instance.context is one of restored | partial | not_restored (or the legacy history_retained_model_context_not_restored); instance.context_restore carries status, method, snapshot, watermark, lineage_since, turns, tail_records, truncated_turns, detail" },
+    { "wire": "agent_audio", "added": [], "source": "media sidecar", "note": "the journaled copy has data \"\" from the media-sidecar build on; its PCM is in the media_stored blob covering its chunk. Records with non-empty data (older builds) are read inline" },
+    { "wire": "input_transcript", "added": [], "source": "provider turn boundaries and OpenAI Realtime", "note": "supersedes the note above on two points. Boundaries: a final part still ends its utterance, but Gemini (which does not send its end-of-transcription flag in practice) also ends one at a provider turn boundary: its own voice-activity start, or, in a session with no voice activity, a model turn's end; the next utterance's first part has boundary=provider_turn. A boundary is never a link to a reply. Association: OpenAI Realtime parts have one utterance per provider input item, and carry association=provider_adjacent with the reply's response_id once the provider placed that reply's output item right after this item; that is adjacency in the conversation, not proof the reply answers it. Anything else stays association=unknown" },
+    { "wire": "input_transcript", "added": [], "source": "OpenAI Realtime association", "note": "supersedes the two notes above where they differ. OpenAI Realtime parts carry no response_id and are always association=unknown: a conversation position (previous_item_id) is not an answers-to link, so association=provider_adjacent is not emitted, and no decision or message_started names an utterance for OpenAI. boundary=provider_turn is display segmentation only: the segment after it may begin mid-utterance and is never restored as settled input, even when the provider finishes it. boundary=local also follows a completion the agent rejected because it did not extend the parts already shown; those parts are never final" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "package": "lucide-static",
+  "version": "0.460.0",
+  "tarball": "https://registry.npmjs.org/lucide-static/-/lucide-static-0.460.0.tgz",
+  "integrity": "sha512-X6pIdg7jVxv7YQ/uR241hwhNiztcAfmj181TbcX7HCxxk/3mGaRtAc6b2ftUvQBufbJE6ehgyzO2uVsa604tWg==",
+  "license": "ISC",
+  "icons": {
+    "audio-lines": "d4ff831aee48c9d1fb7ace29409aa67b4989ce3b71b3bc119391a90235369a8a",
+    "audio-waveform": "f93310051be5ce1d9cb9b93f4b773383ff63c7e9228662701fdd0f17fd1fbeed",
+    "book-open": "4cf286ca0c3b8c904eee071433e9417968f65c65e4010835fff633184cdb8187",
+    "git-branch": "3f27f87e3fcfa927f88a8bf0c0b257e5ba457b952932fa3f33a3161ddddc55b7",
+    "image": "9e71c159132ae5b2915203a8e660e2317053c22d12846e2231a9d272ed8246d1",
+    "keyboard": "dd4e4a6d291155f128f82777dee5f70b0cfb9d47a92115789110aa43e31af4b7",
+    "mic": "8034ccd8261559833bcf143536f3ae2c9db191fae2b10b5edf73ee416d1c545e",
+    "mic-off": "21028c1b2ee9d17ce2f33034abc7d827cb5608d592b64f8f45c4cec8ac4c011e",
+    "phone": "62cb303c38c6729752599729ea13b07b49852b92fe60e7bc69704dc395b974bc",
+    "plug": "ade79ca0886d4ab730ab93d1d4dbf484773ca838155b7c53548bbf5b1c12e69f",
+    "radio": "f49c6f762ecae119384aeebbf137f0000d704fd78aeecac83a8748a73d42bfa4",
+    "shield": "8bff34de268a993f7d6552439427faf47e883619df6738c4b6bc7947db15ab2d",
+    "sparkles": "426bb86616d91ceab70c0d6f0f6e5f966e1a252348eed13d1472b70f4a9dfa6b",
+    "terminal": "b3f536fddb382588a68e8aeea831998b462ed5376ec2dcb37eaafe1c8bdae66c",
+    "triangle-alert": "841ff727a8126b0ae81e4d57c5edd9fdba198805445d33824c750a241e364416",
+    "unlink": "7252c89d1d6b72f548fe2769fd3989093e3feacca154f5bdb7e09c620a2226bb",
+    "volume-2": "3ca81e1b4869efd51a76a6c3dfa68e727967097844e5323e18c6b47d8be00b9d",
+    "zap": "4b3a23ea81459a3e4b57a725c7f3a5015472baa6311f145f926a826c398f7581"
+  }
+}

@@ -1,0 +1,219 @@
+# Bot profile: plain DSH 0.2.1-rc.2 web profile with the Unfold plugins (as in shell/dsh-home:
+# events, capabilities, and the rth-session adapter, plus settings, mind and trajectory) and the
+# vendored Bot plugin @automagik/omni-dsh (shell/vendor/omni-ui-dsh). All are linked into this
+# profile's node_modules by package name. The Bot is inserted here rather than listed as a
+# bundle, so its own patch does not also apply and its config is ours:
+# - home: the Bot keeps its team (state.json, Sessions roster, memory, keys) in config.home,
+#   default $OMNI_HOME/ui = ~/.omni/ui. Here it is $OMNI_HOME/ui and OMNI_HOME must be canonical
+#   and under the RTH state root's instance dir (<RTH_DATA_DIR or ~/.local/share/rth>/instances/<id>/);
+#   the dev layout (this tree's shell/) only with RTH_OMNI_DEV_LAYOUT=1; anything else throws, so the
+#   Bot fails closed instead of attaching to a real Omni team.
+# - importHome: the packaged read-only seed of this tree or a seed under the same instance dir
+#   (RTH_OMNI_TEAM_SEED; never a live Omni team), copied once into an empty home; updateCheck:
+#   false (no registry/GitHub calls).
+# The agentd port is RTH_AGENTD_PORT (default 7797).
+- insert:
+    - id: rth-events
+      name: '@rth/dsh-events'
+      config:
+        agentd:
+          enabled: true
+          host: 127.0.0.1
+          port: !!js Number(process.env.RTH_AGENTD_PORT || 7797)
+    - id: rth-capabilities
+      name: '@rth/dsh-capabilities'
+      config:
+        results: !!js process.env.RTH_BENCH_RESULTS || ''
+    - id: rth-settings
+      name: '@rth/dsh-settings'
+    - id: rth-mind
+      name: '@rth/dsh-mind'
+      config:
+        journals:
+          # Follow THIS app instance's host journal: Mind derives <data>/app/<label>/rth-host.jsonl
+          # from the RTH_HOST_TOKEN_FILE path the app passes (<data>/host/<label>/token); the token
+          # is never read. Any other layout leaves the host log off, with the reason in Mind's More.
+          hostFromTokenFile: true
+    - id: omni-ui
+      name: '@automagik/omni-dsh'
+      config:
+        # The Bot's home (both expressions share one canonical-path rule): OMNI_HOME and the final
+        # $OMNI_HOME/ui the Bot receives must both be canonical (no . or .., every link resolved; a
+        # dangling link or non-directory component refuses) under ONE instance directory of the admitted
+        # RTH state root, <RTH_DATA_DIR or ~/.local/share/rth>/instances/<id>/...; never ~/.omni or inside
+        # any .omni; the dev layout (this tree's shell/) only with RTH_OMNI_DEV_LAYOUT=1.
+        home: !!js |-
+          (() => {
+            const { lstatSync, realpathSync } = process.getBuiltinModule('node:fs');
+            const { isAbsolute, join, relative, sep } = process.getBuiltinModule('node:path');
+            const { homedir } = process.getBuiltinModule('node:os');
+            // Canonical: walk from /, resolving every link. Only a genuinely absent component (ENOENT,
+            // and then everything after it) is a missing tail; a dangling or looping link, a
+            // non-directory in the middle, or any other inspection error is a refusal (null).
+            const canon = (p) => {
+              if (!p || !isAbsolute(p) || p.split('/').some((s) => s === '.' || s === '..')) return null;
+              const parts = p.split('/').filter(Boolean);
+              let cur = '/';
+              for (let i = 0; i < parts.length; i++) {
+                const next = join(cur, parts[i]);
+                let st;
+                try { st = lstatSync(next) } catch (e) { return e.code === 'ENOENT' ? join(cur, ...parts.slice(i)) : null }
+                if (st.isSymbolicLink()) { try { cur = realpathSync(next) } catch { return null } }
+                else if (i < parts.length - 1 && !st.isDirectory()) return null;
+                else cur = next;
+              }
+              return cur;
+            };
+            const under = (p, root) => { const r = relative(root, p); return r !== '' && !r.startsWith('..') && !isAbsolute(r); };
+            const stateRoot = canon(process.env.RTH_DATA_DIR || join(homedir(), '.local/share/rth'));
+            // The instance a canonical path lives in (<state root>/instances/<id>/...), or null.
+            const instanceOf = (p) => { if (!p || !stateRoot || !under(p, stateRoot)) return null; const r = relative(stateRoot, p).split(sep); return r[0] === 'instances' && r.length >= 3 && r[1] !== '' ? r[1] : null; };
+            const liveOmni = canon(join(homedir(), '.omni'));
+            const notOmni = (p) => !p.split(sep).includes('.omni') && !(liveOmni && (p === liveOmni || under(p, liveOmni)));
+            const dshRoot = process.env.RTH_DSH_ROOT ? canon(process.env.RTH_DSH_ROOT) : null;
+            const dev = process.env.RTH_OMNI_DEV_LAYOUT === '1' && dshRoot ? join(dshRoot, 'shell') : null;
+            // The admitted Bot home: OMNI_HOME and its final /ui, both canonical, both in ONE instance
+            // (or both in the dev layout), never in ~/.omni. Returns { ui, instance } or null.
+            const admitHome = (raw) => {
+              const h = canon(raw), ui = h && canon(join(raw, 'ui'));
+              if (!h || !ui || !notOmni(h) || !notOmni(ui)) return null;
+              const inst = instanceOf(h);
+              if (inst && instanceOf(ui) === inst) return { ui, instance: inst };
+              if (dev && under(h, dev) && under(ui, dev)) return { ui, instance: null };
+              return null;
+            };
+            const raw = process.env.OMNI_HOME || '';
+            const a = admitHome(raw);
+            if (!a)
+              throw new Error('rth refuses to start the Bot: OMNI_HOME and its ui dir must be canonical, under one instance of the RTH state root, <RTH_DATA_DIR or ~/.local/share/rth>/instances/<id>/' + (dev ? ', or in the dev layout under ' + dev : '') + ', and never in ~/.omni; it was ' + JSON.stringify(raw));
+            return a.ui;
+          })()
+        # The visible Bot session IS rth-root: the team is seeded once from an RTH-owned seed (a
+        # roster whose one Main Bot "RTH" has the Session id rth-root, and no kickoff), copied into
+        # the empty home on first start. The Bot then lands on rth-root itself (its own landing,
+        # palette and return-to-Bot all open the Main Bot), so there is no second openSession to race.
+        # The team seed: this tree's packaged read-only seed (<RTH_DSH_ROOT>/shell/dsh-home-bot/omni-team-seed),
+        # or a seed in the SAME instance directory as the admitted home (OMNI_HOME, judged by the same
+        # rule as above); never another instance's, ~/.omni or a live Omni team.
+        importHome: !!js |-
+          (() => {
+            const { lstatSync, realpathSync } = process.getBuiltinModule('node:fs');
+            const { isAbsolute, join, relative, sep } = process.getBuiltinModule('node:path');
+            const { homedir } = process.getBuiltinModule('node:os');
+            // Canonical: walk from /, resolving every link. Only a genuinely absent component (ENOENT,
+            // and then everything after it) is a missing tail; a dangling or looping link, a
+            // non-directory in the middle, or any other inspection error is a refusal (null).
+            const canon = (p) => {
+              if (!p || !isAbsolute(p) || p.split('/').some((s) => s === '.' || s === '..')) return null;
+              const parts = p.split('/').filter(Boolean);
+              let cur = '/';
+              for (let i = 0; i < parts.length; i++) {
+                const next = join(cur, parts[i]);
+                let st;
+                try { st = lstatSync(next) } catch (e) { return e.code === 'ENOENT' ? join(cur, ...parts.slice(i)) : null }
+                if (st.isSymbolicLink()) { try { cur = realpathSync(next) } catch { return null } }
+                else if (i < parts.length - 1 && !st.isDirectory()) return null;
+                else cur = next;
+              }
+              return cur;
+            };
+            const under = (p, root) => { const r = relative(root, p); return r !== '' && !r.startsWith('..') && !isAbsolute(r); };
+            const stateRoot = canon(process.env.RTH_DATA_DIR || join(homedir(), '.local/share/rth'));
+            // The instance a canonical path lives in (<state root>/instances/<id>/...), or null.
+            const instanceOf = (p) => { if (!p || !stateRoot || !under(p, stateRoot)) return null; const r = relative(stateRoot, p).split(sep); return r[0] === 'instances' && r.length >= 3 && r[1] !== '' ? r[1] : null; };
+            const liveOmni = canon(join(homedir(), '.omni'));
+            const notOmni = (p) => !p.split(sep).includes('.omni') && !(liveOmni && (p === liveOmni || under(p, liveOmni)));
+            const dshRoot = process.env.RTH_DSH_ROOT ? canon(process.env.RTH_DSH_ROOT) : null;
+            const dev = process.env.RTH_OMNI_DEV_LAYOUT === '1' && dshRoot ? join(dshRoot, 'shell') : null;
+            // The admitted Bot home: OMNI_HOME and its final /ui, both canonical, both in ONE instance
+            // (or both in the dev layout), never in ~/.omni. Returns { ui, instance } or null.
+            const admitHome = (raw) => {
+              const h = canon(raw), ui = h && canon(join(raw, 'ui'));
+              if (!h || !ui || !notOmni(h) || !notOmni(ui)) return null;
+              const inst = instanceOf(h);
+              if (inst && instanceOf(ui) === inst) return { ui, instance: inst };
+              if (dev && under(h, dev) && under(ui, dev)) return { ui, instance: null };
+              return null;
+            };
+            const raw = process.env.RTH_OMNI_TEAM_SEED || '';
+            const s = canon(raw);
+            const packaged = dshRoot ? canon(join(dshRoot, 'shell/dsh-home-bot/omni-team-seed')) : null;
+            const home = admitHome(process.env.OMNI_HOME || '');
+            const sameInstance = Boolean(s && home && home.instance && instanceOf(s) === home.instance);
+            if (!s || !notOmni(s) || !((packaged && s === packaged) || sameInstance || (dev && home && home.instance === null && under(s, dev))))
+              throw new Error('rth refuses to seed the Bot team: RTH_OMNI_TEAM_SEED must be this tree\'s packaged seed, or under the same <RTH_DATA_DIR or ~/.local/share/rth>/instances/<id>/ as the admitted OMNI_HOME; it was ' + JSON.stringify(raw));
+            return s;
+          })()
+        updateCheck: false
+        # No model runs in the Bot (no provider is configured; rth-root is a voice session in
+        # rth-agentd), so the Bot's own memory review has no model to ask and would fail with "No
+        # model is available" on every idle. The vendor's switch, not a patch: memory stays,
+        # written only by the Bots' own remember calls.
+        memoryReview: false
+# The session adapter, as in shell/dsh-home: the one rolling session as the
+# DSH root Session `rth-root`. Composer turns become typed commands through the host control owner
+# (rth-host, RTH_HOST_URL + RTH_HOST_TOKEN_FILE); replies are read from rth-agentd as an observer
+# (RTH_AGENTD_PORT). DSH runs no root loop: every other root Session is refused at pre-step (the
+# Bot's own Sessions included), and the first-prompt title model is off.
+- id: session-title-llm
+  disabled: true
+- insert:
+    - id: rth-session
+      name: '@rth/dsh-session'
+      config:
+        host:
+          url: !!js process.env.RTH_HOST_URL || 'http://127.0.0.1:7781'
+          tokenFile: !!js process.env.RTH_HOST_TOKEN_FILE || ''
+        agentd:
+          host: 127.0.0.1
+          port: !!js Number(process.env.RTH_AGENTD_PORT || 7797)
+        faults:
+          dropAcks: !!js Number(process.env.RTH_SESSION_DROP_ACKS || 0)
+          route: !!js process.env.RTH_SESSION_FAULTS === '1'
+        # Delegation: ON. The worker is gpt-5.4-mini with zero tools, the everyday report limits
+        # (budget.mjs DEFAULTS), priced at its highest listed tier, under soft caps of US$0.05 per
+        # task and US$1 per day. It runs only when the launcher opts in (RTH_DELEGATE_WORKER=1) and
+        # the host owner has registered the launch.
+        delegate:
+          enabled: true
+          provider: openai
+          model: gpt-5.4-mini
+          prices: {"model": "gpt-5.4-mini", "inputPerMTok": 1.5, "outputPerMTok": 9.0, "reasoningPerMTok": 9.0, "source": "https://developers.openai.com/api/docs/pricing, gpt-5.4-mini Fast tier (formerly Priority), the highest listed: the request pins no service tier", "pinnedAt": "2026-10-23"}
+- id: ui-settings-general
+  name: "@deepseek-ai/dsh-client-ui-settings-general"
+  config:
+    welcomeNoticeVersion: 2026-09-28.1
+# Trajectory: a fork of @deepseek-ai/dsh-client-ui-trajectory 0.2.1-rc.2 (MIT, see
+# plugins/dsh-rth-trajectory/NOTICE.md) over the Mind projection.
+# Its own conversation view "rth-trajectory" (plain DSH) and right-sidebar tab "Trajectory", opened
+# from the Bot header for the RTH session only. Upstream Trajectory is untouched.
+- insert:
+    - id: rth-trajectory
+      name: '@rth/dsh-rth-trajectory'
+# Delegation: the report worker's preset and provider route. The preset mounts only a persona:
+# no tool plugin, no subagent tool, so the child has zero tools (dsh-session also restricts and
+# guards the child agent itself). The OpenAI route reads its key by reference (apiKeyEnv), with
+# finite retries (one retry: at most 2 attempts per step). Acceptance runs override these limits
+# with 1 step, 1 attempt, 2000 output tokens and no retries, so maxRetries: 1 is safe here.
+# Nothing here runs without the launcher's opt-in.
+- insert:
+    - id: preset-rth-delegate
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: rth-delegate
+        order: 99
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: You write a report of a conversation you are given. You have no tools. Follow the format you are asked for exactly.
+              complete: true
+              includeRuntimeContext: false
+- id: llm-pi-ai
+  config:
+    providers:
+      openai:
+        apiKeyEnv: LABS_OPENAI_API_KEY_HV
+        retryPolicy:
+          mode: normal
+          maxRetries: 1

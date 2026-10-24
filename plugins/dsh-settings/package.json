@@ -1,0 +1,39 @@
+{
+  "name": "@rth/dsh-settings",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RTH settings for DSH, read-only: effective runtime, voice, prompt and context settings, each with its source and freshness, from the host status and the agentd event window",
+  "keywords": [
+    "dsh-plugin",
+    "cordis-plugin"
+  ],
+  "type": "module",
+  "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@rth/dsh-sse": "0.1.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "scripts": {
+    "build:client": "node ../scripts/build-client.mjs dsh-settings"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@rth/dsh-rth-trajectory",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RTH's real-time trajectory: a fork of @deepseek-ai/dsh-client-ui-trajectory 0.2.1-rc.2 (MIT, Copyright (c) 2026 DeepSeek) that keeps its ledger, overview and inspector and replaces its data layer with RTH's Mind projection",
+  "keywords": [
+    "dsh-plugin",
+    "cordis-plugin"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ],
+      "external": [
+        "@automagik/omni-dsh/client"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

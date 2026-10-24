@@ -1,0 +1,7 @@
+# Confirmed synthetic test fixtures (reviewed 2026-10-24); none is a real credential.
+# redact-sk.test.mjs:88, an out-of-scope "sk_live_Synth3tic…" family case for the redactor
+plugins/dsh-mind/test/redact-sk.test.mjs:stripe-access-token:88
+# events.test.mjs:588, a made-up 20-character canary that the tail-redaction test must hide
+plugins/dsh-events/test/events.test.mjs:generic-api-key:588
+# mcp-paste.test.js:24, a pasted JSON with two placeholder values "abcdef…" (two hits, one fingerprint)
+shell/vendor/omni-ui-dsh/test/mcp-paste.test.js:generic-api-key:24

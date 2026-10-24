@@ -1,0 +1,133 @@
+{"action":"nothing_audible","audible":false,"detected_sample":145920,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-19.762371063232422,"start_sample":144960,"stream_id":"mic-1","t_ms":9126.878874999999}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-19.762371063232422,"kind":"echo_gate","run_ms":40.159333,"t_ms":9127.044875,"threshold_dbfs":-38}
+{"action":"nothing_audible","audible":false,"detected_sample":340160,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-23.233238220214844,"start_sample":339200,"stream_id":"mic-1","t_ms":21266.786667}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-23.233238220214844,"kind":"echo_gate","run_ms":42.96425,"t_ms":21266.903917,"threshold_dbfs":-38}
+{"action":"nothing_audible","audible":false,"detected_sample":518720,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-16.40479850769043,"start_sample":517760,"stream_id":"mic-1","t_ms":32424.462667}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-16.40479850769043,"kind":"echo_gate","run_ms":36.862792,"t_ms":32424.622292000004,"threshold_dbfs":-38}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":32681.122666999996}
+{"kind":"input_transcript","t_ms":33640.727125,"text":"olá, tudo bem?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":33640.815167}
+{"cause":"guest-fixture:44","kind":"response_started","request_id":"mic-1","response_id":"fx-v1","t_ms":33640.882916999995}
+{"kind":"provider_signal","response_id":"fx-v1","signal":"turn_complete","t_ms":33642.626917}
+{"kind":"response_done","response_id":"fx-v1","status":"completed","t_ms":33642.705084}
+{"kind":"reply_text","response_id":"fx-v1","t_ms":33642.777834,"text":"Oi! Tudo bem por aqui."}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":34007.532125}
+{"kind":"input_transcript","t_ms":36066.549,"text":"qual é a capital da França?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":36066.671959}
+{"cause":"guest-fixture:56","kind":"response_started","request_id":"mic-1","response_id":"fx-v2","t_ms":37255.987792}
+{"dropped_samples":0,"epoch":1,"kind":"playback","phase":"started","played_samples":960,"reason":null,"response_id":"fx-v2","sample_rate":48000,"t_ms":37275.320417}
+{"action":"observed","audible":true,"detected_sample":682880,"echo_est_dbfs":-23.27906036376953,"kind":"local_vad_onset","level_dbfs":-18.71209716796875,"start_sample":681920,"stream_id":"mic-1","t_ms":42686.932458999996}
+{"kind":"provider_signal","response_id":"fx-v2","signal":"voice_activity_start","t_ms":43010.165417000004}
+{"cancelled":[],"clear_us":24,"dropped_samples":198718,"kind":"speaker_cleared","reason":"provider_interrupted","t_ms":43010.228083999995}
+{"kind":"provider_signal","response_id":"fx-v2","signal":"interrupted","t_ms":43010.287459}
+{"kind":"response_done","response_id":"fx-v2","status":"cancelled","t_ms":43010.328792}
+{"kind":"reply_text","response_id":"fx-v2","t_ms":43010.377042,"text":"A capital da França é Paris."}
+{"kind":"response_cancelled","response_id":"fx-v2","t_ms":43010.421875}
+{"clock":"render taps stamped in the output callback, microphone frames in the capture callback, one host monotonic clock","epoch":1,"kind":"echo_probe","phase":"cleared","probe":{"corr":0.15673944354057312,"coupling_db":-101.4697265625,"frames":288,"lag_ms":440,"mic_dbfs_p50":-120,"rendered_dbfs_p50":-20.08986473083496},"rendered_ms":5750,"response_id":"fx-v2","t_ms":43015.400834}
+{"dropped_samples":198718,"epoch":1,"kind":"playback","phase":"cleared","played_samples":276000,"reason":"provider_interrupted","response_id":"fx-v2","sample_rate":48000,"t_ms":43015.539834}
+{"kind":"provider_signal","response_id":null,"signal":"turn_complete","t_ms":43047.486124999996}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-14.997323036193848,"kind":"echo_gate","run_ms":41.622459,"t_ms":43585.073749999996,"threshold_dbfs":-38}
+{"kind":"input_transcript","t_ms":44003.182959,"text":"me lembra de beber água"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":44003.234375}
+{"cause":"guest-fixture:133","kind":"response_started","request_id":"mic-1","response_id":"fx-v3","t_ms":44640.855542}
+{"dropped_samples":0,"epoch":2,"kind":"playback","phase":"started","played_samples":480,"reason":null,"response_id":"fx-v3","sample_rate":48000,"t_ms":44654.765417}
+{"action":"observed","audible":true,"detected_sample":736320,"echo_est_dbfs":-21.279842376708984,"kind":"local_vad_onset","level_dbfs":-18.52250862121582,"start_sample":735360,"stream_id":"mic-1","t_ms":46026.883709}
+{"action":"observed","audible":true,"echo_est_dbfs":-37.455078125,"frame_dbfs":-17.37926483154297,"kind":"echo_gate","run_ms":240.568542,"t_ms":47146.836834,"threshold_dbfs":-31.455078125}
+{"kind":"provider_signal","response_id":"fx-v3","signal":"turn_complete","t_ms":47398.231209000005}
+{"kind":"response_done","response_id":"fx-v3","status":"completed","t_ms":47398.29675}
+{"kind":"reply_text","response_id":"fx-v3","t_ms":47398.343584,"text":"Combinado, eu te lembro."}
+{"clock":"render taps stamped in the output callback, microphone frames in the capture callback, one host monotonic clock","epoch":2,"kind":"echo_probe","phase":"finished","probe":{"corr":0.2543412148952484,"coupling_db":-5.88466739654541,"frames":138,"lag_ms":30,"mic_dbfs_p50":-23.0548038482666,"rendered_dbfs_p50":-19.976741790771484},"rendered_ms":2759.9583333333335,"response_id":"fx-v3","t_ms":47404.645459}
+{"dropped_samples":0,"epoch":2,"kind":"playback","phase":"finished","played_samples":132478,"reason":null,"response_id":"fx-v3","sample_rate":48000,"t_ms":47404.789875}
+{"action":"nothing_audible","audible":false,"detected_sample":878080,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-22.495176315307617,"start_sample":877120,"stream_id":"mic-1","t_ms":54886.017042}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-22.495176315307617,"kind":"echo_gate","run_ms":39.59245799999999,"t_ms":54886.125292000004,"threshold_dbfs":-38}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":55352.745292}
+{"kind":"input_transcript","t_ms":57094.705334,"text":"obrigado"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":57096.810959}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":57480.148375}
+{"kind":"input_transcript","t_ms":59721.796959,"text":"pode falar mais devagar?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":59721.881167}
+{"cause":"guest-fixture:179","kind":"response_started","request_id":"mic-1","response_id":"fx-v4","t_ms":59940.027834}
+{"dropped_samples":0,"epoch":3,"kind":"playback","phase":"started","played_samples":480,"reason":null,"response_id":"fx-v4","sample_rate":48000,"t_ms":59953.353084}
+{"kind":"provider_signal","response_id":"fx-v4","signal":"turn_complete","t_ms":64149.221084000004}
+{"kind":"response_done","response_id":"fx-v4","status":"completed","t_ms":64149.28254199999}
+{"kind":"reply_text","response_id":"fx-v4","t_ms":64149.331417,"text":"De nada!"}
+{"clock":"render taps stamped in the output callback, microphone frames in the capture callback, one host monotonic clock","epoch":3,"kind":"echo_probe","phase":"finished","probe":{"corr":1.5148296994630913e-15,"coupling_db":-104.12057495117188,"frames":211,"lag_ms":50,"mic_dbfs_p50":-120,"rendered_dbfs_p50":-17.446269989013672},"rendered_ms":4199.958333333333,"response_id":"fx-v4","t_ms":64155.10733399999}
+{"dropped_samples":0,"epoch":3,"kind":"playback","phase":"finished","played_samples":201598,"reason":null,"response_id":"fx-v4","sample_rate":48000,"t_ms":64155.243875}
+{"action":"nothing_audible","audible":false,"detected_sample":1076160,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-16.40479850769043,"start_sample":1075200,"stream_id":"mic-1","t_ms":67264.949542}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-16.40479850769043,"kind":"echo_gate","run_ms":37.57275,"t_ms":67265.063042,"threshold_dbfs":-38}
+{"action":"nothing_audible","audible":false,"detected_sample":1339520,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-25.907081604003906,"start_sample":1338560,"stream_id":"mic-1","t_ms":83725.157209}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-25.907081604003906,"kind":"echo_gate","run_ms":41.745333,"t_ms":83725.432375,"threshold_dbfs":-38}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":84022.322709}
+{"action":"nothing_audible","audible":false,"detected_sample":1352320,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-21.472309112548828,"start_sample":1351360,"stream_id":"mic-1","t_ms":84525.485625}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-21.472309112548828,"kind":"echo_gate","run_ms":38.520208,"t_ms":84525.735209,"threshold_dbfs":-38}
+{"kind":"input_transcript","t_ms":85926.098167,"text":"e amanhã, vai chover?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":85926.223209}
+{"cause":"guest-fixture:237","kind":"response_started","request_id":"mic-1","response_id":"fx-v5","t_ms":85926.302792}
+{"kind":"provider_signal","response_id":"fx-v5","signal":"turn_complete","t_ms":85926.40579199999}
+{"kind":"response_done","response_id":"fx-v5","status":"completed","t_ms":85926.487209}
+{"kind":"reply_text","response_id":"fx-v5","t_ms":85926.6035,"text":"Claro, vou falar mais devagar."}
+{"action":"nothing_audible","audible":false,"detected_sample":1377280,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-21.22382164001465,"start_sample":1376320,"stream_id":"mic-1","t_ms":86084.285125}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-21.22382164001465,"kind":"echo_gate","run_ms":38.065166,"t_ms":86084.46245899999,"threshold_dbfs":-38}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":86316.90437500001}
+{"kind":"input_transcript","t_ms":88006.191,"text":"olá, tudo bem?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":88006.298167}
+{"cause":"guest-fixture:249","kind":"response_started","request_id":"mic-1","response_id":"fx-v6","t_ms":88414.418709}
+{"kind":"provider_signal","response_id":"fx-v6","signal":"turn_complete","t_ms":88466.989209}
+{"kind":"response_done","response_id":"fx-v6","status":"completed","t_ms":88467.07304199999}
+{"kind":"reply_text","response_id":"fx-v6","t_ms":88467.13725,"text":"Amanhã deve fazer sol."}
+{"action":"nothing_audible","audible":false,"detected_sample":1527040,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-15.952963829040527,"start_sample":1526080,"stream_id":"mic-1","t_ms":95445.312459}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-15.952963829040527,"kind":"echo_gate","run_ms":38.344625,"t_ms":95445.494084,"threshold_dbfs":-38}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":95634.437459}
+{"kind":"input_transcript","t_ms":96884.348459,"text":"qual é a capital da França?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":96889.000709}
+{"cause":"guest-fixture:266","kind":"response_started","request_id":"mic-1","response_id":"fx-v7","t_ms":97024.586875}
+{"kind":"provider_signal","response_id":"fx-v7","signal":"turn_complete","t_ms":97066.276084}
+{"kind":"response_done","response_id":"fx-v7","status":"completed","t_ms":97066.409375}
+{"kind":"reply_text","response_id":"fx-v7","t_ms":97066.503459,"text":"Oi! Tudo bem por aqui."}
+{"action":"nothing_audible","audible":false,"detected_sample":1691840,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-16.40479850769043,"start_sample":1690880,"stream_id":"mic-1","t_ms":105746.445959}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-16.40479850769043,"kind":"echo_gate","run_ms":38.861542,"t_ms":105746.550875,"threshold_dbfs":-38}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-19.768564224243164,"kind":"echo_gate","run_ms":58.539042,"t_ms":109085.745417,"threshold_dbfs":-38}
+{"action":"nothing_audible","audible":false,"detected_sample":1745600,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-16.98393440246582,"start_sample":1744640,"stream_id":"mic-1","t_ms":109103.536209}
+{"action":"nothing_audible","audible":false,"detected_sample":1891200,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-16.40479850769043,"start_sample":1890240,"stream_id":"mic-1","t_ms":118206.846875}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-16.40479850769043,"kind":"echo_gate","run_ms":40.694874999999996,"t_ms":118207.056209,"threshold_dbfs":-38}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":118434.70875}
+{"kind":"input_transcript","t_ms":119433.819875,"text":"me lembra de beber água"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":119433.89170899999}
+{"cause":"guest-fixture:297","kind":"response_started","request_id":"mic-1","response_id":"fx-v8","t_ms":119800.40945899999}
+{"kind":"provider_signal","response_id":"fx-v8","signal":"turn_complete","t_ms":119847.49675}
+{"kind":"response_done","response_id":"fx-v8","status":"completed","t_ms":119847.60866700001}
+{"kind":"reply_text","response_id":"fx-v8","t_ms":119847.719417,"text":"A capital da França é Paris."}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":119874.17825}
+{"kind":"input_transcript","t_ms":121196.059834,"text":"obrigado"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":121196.13320899999}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-19.183849334716797,"kind":"echo_gate","run_ms":64.58304199999999,"t_ms":121487.738792,"threshold_dbfs":-38}
+{"action":"nothing_audible","audible":false,"detected_sample":1944000,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-17.315879821777344,"start_sample":1943040,"stream_id":"mic-1","t_ms":121505.81791700001}
+{"cause":"guest-fixture:307","kind":"response_started","request_id":"mic-1","response_id":"fx-v9","t_ms":121610.344834}
+{"kind":"provider_signal","response_id":"fx-v9","signal":"turn_complete","t_ms":121610.605667}
+{"kind":"response_done","response_id":"fx-v9","status":"completed","t_ms":121610.66958399999}
+{"kind":"reply_text","response_id":"fx-v9","t_ms":121610.735625,"text":"Combinado, eu te lembro."}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":121753.751917}
+{"kind":"input_transcript","t_ms":123683.36812500001,"text":"pode falar mais devagar?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":123683.477709}
+{"cause":"guest-fixture:319","kind":"response_started","request_id":"mic-1","response_id":"fx-v10","t_ms":124166.403834}
+{"kind":"provider_signal","response_id":"fx-v10","signal":"turn_complete","t_ms":124166.47924999999}
+{"kind":"response_done","response_id":"fx-v10","status":"completed","t_ms":124166.531084}
+{"kind":"reply_text","response_id":"fx-v10","t_ms":124166.58037499999,"text":"De nada!"}
+{"action":"nothing_audible","audible":false,"detected_sample":2090880,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-16.40479850769043,"start_sample":2089920,"stream_id":"mic-1","t_ms":130685.73208399999}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-16.40479850769043,"kind":"echo_gate","run_ms":39.828542,"t_ms":130686.35458400002,"threshold_dbfs":-38}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":130951.80587499999}
+{"kind":"input_transcript","t_ms":131930.462334,"text":"e amanhã, vai chover?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":131932.663709}
+{"cause":"guest-fixture:336","kind":"response_started","request_id":"mic-1","response_id":"fx-v11","t_ms":132181.357209}
+{"kind":"provider_signal","response_id":"fx-v11","signal":"turn_complete","t_ms":132184.150875}
+{"kind":"response_done","response_id":"fx-v11","status":"completed","t_ms":132184.268459}
+{"kind":"reply_text","response_id":"fx-v11","t_ms":132184.365667,"text":"Claro, vou falar mais devagar."}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_start","t_ms":132286.438709}
+{"kind":"input_transcript","t_ms":134196.86275,"text":"olá, tudo bem?"}
+{"kind":"provider_signal","response_id":null,"signal":"voice_activity_end","t_ms":134196.958834}
+{"action":"nothing_audible","audible":false,"detected_sample":2147520,"echo_est_dbfs":null,"kind":"local_vad_onset","level_dbfs":-16.40479850769043,"start_sample":2146560,"stream_id":"mic-1","t_ms":134224.73333400002}
+{"action":"nothing_audible","audible":false,"echo_est_dbfs":null,"frame_dbfs":-16.40479850769043,"kind":"echo_gate","run_ms":39.940416,"t_ms":134224.917375,"threshold_dbfs":-38}
+{"cause":"guest-fixture:347","kind":"response_started","request_id":"mic-1","response_id":"fx-v12","t_ms":134545.038917}
+{"dropped_samples":0,"epoch":4,"kind":"playback","phase":"started","played_samples":480,"reason":null,"response_id":"fx-v12","sample_rate":48000,"t_ms":134564.14558399998}
+{"action":"observed","audible":true,"detected_sample":2176960,"echo_est_dbfs":-21.427188873291016,"kind":"local_vad_onset","level_dbfs":-28.292312622070312,"start_sample":2176000,"stream_id":"mic-1","t_ms":136063.82675}
+{"action":"observed","audible":true,"echo_est_dbfs":-75.19688415527344,"frame_dbfs":-15.888256072998047,"kind":"echo_gate","run_ms":240.436083,"t_ms":136585.440167,"threshold_dbfs":-38}
