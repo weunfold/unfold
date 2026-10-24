@@ -1,0 +1,31 @@
+title: "[Idea] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An idea becomes a change when it carries evidence. Say what you saw, what you propose, and how the bench could tell whether it worked. A rejected idea always gets a reason.
+  - type: textarea
+    id: observed
+    attributes:
+      label: What you observed
+      description: What happened, with its source. A conversation, a measurement, a failure.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you propose
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: How we would know it worked
+      description: A task the bench could hold, a number that should move, or what should stay the same.
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Limits and risks
+      description: What it could break, who it could affect, what it must never touch.
