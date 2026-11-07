@@ -41,3 +41,17 @@ cargo test -p rth --lib --locked -- --test-threads 4 --include-ignored
 
 Ordinary runs report these seven tests as ignored. The explicit fixture run
 executes every original assertion after checking each consumed file's hash.
+
+## Optional benchmark registry tests
+
+Two registry tests need the external text-contract benchmark tree, including
+its held-out promotion split, which is not distributed here. Set
+`UNFOLD_BENCH_DIR` to that tree and run only the registry target:
+
+```sh
+cargo test -p rth-bench --test registry --locked -- --include-ignored --test-threads 4
+```
+
+The tamper test copies only the registry's suite, tasks and fixture files to a
+temporary directory. Its original inputs stay unchanged. The separate VM
+end-to-end test remains ignored; the command above does not select it.

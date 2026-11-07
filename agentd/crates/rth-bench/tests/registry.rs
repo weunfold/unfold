@@ -1,11 +1,12 @@
 
 
 use rth_bench::fixture::Split;
-use rth_bench::{default_bench_dir, registry};
+use rth_bench::registry;
 
 #[test]
+#[ignore = "needs the text-contract bench tree: set UNFOLD_BENCH_DIR"]
 fn text_contract_v0_registry_verifies() {
-    let reg = registry::load(&default_bench_dir(), "text-contract-v0").expect("registry verifies");
+    let reg = registry::load(&bench_dir(), "text-contract-v0").expect("registry verifies");
     assert_eq!(reg.suite.split_manifest.dev.len(), 12);
     assert_eq!(reg.suite.split_manifest.promotion.len(), 12);
     assert_eq!(reg.suite.probes[0].repeats, 30);
@@ -24,11 +25,12 @@ fn text_contract_v0_registry_verifies() {
 }
 
 #[test]
+#[ignore = "needs the text-contract bench tree: set UNFOLD_BENCH_DIR"]
 fn a_tampered_fixture_is_refused() {
-    let src = default_bench_dir();
+    let src = bench_dir();
     let dir = std::env::temp_dir().join(format!("rth-bench-tamper-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&dir);
-    copy_dir(&src, &dir, &["results"]);
+    copy_registry_inputs(&src, &dir);
     let victim = dir.join("fixtures/dev/tc-dev-01-greeting.json");
     let text = std::fs::read_to_string(&victim).unwrap().replace("\"hi\"", "\"hi!\"");
     std::fs::write(&victim, text).unwrap();
@@ -37,19 +39,26 @@ fn a_tampered_fixture_is_refused() {
     std::fs::remove_dir_all(&dir).unwrap();
 }
 
-fn copy_dir(from: &std::path::Path, to: &std::path::Path, skip: &[&str]) {
-    std::fs::create_dir_all(to).unwrap();
-    for e in std::fs::read_dir(from).unwrap() {
-        let e = e.unwrap();
-        let name = e.file_name();
-        if skip.iter().any(|s| name == *s) {
-            continue;
-        }
-        let (src, dst) = (e.path(), to.join(&name));
-        if src.is_dir() {
-            copy_dir(&src, &dst, &[]);
-        } else {
-            std::fs::copy(&src, &dst).unwrap();
-        }
+fn bench_dir() -> std::path::PathBuf {
+    std::env::var_os("UNFOLD_BENCH_DIR")
+        .map(std::path::PathBuf::from)
+        .expect("set UNFOLD_BENCH_DIR to the text-contract benchmark tree")
+}
+
+fn copy_registry_inputs(from: &std::path::Path, to: &std::path::Path) {
+    let reg = registry::load(from, "text-contract-v0").expect("source registry verifies before tampering");
+    // Copy the verified dependency closure, excluding unrelated benchmark data and outputs.
+    for source in std::iter::once(&reg.suite_path)
+        .chain(reg.tasks.values().map(|task| &task.path))
+        .chain(reg.fixtures.values().map(|fixture| &fixture.path))
+    {
+        let relative = source.strip_prefix(&reg.root).expect("registry input is under its root");
+        let relative = relative.components()
+            .all(|part| matches!(part, std::path::Component::Normal(_)))
+            .then_some(relative)
+            .expect("registry input must be a plain path under its root");
+        let target = to.join(relative);
+        std::fs::create_dir_all(target.parent().unwrap()).unwrap();
+        std::fs::copy(source, target).unwrap();
     }
 }
