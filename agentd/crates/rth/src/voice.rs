@@ -1397,9 +1397,46 @@ mod tests {
         assert_eq!(w.media.unresolved(), s2.chunks.accepted + 1, "stream 2's chunks and its end marker");
     }
 
+    fn fixture_wav(dir: &std::path::Path, name: &str) -> Result<rth_voice::wav::WavData, String> {
+        use sha2::{Digest, Sha256};
+        let filename = format!("{name}.wav");
+        let pin = include_str!("../testdata/voice-fixtures/SHA256SUMS")
+            .lines()
+            .find_map(|line| {
+                let mut fields = line.split_whitespace();
+                let hash = fields.next()?;
+                let file = fields.next()?.strip_prefix("./")?;
+                (file == filename).then_some(hash)
+            })
+            .ok_or_else(|| format!("Voice fixture {name} is not listed in SHA256SUMS"))?;
+        let bytes = std::fs::read(dir.join(filename))
+            .map_err(|e| format!("Voice fixture {name}: {e}"))?;
+        if format!("{:x}", Sha256::digest(&bytes)) != pin {
+            return Err(format!("Voice fixture {name} SHA256 mismatch"));
+        }
+        rth_voice::wav::parse(&bytes)
+    }
+
+    #[test]
+    fn external_voice_fixtures_refuse_missing_corrupted_and_unlisted_inputs() {
+        let dir = std::env::temp_dir().join(format!(
+            "voice-fixture-check-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos()
+        ));
+        std::fs::create_dir(&dir).unwrap();
+        assert!(fixture_wav(&dir, "agent-reply").err().unwrap().contains("Voice fixture agent-reply:"));
+        std::fs::write(dir.join("agent-reply.wav"), b"corrupted fixture").unwrap();
+        assert_eq!(fixture_wav(&dir, "agent-reply").err().unwrap(), "Voice fixture agent-reply SHA256 mismatch");
+        assert!(fixture_wav(&dir, "../unlisted").err().unwrap().contains("not listed in SHA256SUMS"));
+        std::fs::remove_file(dir.join("agent-reply.wav")).unwrap();
+        std::fs::remove_dir(&dir).unwrap();
+    }
+
     fn fixture(name: &str, rate: u32, dbfs: f32) -> Vec<i16> {
-        let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../bench/fixtures/dev/voice-trial-fixes");
-        let w = rth_voice::wav::read(&dir.join(format!("{name}.wav"))).expect("sh bench/fixtures/dev/voice-trial-fixes/make.sh");
+        let dir = std::env::var_os("UNFOLD_VOICE_FIXTURES_DIR")
+            .expect("set UNFOLD_VOICE_FIXTURES_DIR to the directory of pinned voice fixtures");
+        let w = fixture_wav(std::path::Path::new(&dir), name).expect("pinned voice fixture");
         let v = rth_voice::sim::normalize(&w.to_i16_at(16_000), dbfs);
         if rate == 16_000 {
             return v;
@@ -1474,6 +1511,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "needs voice fixtures: run make.sh on macOS and set UNFOLD_VOICE_FIXTURES_DIR"]
     async fn the_echo_fixture_reproduces_the_self_barge_in_under_the_legacy_local_vad() {
         let room = crate::devices::EchoRoom::new(150, -6.0);
         let pcm = fixture("agent-reply", 24_000, -20.0);
@@ -1488,6 +1526,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "needs voice fixtures: run make.sh on macOS and set UNFOLD_VOICE_FIXTURES_DIR"]
     async fn under_provider_mode_the_same_echo_never_cuts_and_provider_interrupted_still_flushes() {
         let room = crate::devices::EchoRoom::new(150, -6.0);
         let pcm = fixture("agent-reply", 24_000, -20.0);
@@ -1508,6 +1547,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "needs voice fixtures: run make.sh on macOS and set UNFOLD_VOICE_FIXTURES_DIR"]
     async fn on_a_processed_microphone_the_reply_survives_its_echo_and_real_speech_cuts_it() {
         let room = crate::devices::EchoRoom::new(150, -6.0 - 25.0);
         let pcm = fixture("agent-reply", 24_000, -20.0);
@@ -1533,6 +1573,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "needs voice fixtures: run make.sh on macOS and set UNFOLD_VOICE_FIXTURES_DIR"]
     async fn speech_during_a_finished_replys_tail_flushes_it_on_the_providers_transcript() {
         let room = crate::devices::EchoRoom::new(150, -6.0 - 25.0);
         let pcm = fixture("agent-reply", 24_000, -20.0);
@@ -1590,6 +1631,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "needs voice fixtures: run make.sh on macOS and set UNFOLD_VOICE_FIXTURES_DIR"]
     async fn push_to_talk_gates_the_provider_and_release_ends_the_stream() {
         let (mut reader, mut agent, agent_reader, hw) = rig();
         let stamper = Stamper::new(Source::Host, "host-t", Box::new(MonotonicClock::start()));
@@ -1704,6 +1746,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "needs voice fixtures: run make.sh on macOS and set UNFOLD_VOICE_FIXTURES_DIR"]
     async fn mute_sends_nothing_never_cancels_playback_and_unmute_restores_input() {
         let (mut reader, mut agent, agent_reader, hw) = rig();
         let stamper = Stamper::new(Source::Host, "host-t", Box::new(MonotonicClock::start()));
@@ -2258,6 +2301,7 @@ mod tests {
 
     #[cfg(target_os = "macos")]
     #[tokio::test]
+    #[ignore = "needs voice fixtures: run make.sh on macOS and set UNFOLD_VOICE_FIXTURES_DIR"]
     async fn with_the_device_unavailable_audio_is_refused_never_reported_as_played() {
         use crate::vpio::{VpioCapture, VpioOptions, VpioPlayout, VpioShared, tests::FakeUnit};
         let unit = FakeUnit::new(vec![Err("injected: VoiceProcessingIO unavailable".into())]);

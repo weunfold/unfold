@@ -25,3 +25,19 @@ The event and protocol types are versioned independently of source paths.
 Keep persisted identifiers stable when changing implementations.
 
 The optional memory-search seam requires the Brain source modules configured by `RTH_MEMORY_BRAIN_SRC`. Its imports retain the bundled provider contract.
+
+## Optional voice fixture tests
+
+Seven device-free voice tests need macOS system-voice audio, which is not
+redistributed here. On macOS with ffmpeg, run
+`sh crates/rth/testdata/voice-fixtures/make.sh` from this workspace. The script
+verifies the generated files against the committed SHA256SUMS instead of
+rewriting its pins; different installed voice versions can produce different
+bytes. Set `UNFOLD_VOICE_FIXTURES_DIR` to the absolute fixture directory, then run:
+
+```sh
+cargo test -p rth --lib --locked -- --test-threads 4 --include-ignored
+```
+
+Ordinary runs report these seven tests as ignored. The explicit fixture run
+executes every original assertion after checking each consumed file's hash.
