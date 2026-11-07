@@ -636,8 +636,8 @@ mod doubletalk_boundary_tests {
         *crate::floor_decide::context().lock().unwrap()=Default::default();
     }
     #[test]
-    fn t16_attenuated_content_waits_for_model_and_final_corroboration() {
-        if isolated("conversation::doubletalk_boundary_tests::t16_attenuated_content_waits_for_model_and_final_corroboration"){return;}
+    fn attenuated_content_waits_for_model_and_final_corroboration() {
+        if isolated("conversation::doubletalk_boundary_tests::attenuated_content_waits_for_model_and_final_corroboration"){return;}
         for _ in 0..1 {
             speaking();
 
@@ -866,11 +866,11 @@ mod h2_admission_tests {
 mod review_h1_probe {
     use super::*;
     #[test]
-    fn t16_corroborated_hold_clears_when_reply_ends_while_held() {
+    fn corroborated_hold_clears_when_reply_ends_while_held() {
         use crate::dictation::Event;
         if std::env::var_os("REVIEW_H1_CHILD").is_none() {
             let child = std::process::Command::new(std::env::current_exe().unwrap())
-                .args(["--exact", "conversation::review_h1_probe::t16_corroborated_hold_clears_when_reply_ends_while_held", "--test-threads", "4"])
+                .args(["--exact", "conversation::review_h1_probe::corroborated_hold_clears_when_reply_ends_while_held", "--test-threads", "4"])
                 .env("REVIEW_H1_CHILD", "1").output().unwrap();
             assert!(child.status.success(), "{}\n{}", String::from_utf8_lossy(&child.stdout), String::from_utf8_lossy(&child.stderr));
             return;
@@ -976,13 +976,13 @@ pub(crate) fn review_busy_front(run: impl FnOnce(crate::voice_front::runtime::Ep
 }
 
 #[cfg(test)]
-mod t16_overlap {
+mod overlap_evidence_tests {
     use super::*;
     use crate::bc_detector::{Action,Decision,Policy,Prediction,CHUNK};
     use crate::dictation::Event;
     fn isolated(name: &str) -> bool {
-        if std::env::var_os("T16_OVERLAP_CHILD").is_some() {return false;}
-        let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact",name,"--test-threads","4"]).env("T16_OVERLAP_CHILD","1").output().unwrap();
+        if std::env::var_os("UNFOLD_OVERLAP_EVIDENCE_TEST_CHILD").is_some() {return false;}
+        let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact",name,"--test-threads","4"]).env("UNFOLD_OVERLAP_EVIDENCE_TEST_CHILD","1").output().unwrap();
         assert!(out.status.success(),"{}\n{}",String::from_utf8_lossy(&out.stdout),String::from_utf8_lossy(&out.stderr));true
     }
     fn start(epoch:u64)->(u64,u64) {
@@ -1003,9 +1003,9 @@ mod t16_overlap {
     }
 
     #[test]
-    fn t16_recorded_genuine_episodes_admit_with_bounded_corroboration_delay() {
-        if isolated("conversation::t16_overlap::t16_recorded_genuine_episodes_admit_with_bounded_corroboration_delay") {return;}
-        let fixtures:Value=serde_json::from_str(include_str!("t16-overlap-positive.json")).unwrap();
+    fn recorded_genuine_episodes_admit_with_bounded_corroboration_delay() {
+        if isolated("conversation::overlap_evidence_tests::recorded_genuine_episodes_admit_with_bounded_corroboration_delay") {return;}
+        let fixtures:Value=serde_json::from_str(include_str!("corroborated-overlap-episodes.json")).unwrap();
         for (i,c) in fixtures.as_array().unwrap().iter().enumerate() {
             let (epoch,turn)=start(600+i as u64);
             let at=c["t_ms"].as_f64().unwrap();
@@ -1028,8 +1028,8 @@ mod t16_overlap {
         }
     }
     #[test]
-    fn t16_capture_corroboration_retries_earlier_low_floor_hold() {
-        if isolated("conversation::t16_overlap::t16_capture_corroboration_retries_earlier_low_floor_hold") {return;}
+    fn capture_corroboration_retries_earlier_low_floor_hold() {
+        if isolated("conversation::overlap_evidence_tests::capture_corroboration_retries_earlier_low_floor_hold") {return;}
         let (epoch,turn)=start(700);let mut d=decision(Action::Hold);d.floor=0.1;
         assert!(!overlap_decision(epoch,turn,&d));
         level(0.8,5);assert_eq!(STATE.lock().unwrap().phase,Phase::Speaking);
@@ -1037,8 +1037,8 @@ mod t16_overlap {
     }
 
     #[test]
-    fn t16_listening_clip_echo_is_filtered_before_final_corroboration() {
-        if isolated("conversation::t16_overlap::t16_listening_clip_echo_is_filtered_before_final_corroboration") {return;}
+    fn listening_clip_echo_is_filtered_before_final_corroboration() {
+        if isolated("conversation::overlap_evidence_tests::listening_clip_echo_is_filtered_before_final_corroboration") {return;}
         let (epoch,turn)=start(800);let mut p=Policy::default();
         for _ in 0..3 {for d in model(&mut p,true,true) {overlap_decision(epoch,turn,&d);}}
         *LISTENER.lock().unwrap()=Some(crate::conversation_overlap::Listener::default());
@@ -1048,8 +1048,8 @@ mod t16_overlap {
     }
 
     #[test]
-    fn t16_rejected_hold_terminal_does_not_consume_release_budget() {
-        if isolated("conversation::t16_overlap::t16_rejected_hold_terminal_does_not_consume_release_budget") {return;}
+    fn rejected_hold_terminal_does_not_consume_release_budget() {
+        if isolated("conversation::overlap_evidence_tests::rejected_hold_terminal_does_not_consume_release_budget") {return;}
         let (epoch,turn)=start(900);
         assert!(!overlap_decision(epoch,turn,&decision(Action::Hold)));
         assert!(!overlap_decision(epoch,turn,&decision(Action::Noise)));
@@ -1060,9 +1060,9 @@ mod t16_overlap {
         level(0.8,6);assert!(overlap_decision(epoch,turn,&decision(Action::Yield)),"a genuine YIELD survives rejected terminals");
     }
     #[test]
-    fn t16_trace_entries_reject_even_positive_model_candidates() {
-        if isolated("conversation::t16_overlap::t16_trace_entries_reject_even_positive_model_candidates") {return;}
-        let fixtures:Value=serde_json::from_str(include_str!("t16-overlap-traces.json")).unwrap();
+    fn trace_entries_reject_even_positive_model_candidates() {
+        if isolated("conversation::overlap_evidence_tests::trace_entries_reject_even_positive_model_candidates") {return;}
+        let fixtures:Value=serde_json::from_str(include_str!("echo-residual-traces.json")).unwrap();
         assert_eq!(fixtures.as_array().unwrap().len(),12);
         for (i,c) in fixtures.as_array().unwrap().iter().enumerate() {
             let (epoch,turn)=start(100+i as u64);
@@ -1091,8 +1091,8 @@ mod t16_overlap {
         }
     }
     #[test]
-    fn t16_quiet_one_final_can_corroborate_earlier_model_segment() {
-        if isolated("conversation::t16_overlap::t16_quiet_one_final_can_corroborate_earlier_model_segment") {return;}
+    fn quiet_one_final_can_corroborate_earlier_model_segment() {
+        if isolated("conversation::overlap_evidence_tests::quiet_one_final_can_corroborate_earlier_model_segment") {return;}
         for (i,text) in ["Para","Não","Stop"].into_iter().enumerate() {
             let (epoch,turn)=start(200+i as u64);let mut p=Policy::default();
             for _ in 0..3 {for d in model(&mut p,true,true) {overlap_decision(epoch,turn,&d);}}
@@ -1117,8 +1117,8 @@ mod t16_overlap {
         }
     }
     #[test]
-    fn t16_rejected_residual_closed_but_fresh_quiet_listening_and_valid_yield_survive() {
-        if isolated("conversation::t16_overlap::t16_rejected_residual_closed_but_fresh_quiet_listening_and_valid_yield_survive") {return;}
+    fn rejected_residual_closed_but_fresh_quiet_listening_and_valid_yield_survive() {
+        if isolated("conversation::overlap_evidence_tests::rejected_residual_closed_but_fresh_quiet_listening_and_valid_yield_survive") {return;}
         let (epoch,turn)=start(300);
         assert!(!overlap_decision(epoch,turn,&decision(Action::Yield)));
         overlap_decision(epoch,turn,&decision(Action::Noise));
@@ -1141,8 +1141,8 @@ mod t16_overlap {
         assert!(INPUT.lock().unwrap().as_ref().unwrap().text().is_empty());
     }
     #[test]
-    fn t16_no_speech_resume_cap_and_next_reply_rearms_corroborated_hold() {
-        if isolated("conversation::t16_overlap::t16_no_speech_resume_cap_and_next_reply_rearms_corroborated_hold") {return;}
+    fn no_speech_resume_cap_and_next_reply_rearms_corroborated_hold() {
+        if isolated("conversation::overlap_evidence_tests::no_speech_resume_cap_and_next_reply_rearms_corroborated_hold") {return;}
         let (epoch,turn)=start(1300);
         for expected in 1..=2 {
             level(0.8,6);
@@ -1172,8 +1172,8 @@ mod t16_overlap {
     }
 
     #[test]
-    fn t16_noise_cap_resets_per_reply_but_never_disables_yield() {
-        if isolated("conversation::t16_overlap::t16_noise_cap_resets_per_reply_but_never_disables_yield") {return;}
+    fn noise_cap_resets_per_reply_but_never_disables_yield() {
+        if isolated("conversation::overlap_evidence_tests::noise_cap_resets_per_reply_but_never_disables_yield") {return;}
         let (epoch,turn)=start(400);
         for _ in 0..2 {
             level(0.8,6);assert!(overlap_decision(epoch,turn,&decision(Action::Hold)));
@@ -1188,8 +1188,8 @@ mod t16_overlap {
         assert_eq!(crate::doubletalk::no_speech_releases(),0);
     }
     #[test]
-    fn t16_uncorroborated_one_word_finals_never_manufacture_model_evidence() {
-        if isolated("conversation::t16_overlap::t16_uncorroborated_one_word_finals_never_manufacture_model_evidence") {return;}
+    fn uncorroborated_one_word_finals_never_manufacture_model_evidence() {
+        if isolated("conversation::overlap_evidence_tests::uncorroborated_one_word_finals_never_manufacture_model_evidence") {return;}
         for (i,text) in ["Para","Não","Stop"].into_iter().enumerate() {
             let (epoch,_)=start(500+i as u64);level(0.,10);final_words(text);
             assert_eq!(STATE.lock().unwrap().phase,Phase::Speaking);
@@ -1200,7 +1200,7 @@ mod t16_overlap {
 }
 
 #[cfg(test)]
-mod t16_decoder_identity {
+mod decoder_prefix_identity_tests {
     use super::*;
     use crate::dictation::{Recognizer,Session,Event};
     use crate::bc_detector::{Action,Decision};
@@ -1213,9 +1213,9 @@ mod t16_decoder_identity {
         fn finish(&mut self)->String {String::new()}
     }
     #[test]
-    fn t16_decoder_reset_preserves_full_fresh_prefix_and_valid_yield_segment() {
-        if std::env::var_os("T16_PREFIX_CHILD").is_none() {
-            let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact","conversation::t16_decoder_identity::t16_decoder_reset_preserves_full_fresh_prefix_and_valid_yield_segment","--test-threads","4"]).env("T16_PREFIX_CHILD","1").output().unwrap();
+    fn decoder_reset_preserves_full_fresh_prefix_and_valid_yield_segment() {
+        if std::env::var_os("UNFOLD_DECODER_PREFIX_TEST_CHILD").is_none() {
+            let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact","conversation::decoder_prefix_identity_tests::decoder_reset_preserves_full_fresh_prefix_and_valid_yield_segment","--test-threads","4"]).env("UNFOLD_DECODER_PREFIX_TEST_CHILD","1").output().unwrap();
             assert!(out.status.success(),"{}\n{}",String::from_utf8_lossy(&out.stdout),String::from_utf8_lossy(&out.stderr));return;
         }
         let (epoch,turn)={let mut s=STATE.lock().unwrap();*s=Conversation::default();s.start();s.endpoint("original");s.submitted=true;s.speech_started();(s.epoch,s.turn)};

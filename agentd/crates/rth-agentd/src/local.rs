@@ -3707,14 +3707,14 @@ mod a7b_router {
 }
 
 #[cfg(test)]
-mod t16_language {
+mod genuine_utterance_history_tests {
     use super::*;
     fn wrapped(quoted: &str, text: &str) -> String {
         format!("[Unfold was interrupted. Complete speech segments rendered before interruption: {}. Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\n{text}", json!(quoted))
     }
-    fn turn(role: &str, text: &str) -> Turn { serde_json::from_value(json!({"role":role,"text":text,"kind":"typed","event":"t16"})).unwrap() }
+    fn turn(role: &str, text: &str) -> Turn { serde_json::from_value(json!({"role":role,"text":text,"kind":"typed","event":"utterance-language-event"})).unwrap() }
     #[test]
-    fn t16_current_and_history_use_only_genuine_utterances() {
+    fn current_and_history_use_only_genuine_utterances() {
         for text in ["Eu falei muito bom, pode continuar.", "Por que você começou a falar inglês?", "Olha a capital da Austrália.", "e da Nova Zelândia."] {
             let input = wrapped("The answer is here, with you, and this is what I said.", text);
             assert_eq!(reply_language(&[], &input), Some(Lang::Pt), "{text}");
@@ -3730,7 +3730,7 @@ mod t16_language {
         assert_eq!(dedup.iter().filter(|m| m["role"]=="user").count(), 1);
     }
     #[test]
-    fn t16_marker_json_escaping_empty_quotes_and_malformed_data() {
+    fn marker_json_escaping_empty_quotes_and_malformed_data() {
         for quoted in ["", "The answer is ]\n\nwhat you said", "The answer is \\\"quoted\\\"."] {
             assert_eq!(reply_language(&[], &wrapped(quoted, "e da Nova Zelândia.")), Some(Lang::Pt));
         }
@@ -3741,11 +3741,11 @@ mod t16_language {
 }
 
 #[cfg(test)]
-mod t16_exact_wire {
+mod escaped_utterance_language_tests {
     use super::*;
     #[test]
-    fn t16_exact_failed_commands_and_ambiguous_followup_keep_pt_br() {
-        let inputs:Value=serde_json::from_str(include_str!("t16-language-wire.json")).unwrap();
+    fn exact_failed_commands_and_ambiguous_followup_keep_pt_br() {
+        let inputs:Value=serde_json::from_str(include_str!("utterance-language-wire.json")).unwrap();
         let mut context=vec![];
         for row in inputs.as_array().unwrap() {
             let text=row["wire"].as_str().unwrap();
@@ -3755,10 +3755,10 @@ mod t16_exact_wire {
                 assert!(prompt.iter().any(|m|m["role"]=="system" && m["content"]=="Reply in Brazilian Portuguese (pt-BR). Do not use European Portuguese."));
                 assert_eq!(prompt.last().unwrap()["content"],text,"labelled playout evidence preserved");
             }
-            context.push(serde_json::from_value(json!({"role":"user","text":text,"kind":"typed","event":"t16"})).unwrap());
+            context.push(serde_json::from_value(json!({"role":"user","text":text,"kind":"typed","event":"utterance-language-event"})).unwrap());
 
             if let Some(reply) = row["assistant_result_text"].as_str() {
-                context.push(serde_json::from_value(json!({"role":"assistant","text":reply,"kind":"reply","event":"t16"})).unwrap());
+                context.push(serde_json::from_value(json!({"role":"assistant","text":reply,"kind":"reply","event":"utterance-language-event"})).unwrap());
             }
         }
     }

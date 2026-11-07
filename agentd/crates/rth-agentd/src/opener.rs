@@ -240,10 +240,10 @@ mod tests {
 }
 
 #[cfg(test)]
-mod t16_opener {
+mod wrapped_social_utterance_tests {
     use super::*;
     #[test]
-    fn t16_wrapped_social_turn_is_still_a_genuine_social_turn() {
+    fn wrapped_social_turn_is_still_a_genuine_social_turn() {
         let input = "[Unfold was interrupted. Complete speech segments rendered before interruption: \"The answer is here.\". Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\nValeu!";
         assert_eq!(social_reply(input), Some("De nada!"));
     }

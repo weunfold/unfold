@@ -1520,7 +1520,7 @@ mod tests {
             let (f, _) = fate(notes, "v1", &mut Vec::new()).await;
             let Fate::Cleared(ClearReason::LocalVad, played) = f else { panic!("{f:?}") };
             eprintln!("echo fixture, legacy local VAD: self-cut after {played} samples played at 48 kHz ({:.0} ms)", played as f64 / 48.0);
-            assert!(played < 48 * 700, "cut early, as in the trial (6,144-9,000 samples): {played}");
+            assert!(played < 48 * 700, "playout did not stop before the sample bound: {played}");
         })
         .await;
     }

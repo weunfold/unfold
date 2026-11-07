@@ -2916,10 +2916,10 @@ mod tests {
 }
 
 #[cfg(test)]
-mod t16_dictation {
+mod dictation_locale_tests {
     use super::*;
     #[test]
-    fn t16_pt_locale_is_canonical_before_model_admission() {
+    fn pt_locale_is_canonical_before_model_admission() {
         let mut settings = crate::settings::Settings::default();
         settings.dictation_language = "pt".into();
         assert_eq!(crate::nemo::language(stream_lang_of(&settings, &["en-US".into()])), Some("pt-BR"));
@@ -2934,7 +2934,7 @@ mod t16_dictation {
 }
 
 #[cfg(test)]
-mod t16_model_admission {
+mod model_admission_tests {
     use super::*;
     use std::cell::RefCell;
     use std::rc::Rc;
@@ -2956,9 +2956,9 @@ mod t16_model_admission {
         std::fs::write(d.join(".verified"),marker).unwrap();
     }
     #[test]
-    fn t16_pt_start_rejects_stale_installed_nemotron_or_english_before_permission() {
+    fn pt_start_rejects_stale_installed_nemotron_or_english_before_permission() {
         for (i,id) in ["nemotron-3.5-streaming-0.6b-q8","parakeet-tdt_ctc-110m-en"].into_iter().enumerate() {
-            let data=std::env::temp_dir().join(format!("T16-admit-{}-{i}",std::process::id()));
+            let data=std::env::temp_dir().join(format!("model-admission-{}-{i}",std::process::id()));
             sparse_installed(&data,id);crate::dictation_models::set_default(&data,id).unwrap();
             let events=Rc::new(RefCell::new(vec![]));let copy=events.clone();
             let (tx,_rx)=std::sync::mpsc::sync_channel(4);
@@ -2970,7 +2970,7 @@ mod t16_model_admission {
 }
 
 #[cfg(test)]
-mod t16_model_dispatch {
+mod model_dispatch_tests {
     use super::*;
     use std::cell::RefCell;
     use std::rc::Rc;
@@ -2993,7 +2993,7 @@ mod t16_model_dispatch {
         fn load(&mut self,lang:&str)->Result<Self::R,String> {self.0.borrow_mut().push(format!("load:{lang}"));Ok(RecognizerFixture)}
     }
     #[test]
-    fn t16_same_resolved_pt_language_reaches_readiness_and_load() {
+    fn same_resolved_pt_language_reaches_readiness_and_load() {
         let calls=Rc::new(RefCell::new(vec![]));let (tx,_rx)=std::sync::mpsc::sync_channel(4);
         let mut worker=Worker::new(MicFixture,ModelFixture(calls.clone()),Box::new(|_|{}),tx,Arc::new(AtomicBool::new(false)),Box::new(|_|None));
         let settings=crate::settings::Settings{dictation_language:"pt".into(),..Default::default()};

@@ -17,9 +17,7 @@ const RUNNING = fixture('host-status-running.json')
 const VOICE = fixture('host-status-voice-synthetic.json')
 const BOOT = RUNNING.link.boot_id
 const NOW = 1_792_615_000_000
-// The ready lines a live voice trial recorded, with the setup ids the replica computes over the
-// fixture policy text (test/fixtures/gemini.rs). The replica is the first Unfold plugins' one, which
-// reproduced the trial's own ids over the agent's real policy text; these pin it unchanged.
+// Pin setup ids computed from the bundled voice policies.
 const READY_SERVER = 'gemini ready gen=1 model=gemini-3.8-live ws_connect_ms=281.9 setup_ms=373.4 setup_to_ready_ms=655.3 resumed=false vad=server policy=ptbr-addressee-v1 proactive=false transcription_langs=- system_extra=false setup_id=bab5b0aed6d89b26'
 const READY_LOW = 'gemini ready gen=1 model=gemini-3.8-live ws_connect_ms=274.0 setup_ms=406.3 setup_to_ready_ms=680.3 resumed=false vad=low-v1 policy=ptbr-addressee-v1 proactive=false transcription_langs=- system_extra=false setup_id=3deb324405afb5a2'
 // Stand-ins for the agent's source files the panel reads; the plugin takes their paths from config.

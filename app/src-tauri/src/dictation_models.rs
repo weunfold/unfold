@@ -1331,12 +1331,12 @@ mod tests {
 }
 
 #[cfg(test)]
-mod t16_model_choice {
+mod required_model_choice_tests {
     use super::*;
     use crate::dictation::Models;
     #[test]
-    fn t16_pt_choice_overrides_saved_default_and_exposes_install_route() {
-        let data=std::env::temp_dir().join(format!("T16-choice-{}",std::process::id()));
+    fn pt_choice_overrides_saved_default_and_exposes_install_route() {
+        let data=std::env::temp_dir().join(format!("required-model-choice-{}",std::process::id()));
         let _ = std::fs::remove_dir_all(&data);
         std::fs::create_dir_all(&data).unwrap();
         for stale in ["nemotron-3.5-streaming-0.6b-q8","parakeet-tdt_ctc-110m-en"] {
@@ -1351,14 +1351,14 @@ mod t16_model_choice {
         assert_eq!(crate::dictation::Installed::new(data.clone()).state_for("pt"),crate::dictation::ModelState::Missing);
     }
     #[test]
-    fn t16_pt_downloading_state_uses_required_model_not_saved_default() {
+    fn pt_downloading_state_uses_required_model_not_saved_default() {
         use crate::dictation::Models;
 
-        if std::env::var_os("T16_DOWNLOAD_CHILD").is_none() {
-            let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact","dictation_models::t16_model_choice::t16_pt_downloading_state_uses_required_model_not_saved_default","--test-threads","4"]).env("T16_DOWNLOAD_CHILD","1").output().unwrap();
+        if std::env::var_os("UNFOLD_REQUIRED_MODEL_TEST_CHILD").is_none() {
+            let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact","dictation_models::required_model_choice_tests::pt_downloading_state_uses_required_model_not_saved_default","--test-threads","4"]).env("UNFOLD_REQUIRED_MODEL_TEST_CHILD","1").output().unwrap();
             assert!(out.status.success(),"{}",String::from_utf8_lossy(&out.stdout));return;
         }
-        let data=std::env::temp_dir().join(format!("T16-download-{}",std::process::id()));
+        let data=std::env::temp_dir().join(format!("required-model-download-{}",std::process::id()));
         let _ = std::fs::remove_dir_all(&data);
         std::fs::create_dir_all(&data).unwrap();
         set_default(&data,"nemotron-3.5-streaming-0.6b-q8").unwrap();

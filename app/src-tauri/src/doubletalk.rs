@@ -140,7 +140,7 @@ impl Probe {
 mod tests {
     use super::*;
     #[test]
-    fn doubletalk_telemetry_is_trial_only_by_default() {
+    fn telemetry_defaults_to_the_maintenance_series_and_honors_overrides() {
         assert!(telemetry_enabled("0.4.12",None));
         assert!(!telemetry_enabled("0.5.0",None));
         assert!(!telemetry_enabled("1.0.0",None));
@@ -148,7 +148,7 @@ mod tests {
         assert!(telemetry_enabled("0.5.0",Some("1")));
     }
     #[test]
-    fn capture_onset_keeps_trial_calibrated_minus_38db_threshold() {
+    fn capture_observation_keeps_the_minus_38db_threshold() {
         let mut p=Probe::default();
         assert!(!p.level(0.30,true,50).1,"clean-mic -45dB replay threshold is not a capture calibration");
         assert!(!p.level(crate::conversation_input::VOICE_LEVEL,true,100).1,"energy-only -38dB cannot hold playout");
@@ -206,21 +206,21 @@ mod review04 {
 }
 
 #[cfg(test)]
-mod t16_capture {
+mod capture_observation_tests {
     use super::*;
     #[test]
-    fn t16_capture_energy_never_holds_or_fences_a_published_front() {
-        if std::env::var_os("T16_CAPTURE_CHILD").is_none() {
-            let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact","doubletalk::t16_capture::t16_capture_energy_never_holds_or_fences_a_published_front","--test-threads","4"]).env("T16_CAPTURE_CHILD","1").output().unwrap();
+    fn capture_energy_never_holds_or_fences_a_published_front() {
+        if std::env::var_os("UNFOLD_CAPTURE_OBSERVATION_TEST_CHILD").is_none() {
+            let out=std::process::Command::new(std::env::current_exe().unwrap()).args(["--exact","doubletalk::capture_observation_tests::capture_energy_never_holds_or_fences_a_published_front","--test-threads","4"]).env("UNFOLD_CAPTURE_OBSERVATION_TEST_CHILD","1").output().unwrap();
             assert!(out.status.success(),"{}\n{}",String::from_utf8_lossy(&out.stdout),String::from_utf8_lossy(&out.stderr));return;
         }
         reset();reply(true);playing(true);
         let capture=std::sync::Arc::new(crate::voice_front::capture::Capture::<2048>::new());let reader=capture.reader();reader.activate();
         let epoch=crate::voice_front::runtime::Epoch{capture:1,turn:1};
-        let ticket=crate::voice_front::runtime::Ticket::new(epoch,"t16-front".into());capture.publish(&ticket,0).unwrap();
+        let ticket=crate::voice_front::runtime::Ticket::new(epoch,"capture-observation-front".into());capture.publish(&ticket,0).unwrap();
         Probe::default().push_front(&[0.1;crate::duplex_audio::RATE as usize/20],Some(&reader));
         assert!(!held(),"strong energy alone is still not near-end speech evidence");
-        assert!(ticket.render(epoch,"t16-front",480),"energy-only capture cannot bypass model admission by fencing front");
+        assert!(ticket.render(epoch,"capture-observation-front",480),"energy-only capture cannot bypass model admission by fencing front");
         reset();
     }
 }

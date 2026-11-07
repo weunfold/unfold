@@ -6,8 +6,10 @@ use rth_voice::sim::Policy;
 use rth_voice::vad::VadConfig;
 
 fn main() {
-    let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../bench/fixtures/dev/voice-trial-fixes");
-    let f = matrix::load(&dir).expect("fixtures (sh bench/fixtures/dev/voice-trial-fixes/make.sh)");
+    let dir = std::env::var_os("UNFOLD_VOICE_FIXTURES_DIR")
+        .map(std::path::PathBuf::from)
+        .expect("set UNFOLD_VOICE_FIXTURES_DIR; generate fixtures with sh crates/rth/testdata/voice-fixtures/make.sh");
+    let f = matrix::load(&dir).expect("voice fixtures from UNFOLD_VOICE_FIXTURES_DIR");
     let levels = [-25.0, -35.0];
     let (e, g) = (Policy::LocalEnergy(VadConfig::default()), Policy::Gated(EchoConfig::default()));
     let cases: Vec<(Policy, f32, bool)> = vec![
@@ -27,7 +29,7 @@ fn main() {
     }
     let near: Vec<String> = levels.iter().map(|&l| { let (s, n) = matrix::near_only(&f, l); format!("{{\"level_dbfs\": {l}, \"local_vad_saw\": {s}, \"of\": {n}}}") }).collect();
     println!(
-        "{{\n  \"fixtures\": \"bench/fixtures/dev/voice-trial-fixes (synthetic, dev only)\",\n  \"echo_grid\": {{\"delay_ms\": {:?}, \"gain_db\": {:?}, \"tail_ms\": {:?}}},\n  \"far_end_rms_dbfs\": -20, \"interruption_at_ms_into_reply\": 6000,\n  \"gate\": \"{}\",\n  \"rows\": [\n{}\n  ],\n  \"near_end_only\": [{}]\n}}",
+        "{{\n  \"fixtures\": \"UNFOLD_VOICE_FIXTURES_DIR (synthetic voice fixtures)\",\n  \"echo_grid\": {{\"delay_ms\": {:?}, \"gain_db\": {:?}, \"tail_ms\": {:?}}},\n  \"far_end_rms_dbfs\": -20, \"interruption_at_ms_into_reply\": 6000,\n  \"gate\": \"{}\",\n  \"rows\": [\n{}\n  ],\n  \"near_end_only\": [{}]\n}}",
         matrix::DELAYS, matrix::GAINS, matrix::TAILS, EchoConfig::default().describe(), rows.join(",\n"), near.join(", ")
     );
 }

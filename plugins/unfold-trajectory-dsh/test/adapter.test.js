@@ -217,7 +217,7 @@ test('real-shaped fixture (a host journal, synthetic text): replies as turns, un
   const { readFileSync } = await import('node:fs')
   const mind = new MindStream({ limit: 2000 })
   const file = `${HOME}/unfold/app/bot/unfold-host.jsonl`
-  const recs = readFileSync(new URL('fixtures/voice-trial-host.jsonl', import.meta.url), 'utf8').trim().split('\n').map((l) => JSON.parse(l))
+  const recs = readFileSync(new URL('fixtures/voice-playback-events.jsonl', import.meta.url), 'utf8').trim().split('\n').map((l) => JSON.parse(l))
   mind.host({ kind: 'started', pid: 1, t_ms: 0 }, { via: 'host journal', file, offset: 0, length: 1 }) // the replaying host's own lifetime record
   recs.forEach((r, i) => mind.host(r, { via: 'host journal', file, offset: 100 + i * 100, length: 99 }))
   const b = buildUnfoldTrajectory({ rows: mind.snapshot().rows })

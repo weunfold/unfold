@@ -84,3 +84,7 @@ Rust app, agent and activation library are Apache-2.0; voice client libraries
 and seven plugins are MIT; the Bot and bridge plugins are Apache-2.0. Component
 LICENSE and NOTICE files take precedence for those components. Vendored Omni UI
 and trajectory dependencies retain their required upstream notices.
+
+## Trademarks
+
+Logo, wordmark and app-icon artwork is all rights reserved as trademarks; [TRADEMARKS.md](TRADEMARKS.md) lists the exact files. Design code and CSS retain their applicable code licences.

@@ -3550,13 +3550,13 @@ mod tests;
 mod reasoning_limits_tests;
 
 #[cfg(test)]
-mod t16_memory_locale {
+mod memory_reply_language_tests {
     use super::*;
     fn wire(quoted:&str,text:&str)->String {
         format!("[Unfold was interrupted. Complete speech segments rendered before interruption: {}. Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\n{text}",serde_json::json!(quoted))
     }
     #[test]
-    fn t16_wrapped_memory_examples_use_genuine_pt_and_english_only() {
+    fn wrapped_memory_examples_use_genuine_pt_and_english_only() {
         let pt=wire("","Qual é o meu nome?");
         let none=blocks::none(&pt);
         assert!(none.starts_with("MEMORY_NONE:"));
@@ -3579,7 +3579,7 @@ mod t16_memory_locale {
         assert!(pt.ends_with("\n\nQual é o meu nome?"));
     }
     #[test]
-    fn t16_wrapped_nothing_to_correct_follows_current_utterance() {
+    fn wrapped_nothing_to_correct_follows_current_utterance() {
         let pt=wire("","Na verdade é Sol agora.");
         assert_eq!(nothing_to_correct(&pt),NOTHING_TO_CORRECT_PT);
         let english=wire(&"você não eu meu minha como quem é pode para agora".repeat(4),"Actually it is Sol now.");
@@ -3587,19 +3587,19 @@ mod t16_memory_locale {
         assert_eq!(nothing_to_correct("Na verdade é Sol agora."),NOTHING_TO_CORRECT_PT);
     }
     #[tokio::test]
-    async fn t16_wrapped_forget_fixed_reply_uses_genuine_language_without_effects() {
+    async fn wrapped_forget_fixed_reply_uses_genuine_language_without_effects() {
 
         let nonce=std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos();
-        let dir=std::env::temp_dir().join(format!("T16-forget-locale-{}-{nonce}",std::process::id()));
+        let dir=std::env::temp_dir().join(format!("forget-reply-language-{}-{nonce}",std::process::id()));
         std::fs::create_dir(&dir).unwrap();
         let journal_path=dir.join("journal.jsonl");
         let (faults,_)=mpsc::unbounded_channel();
         let (journal,_)=Journal::open(&journal_path,faults,None).unwrap();
         let (backend,_)=mpsc::channel(4);
-        let agent=Arc::new(Agent::new(journal,journal_path.to_string_lossy().into_owned(),"guest-t16".into(),backend,instance::Boot::default(),"fake".into(),"test"));
-        let (ledger,_)=rth_memory::ledger::Ledger::open(&dir.join("reference.jsonl"),"t16",rth_memory::ledger::PRIVATE_SCOPE,"boot").unwrap();
+        let agent=Arc::new(Agent::new(journal,journal_path.to_string_lossy().into_owned(),"guest-memory-language".into(),backend,instance::Boot::default(),"fake".into(),"test"));
+        let (ledger,_)=rth_memory::ledger::Ledger::open(&dir.join("reference.jsonl"),"memory-language-fixture",rth_memory::ledger::PRIVATE_SCOPE,"boot").unwrap();
         let provider=Box::new(rth_memory::ledger::Reference{ledger});
-        let (memory,_,_)=memory::Memory::open_with(provider,&dir.join("memory-acts.jsonl"),"t16","boot","fake","").unwrap();
+        let (memory,_,_)=memory::Memory::open_with(provider,&dir.join("memory-acts.jsonl"),"memory-language-fixture","boot","fake","").unwrap();
         let memory=Arc::new(memory);
         let pt=wire("","Esquece onde eu moro.");
         assert_eq!(forget_turn(&agent,&memory,&pt,"cause","response").await,NO_FORGET_MATCH_PT);

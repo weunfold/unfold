@@ -1417,13 +1417,13 @@ mod pv05_g6_intro {
 }
 
 #[cfg(test)]
-mod t16_name_locale {
+mod name_reply_language_tests {
     use super::*;
     fn wire(quoted:&str,text:&str)->String {
         format!("[Unfold was interrupted. Complete speech segments rendered before interruption: {}. Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\n{text}",serde_json::json!(quoted))
     }
     #[test]
-    fn t16_name_answer_subject_follows_genuine_question_language() {
+    fn name_answer_subject_follows_genuine_question_language() {
         let pt=wire("","Qual é o meu nome?");
         assert_eq!(name_answer("Ana",Some(&pt),Some("Não sei; você ainda não me contou isso.")).as_deref(),Some("meu nome é Ana"));
         let english=wire(&"você não eu meu minha como quem é pode para agora".repeat(4),"What is my name?");
