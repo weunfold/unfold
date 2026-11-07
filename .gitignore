@@ -3,3 +3,7 @@ node_modules
 # Local test output
 .test-logs/
 .DS_Store
+
+# Native build output
+**/target/
+app/src-tauri/gen/

@@ -1,0 +1,83 @@
+{
+  "name": "@automagik/unfold-capabilities-dsh",
+  "version": "3.90.7",
+  "description": "What Unfold can do, and how well, for DSH: a read-only capability map per capability, modality and benchmark row, computed only from bench scorecards joined to their manifests. A run that lands pushes the new map; nothing polls",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "capabilities"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-capabilities-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-capabilities-dsh"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/capmap.js",
+    "src/sse.js",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --import ./test/harness-resolve.mjs --test --test-force-exit \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold capabilities"
+      },
+      "description": {
+        "en": "Part of Unfold; works with the Unfold app. What Unfold can do, and how well. A read-only map of each capability, modality and benchmark row, computed only from bench scorecards joined to their manifests: a cell without evidence says so, and runs that are not comparable are listed apart with why. Shows the latest measured candidate as a measurement, never as proof of what is deployed. Writes nothing and opens no connection of its own."
+      },
+      "category": "ai",
+      "keywords": [
+        "unfold",
+        "capabilities",
+        "benchmark"
+      ]
+    }
+  }
+}

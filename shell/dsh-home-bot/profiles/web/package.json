@@ -2,12 +2,6 @@
   "name": "dsh-profile-web-bot",
   "private": true,
   "dependencies": {
-    "@rth/dsh-events": "link:../../../../plugins/dsh-events",
-    "@rth/dsh-capabilities": "link:../../../../plugins/dsh-capabilities",
-    "@rth/dsh-session": "link:../../../../plugins/dsh-session",
-    "@rth/dsh-settings": "link:../../../../plugins/dsh-settings",
-    "@rth/dsh-mind": "link:../../../../plugins/dsh-mind",
-    "@rth/dsh-rth-trajectory": "link:../../../../plugins/dsh-rth-trajectory",
     "@automagik/omni-dsh": "link:../../../vendor/omni-ui-dsh"
   },
   "dsh": {

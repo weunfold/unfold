@@ -1,0 +1,86 @@
+{
+  "name": "@automagik/unfold-settings-dsh",
+  "version": "3.90.7",
+  "description": "Unfold's settings for DSH, read-only: the effective runtime, prompt, voice and context settings, each with its source and how fresh it is, read from the Unfold session's host status and the agent's event window. A value nobody reports says unknown; nothing is assumed",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "settings"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-settings-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-settings-dsh"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/display.js",
+    "src/redact.js",
+    "src/settings.js",
+    "src/sources.js",
+    "src/sse.js",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --import ./test/harness-resolve.mjs --test --test-force-exit \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold settings"
+      },
+      "description": {
+        "en": "Part of Unfold; works with the Unfold app. How Unfold is set up right now, read-only: backend and model, the prompt revision (shown only when it is proven against what the agent sent), voice and device state and the model context, each with its source and how fresh it is. A value nobody reports says unknown, and a value past its lease says stale; nothing is assumed. Writes nothing and opens no connection of its own: it reads the Unfold session and event plugins."
+      },
+      "category": "ai",
+      "keywords": [
+        "unfold",
+        "settings",
+        "status"
+      ]
+    }
+  }
+}

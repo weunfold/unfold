@@ -1,0 +1,9 @@
+# Mounts Unfold's settings view; the browser half is discovered through the package's dsh.client
+# manifest and ./client export.
+#
+# The row's Config (index.js) may name the agent's source files the prompt check reads; with none,
+# the prompt is never shown and the context bounds are unknown. Installed into someone's own DSH,
+# this patch adds that row and changes nothing of theirs: the plugin has no write route.
+- insert:
+    - id: unfold-settings
+      name: '@automagik/unfold-settings-dsh'

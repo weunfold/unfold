@@ -1,0 +1,86 @@
+{
+  "name": "@automagik/unfold-trajectory-dsh",
+  "version": "3.90.7",
+  "description": "Unfold's real-time trajectory for DeepSeek Harness: a fork of DeepSeek's trajectory UI (@deepseek-ai/dsh-client-ui-trajectory 0.2.1-rc.3, MIT) that keeps its ledger, overview and inspector and reads Unfold's Mind stream instead",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "trajectory"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-trajectory-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-trajectory-dsh"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "third_party/",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --test \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ],
+      "external": [
+        "@automagik/bots-dsh/client"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold's trajectory"
+      },
+      "description": {
+        "en": "Part of Unfold; works with the Unfold app. What Unfold heard, thought, said and did, as one ledger with a timing overview and an inspector, in Unfold's own Session. A fork of DeepSeek's Trajectory view that reads Unfold's Mind stream (from Unfold's Mind plugin) and opens no other connection. It only reads, and DeepSeek's own Trajectory view stays as it is."
+      },
+      "category": "ai",
+      "keywords": [
+        "unfold",
+        "trajectory",
+        "timeline"
+      ]
+    }
+  }
+}

@@ -18,7 +18,7 @@ import { createInterface } from 'node:readline'
 import { fileURLToPath } from 'node:url'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const FIXTURES = resolve(here, '../../plugins/dsh-events/test/fixtures')
+const FIXTURES = resolve(here, './fixtures')
 const arg = (name, fallback) => {
   const i = process.argv.indexOf(`--${name}`)
   return i < 0 ? fallback : process.argv[i + 1]

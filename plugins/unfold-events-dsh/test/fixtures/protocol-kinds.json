@@ -1,0 +1,5 @@
+{
+  "note": "The event kinds of agentd's protocol v2 that the catalog names, as the first Unfold plugins were tested against. A later agentd adds kinds this catalog does not name yet; the window shows those as unknown and flags them.",
+  "protocol": 2,
+  "kinds": ["hello", "ready", "heartbeat", "response_started", "agent_delta", "agent_done", "agent_audio", "decision", "journal_fault", "rejected", "log", "audio_ingress", "input_transcript", "provider_signal", "command_admitted", "media_stored", "context_restore", "response_diagnostic", "attach", "user_text", "command_submitted", "cancel", "user_audio", "user_audio_end", "playback", "tasks_ready", "task_state", "task_update", "executor_status", "memory_act", "memory_recall"]
+}

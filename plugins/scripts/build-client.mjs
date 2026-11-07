@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url'
 import { build } from 'esbuild'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const dirs = process.argv.slice(2).length ? process.argv.slice(2) : ['dsh-events', 'dsh-capabilities', 'dsh-session']
+const dirs = process.argv.slice(2).length ? process.argv.slice(2) : []
 
 for (const dir of dirs) {
   const pkgDir = resolve(root, dir)

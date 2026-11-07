@@ -1,0 +1,85 @@
+{
+  "name": "@automagik/unfold-bridge-dsh",
+  "version": "3.90.7",
+  "description": "Your DSH's models and agent events for Unfold: serves the model routes of your own DeepSeek Harness on loopback as an OpenAI chat-completions endpoint, behind a key made at each start. Unfold sees your sessions' names and status, and what your agents say only for the sessions you subscribe it to. Drafts send only when you click Send",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "openai-compatible"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-bridge-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-bridge-dsh"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/host/",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --import ./test/harness-resolve.mjs --test --test-force-exit \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-llm": "*"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold bridge"
+      },
+      "description": {
+        "en": "Use the models of your own DSH in Unfold, and let Unfold follow the agents you pick. Serves your DSH's model routes to apps on this computer as an OpenAI-compatible endpoint on 127.0.0.1, behind a key made at each start. Unfold sees your sessions' names and status, and what your agents say only for the sessions you subscribe it to. It can draft a next message for an agent, which is sent only when you click Send in DSH. Your sign-ins and their tokens stay in DSH. It never answers approvals and runs no tools. Part of Unfold; works with the Unfold app."
+      },
+      "category": "ai",
+      "keywords": [
+        "unfold",
+        "openai-compatible",
+        "bridge",
+        "models"
+      ]
+    }
+  }
+}

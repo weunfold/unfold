@@ -6,12 +6,7 @@
   "engines": {
     "node": ">=22.19"
   },
-  "workspaces": [
-    "dsh-sse",
-    "dsh-events",
-    "dsh-capabilities",
-    "dsh-session"
-  ],
+  "workspaces": [],
   "scripts": {
     "test": "node --test",
     "build:client": "node scripts/build-client.mjs"

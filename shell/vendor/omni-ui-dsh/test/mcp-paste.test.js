@@ -21,7 +21,9 @@ test('placeholders and plain settings are left as they are', () => {
 })
 
 test('the same value pasted twice is one secret', () => {
-  const { secrets } = extractSecrets('{"API_KEY":"abcdef0123456789","OTHER_TOKEN":"abcdef0123456789"}')
+  const fixture_secret_0 = globalThis.crypto.randomUUID().replaceAll("-", "")
+
+  const { secrets } = extractSecrets(("{\"API_KEY\":\"" + fixture_secret_0 + "\",\"OTHER_TOKEN\":\"" + fixture_secret_0 + "\"}"))
   assert.equal(secrets.length, 1)
 })
 

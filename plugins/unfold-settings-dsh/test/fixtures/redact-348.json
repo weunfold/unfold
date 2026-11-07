@@ -1,0 +1,1118 @@
+{
+ "issue": 348,
+ "text": [
+  [
+   "measured: NUL inside the name",
+   "pass\u0000word: hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "measured: ZWSP inside the name",
+   "pass\u200bword: hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "measured: an anchor before the value",
+   "password: &a hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "measured: a tag before the value",
+   "password: !!str hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "control: the plain scalar",
+   "password: hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "control: prose after the plain scalar",
+   "password: hunter2 is not safe",
+   "password: [redacted] is not safe"
+  ],
+  [
+   "NUL, name=value",
+   "pass\u0000word=hunter2",
+   "password=[redacted]"
+  ],
+  [
+   "ZWSP, upper-case NAME=value",
+   "DB_PASS\u200bWORD=hunter2",
+   "DB_PASSWORD=[redacted]"
+  ],
+  [
+   "ZWSP, --flag=value",
+   "tool --api\u200bkey=hunter2",
+   "tool --apikey=[redacted]"
+  ],
+  [
+   "ZWSP, camelCase name",
+   "dbPass\u200bword: hunter2",
+   "dbPassword: [redacted]"
+  ],
+  [
+   "ZWJ, PascalCase name",
+   "Client\u200dSecret: hunter2",
+   "ClientSecret: [redacted]"
+  ],
+  [
+   "ZWSP, a quoted JSON key",
+   "{\"pass\u200bword\": \"hunter2 two\"}",
+   "{\"password\": \"[redacted]\"}"
+  ],
+  [
+   "ZWSP, an escaped JSON key",
+   "{\\\"pass\u200bword\\\": \\\"hunter2 two\\\"}",
+   "{\\\"password\\\": \\\"[redacted]\\\"}"
+  ],
+  [
+   "a JSON \\u0000 escape inside a key",
+   "{\"pass\\u0000word\":\"hunter2\"}",
+   "{\"password\":\"[redacted]\"}"
+  ],
+  [
+   "a JSON \\u200b escape inside a key",
+   "{\"api\\u200bkey\":\"hunter2\"}",
+   "{\"apikey\":\"[redacted]\"}"
+  ],
+  [
+   "ZWSP, a YAML block key",
+   "pass\u200bword: |\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "NUL, a YAML block key",
+   "config:\n  db_pass\u0000word: >\n    hunter2\nnext: shown",
+   "config:\n  db_password: >\n    [redacted]\nnext: shown"
+  ],
+  [
+   "measured: an anchor before a block indicator",
+   "password: &a |\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "measured: a tag before a block indicator",
+   "password: !!str |\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "measured: a local tag before a block indicator",
+   "password: !secret |\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "measured: a verbatim tag before a block indicator",
+   "password: !<tag:yaml.org,2002:str> |\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "control: the plain block scalar",
+   "password: |\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor then a tag before a strip indicator, two lines",
+   "password: &a !!str |-\n  hunter2\n  hunter2 again\nnext: shown",
+   "password: |-\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a tag then an anchor before a folded indicator",
+   "password: !!str &a >\n  hunter2\nnext: shown",
+   "password: >\n  [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor before a keep indicator",
+   "password: &a |+\n  hunter2\nnext: shown",
+   "password: |+\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a tag before a folded strip indicator",
+   "password: !!str >-\n  hunter2\nnext: shown",
+   "password: >-\n  [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor before an indent indicator",
+   "password: &a |2\n    hunter2\nnext: shown",
+   "password: |2\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a tag before a keep and indent indicator",
+   "password: !!str >+1\n  hunter2\nnext: shown",
+   "password: >+1\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a tag then a tab before a block indicator",
+   "password: !!str\t|\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor before a block indicator, extra spaces",
+   "password:  &a  |  \n  hunter2\nnext: shown",
+   "password:  |  \n  [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor before a block under a camelCase name",
+   "dbPassword: &a |\n  hunter2\nnext: shown",
+   "dbPassword: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a tag before a block under an indented key",
+   "config:\n  db_password: !!str >-\n    hunter2\nnext: shown",
+   "config:\n  db_password: >-\n    [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor before a block under an invisible name",
+   "pass\u200bword: &a |\n  hunter2\nnext: shown",
+   "password: |\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a verbatim tag holding a name before a block, in a list item",
+   "- name: db\n  password: !<tag:example.com,2026:token> |\n    hunter2\nnext: shown",
+   "- name: db\n  password: |\n    [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor before a block indicator at the end of the text",
+   "password: &a |",
+   "password: |"
+  ],
+  [
+   "control: an anchor before a scalar that ends in a pipe",
+   "password: &a hunter2 |",
+   "password: [redacted] |"
+  ],
+  [
+   "near miss: an anchor before a block under a plain key",
+   "email: &a |\n  hunter2\nnext: shown",
+   "email: &a |\n  hunter2\nnext: shown"
+  ],
+  [
+   "near miss: a tag before a block under a plain key",
+   "note: !important >\n  hunter2\nnext: shown",
+   "note: !important >\n  hunter2\nnext: shown"
+  ],
+  [
+   "near miss: a verbatim tag before a block under a plain key",
+   "type: !<tag:yaml.org,2002:str> |\n  hunter2\nnext: shown",
+   "type: !<tag:yaml.org,2002:str> |\n  hunter2\nnext: shown"
+  ],
+  [
+   "next line: an anchor with no value, then the next key",
+   "password: &a\nusername: bob",
+   "password: [redacted]\nusername: bob"
+  ],
+  [
+   "next line: a null tag with no value, then the next key",
+   "password: !!null\nusername: bob",
+   "password: [redacted]\nusername: bob"
+  ],
+  [
+   "next line: an anchor under a camelCase name, then the next key",
+   "apiKey: &a\nusername: bob",
+   "apiKey: [redacted]\nusername: bob"
+  ],
+  [
+   "next line: a null tag under a camelCase name, then the next key",
+   "apiKey: !!null\nusername: bob",
+   "apiKey: [redacted]\nusername: bob"
+  ],
+  [
+   "invalid YAML: three anchors and tags before a block indicator, left as written",
+   "password: &a !!str !x |\n  hunter2\nnext: shown",
+   "password: &a !!str !x |\n  hunter2\nnext: shown"
+  ],
+  [
+   "invalid YAML: four anchors and tags before a block indicator, left as written",
+   "password: &a !!str !x &b >\n  hunter2\nnext: shown",
+   "password: &a !!str !x &b >\n  hunter2\nnext: shown"
+  ],
+  [
+   "invalid YAML: three anchors and tags before a scalar, left as written",
+   "password: &a !!str !x hunter2",
+   "password: &a !!str !x hunter2"
+  ],
+  [
+   "invalid YAML: three anchors and tags before a scalar, a long third, left as written",
+   "password: &a !!str !!int hunter2",
+   "password: &a !!str !!int hunter2"
+  ],
+  [
+   "invalid YAML: four anchors and tags before a scalar, left as written",
+   "password: &a !!str !!int &bb hunter2",
+   "password: &a !!str !!int &bb hunter2"
+  ],
+  [
+   "invalid YAML: three anchors and tags before a camelCase scalar, left as written",
+   "dbPassword: &a !!str !!int hunter2",
+   "dbPassword: &a !!str !!int hunter2"
+  ],
+  [
+   "invalid YAML: four anchors and tags before a camelCase scalar, left as written",
+   "dbPassword: &a !!str !!int &bb hunter2",
+   "dbPassword: &a !!str !!int &bb hunter2"
+  ],
+  [
+   "invalid YAML: three anchors and tags before a quoted scalar, left as written",
+   "password: &a !!str !!int \"hunter2\"",
+   "password: &a !!str !!int \"hunter2\""
+  ],
+  [
+   "invalid YAML: three anchors and tags after an equals sign, left as written",
+   "password= &a !!str !!int hunter2",
+   "password= &a !!str !!int hunter2"
+  ],
+  [
+   "a comment glued to a block indicator",
+   "password: |#x\n  hunter2\nnext: shown",
+   "password: |#x\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a comment glued to a strip folded indicator under a camelCase name",
+   "dbPassword: >-#x\n  hunter2\nnext: shown",
+   "dbPassword: >-#x\n  [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor, then a comment glued to a block indicator",
+   "password: &a |#x\n  hunter2\nnext: shown",
+   "password: |#x\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a comment after a block indicator",
+   "password: | # note\n  hunter2\nnext: shown",
+   "password: | # note\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a comment after a folded indicator",
+   "password: > # note\n  hunter2\nnext: shown",
+   "password: > # note\n  [redacted]\nnext: shown"
+  ],
+  [
+   "an anchor, then a comment after a strip indicator",
+   "password: &a |- # note\n  hunter2\nnext: shown",
+   "password: |- # note\n  [redacted]\nnext: shown"
+  ],
+  [
+   "a CRLF block under an anchor",
+   "password: &a |\r\n  hunter2\r\n\r\n  hunter2 again\r\nnext: shown",
+   "password: |\r\n  [redacted]\r\nnext: shown"
+  ],
+  [
+   "a CRLF folded block under an anchor",
+   "password: &a >\r\n  hunter2\r\nnext: shown",
+   "password: >\r\n  [redacted]\r\nnext: shown"
+  ],
+  [
+   "a CRLF block under a tag, with a comment",
+   "dbPassword: !!str | # note\r\n  hunter2\r\nnext: shown",
+   "dbPassword: | # note\r\n  [redacted]\r\nnext: shown"
+  ],
+  [
+   "BOM, word joiner, soft hyphen, bidi mark, DEL",
+   "p\ufeffa\u2060s\u00ads\u202ew\u007ford: hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "a run of invisible characters",
+   "pass\u200b\u200c\u200d\u0000word: hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "ZWSP between the name and the colon",
+   "password\u200b: hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "ZWSP after the colon",
+   "password:\u200b hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "anchor then tag",
+   "password: &a !!str hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "tag then anchor",
+   "password: !!str &a hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "a local tag",
+   "password: !secret hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "a verbatim tag",
+   "password: !<tag:yaml.org,2002:str> hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "a tag then a tab",
+   "password: !!str\thunter2",
+   "password: [redacted]"
+  ],
+  [
+   "an anchor before a quoted value",
+   "password: &a \"hunter2 two\"",
+   "password: \"[redacted]\""
+  ],
+  [
+   "a tag before a scheme",
+   "authorization: !!str Bearer hunter2",
+   "authorization: Bearer [redacted]"
+  ],
+  [
+   "an anchor under a camelCase name",
+   "dbPassword: &a hunter2",
+   "dbPassword: [redacted]"
+  ],
+  [
+   "an anchor and an invisible name",
+   "pass\u200bword: &a hunter2",
+   "password: [redacted]"
+  ],
+  [
+   "an indented YAML key with a tag",
+   "db:\n  password: !!str hunter2\n  host: shown",
+   "db:\n  password: [redacted]\n  host: shown"
+  ],
+  [
+   "near miss: an invisible inside a word with no separator",
+   "the pass\u200bword is long",
+   "the pass\u200bword is long"
+  ],
+  [
+   "near miss: passport (key read whole, value kept)",
+   "pass\u200bport: AB123",
+   "passport: AB123"
+  ],
+  [
+   "near miss: a key with no credential stem",
+   "e\u200bmail: hunter2",
+   "e\u200bmail: hunter2"
+  ],
+  [
+   "near miss: an anchor under a plain key",
+   "email: &a hunter2",
+   "email: &a hunter2"
+  ],
+  [
+   "near miss: a tag in prose",
+   "note: !important hunter2",
+   "note: !important hunter2"
+  ],
+  [
+   "near miss: an emoji joiner",
+   "family \ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67: home",
+   "family \ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67: home"
+  ],
+  [
+   "near miss: a ZWNJ in Persian text",
+   "\u0645\u06cc\u200c\u062e\u0648\u0627\u0647\u0645: \u0628\u0644\u0647",
+   "\u0645\u06cc\u200c\u062e\u0648\u0627\u0647\u0645: \u0628\u0644\u0647"
+  ],
+  [
+   "near miss: tokenizer",
+   "tokenizer: gpt2",
+   "tokenizer: gpt2"
+  ]
+ ],
+ "object": [
+  [
+   "measured: NUL inside a key",
+   {
+    "pass\u0000word": "hunter2"
+   },
+   {
+    "pass\u0000word": "[redacted]"
+   }
+  ],
+  [
+   "ZWSP inside a key",
+   {
+    "pass\u200bword": "hunter2"
+   },
+   {
+    "pass\u200bword": "[redacted]"
+   }
+  ],
+  [
+   "BOM inside a nested key",
+   {
+    "config": {
+     "api\ufeff_key": "hunter2"
+    }
+   },
+   {
+    "config": {
+     "api\ufeff_key": "[redacted]"
+    }
+   }
+  ],
+  [
+   "a word joiner inside a key in a list",
+   [
+    {
+     "to\u2060ken": "hunter2"
+    }
+   ],
+   [
+    {
+     "to\u2060ken": "[redacted]"
+    }
+   ]
+  ],
+  [
+   "a value with an invisible name",
+   {
+    "note": "pass\u200bword: hunter2"
+   },
+   {
+    "note": "password: [redacted]"
+   }
+  ],
+  [
+   "a value with an anchor",
+   {
+    "note": "password: &a hunter2"
+   },
+   {
+    "note": "password: [redacted]"
+   }
+  ],
+  [
+   "control: a plain key",
+   {
+    "password": "hunter2"
+   },
+   {
+    "password": "[redacted]"
+   }
+  ],
+  [
+   "near miss: pass_rate with an invisible",
+   {
+    "pass\u200b_rate": 0.9
+   },
+   {
+    "pass\u200b_rate": 0.9
+   }
+  ],
+  [
+   "near miss: bypass with an invisible",
+   {
+    "by\u200bpass": "on"
+   },
+   {
+    "by\u200bpass": "on"
+   }
+  ]
+ ],
+ "blank_run": [
+  [
+   "an anchor, a blank run, then a block indicator",
+   "password: &a",
+   "|"
+  ],
+  [
+   "a tag, a blank run, then a strip folded indicator",
+   "password: !!str",
+   ">-"
+  ],
+  [
+   "an anchor and a tag, a blank run, then a block indicator",
+   "password: &a !!str",
+   "|"
+  ],
+  [
+   "an anchor under a camelCase name, a blank run, then a comment",
+   "dbPassword: &a",
+   "| # note"
+  ],
+  [
+   "control: a bare colon, a blank run, then a block indicator",
+   "password:",
+   "|"
+  ]
+ ],
+ "continuation": [
+  [
+   "L10: an anchor ends the key line, a blank line, then the value",
+   "{name}: &a\n\n  {value}",
+   "{name}: &a\n\n  [redacted]"
+  ],
+  [
+   "L11: a bare key line, an anchor line, a blank line, then the value",
+   "{name}:\n  &a\n\n  {value}",
+   "{name}:\n  &a\n\n  [redacted]"
+  ],
+  [
+   "L12: a bare key line, a comment at the top, then the value",
+   "{name}:\n# note\n  {value}",
+   "{name}:\n# note\n  [redacted]"
+  ],
+  [
+   "L13: a bare key line, an indented comment, then the value",
+   "{name}:\n  # note\n  {value}",
+   "{name}:\n  # note\n  [redacted]"
+  ],
+  [
+   "L14: an anchor ends the key line, a comment at the top, then the value",
+   "{name}: &a\n# note\n  {value}",
+   "{name}: &a\n# note\n  [redacted]"
+  ],
+  [
+   "L14, camelCase: an anchor ends the key line, a comment at the top, then the value",
+   "{camel}: &a\n# note\n  {value}",
+   "{camel}: &a\n# note\n  [redacted]"
+  ],
+  [
+   "L15: a comment ends the key line, then the value",
+   "{name}: # note\n  {value}",
+   "{name}: # note\n  [redacted]"
+  ],
+  [
+   "L16: an anchor and a comment end the key line, then the value",
+   "{name}: &a # note\n  {value}",
+   "{name}: &a # note\n  [redacted]"
+  ],
+  [
+   "L35: a tag and a comment end the key line, then the value",
+   "{name}: !!str # note\n  {value}",
+   "{name}: !!str # note\n  [redacted]"
+  ],
+  [
+   "L36: an anchor, a tag and a comment end the key line, then the value",
+   "{name}: &a !!str # n\n  {value}",
+   "{name}: &a !!str # n\n  [redacted]"
+  ],
+  [
+   "L40: spaces, then a comment end the key line, then the value",
+   "{name}:   # c\n  {value}",
+   "{name}:   # c\n  [redacted]"
+  ],
+  [
+   "L17: a bare key line, a blank line, then an anchor and the value",
+   "{name}:\n\n  &a {value}",
+   "{name}:\n\n  &a [redacted]"
+  ],
+  [
+   "L18: a bare key line, a blank line, a comment at the top, then the value",
+   "{name}:\n\n# note\n  {value}",
+   "{name}:\n\n# note\n  [redacted]"
+  ],
+  [
+   "L37: a bare key line, a blank line, a comment, then an anchor and the value",
+   "{name}:\n\n# c\n  &a {value}",
+   "{name}:\n\n# c\n  &a [redacted]"
+  ],
+  [
+   "L38: a bare key line, a comment, then an anchor and the value",
+   "{name}:\n# c\n  &a {value}",
+   "{name}:\n# c\n  &a [redacted]"
+  ],
+  [
+   "L33: a bare key line, a comment, then a quoted value",
+   "{name}:\n# note\n  \"{value}\"",
+   "{name}:\n# note\n  \"[redacted]\""
+  ],
+  [
+   "L19: a bare key line, then a block indicator and its lines",
+   "{name}:\n  |\n    {value}",
+   "{name}:\n  |\n    [redacted]"
+  ],
+  [
+   "L19, camelCase: a bare key line, then a block indicator and its lines",
+   "{camel}:\n  |\n    {value}",
+   "{camel}:\n  |\n    [redacted]"
+  ],
+  [
+   "L20: a bare key line, then an anchor, a block indicator and its lines",
+   "{name}:\n  &a |\n    {value}",
+   "{name}:\n  &a |\n    [redacted]"
+  ],
+  [
+   "L21: a comment ends the key line, then a block indicator and its lines",
+   "{name}: # note\n  |\n    {value}",
+   "{name}: # note\n  |\n    [redacted]"
+  ],
+  [
+   "L22: an anchor and a comment end the key line, then a block indicator and its lines",
+   "{name}: &a # note\n  |\n    {value}",
+   "{name}: &a # note\n  |\n    [redacted]"
+  ],
+  [
+   "L46: a bare key line, then a folded indicator and its lines",
+   "{name}:\n  >\n    {value}",
+   "{name}:\n  >\n    [redacted]"
+  ],
+  [
+   "L47: a bare key line, then a strip indicator and its lines",
+   "{name}:\n  |-\n    {value}",
+   "{name}:\n  |-\n    [redacted]"
+  ],
+  [
+   "L34: an anchor ends the key line, a blank line, then a block indicator and its lines",
+   "{name}: &a\n\n  |\n    {value}",
+   "{name}: &a\n\n  |\n    [redacted]"
+  ],
+  [
+   "L39: a bare key line, a blank line, a comment, then a block indicator and its lines",
+   "{name}:\n\n# c\n  |\n    {value}",
+   "{name}:\n\n# c\n  |\n    [redacted]"
+  ],
+  [
+   "L48: an anchor ends the key line, a blank line, then a block of two lines and a sibling",
+   "{name}: &a\n\n  |\n    {value}\n    {value} again\nnext: shown",
+   "{name}: &a\n\n  |\n    [redacted]\nnext: shown"
+  ],
+  [
+   "L49: a tag ends the key line, a blank line, then a block indicator and its lines",
+   "{name}: !!str\n\n  |\n    {value}",
+   "{name}: !!str\n\n  |\n    [redacted]"
+  ],
+  [
+   "L29: an anchor ends the key line, a comment, then the value, CRLF",
+   "{name}: &a\r\n# note\r\n  {value}",
+   "{name}: &a\r\n# note\r\n  [redacted]"
+  ],
+  [
+   "L41: an anchor ends the key line, a blank line, then the value, CRLF",
+   "{name}: &a\r\n\r\n  {value}",
+   "{name}: &a\r\n\r\n  [redacted]"
+  ],
+  [
+   "L42: an anchor ends the key line, a comment, then the value, lone CR",
+   "{name}: &a\r# c\r  {value}",
+   "{name}: &a\r# c\r  [redacted]"
+  ],
+  [
+   "L42, camelCase: an anchor ends the key line, a comment, then the value, lone CR",
+   "{camel}: &a\r# c\r  {value}",
+   "{camel}: &a\r# c\r  [redacted]"
+  ],
+  [
+   "L44: a nested key line ends in an anchor, a blank line, then the value deeper",
+   "config:\n  {name}: &a\n\n    {value}",
+   "config:\n  {name}: &a\n\n    [redacted]"
+  ],
+  [
+   "L45: a list item key line ends in an anchor, a comment, then the value",
+   "- {name}: &a\n# c\n  {value}",
+   "- {name}: &a\n# c\n  [redacted]"
+  ],
+  [
+   "L50: a parent anchor, then a credential child: only the child value is hidden",
+   "{parent}: &d\n  {name}: {value}",
+   "{parent}: &d\n  {name}: [redacted]"
+  ],
+  [
+   "L51: a parent map tag, then a credential child: only the child value is hidden",
+   "{parent}: !!map\n  {name}: {value}",
+   "{parent}: !!map\n  {name}: [redacted]"
+  ],
+  [
+   "L53: a bare parent, then a credential child: only the child value is hidden",
+   "{parent}:\n  {name}: {value}",
+   "{parent}:\n  {name}: [redacted]"
+  ],
+  [
+   "G19: a parent anchor, then a plain child: the child line is kept",
+   "{parent}: &d\n  user: {value}",
+   "{parent}: &d\n  user: {value}"
+  ],
+  [
+   "G05: a comment line names the key, then an indented line",
+   "# {name}:\n  {value}",
+   "# {name}:\n  {value}"
+  ],
+  [
+   "G09: a comment line names the key and an anchor, then an indented line",
+   "# {name}: &a\n  {value}",
+   "# {name}: &a\n  {value}"
+  ],
+  [
+   "G13: a bare key line, a blank line, then a sibling at the same indent",
+   "{name}:\n\nnext: {value}",
+   "{name}:\n\nnext: {value}"
+  ],
+  [
+   "G11: a comment ends the key line, then a sibling at the same indent",
+   "{name}: # note\nnext: {value}",
+   "{name}: # note\nnext: {value}"
+  ],
+  [
+   "G12: a bare key line, a comment, then a sibling at the same indent",
+   "{name}:\n# note\nnext: {value}",
+   "{name}:\n# note\nnext: {value}"
+  ],
+  [
+   "G16: an indented key line, a comment at the top, then a sibling at the same indent",
+   "  {name}:\n# c\n  next: {value}",
+   "  {name}:\n# c\n  next: {value}"
+  ],
+  [
+   "G01: a plain name and an anchor, then an indented line",
+   "name: &a\n  {value}",
+   "name: &a\n  {value}"
+  ],
+  [
+   "G02: a plain name, then an indented line",
+   "name:\n  {value}",
+   "name:\n  {value}"
+  ],
+  [
+   "G03: an anchor ends the key line, then a sibling: the anchor is hidden, the sibling kept",
+   "{name}: &a\nnext: {value}",
+   "{name}: [redacted]\nnext: {value}"
+  ],
+  [
+   "G04: an indented key line ends in an anchor, then a sibling at the same indent",
+   "  {name}: &a\n  next: {value}",
+   "  {name}: [redacted]\n  next: {value}"
+  ],
+  [
+   "G06: a nested key line ends in an anchor, then a nested sibling",
+   "config:\n  {name}: &a\n  user: {value}",
+   "config:\n  {name}: [redacted]\n  user: {value}"
+  ],
+  [
+   "G08: a plain name with a block indicator on its line",
+   "notes: |\n  {value}",
+   "notes: |\n  {value}"
+  ],
+  [
+   "G17: a plain name, then a block indicator and its lines",
+   "notes:\n  |\n    {value}",
+   "notes:\n  |\n    {value}"
+  ],
+  [
+   "G18: an anchor ends the key line, then a sibling with a quoted value",
+   "{name}: &a\nnext: \"{value}\"",
+   "{name}: [redacted]\nnext: \"{value}\""
+  ],
+  [
+   "G07: a bare key line, then indented prose: hidden whole, on purpose",
+   "{name}:\n  {value} is a word",
+   "{name}:\n  [redacted]"
+  ],
+  [
+   "earlier shape a: an anchor ends the key line, the value on the next line",
+   "{name}: &a\n  {value}",
+   "{name}: &a\n  [redacted]"
+  ],
+  [
+   "earlier shape a: a tag ends the key line, the value on the next line",
+   "{name}: !!str\n  {value}",
+   "{name}: !!str\n  [redacted]"
+  ],
+  [
+   "earlier shape a: an anchor and a tag end the key line, the value on the next line",
+   "{name}: &a !!str\n  {value}",
+   "{name}: &a !!str\n  [redacted]"
+  ],
+  [
+   "earlier shape a: an anchor under a camelCase name",
+   "{camel}: &a\n  {value}",
+   "{camel}: &a\n  [redacted]"
+  ],
+  [
+   "earlier shape a: an anchor under a nested name, the value four deep",
+   "config:\n  {name}: &a\n    {value}\nnext: shown",
+   "config:\n  {name}: &a\n    [redacted]\nnext: shown"
+  ],
+  [
+   "earlier shape a: an anchor under a list item",
+   "- {name}: &a\n    {value}",
+   "- {name}: &a\n    [redacted]"
+  ],
+  [
+   "earlier shape a: an anchor, CRLF",
+   "{name}: &a\r\n  {value}\r\nnext: shown",
+   "{name}: &a\r\n  [redacted]\r\nnext: shown"
+  ],
+  [
+   "earlier shape a: an anchor, then a quoted value",
+   "{name}: &a\n  \"{value} and more\"",
+   "{name}: &a\n  \"[redacted]\""
+  ],
+  [
+   "earlier shape b: a bare name, then an anchor and the value",
+   "{name}:\n  &a {value}",
+   "{name}:\n  &a [redacted]"
+  ],
+  [
+   "earlier shape b: a bare name, then a tag and the value",
+   "{name}:\n  !!str {value}",
+   "{name}:\n  !!str [redacted]"
+  ],
+  [
+   "earlier shape b: a bare camelCase name, then an anchor and the value",
+   "{camel}:\n  &a {value}",
+   "{camel}:\n  &a [redacted]"
+  ],
+  [
+   "earlier chain: a bare name, an anchor line, then the value",
+   "{name}:\n  &a\n  {value}",
+   "{name}:\n  &a\n  [redacted]"
+  ],
+  [
+   "earlier chain: an anchor, an anchor line, then the value",
+   "{name}: &a\n  &b\n  {value}",
+   "{name}: &a\n  &b\n  [redacted]"
+  ],
+  [
+   "earlier chain: a bare name, a tag line, then the value",
+   "{name}:\n  !!str\n  {value}",
+   "{name}:\n  !!str\n  [redacted]"
+  ],
+  [
+   "earlier chain: an anchor, then a tag and the value",
+   "{name}: &a\n  !!str {value}",
+   "{name}: &a\n  !!str [redacted]"
+  ],
+  [
+   "earlier chain: a bare name, then an anchor, a tag and the value",
+   "{name}:\n  &a !!str {value}",
+   "{name}:\n  &a !!str [redacted]"
+  ],
+  [
+   "earlier regression: a bare name, the plain value on the next line",
+   "{name}:\n  {value}",
+   "{name}:\n  [redacted]"
+  ],
+  [
+   "earlier guard: an anchor, the value at the same indent",
+   "{name}: &a\n{value}",
+   "{name}: [redacted]\n{value}"
+  ],
+  [
+   "earlier guard: an anchor, the value less indented",
+   "  {name}: &a\n{value}",
+   "  {name}: [redacted]\n{value}"
+  ],
+  [
+   "earlier guard: a nested anchor, the value at the same indent",
+   "config:\n  {name}: &a\n  {value}",
+   "config:\n  {name}: [redacted]\n  {value}"
+  ],
+  [
+   "earlier guard: a bare name, an anchor and the value at the same indent",
+   "{name}:\n&a {value}",
+   "{name}:\n&a {value}"
+  ],
+  [
+   "earlier guard: an anchor line, then the value at the key indent",
+   "{name}: &a\n  &b\n{value}",
+   "{name}: [redacted]\n  &b\n{value}"
+  ],
+  [
+   "earlier guard: an anchor, then a sibling key",
+   "config:\n  {name}: &a\n  user: bob",
+   "config:\n  {name}: [redacted]\n  user: bob"
+  ],
+  [
+   "earlier guard: indented prose under a plain name",
+   "notes:\n  {value} is a word",
+   "notes:\n  {value} is a word"
+  ],
+  [
+   "earlier guard: an anchor, then indented prose under a plain name",
+   "notes: &a\n  {value} is a word",
+   "notes: &a\n  {value} is a word"
+  ],
+  [
+   "earlier guard: a plain name, then an anchor and prose",
+   "notes:\n  &a {value} is a word",
+   "notes:\n  &a {value} is a word"
+  ],
+  [
+   "FA1: an explicit key, its ':' line, then the value more indented",
+   "? {name}\n:\n    {value}",
+   "? {name}\n:\n    [redacted]"
+  ],
+  [
+   "FA2: an explicit key, blanks after the colon of its ':' line, then the value",
+   "? {name}\n:  \n    {value}",
+   "? {name}\n:  \n    [redacted]"
+  ],
+  [
+   "FA3, camelCase: an explicit key, its ':' line, then the value",
+   "? {camel}\n:\n  {value}",
+   "? {camel}\n:\n  [redacted]"
+  ],
+  [
+   "FA4: a nested explicit key, its ':' line, the value, then a sibling",
+   "config:\n  ? {name}\n  :\n    {value}\n  next: shown",
+   "config:\n  ? {name}\n  :\n    [redacted]\n  next: shown"
+  ],
+  [
+   "FA5: an explicit key, a comment ends its ':' line, then the value",
+   "? {name}\n: # note\n  {value}",
+   "? {name}\n: # note\n  [redacted]"
+  ],
+  [
+   "FG1: an explicit plain key, its ':' line, then an indented line",
+   "? notes\n:\n    {value}",
+   "? notes\n:\n    {value}"
+  ],
+  [
+   "FG2: an explicit key, its ':' line, then a sibling at the same indent",
+   "? {name}\n:\nnext: {value}",
+   "? {name}\n:\nnext: {value}"
+  ],
+  [
+   "FL1: an explicit key in a list item, its ':' line below, then the value",
+   "- ? {name}\n  :\n    {value}",
+   "- ? {name}\n  :\n    [redacted]"
+  ],
+  [
+   "FB1: an explicit key, a block indicator on its ':' line, then its lines",
+   "? {name}\n: |\n  {value}",
+   "? {name}\n: |\n  [redacted]"
+  ],
+  [
+   "#493: a quoted explicit key with a soft hyphen in its name, the value on its ':' line",
+   "? \"{pass}\u00ad{word}\"\n: {value}\n",
+   "? \"{pass}{word}\"\n: [redacted]\n"
+  ],
+  [
+   "#493: a quoted explicit key with a zero-width space in its name, the value on its ':' line",
+   "? \"{pass}\u200b{word}\"\n: {value}\n",
+   "? \"{pass}{word}\"\n: [redacted]\n"
+  ],
+  [
+   "#493: a quoted explicit key with a word joiner in its name, the value on its ':' line",
+   "? \"{pass}\u2060{word}\"\n: {value}\n",
+   "? \"{pass}{word}\"\n: [redacted]\n"
+  ],
+  [
+   "#493: a quoted explicit key with a NUL in its name, the value on its ':' line",
+   "? \"{pass}\u0000{word}\"\n: {value}\n",
+   "? \"{pass}{word}\"\n: [redacted]\n"
+  ],
+  [
+   "#493: an unquoted explicit key with a soft hyphen in its name, the value on its ':' line",
+   "? {pass}\u00ad{word}\n: {value}\n",
+   "? {pass}{word}\n: [redacted]\n"
+  ],
+  [
+   "#493: a quoted explicit key with a soft hyphen in its name, the value on the next indented line",
+   "? \"{pass}\u00ad{word}\"\n:\n  {value}\n",
+   "? \"{pass}{word}\"\n:\n  [redacted]\n"
+  ],
+  [
+   "#493: a quoted explicit key with a soft hyphen in its name, the value on its ':' line, CRLF",
+   "? \"{pass}\u00ad{word}\"\r\n: {value}\n",
+   "? \"{pass}{word}\"\r\n: [redacted]\n"
+  ],
+  [
+   "#493: a quoted explicit key with a soft hyphen in its name, a block indicator on its ':' line",
+   "? \"{pass}\u00ad{word}\"\n: |\n  {value}",
+   "? \"{pass}{word}\"\n: |\n  [redacted]"
+  ],
+  [
+   "#493: a list item's quoted explicit key with a soft hyphen in its name, the value below its ':' line",
+   "- ? \"{pass}\u00ad{word}\"\n  :\n    {value}\n",
+   "- ? \"{pass}{word}\"\n  :\n    [redacted]\n"
+  ],
+  [
+   "#493 near miss: an explicit key with no credential stem and an invisible name",
+   "? \"no\u200bte\"\n: {value}",
+   "? \"no\u200bte\"\n: {value}"
+  ]
+ ],
+ "partial_key": [
+  [
+   "key/value split: a parent anchor, a credential child, the cut after its colon",
+   "{parent}: &d\n  {name}:{cut} {value}",
+   "{parent}: &d\n  {name}: [redacted]"
+  ],
+  [
+   "key/value split: a bare parent, a credential child, a blank line between its key and value",
+   "{parent}:\n  {name}:\n{cut}\n    {value}",
+   "{parent}:\n  {name}:\n\n    [redacted]"
+  ],
+  [
+   "mid-property: the cut inside the parent's anchor, then a credential child",
+   "{parent}: &{cut}d\n  {name}: {value}",
+   "{parent}: &d\n  {name}: [redacted]"
+  ],
+  [
+   "mid-property: an anchor line under the parent, the cut inside a credential child key",
+   "{parent}:\n  &d\n  {pass}{cut}{word}: {value}",
+   "{parent}:\n  &d\n  {name}: [redacted]"
+  ],
+  [
+   "mid-block: the cut inside a later-line block body under a parent",
+   "{parent}:\n  |\n    {value} one\n    {pass}{cut}{word} two\nnext: shown",
+   "{parent}:\n  |\n    [redacted]\nnext: shown"
+  ],
+  [
+   "mid-child-key: a parent anchor, the cut inside a credential child key",
+   "{parent}: &d\n  {pass}{cut}{word}: {value}",
+   "{parent}: &d\n  {name}: [redacted]"
+  ],
+  [
+   "mid-child-key: a parent anchor, the cut after the first word of a spaced credential child key",
+   "{parent}: &d\n  user {cut}{name}: {value}",
+   "{parent}: &d\n  user {name}: [redacted]"
+  ],
+  [
+   "mid-child-key guard: a parent anchor, the cut inside a plain child key",
+   "{parent}: &d\n  user{cut}_id: {value}",
+   "{parent}: &d\n  user_id: {value}"
+  ]
+ ],
+ "split_forms": [
+  [
+   "plain",
+   [
+    [
+     "a cut-padded key line, its value on the next line",
+     "{parent}: &d\n  {name}:{pad}\n    {value}\n{later}"
+    ],
+    [
+     "a cut-padded key line completed on its own line",
+     "{parent}: &d\n  {name}:{pad}{value}\n{later}"
+    ]
+   ]
+  ],
+  [
+   "block",
+   [
+    [
+     "an explicit key padded before its block indicator line, the block under it",
+     "? {name}{pad}\n: |\n  {value}\n{later}"
+    ]
+   ]
+  ],
+  [
+   "list",
+   [
+    [
+     "an explicit key in a list item padded before its ':' line, the value under it",
+     "- ? {name}{pad}\n  :\n    {value}\n{later}"
+    ]
+   ]
+  ],
+  [
+   "explicit plain",
+   [
+    [
+     "an explicit key padded before its ':' line, the value under it",
+     "? {name}{pad}\n:\n  {value}\n{later}"
+    ]
+   ]
+  ],
+  [
+   "explicit list",
+   [
+    [
+     "an explicit key padded before its ':' line, a list item under it",
+     "? {name}{pad}\n:\n  - {value}\n{later}"
+    ]
+   ]
+  ]
+ ]
+}

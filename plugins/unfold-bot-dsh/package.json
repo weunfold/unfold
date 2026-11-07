@@ -1,0 +1,66 @@
+{
+  "name": "@automagik/unfold-bot-dsh",
+  "version": "3.90.7",
+  "description": "Unfold for DeepSeek Harness: the Unfold Bot on the Automagik Bot team, with the Unfold plugins and the Unfold bridge as its defaults",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "agents"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-bot-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-bot-dsh"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/host/",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold"
+      },
+      "description": {
+        "en": "Unfold inside DSH, on the Automagik Bot team. Adds the Unfold Bot, drawn in Unfold's own clay, which follows and carries on the work you do with Unfold through the Unfold plugins and the Unfold bridge. Install it from the welcome's team step, which brings those plugins with it. Part of Unfold; works with the Unfold app."
+      },
+      "category": "automagik",
+      "keywords": [
+        "unfold",
+        "bot",
+        "agents"
+      ]
+    }
+  }
+}

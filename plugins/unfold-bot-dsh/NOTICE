@@ -1,0 +1,7 @@
+Unfold for DeepSeek Harness (@automagik/unfold-bot-dsh)
+Copyright 2026 Namastex Labs and the Automagik contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+At run time the plugin uses the Bot team (@automagik/bots-dsh) and the @deepseek-ai/* packages of
+the DeepSeek Harness install it runs in; they are not bundled. It has no other dependencies.

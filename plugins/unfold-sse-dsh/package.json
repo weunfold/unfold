@@ -1,0 +1,41 @@
+{
+  "name": "@automagik/unfold-sse-dsh",
+  "version": "3.90.7",
+  "description": "Server-sent events for the Unfold DSH plugins: a snapshot baseline, then increments, honouring backpressure, with per-client pending bounds and a drain deadline. A library the Unfold plugins carry; it registers nothing in DSH by itself",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "server-sent-events"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-sse-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-sse-dsh"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  }
+}
