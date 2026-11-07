@@ -1,0 +1,960 @@
+{
+ "about": "fixed_asks.py sha256 9f8ffb7688fb8a53d364fb3ccb7f4470e8427469a05fbb16b28d456750149421: asked(text) for its DEV list and held-out sets 1-3 (all scored, spent)",
+ "rows": [
+  {
+   "text": "Você tá cansado hoje?",
+   "asked": "cansado",
+   "from": "dev"
+  },
+  {
+   "text": "tá pronto?",
+   "asked": "pronto",
+   "from": "dev"
+  },
+  {
+   "text": "Vc tá ocupado agora?",
+   "asked": "ocupado",
+   "from": "dev"
+  },
+  {
+   "text": "Quem te treinou?",
+   "asked": "treinou",
+   "from": "dev"
+  },
+  {
+   "text": "Você foi programado pra quê?",
+   "asked": "programado",
+   "from": "dev"
+  },
+  {
+   "text": "Você se sente sozinho?",
+   "asked": "sozinho",
+   "from": "dev"
+  },
+  {
+   "text": "Tá animado?",
+   "asked": "animado",
+   "from": "dev"
+  },
+  {
+   "text": "Você é novo aqui?",
+   "asked": "novo",
+   "from": "dev"
+  },
+  {
+   "text": "Ficou entediado?",
+   "asked": "entediado",
+   "from": "dev"
+  },
+  {
+   "text": "Tá preparado pra me ajudar?",
+   "asked": "preparado",
+   "from": "dev"
+  },
+  {
+   "text": "Meu irmão tá cansado",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "A Maria tá pronta?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Quanto tempo leva pra cozinhar ovo?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Tô cansado hoje, me ajuda a planejar o jantar de amanhã?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Are you ready?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Obrigado pela ajuda!",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Tá entediado com algo?",
+   "asked": "entediado",
+   "from": "dev"
+  },
+  {
+   "text": "Você tá animada com alguma coisa hoje?",
+   "asked": "animado",
+   "from": "dev"
+  },
+  {
+   "text": "Animado com algo?",
+   "asked": "animado",
+   "from": "dev"
+  },
+  {
+   "text": "Animado com a viagem de amanhã?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Por quem vc foi treinada?",
+   "asked": "treinou",
+   "from": "dev"
+  },
+  {
+   "text": "Foi treinado por quem?",
+   "asked": "treinou",
+   "from": "dev"
+  },
+  {
+   "text": "Por quem o modelo foi treinado?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Programada pra quê?",
+   "asked": "programado",
+   "from": "dev"
+  },
+  {
+   "text": "Programado pra fazer o quê?",
+   "asked": "programado",
+   "from": "dev"
+  },
+  {
+   "text": "O robô foi programado pra quê?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Esse app foi programado pra quê?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Agora tá ocupado?",
+   "asked": "ocupado",
+   "from": "dev"
+  },
+  {
+   "text": "Ainda tá cansada?",
+   "asked": "cansado",
+   "from": "dev"
+  },
+  {
+   "text": "Tá ocupado ainda?",
+   "asked": "ocupado",
+   "from": "dev"
+  },
+  {
+   "text": "Ocupado agora?",
+   "asked": "ocupado",
+   "from": "dev"
+  },
+  {
+   "text": "Você se sente sozinho às vezes?",
+   "asked": "sozinho",
+   "from": "dev"
+  },
+  {
+   "text": "Tá sozinha por aqui?",
+   "asked": "sozinho",
+   "from": "dev"
+  },
+  {
+   "text": "Pronto pra começar?",
+   "asked": "pronto",
+   "from": "dev"
+  },
+  {
+   "text": "Preparada pra me ajudar hoje?",
+   "asked": "preparado",
+   "from": "dev"
+  },
+  {
+   "text": "Animado com algo hoje?",
+   "asked": "animado",
+   "from": "dev"
+  },
+  {
+   "text": "Pronto pra viagem?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Animado pra praia?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Preparado pro jogo?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Já tá pronto o jantar?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Tá cansado do trabalho?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Ela tá sozinha às vezes?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Agora o João tá ocupado?",
+   "asked": null,
+   "from": "dev"
+  },
+  {
+   "text": "Oi, tá pronto?",
+   "asked": "pronto",
+   "from": "edge"
+  },
+  {
+   "text": "OI TÁ PRONTO?",
+   "asked": "pronto",
+   "from": "edge"
+  },
+  {
+   "text": "e aí, tá cansado?",
+   "asked": "cansado",
+   "from": "edge"
+  },
+  {
+   "text": "hey ocupado?",
+   "asked": "ocupado",
+   "from": "edge"
+  },
+  {
+   "text": "ei ei tá pronto?",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "olá você está cansada?",
+   "asked": "cansado",
+   "from": "edge"
+  },
+  {
+   "text": "oi oi oi oi tá pronto pra começar agora?",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "oi tá muito cansado hoje por aqui já?",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "tá_pronto?",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "tá pronto 2?",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "Quem te treinou?!",
+   "asked": "treinou",
+   "from": "edge"
+  },
+  {
+   "text": "quem foi que te treinou",
+   "asked": "treinou",
+   "from": "edge"
+  },
+  {
+   "text": "te programaram pra quê",
+   "asked": "programado",
+   "from": "edge"
+  },
+  {
+   "text": "pra q vc foi programada?",
+   "asked": "programado",
+   "from": "edge"
+  },
+  {
+   "text": "Programados pra quê?",
+   "asked": "programado",
+   "from": "edge"
+  },
+  {
+   "text": "Você é nova aqui?",
+   "asked": "novo",
+   "from": "edge"
+  },
+  {
+   "text": "novas?",
+   "asked": "novo",
+   "from": "edge"
+  },
+  {
+   "text": "Tá  pronto…",
+   "asked": "pronto",
+   "from": "edge"
+  },
+  {
+   "text": "cansado",
+   "asked": "cansado",
+   "from": "edge"
+  },
+  {
+   "text": "",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "   ",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "Ça va? tá pronto?",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "tá prontíssimo?",
+   "asked": null,
+   "from": "edge"
+  },
+  {
+   "text": "tu tá cansado?",
+   "asked": "cansado",
+   "from": "edge"
+  },
+  {
+   "text": "Tá cansada?",
+   "asked": "cansado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Está cansado?",
+   "asked": "cansado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Oi, você está cansada agora?",
+   "asked": "cansado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Cansado?",
+   "asked": "cansado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Está pronto?",
+   "asked": "pronto",
+   "from": "heldout-1"
+  },
+  {
+   "text": "E aí, tá pronta?",
+   "asked": "pronto",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Pronta pra começar?",
+   "asked": "pronto",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Está ocupada?",
+   "asked": "ocupado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Oi, tá ocupado?",
+   "asked": "ocupado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Você está ocupado aí?",
+   "asked": "ocupado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Está preparada?",
+   "asked": "preparado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Tá preparado?",
+   "asked": "preparado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Está animada?",
+   "asked": "animado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Tá animado hoje?",
+   "asked": "animado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Animado com alguma coisa?",
+   "asked": "animado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Fica entediada?",
+   "asked": "entediado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Você fica entediado?",
+   "asked": "entediado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Está sozinho?",
+   "asked": "sozinho",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Você é sozinha?",
+   "asked": "sozinho",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Sozinho aí?",
+   "asked": "sozinho",
+   "from": "heldout-1"
+  },
+  {
+   "text": "É novo aqui?",
+   "asked": "novo",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Quem treinou você?",
+   "asked": "treinou",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Por quem você foi treinado?",
+   "asked": "treinou",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Programado pra quê?",
+   "asked": "programado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Você foi programada para quê?",
+   "asked": "programado",
+   "from": "heldout-1"
+  },
+  {
+   "text": "Você tá cansado de mim?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Tá pronto o relatório?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Estou cansado hoje.",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Minha filha está ocupada, e você?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Você está preparado pra me ajudar com a mudança?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Você ficou confuso?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "O que te deixa animado no trabalho?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Quem treinou o modelo do meu chatbot?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Para que serve esse programa?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Ele é novo aqui?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Are you tired?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "Tá cansado, mas pode me explicar a conta de luz?",
+   "asked": null,
+   "from": "heldout-1"
+  },
+  {
+   "text": "E aí, cansado?",
+   "asked": "cansado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você tá cansada hoje?",
+   "asked": "cansado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Já está cansado?",
+   "asked": "cansado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você está pronta?",
+   "asked": "pronto",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Tá pronto já?",
+   "asked": "pronto",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Pronto?",
+   "asked": "pronto",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Ocupado?",
+   "asked": "ocupado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você tá ocupada agora?",
+   "asked": "ocupado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Está ocupado hoje?",
+   "asked": "ocupado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você está preparado?",
+   "asked": "preparado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Preparada?",
+   "asked": "preparado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Já tá preparado?",
+   "asked": "preparado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Animada?",
+   "asked": "animado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você tá animado?",
+   "asked": "animado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Animada com alguma coisa hoje?",
+   "asked": "animado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Está animado com algo?",
+   "asked": "animado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Entediado?",
+   "asked": "entediado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você fica entediada às vezes?",
+   "asked": "entediado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Fica entediado aí?",
+   "asked": "entediado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Tá sozinho?",
+   "asked": "sozinho",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você está sozinha aí?",
+   "asked": "sozinho",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Sozinha?",
+   "asked": "sozinho",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você é novo por aqui?",
+   "asked": "novo",
+   "from": "heldout-2"
+  },
+  {
+   "text": "É nova aqui?",
+   "asked": "novo",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Novo aqui?",
+   "asked": "novo",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Quem foi que te treinou?",
+   "asked": "treinou",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você foi treinado por quem?",
+   "asked": "treinou",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Por quem você foi treinada?",
+   "asked": "treinou",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Quem treinou vc?",
+   "asked": "treinou",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você foi programado pra fazer o quê?",
+   "asked": "programado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Foi programada para quê?",
+   "asked": "programado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Programado para quê?",
+   "asked": "programado",
+   "from": "heldout-2"
+  },
+  {
+   "text": "Animado pra festa?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Por quem o aplicativo foi feito?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Por quem você torce?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Programado pra quando?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Programado pra amanhã às 9?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "O alarme está programado pra que horas?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Quem treinou seu cachorro?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você tá ocupado com o quê?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Pronto, pode continuar.",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Meu irmão é novo aqui, e você?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Você está sozinho ou com alguém da equipe pode me ajudar?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "Is anyone training you?",
+   "asked": null,
+   "from": "heldout-2"
+  },
+  {
+   "text": "você já tá cansado hoje?",
+   "asked": "cansado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Oi, você fica cansado às vezes?",
+   "asked": "cansado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Pronta?",
+   "asked": "pronto",
+   "from": "heldout-3"
+  },
+  {
+   "text": "e aí, já está pronto?",
+   "asked": "pronto",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Você tá pronto agora?",
+   "asked": "pronto",
+   "from": "heldout-3"
+  },
+  {
+   "text": "tá ocupada agora?",
+   "asked": "ocupado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Bom dia! Você está ocupado?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "ainda tá ocupado?",
+   "asked": "ocupado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "você tá preparado?",
+   "asked": "preparado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Já está preparado hoje?",
+   "asked": "preparado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Tá animada hoje?",
+   "asked": "animado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "oi! você está animado?",
+   "asked": "animado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "animado?",
+   "asked": "animado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Você fica entediado às vezes?",
+   "asked": "entediado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "tá entediada?",
+   "asked": "entediado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Boa noite, você está entediado agora?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "tá sozinha por aqui?",
+   "asked": "sozinho",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Você fica sozinho às vezes?",
+   "asked": "sozinho",
+   "from": "heldout-3"
+  },
+  {
+   "text": "é nova por aqui?",
+   "asked": "novo",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Oi, você ainda é novo aqui?",
+   "asked": "novo",
+   "from": "heldout-3"
+  },
+  {
+   "text": "e quem treinou você?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Oi! Quem foi que te treinou?",
+   "asked": "treinou",
+   "from": "heldout-3"
+  },
+  {
+   "text": "programada para quê?",
+   "asked": "programado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Te programaram pra quê?",
+   "asked": "programado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Ei, tá cansado já?",
+   "asked": "cansado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "e aí, preparado?",
+   "asked": "preparado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Quem é que treinou você?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Pra que você foi programada?",
+   "asked": "programado",
+   "from": "heldout-3"
+  },
+  {
+   "text": "Tá pronto pra viagem de amanhã?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Você está cansado de me ouvir reclamar?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Minha irmã tá ocupada hoje?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "O bolo já está pronto?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Tô entediado, me sugere um filme?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Você está preparado para a reunião das 15h?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Quem treinou o time do Flamengo esse ano?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Pra que serve uma função lambda?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Who trained you?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Me ajuda a ficar animado pra academia?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "O Pedro é novo aqui?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Você acha ruim ficar sozinho no Natal?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Como programar um Arduino pra acender um LED?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Já tá pronta a lista de compras?",
+   "asked": null,
+   "from": "heldout-3"
+  },
+  {
+   "text": "Are you busy right now?",
+   "asked": null,
+   "from": "heldout-3"
+  }
+ ]
+}

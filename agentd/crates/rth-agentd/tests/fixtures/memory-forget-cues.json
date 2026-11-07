@@ -1,0 +1,246 @@
+{
+ "version": "rc4-forget-cues-1",
+ "date": "2026-10-25",
+ "forget_cue": "(?i)^(?:(?:please|por\\s+favor)[,]?\\s+)?(?:forget|esque[cç]a|esquece)(?:\\s+(?:about|that|que|disso|isso|de\\s+que|sobre))?\\s*[,:]?\\s+",
+ "forget_dismiss": "(?i)^\\s*(?:(?:oh|ok|okay|ah|bom|t[aá])[,]?\\s+)?(?:forget\\s+(?:it|that|about\\s+it)|never\\s*mind|esque[cç]a(?:\\s+isso)?|esquece(?:\\s+isso)?|deixa\\s+(?:pra|para)\\s+l[aá]|deixa\\s+quieto)\\s*[.!?]*\\s*$",
+ "remember_question": "(?i)^(?:(?:please|por\\s+favor)[,]?\\s+)?(?:remember|lembra(?:-te)?|lembre(?:-se)?|lembras|voc[eê]\\s+lembra|remind\\s+me|me\\s+lembr[ae]|lembra-me|lembre-me)\\s+(?:of|about|what|when|where|who|whose|which|how|whether|if|qual|quais|quando|onde|quem|como|o\\s+que|se|do|da|de|to)\\b",
+ "remember_cue": "(?i)^(?:(?:please|por favor)[,]?\\s+)?(?:remember|note|save this|(?:don['’]t|do\\s+not)\\s+forget|lembra(?:-te)?|lembre(?:-se)?|anota|anote|guarda|guarde|n[aã]o\\s+esque[cç]a|n[aã]o\\s+esquece)(?:\\s+(?:that|que|disso|isso|de\\s+que))?\\s*[,:]?\\s+",
+ "previous_remember_cue": "(?i)^(?:(?:please|por favor)[,]?\\s+)?(?:remember|note|save this|don't forget|lembra(?:-te)?|lembre(?:-se)?|anota|anote|guarda|guarde|n[aã]o\\s+esque[cç]a|n[aã]o\\s+esquece)(?:\\s+(?:that|que|disso|isso|de\\s+que))?\\s*[,:]?\\s+",
+ "correct_cue": "(?i)^(?:(?:actually|correction|wait|na\\s+verdade|corre[cç][aã]o|espera)\\s*[,:]?|(?:no|n[aã]o)\\s*[,:])\\s+",
+ "order": [
+  "remember_question",
+  "remember_cue",
+  "forget_dismiss",
+  "correct_cue",
+  "forget_cue"
+ ],
+ "apply": "case-insensitive, Unicode, anchored at the start. Check in order: remember_question (a question about a memory, such as lembra qual / remind me what; to the model, never stored), remember_cue (remember; store the rest), forget_dismiss (whole utterance; no_op, nothing forgotten), correct_cue (go to the model: a correction is never a forget), forget_cue (forget: strip ONE leading match, trim trailing spaces and . ! ?, and the rest is the text shown on the confirm card). A forget happens only after the person taps the card. Anything else goes to the model as today. correct_cue is the rc3 string, byte for byte; remember_cue is rc3's with one alternative widened (don't forget becomes (?:don['’]t|do\\s+not)\\s+forget), and the rc3 string is kept as previous_remember_cue. No lookaround, so the Rust regex crate accepts the same strings.",
+ "strip_cases": [
+  {
+   "in": "forget that my gym is Iron Box",
+   "action": "forget",
+   "out": "my gym is Iron Box"
+  },
+  {
+   "in": "forget my old address",
+   "action": "forget",
+   "out": "my old address"
+  },
+  {
+   "in": "please forget Rui's old number.",
+   "action": "forget",
+   "out": "Rui's old number"
+  },
+  {
+   "in": "Forget about the dentist on Friday",
+   "action": "forget",
+   "out": "the dentist on Friday"
+  },
+  {
+   "in": "forget, the meeting with Ana",
+   "action": "forget",
+   "out": "the meeting with Ana"
+  },
+  {
+   "in": "esquece que meu café favorito é o Lua",
+   "action": "forget",
+   "out": "meu café favorito é o Lua"
+  },
+  {
+   "in": "esqueça o endereço antigo do Rui",
+   "action": "forget",
+   "out": "o endereço antigo do Rui"
+  },
+  {
+   "in": "por favor esquece disso: a senha do wifi",
+   "action": "forget",
+   "out": "a senha do wifi"
+  },
+  {
+   "in": "esquece sobre a consulta de sexta!",
+   "action": "forget",
+   "out": "a consulta de sexta"
+  },
+  {
+   "in": "don't forget that Rui's birthday is in May",
+   "action": "remember",
+   "out": "Rui's birthday is in May"
+  },
+  {
+   "in": "não esqueça que a reunião é às 9",
+   "action": "remember",
+   "out": "a reunião é às 9"
+  },
+  {
+   "in": "não esquece disso: o voo é domingo",
+   "action": "remember",
+   "out": "o voo é domingo"
+  },
+  {
+   "in": "don’t forget the bins go out on Tuesday",
+   "action": "remember",
+   "out": "the bins go out on Tuesday"
+  },
+  {
+   "in": "do not forget that Ana is allergic to nuts",
+   "action": "remember",
+   "out": "Ana is allergic to nuts"
+  },
+  {
+   "in": "please, don’t forget: the vet is at 4",
+   "action": "remember",
+   "out": "the vet is at 4"
+  },
+  {
+   "in": "Do not forget, Rui lands at 7",
+   "action": "remember",
+   "out": "Rui lands at 7"
+  },
+  {
+   "in": "lembra qual é o meu café favorito?",
+   "action": "decide",
+   "out": "lembra qual é o meu café favorito?"
+  },
+  {
+   "in": "lembra onde eu estacionei",
+   "action": "decide",
+   "out": "lembra onde eu estacionei"
+  },
+  {
+   "in": "lembra-me qual é o código do portão",
+   "action": "decide",
+   "out": "lembra-me qual é o código do portão"
+  },
+  {
+   "in": "me lembra o que a Ana bebe?",
+   "action": "decide",
+   "out": "me lembra o que a Ana bebe?"
+  },
+  {
+   "in": "remind me of my favourite café",
+   "action": "decide",
+   "out": "remind me of my favourite café"
+  },
+  {
+   "in": "remind me what my sister likes",
+   "action": "decide",
+   "out": "remind me what my sister likes"
+  },
+  {
+   "in": "remember what I told you about Rui?",
+   "action": "decide",
+   "out": "remember what I told you about Rui?"
+  },
+  {
+   "in": "você lembra quando é o voo?",
+   "action": "decide",
+   "out": "você lembra quando é o voo?"
+  },
+  {
+   "in": "remind me to call Ana tomorrow",
+   "action": "decide",
+   "out": "remind me to call Ana tomorrow"
+  },
+  {
+   "in": "remember to buy milk",
+   "action": "decide",
+   "out": "remember to buy milk"
+  },
+  {
+   "in": "forget it",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "Forget that.",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "oh, forget about it",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "never mind",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "nevermind!",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "ok, never mind",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "esquece",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "Esquece isso",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "esqueça",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "deixa pra lá",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "deixa para lá.",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "tá, deixa quieto",
+   "action": "no_op",
+   "out": ""
+  },
+  {
+   "in": "no, forget the old one, it's Sol now",
+   "action": "decide",
+   "out": "no, forget the old one, it's Sol now"
+  },
+  {
+   "in": "não, esquece o Lua, agora é o Sol",
+   "action": "decide",
+   "out": "não, esquece o Lua, agora é o Sol"
+  },
+  {
+   "in": "did I tell you to forget my gym?",
+   "action": "decide",
+   "out": "did I tell you to forget my gym?"
+  },
+  {
+   "in": "I always forget my keys",
+   "action": "decide",
+   "out": "I always forget my keys"
+  },
+  {
+   "in": "forgetting things is normal",
+   "action": "decide",
+   "out": "forgetting things is normal"
+  },
+  {
+   "in": "esquecer é humano",
+   "action": "decide",
+   "out": "esquecer é humano"
+  },
+  {
+   "in": "forget",
+   "action": "decide",
+   "out": "forget"
+  }
+ ],
+ "remember_cue_change": "rc4 remember_cue = rc3's with don't forget widened to (?:don['’]t|do\\s+not)\\s+forget, so don’t forget (curly) and do not forget also remember. rc3's remember strip cases still pass unchanged."
+}

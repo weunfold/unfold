@@ -1,0 +1,25 @@
+[package]
+name = "rth"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+default-run = "rth"
+
+[dependencies]
+rth-protocol.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["signal"] }
+serde.workspace = true
+anyhow.workspace = true
+base64 = "0.22"
+sha2 = "=0.10.9"
+microsandbox = { version = "=0.7.8", default-features = false, features = ["local", "net"] }
+ratatui = "=0.30.2"
+rth-voice = { path = "../rth-voice" }
+rth-deploy = { path = "../rth-deploy" }
+cpal = "=0.18.2"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+coreaudio-rs = { version = "=0.14.2", default-features = false, features = ["core_audio", "audio_toolbox"] }
+objc2 = "=0.6.5"
+

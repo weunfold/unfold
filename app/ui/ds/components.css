@@ -1,0 +1,134 @@
+/* unfold components: the landing's pieces that are pure CSS, without its scroll scenes or the particle field.
+   Load tokens.css first. Class names match site/index.html and site/assets/sub.css, so pieces port both ways. */
+
+/* base */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--text); font-family: var(--font-display); font-size: var(--text-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 300; letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
+h1 { font-size: var(--text-display); line-height: 0.98; }
+h2 { font-size: var(--text-heading); line-height: 1; }
+h3 { font-size: var(--text-title); line-height: 1.2; font-weight: 400; letter-spacing: -0.01em; }
+h1 i, h2 i, h3 i { font-style: italic; }
+.hero { font-size: var(--text-hero); line-height: 0.92; }
+p { margin: 0; color: var(--text-muted); }
+a { color: inherit; text-underline-offset: 0.2em; }
+.lead { font-size: var(--text-lead); line-height: 1.45; color: var(--text); margin: 0; }
+.small { font-size: var(--text-small); line-height: 1.5; color: var(--text-faint); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* layout */
+.wrap { position: relative; max-width: var(--max-width); margin: 0 auto; padding-inline: max(var(--space-21), env(safe-area-inset-left, 0px)) max(var(--space-21), env(safe-area-inset-right, 0px)); }
+.col { max-width: var(--column); display: flex; flex-direction: column; gap: var(--space-21); }
+.prose { max-width: var(--prose); display: flex; flex-direction: column; gap: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: var(--space-13); align-items: center; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--space-13); }
+
+/* mono labels */
+.eyebrow { font-family: var(--font-mono); font-size: var(--text-eyebrow); letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-faint); }
+.tag { font-family: var(--font-mono); font-size: var(--text-tag); letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); }
+.label { font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); }
+.data { font-family: var(--font-mono); font-size: var(--text-data); letter-spacing: 0.08em; color: var(--text-muted); }
+
+/* wordmark: "we" upright, "unfold" italic, always lowercase */
+.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
+.brand-mark { width: 36px; height: 36px; display: block; flex: none; }
+.wm { font-family: var(--font-display); font-size: var(--text-wordmark); letter-spacing: -0.02em; line-height: 1; color: var(--text); white-space: nowrap; }
+.wm i { font-style: italic; }
+
+/* buttons: the primary pill is a solid fill, the ghost a hairline; both mono, uppercase, round */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-8); font-family: var(--font-mono); font-size: var(--text-button); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ground); background: var(--fill); border: 0; border-radius: var(--radius-pill); padding: 12px var(--space-21); min-height: var(--tap-target); text-decoration: none; cursor: pointer; }
+.pill.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); transition: border-color var(--duration-fast) var(--ease); }
+.pill.ghost:hover { border-color: var(--text-faint); }
+.pill.small { padding: 10px 18px; min-height: 40px; }
+.pill:disabled, .pill[aria-disabled="true"] { opacity: 0.45; cursor: default; }
+
+/* a pressable toggle (join, follow, thumbs): hairline at rest, filled when pressed */
+.toggle { display: inline-flex; align-items: center; gap: var(--space-8); flex: none; white-space: nowrap; font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); background: none; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: var(--space-8) 12px; min-height: 36px; cursor: pointer; }
+.toggle svg { display: block; }
+.toggle[aria-pressed="true"] { color: var(--ground); background: var(--fill); border-color: var(--fill); }
+
+/* segmented control (theme, size, alignment): square, hairline dividers, the pressed segment filled */
+.seg { display: inline-flex; border: 1px solid var(--line); }
+.seg button { min-height: 40px; min-width: 52px; padding: 0 10px; background: none; border: 0; color: var(--text-muted); font-family: var(--font-mono); font-size: var(--text-data); letter-spacing: 0.08em; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--fill); color: var(--ground); }
+
+/* state chips: every figure says what it is (Proposal, Example, Not measured yet, Sample data) */
+.state { display: inline-block; font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 3px 10px; white-space: nowrap; }
+.state.proposal { color: var(--gold); border-color: var(--gold-line); }
+.soon { display: inline-block; font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); border: 1px dashed var(--line); padding: 7px 10px; }
+
+/* status dots and their legend */
+.dot { width: 10px; height: 10px; border-radius: var(--radius-circle); flex: none; display: inline-block; }
+.dot.done { background: var(--status-done); }
+.dot.road { background: var(--status-road); }
+.dot.open { border: 1.5px solid var(--status-open); }
+.legend { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-21); font-family: var(--font-mono); font-size: var(--text-data); letter-spacing: 0.08em; color: var(--text-muted); }
+.legend span { display: inline-flex; align-items: center; gap: var(--space-8); }
+.legend b { color: var(--text); font-weight: 500; }
+
+/* cards: square, see-through over the field, hairline border; no shadows */
+.card { background: var(--card); border: 1px solid var(--line); padding: var(--space-21); display: flex; flex-direction: column; gap: 10px; min-width: 0; transition: border-color var(--duration-base) var(--ease), background var(--duration-base) var(--ease); }
+.card p { font-size: 16px; line-height: 1.5; }
+.card.is-active { border-color: var(--text-faint); background: var(--card-active); }
+a.card { color: var(--text); text-decoration: none; }
+a.card.featured:hover { border-color: var(--gold); }
+.panel { background: var(--surface-raised); border: 1px solid var(--line); padding: var(--space-21); }
+
+/* lists: numbered with hairlines above, or a quiet rule at the left */
+.pledge { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-13); counter-reset: p; }
+.pledge li { display: grid; grid-template-columns: var(--space-34) 1fr; gap: var(--space-13); border-top: 1px solid var(--line); padding-top: var(--space-13); counter-increment: p; }
+.pledge li::before { content: counter(p); font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); padding-top: var(--space-5); }
+.pledge b, .creases b { font-weight: 400; color: var(--text); }
+.pledge span, .creases span { color: var(--text-muted); }
+.creases { display: flex; flex-direction: column; gap: var(--space-13); }
+.creases > div, .detail { border-left: 1px solid var(--line); padding-left: var(--space-21); }
+
+/* a fold: something to find (dashed) or found (solid) */
+.fold { display: inline-flex; align-items: center; gap: var(--space-13); align-self: flex-start; font-family: var(--font-mono); font-size: var(--text-button); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); border: 1px dashed var(--line); padding: 10px 14px; }
+.fold.got { color: var(--text); border-style: solid; border-color: var(--text-faint); }
+
+/* breadcrumbs */
+.crumbs { display: flex; flex-wrap: wrap; gap: var(--space-8); margin: 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: var(--text-button); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+.crumbs li + li::before { content: "/"; margin-right: var(--space-8); }
+.crumbs a { color: var(--text-muted); text-decoration: none; }
+.crumbs a:hover { color: var(--text); }
+
+/* top bar: transparent at rest, a blurred ground once content scrolls under it; one gold line marks where you are */
+.topbar { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid transparent; transition: transform 350ms var(--ease), background-color var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease); }
+.topbar.is-scrolled { background: var(--bar); -webkit-backdrop-filter: blur(14px) saturate(120%); backdrop-filter: blur(14px) saturate(120%); border-bottom-color: var(--line); }
+.topbar.is-hidden { transform: translateY(-100%); }
+.topbar-in { max-width: var(--max-width); margin: 0 auto; min-height: calc(var(--topbar-height) - 1px); padding: var(--space-13) var(--space-21); display: flex; align-items: center; justify-content: space-between; gap: var(--space-21); }
+.nav-links { position: relative; display: flex; align-items: center; gap: 26px; font-family: var(--font-mono); font-size: var(--text-button); letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links > a:not(.pill) { color: var(--text-muted); text-decoration: none; min-height: var(--tap-target); display: inline-flex; align-items: center; transition: color var(--duration-fast) var(--ease); }
+.nav-links > a:not(.pill):hover, .nav-links > a[aria-current="page"] { color: var(--text); }
+.nav-ind { position: absolute; left: 0; bottom: 4px; height: 2px; width: 0; border-radius: var(--radius-hair); background: var(--gold); pointer-events: none; transition: transform var(--duration-move) var(--ease-move), width var(--duration-move) var(--ease-move); }
+
+/* a menu (dropdown, sidebar): the current item gets a 2px gold rule at its left */
+.menu { display: flex; flex-direction: column; background: var(--surface-raised); border: 1px solid var(--line); padding: var(--space-8) 0; min-width: 220px; }
+.menu a, .menu button { position: relative; display: flex; align-items: center; min-height: var(--tap-target); padding: 0 var(--space-21); color: var(--text-muted); background: none; border: 0; text-align: left; text-decoration: none; font-family: var(--font-mono); font-size: var(--text-button); letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; }
+.menu a:hover, .menu button:hover, .menu [aria-current="page"] { color: var(--text); }
+.menu [aria-current="page"]::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 2px; background: var(--gold); }
+
+/* the night/day switch: a small warm sun */
+.theme-sw { display: inline-flex; align-items: center; gap: var(--space-8); min-height: 40px; padding: 0 var(--space-13); background: none; border: 1px solid var(--line); border-radius: var(--radius-pill); color: var(--text-muted); font-family: var(--font-mono); font-size: var(--text-button); letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; }
+.theme-sw { transition: color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease); }
+.theme-sw:hover { color: var(--text); border-color: var(--text-faint); }
+.ts-ico { width: 12px; height: 12px; border-radius: var(--radius-circle); background: radial-gradient(circle at 35% 35%, #ffe2a8, #d9a35a 70%); box-shadow: 0 0 8px rgba(255, 190, 110, 0.6); }
+/* in day the icon is a cool crescent: set data-mode-now="day" on the switch (the landing does, and its label then reads "Night") */
+.theme-sw[data-mode-now="day"] .ts-ico { background: radial-gradient(circle at 70% 30%, transparent 40%, var(--moon) 42%); box-shadow: none; }
+/* optional fade-in, as on the landing (shown once the sun is up): add data-reveal, then toggle .is-shown */
+.theme-sw[data-reveal] { opacity: 0; transform: translateY(-4px); transition: opacity 500ms var(--ease), transform 500ms var(--ease), color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease); }
+.theme-sw[data-reveal].is-shown { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .theme-sw { transition: none; } }
+
+/* inputs: square hairline fields on the card ground */
+.field { display: flex; flex-direction: column; gap: var(--space-8); }
+.field > span { font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); }
+.input { width: 100%; min-height: var(--tap-target); padding: 10px var(--space-13); background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius-none); font: inherit; font-size: 16px; }
+.input:hover { border-color: var(--text-faint); }
+.input::placeholder { color: var(--text-faint); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .pill.ghost, .topbar, .nav-links > a, .nav-ind { transition: none; }
+}

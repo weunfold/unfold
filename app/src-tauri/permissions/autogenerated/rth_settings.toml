@@ -1,0 +1,10 @@
+
+[[permission]]
+identifier = "allow-rth-settings"
+description = "Enables the rth_settings command without any pre-configured scope."
+commands.allow = ["rth_settings"]
+
+[[permission]]
+identifier = "deny-rth-settings"
+description = "Denies the rth_settings command without any pre-configured scope."
+commands.deny = ["rth_settings"]

@@ -1,0 +1,55 @@
+[package]
+name = "rth-app"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Unfold's Mac app: a Tauri 2 window over its bundled local pages"
+
+[workspace]
+
+[features]
+checkout = []
+self_pane = []
+voice_pane = ["dep:unfold-speech", "dep:speech-markup", "dep:base64", "dep:rth-voice", "dep:rth-protocol"]
+menu_bar = []
+rehearsal_pack = ["menu_bar"]
+
+[build-dependencies]
+base64 = "=0.22.1"
+tauri-build = { version = "2", features = [] }
+sha2 = "=0.10.9"
+serde_json = "1"
+
+[dependencies]
+regex = "=1.13.1"
+ort = { version = "=2.0.0-rc.13", default-features = false, features = ["std", "load-dynamic", "api-27"] }
+realfft = "=3.5.0"
+tauri = { version = "2", features = ["tray-icon", "macos-private-api"] }
+tauri-plugin-updater = { version = "=2.13.3", default-features = false, features = ["native-tls"] }
+semver = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+libc = "0.2"
+sha2 = "=0.10.9"
+tar = "=0.4.46"
+flate2 = "=1.1.10"
+security-framework = "=3.7.0"
+rth-activation = { path = "../../crates/rth-activation" }
+sherpa-onnx = { version = "=2.0.0", default-features = false, features = ["shared"] }
+cpal = "=0.18.2"
+block2 = "=0.6.2"
+objc2 = "=0.6.5"
+tungstenite = { version = "=0.28.0", default-features = false, features = ["handshake"] }
+unfold-speech = { path = "../../crates/unfold-speech", optional = true }
+speech-markup = { path = "../../crates/speech-markup", optional = true }
+base64 = { version = "=0.22.1", optional = true }
+rth-voice = { path = "../../agentd/crates/rth-voice", optional = true }
+rth-protocol = { path = "../../agentd/crates/rth-protocol", optional = true }
+
+[dev-dependencies]
+tauri = { version = "2", features = ["tray-icon", "macos-private-api", "test"] }
+
+[profile.release]
+codegen-units = 4
+lto = "thin"
+strip = true

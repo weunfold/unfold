@@ -1,0 +1,5990 @@
+[
+  {
+    "journal_row": 522,
+    "decision_t_ms": 104837.3815,
+    "first_held_t_ms": 104917,
+    "action": "HOLD",
+    "p_floor": 0.6536327600479126,
+    "p_bc": 0.3291959762573242,
+    "capture_actual": [
+      {
+        "row": 7591,
+        "t_ms": 104410,
+        "dbfs": -125.29696655273438,
+        "vad": false
+      },
+      {
+        "row": 7592,
+        "t_ms": 104410,
+        "dbfs": -128.9752197265625,
+        "vad": false
+      },
+      {
+        "row": 7593,
+        "t_ms": 104492,
+        "dbfs": -136.95787048339844,
+        "vad": false
+      },
+      {
+        "row": 7594,
+        "t_ms": 104578,
+        "dbfs": -136.53065490722656,
+        "vad": false
+      },
+      {
+        "row": 7595,
+        "t_ms": 104578,
+        "dbfs": -133.85678100585938,
+        "vad": false
+      },
+      {
+        "row": 7596,
+        "t_ms": 104663,
+        "dbfs": -130.35264587402344,
+        "vad": false
+      },
+      {
+        "row": 7597,
+        "t_ms": 104663,
+        "dbfs": -124.5637435913086,
+        "vad": false
+      },
+      {
+        "row": 7598,
+        "t_ms": 104750,
+        "dbfs": -124.93917846679688,
+        "vad": false
+      },
+      {
+        "row": 7599,
+        "t_ms": 104750,
+        "dbfs": -123.3523941040039,
+        "vad": false
+      },
+      {
+        "row": 7600,
+        "t_ms": 104835,
+        "dbfs": -45.35862350463867,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 7601,
+        "kind": "post_aec_level",
+        "t_ms": 104917,
+        "dbfs": -39.81635665893555,
+        "vad": false
+      },
+      {
+        "row": 7602,
+        "kind": "post_aec_level",
+        "t_ms": 104917,
+        "dbfs": -60.92536926269531,
+        "vad": false
+      },
+      {
+        "row": 7603,
+        "kind": "post_aec_level",
+        "t_ms": 105006,
+        "dbfs": -66.33561706542969,
+        "vad": false
+      },
+      {
+        "row": 7604,
+        "kind": "post_aec_level",
+        "t_ms": 105006,
+        "dbfs": -64.49081420898438,
+        "vad": false
+      },
+      {
+        "row": 7605,
+        "kind": "post_aec_level",
+        "t_ms": 105090,
+        "dbfs": -58.67826461791992,
+        "vad": false
+      },
+      {
+        "row": 7606,
+        "kind": "post_aec_level",
+        "t_ms": 105177,
+        "dbfs": -41.9547233581543,
+        "vad": false
+      },
+      {
+        "row": 7607,
+        "kind": "post_aec_level",
+        "t_ms": 105177,
+        "dbfs": -57.48197555541992,
+        "vad": false
+      },
+      {
+        "row": 7608,
+        "kind": "post_aec_level",
+        "t_ms": 105260,
+        "dbfs": -71.85944366455078,
+        "vad": false
+      },
+      {
+        "row": 7609,
+        "kind": "post_aec_level",
+        "t_ms": 105260,
+        "dbfs": -74.50967407226562,
+        "vad": false
+      },
+      {
+        "row": 7610,
+        "kind": "post_aec_level",
+        "t_ms": 105345,
+        "dbfs": -97.3622817993164,
+        "vad": false
+      },
+      {
+        "row": 7611,
+        "kind": "post_aec_level",
+        "t_ms": 105345,
+        "dbfs": -114.58226013183594,
+        "vad": false
+      },
+      {
+        "row": 7612,
+        "kind": "post_aec_level",
+        "t_ms": 105432,
+        "dbfs": -128.10118103027344,
+        "vad": false
+      },
+      {
+        "row": 7613,
+        "kind": "post_aec_level",
+        "t_ms": 105518,
+        "dbfs": -133.90826416015625,
+        "vad": false
+      },
+      {
+        "row": 7614,
+        "kind": "post_aec_level",
+        "t_ms": 105518,
+        "dbfs": -135.45321655273438,
+        "vad": false
+      },
+      {
+        "row": 7615,
+        "kind": "post_aec_level",
+        "t_ms": 105599,
+        "dbfs": -136.12982177734375,
+        "vad": false
+      },
+      {
+        "row": 7616,
+        "kind": "post_aec_level",
+        "t_ms": 105599,
+        "dbfs": -100.2570571899414,
+        "vad": false
+      },
+      {
+        "row": 7617,
+        "kind": "post_aec_level",
+        "t_ms": 105690,
+        "dbfs": -133.92556762695312,
+        "vad": false
+      },
+      {
+        "row": 7618,
+        "kind": "post_aec_level",
+        "t_ms": 105773,
+        "dbfs": -121.94878387451172,
+        "vad": false
+      },
+      {
+        "row": 7619,
+        "kind": "post_aec_level",
+        "t_ms": 105773,
+        "dbfs": -115.85640716552734,
+        "vad": false
+      },
+      {
+        "row": 7620,
+        "kind": "post_aec_level",
+        "t_ms": 105859,
+        "dbfs": -114.41352081298828,
+        "vad": false
+      },
+      {
+        "row": 7621,
+        "kind": "post_aec_level",
+        "t_ms": 105859,
+        "dbfs": -117.56944274902344,
+        "vad": false
+      },
+      {
+        "row": 7622,
+        "kind": "post_aec_level",
+        "t_ms": 105946,
+        "dbfs": -118.35460662841797,
+        "vad": false
+      },
+      {
+        "row": 7623,
+        "kind": "post_aec_level",
+        "t_ms": 105946,
+        "dbfs": -124.2417221069336,
+        "vad": false
+      },
+      {
+        "row": 7624,
+        "kind": "post_aec_level",
+        "t_ms": 106029,
+        "dbfs": -130.49134826660156,
+        "vad": false
+      },
+      {
+        "row": 7625,
+        "kind": "post_aec_level",
+        "t_ms": 106115,
+        "dbfs": -137.38516235351562,
+        "vad": false
+      },
+      {
+        "row": 7626,
+        "kind": "post_aec_level",
+        "t_ms": 106115,
+        "dbfs": -137.42147827148438,
+        "vad": false
+      },
+      {
+        "row": 7627,
+        "kind": "post_aec_level",
+        "t_ms": 106199,
+        "dbfs": -137.09591674804688,
+        "vad": false
+      },
+      {
+        "row": 7628,
+        "kind": "post_aec_level",
+        "t_ms": 106199,
+        "dbfs": -136.30081176757812,
+        "vad": false
+      },
+      {
+        "row": 7629,
+        "kind": "post_aec_level",
+        "t_ms": 106287,
+        "dbfs": -138.20777893066406,
+        "vad": false
+      },
+      {
+        "row": 7630,
+        "kind": "post_aec_level",
+        "t_ms": 106369,
+        "dbfs": -132.59608459472656,
+        "vad": false
+      },
+      {
+        "row": 7631,
+        "kind": "post_aec_level",
+        "t_ms": 106369,
+        "dbfs": -136.61061096191406,
+        "vad": false
+      },
+      {
+        "row": 7632,
+        "kind": "post_aec_level",
+        "t_ms": 106455,
+        "dbfs": -143.86895751953125,
+        "vad": false
+      },
+      {
+        "row": 7633,
+        "kind": "post_aec_level",
+        "t_ms": 106455,
+        "dbfs": -141.46755981445312,
+        "vad": false
+      },
+      {
+        "row": 7634,
+        "kind": "post_aec_level",
+        "t_ms": 106539,
+        "dbfs": -146.12582397460938,
+        "vad": false
+      },
+      {
+        "row": 7635,
+        "kind": "post_aec_level",
+        "t_ms": 106625,
+        "dbfs": -147.5347442626953,
+        "vad": false
+      },
+      {
+        "row": 7636,
+        "kind": "post_aec_level",
+        "t_ms": 106625,
+        "dbfs": -148.19573974609375,
+        "vad": false
+      },
+      {
+        "row": 7637,
+        "kind": "post_aec_level",
+        "t_ms": 106715,
+        "dbfs": -111.26930236816406,
+        "vad": false
+      },
+      {
+        "row": 7638,
+        "kind": "post_aec_level",
+        "t_ms": 106715,
+        "dbfs": -116.95845794677734,
+        "vad": false
+      },
+      {
+        "row": 7639,
+        "kind": "post_aec_level",
+        "t_ms": 106798,
+        "dbfs": -115.79859924316406,
+        "vad": false
+      },
+      {
+        "row": 7640,
+        "kind": "post_aec_level",
+        "t_ms": 106798,
+        "dbfs": -128.11366271972656,
+        "vad": false
+      },
+      {
+        "row": 7641,
+        "kind": "post_aec_level",
+        "t_ms": 106881,
+        "dbfs": -140.9110565185547,
+        "vad": false
+      },
+      {
+        "row": 7642,
+        "kind": "post_aec_level",
+        "t_ms": 106968,
+        "dbfs": -133.46719360351562,
+        "vad": false
+      },
+      {
+        "row": 7643,
+        "kind": "post_aec_level",
+        "t_ms": 106968,
+        "dbfs": -130.55087280273438,
+        "vad": false
+      },
+      {
+        "row": 7644,
+        "kind": "post_aec_level",
+        "t_ms": 107052,
+        "dbfs": -124.3210220336914,
+        "vad": false
+      },
+      {
+        "row": 7645,
+        "kind": "post_aec_level",
+        "t_ms": 107052,
+        "dbfs": -131.66050720214844,
+        "vad": false
+      },
+      {
+        "row": 7646,
+        "kind": "post_aec_level",
+        "t_ms": 107140,
+        "dbfs": -136.20034790039062,
+        "vad": false
+      },
+      {
+        "row": 7647,
+        "kind": "post_aec_level",
+        "t_ms": 107223,
+        "dbfs": -128.3011932373047,
+        "vad": false
+      },
+      {
+        "row": 7648,
+        "kind": "post_aec_level",
+        "t_ms": 107223,
+        "dbfs": -132.29701232910156,
+        "vad": false
+      },
+      {
+        "row": 7649,
+        "kind": "post_aec_level",
+        "t_ms": 107306,
+        "dbfs": -133.9781951904297,
+        "vad": false
+      },
+      {
+        "row": 7650,
+        "kind": "post_aec_level",
+        "t_ms": 107306,
+        "dbfs": -129.23162841796875,
+        "vad": false
+      },
+      {
+        "row": 7651,
+        "kind": "post_aec_level",
+        "t_ms": 107394,
+        "dbfs": -132.14715576171875,
+        "vad": false
+      },
+      {
+        "row": 7652,
+        "kind": "post_aec_level",
+        "t_ms": 107394,
+        "dbfs": -136.14952087402344,
+        "vad": false
+      },
+      {
+        "row": 7653,
+        "kind": "post_aec_level",
+        "t_ms": 107479,
+        "dbfs": -140.3555450439453,
+        "vad": false
+      },
+      {
+        "row": 7654,
+        "kind": "post_aec_level",
+        "t_ms": 107568,
+        "dbfs": -130.29710388183594,
+        "vad": false
+      },
+      {
+        "row": 7655,
+        "kind": "post_aec_level",
+        "t_ms": 107568,
+        "dbfs": -138.87400817871094,
+        "vad": false
+      },
+      {
+        "row": 7656,
+        "kind": "post_aec_level",
+        "t_ms": 107651,
+        "dbfs": -135.875244140625,
+        "vad": false
+      },
+      {
+        "row": 7657,
+        "kind": "post_aec_level",
+        "t_ms": 107651,
+        "dbfs": -133.326416015625,
+        "vad": false
+      },
+      {
+        "row": 7658,
+        "kind": "post_aec_level",
+        "t_ms": 107734,
+        "dbfs": -121.42615509033203,
+        "vad": false
+      },
+      {
+        "row": 7659,
+        "kind": "post_aec_level",
+        "t_ms": 107820,
+        "dbfs": -130.0108184814453,
+        "vad": false
+      },
+      {
+        "row": 7660,
+        "kind": "post_aec_level",
+        "t_ms": 107820,
+        "dbfs": -140.0926513671875,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 530,
+    "decision_t_ms": 130522.30941600002,
+    "first_held_t_ms": 130520,
+    "action": "HOLD",
+    "p_floor": 0.46789681911468506,
+    "p_bc": 0.5229816436767578,
+    "capture_actual": [
+      {
+        "row": 8108,
+        "t_ms": 130093,
+        "dbfs": -113.88743591308594,
+        "vad": false
+      },
+      {
+        "row": 8109,
+        "t_ms": 130178,
+        "dbfs": -119.5322494506836,
+        "vad": false
+      },
+      {
+        "row": 8110,
+        "t_ms": 130178,
+        "dbfs": -115.71381378173828,
+        "vad": false
+      },
+      {
+        "row": 8111,
+        "t_ms": 130266,
+        "dbfs": -115.49663543701172,
+        "vad": false
+      },
+      {
+        "row": 8112,
+        "t_ms": 130266,
+        "dbfs": -112.27462768554688,
+        "vad": false
+      },
+      {
+        "row": 8113,
+        "t_ms": 130348,
+        "dbfs": -112.79696655273438,
+        "vad": false
+      },
+      {
+        "row": 8114,
+        "t_ms": 130348,
+        "dbfs": -115.5671157836914,
+        "vad": false
+      },
+      {
+        "row": 8115,
+        "t_ms": 130439,
+        "dbfs": -116.25748443603516,
+        "vad": false
+      },
+      {
+        "row": 8116,
+        "t_ms": 130520,
+        "dbfs": -99.10755920410156,
+        "vad": false
+      },
+      {
+        "row": 8117,
+        "t_ms": 130520,
+        "dbfs": -30.657733917236328,
+        "vad": true
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 8118,
+        "kind": "post_aec_level",
+        "t_ms": 130608,
+        "dbfs": -44.47522735595703,
+        "vad": false
+      },
+      {
+        "row": 8119,
+        "kind": "post_aec_level",
+        "t_ms": 130608,
+        "dbfs": -85.26754760742188,
+        "vad": false
+      },
+      {
+        "row": 8120,
+        "kind": "post_aec_level",
+        "t_ms": 130689,
+        "dbfs": -101.46076202392578,
+        "vad": false
+      },
+      {
+        "row": 8121,
+        "kind": "post_aec_level",
+        "t_ms": 130778,
+        "dbfs": -114.79702758789062,
+        "vad": false
+      },
+      {
+        "row": 8122,
+        "kind": "post_aec_level",
+        "t_ms": 130778,
+        "dbfs": -120.25569152832031,
+        "vad": false
+      },
+      {
+        "row": 8123,
+        "kind": "post_aec_level",
+        "t_ms": 130860,
+        "dbfs": -105.3666763305664,
+        "vad": false
+      },
+      {
+        "row": 8124,
+        "kind": "post_aec_level",
+        "t_ms": 130860,
+        "dbfs": -109.44293975830078,
+        "vad": false
+      },
+      {
+        "row": 8125,
+        "kind": "post_aec_level",
+        "t_ms": 130949,
+        "dbfs": -120.00565338134766,
+        "vad": false
+      },
+      {
+        "row": 8126,
+        "kind": "post_aec_level",
+        "t_ms": 130949,
+        "dbfs": -123.97393798828125,
+        "vad": false
+      },
+      {
+        "row": 8127,
+        "kind": "post_aec_level",
+        "t_ms": 131032,
+        "dbfs": -131.13839721679688,
+        "vad": false
+      },
+      {
+        "row": 8128,
+        "kind": "post_aec_level",
+        "t_ms": 131117,
+        "dbfs": -139.64126586914062,
+        "vad": false
+      },
+      {
+        "row": 8129,
+        "kind": "post_aec_level",
+        "t_ms": 131117,
+        "dbfs": -144.03736877441406,
+        "vad": false
+      },
+      {
+        "row": 8130,
+        "kind": "post_aec_level",
+        "t_ms": 131201,
+        "dbfs": -140.8495635986328,
+        "vad": false
+      },
+      {
+        "row": 8131,
+        "kind": "post_aec_level",
+        "t_ms": 131201,
+        "dbfs": -139.90330505371094,
+        "vad": false
+      },
+      {
+        "row": 8132,
+        "kind": "post_aec_level",
+        "t_ms": 131290,
+        "dbfs": -142.1782684326172,
+        "vad": false
+      },
+      {
+        "row": 8133,
+        "kind": "post_aec_level",
+        "t_ms": 131374,
+        "dbfs": -138.4158935546875,
+        "vad": false
+      },
+      {
+        "row": 8134,
+        "kind": "post_aec_level",
+        "t_ms": 131374,
+        "dbfs": -144.17416381835938,
+        "vad": false
+      },
+      {
+        "row": 8135,
+        "kind": "post_aec_level",
+        "t_ms": 131459,
+        "dbfs": -140.6251220703125,
+        "vad": false
+      },
+      {
+        "row": 8136,
+        "kind": "post_aec_level",
+        "t_ms": 131459,
+        "dbfs": -143.19898986816406,
+        "vad": false
+      },
+      {
+        "row": 8137,
+        "kind": "post_aec_level",
+        "t_ms": 131544,
+        "dbfs": -140.67449951171875,
+        "vad": false
+      },
+      {
+        "row": 8138,
+        "kind": "post_aec_level",
+        "t_ms": 131544,
+        "dbfs": -144.17417907714844,
+        "vad": false
+      },
+      {
+        "row": 8139,
+        "kind": "post_aec_level",
+        "t_ms": 131629,
+        "dbfs": -142.5708770751953,
+        "vad": false
+      },
+      {
+        "row": 8140,
+        "kind": "post_aec_level",
+        "t_ms": 131712,
+        "dbfs": -140.79539489746094,
+        "vad": false
+      },
+      {
+        "row": 8141,
+        "kind": "post_aec_level",
+        "t_ms": 131712,
+        "dbfs": -141.10125732421875,
+        "vad": false
+      },
+      {
+        "row": 8142,
+        "kind": "post_aec_level",
+        "t_ms": 131799,
+        "dbfs": -143.16908264160156,
+        "vad": false
+      },
+      {
+        "row": 8143,
+        "kind": "post_aec_level",
+        "t_ms": 131799,
+        "dbfs": -144.44996643066406,
+        "vad": false
+      },
+      {
+        "row": 8144,
+        "kind": "post_aec_level",
+        "t_ms": 131884,
+        "dbfs": -144.39022827148438,
+        "vad": false
+      },
+      {
+        "row": 8145,
+        "kind": "post_aec_level",
+        "t_ms": 131968,
+        "dbfs": -142.62135314941406,
+        "vad": false
+      },
+      {
+        "row": 8146,
+        "kind": "post_aec_level",
+        "t_ms": 131968,
+        "dbfs": -141.21041870117188,
+        "vad": false
+      },
+      {
+        "row": 8147,
+        "kind": "post_aec_level",
+        "t_ms": 132056,
+        "dbfs": -141.54483032226562,
+        "vad": false
+      },
+      {
+        "row": 8148,
+        "kind": "post_aec_level",
+        "t_ms": 132056,
+        "dbfs": -142.09552001953125,
+        "vad": false
+      },
+      {
+        "row": 8149,
+        "kind": "post_aec_level",
+        "t_ms": 132141,
+        "dbfs": -142.50912475585938,
+        "vad": false
+      },
+      {
+        "row": 8150,
+        "kind": "post_aec_level",
+        "t_ms": 132229,
+        "dbfs": -145.1785125732422,
+        "vad": false
+      },
+      {
+        "row": 8151,
+        "kind": "post_aec_level",
+        "t_ms": 132229,
+        "dbfs": -147.0989532470703,
+        "vad": false
+      },
+      {
+        "row": 8152,
+        "kind": "post_aec_level",
+        "t_ms": 132313,
+        "dbfs": -143.2499542236328,
+        "vad": false
+      },
+      {
+        "row": 8153,
+        "kind": "post_aec_level",
+        "t_ms": 132313,
+        "dbfs": -136.8898162841797,
+        "vad": false
+      },
+      {
+        "row": 8154,
+        "kind": "post_aec_level",
+        "t_ms": 132398,
+        "dbfs": -150.5208282470703,
+        "vad": false
+      },
+      {
+        "row": 8155,
+        "kind": "post_aec_level",
+        "t_ms": 132398,
+        "dbfs": -150.91969299316406,
+        "vad": false
+      },
+      {
+        "row": 8156,
+        "kind": "post_aec_level",
+        "t_ms": 132484,
+        "dbfs": -152.64935302734375,
+        "vad": false
+      },
+      {
+        "row": 8157,
+        "kind": "post_aec_level",
+        "t_ms": 132571,
+        "dbfs": -150.42254638671875,
+        "vad": false
+      },
+      {
+        "row": 8158,
+        "kind": "post_aec_level",
+        "t_ms": 132571,
+        "dbfs": -137.43885803222656,
+        "vad": false
+      },
+      {
+        "row": 8159,
+        "kind": "post_aec_level",
+        "t_ms": 132655,
+        "dbfs": -142.76458740234375,
+        "vad": false
+      },
+      {
+        "row": 8160,
+        "kind": "post_aec_level",
+        "t_ms": 132655,
+        "dbfs": -146.00230407714844,
+        "vad": false
+      },
+      {
+        "row": 8161,
+        "kind": "post_aec_level",
+        "t_ms": 132741,
+        "dbfs": -145.36634826660156,
+        "vad": false
+      },
+      {
+        "row": 8162,
+        "kind": "post_aec_level",
+        "t_ms": 132827,
+        "dbfs": -148.7253875732422,
+        "vad": false
+      },
+      {
+        "row": 8163,
+        "kind": "post_aec_level",
+        "t_ms": 132827,
+        "dbfs": -142.67665100097656,
+        "vad": false
+      },
+      {
+        "row": 8164,
+        "kind": "post_aec_level",
+        "t_ms": 132909,
+        "dbfs": -132.64962768554688,
+        "vad": false
+      },
+      {
+        "row": 8165,
+        "kind": "post_aec_level",
+        "t_ms": 132909,
+        "dbfs": -147.8815155029297,
+        "vad": false
+      },
+      {
+        "row": 8166,
+        "kind": "post_aec_level",
+        "t_ms": 132993,
+        "dbfs": -153.82371520996094,
+        "vad": false
+      },
+      {
+        "row": 8167,
+        "kind": "post_aec_level",
+        "t_ms": 132993,
+        "dbfs": -145.68142700195312,
+        "vad": false
+      },
+      {
+        "row": 8168,
+        "kind": "post_aec_level",
+        "t_ms": 133079,
+        "dbfs": -144.7119598388672,
+        "vad": false
+      },
+      {
+        "row": 8169,
+        "kind": "post_aec_level",
+        "t_ms": 133166,
+        "dbfs": -145.68795776367188,
+        "vad": false
+      },
+      {
+        "row": 8170,
+        "kind": "post_aec_level",
+        "t_ms": 133166,
+        "dbfs": -145.69036865234375,
+        "vad": false
+      },
+      {
+        "row": 8171,
+        "kind": "post_aec_level",
+        "t_ms": 133249,
+        "dbfs": -145.42848205566406,
+        "vad": false
+      },
+      {
+        "row": 8172,
+        "kind": "post_aec_level",
+        "t_ms": 133249,
+        "dbfs": -142.48583984375,
+        "vad": false
+      },
+      {
+        "row": 8173,
+        "kind": "post_aec_level",
+        "t_ms": 133335,
+        "dbfs": -142.09031677246094,
+        "vad": false
+      },
+      {
+        "row": 8174,
+        "kind": "post_aec_level",
+        "t_ms": 133419,
+        "dbfs": -146.41009521484375,
+        "vad": false
+      },
+      {
+        "row": 8175,
+        "kind": "post_aec_level",
+        "t_ms": 133419,
+        "dbfs": -145.18038940429688,
+        "vad": false
+      },
+      {
+        "row": 8176,
+        "kind": "post_aec_level",
+        "t_ms": 133509,
+        "dbfs": -131.0614471435547,
+        "vad": false
+      },
+      {
+        "row": 8177,
+        "kind": "post_aec_level",
+        "t_ms": 133509,
+        "dbfs": -129.68850708007812,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 641,
+    "decision_t_ms": 222681.08470799998,
+    "first_held_t_ms": 222767,
+    "action": "HOLD",
+    "p_floor": 0.5745916962623596,
+    "p_bc": 0.39146965742111206,
+    "capture_actual": [
+      {
+        "row": 9982,
+        "t_ms": 222252,
+        "dbfs": -117.1988525390625,
+        "vad": false
+      },
+      {
+        "row": 9983,
+        "t_ms": 222252,
+        "dbfs": -133.28526306152344,
+        "vad": false
+      },
+      {
+        "row": 9984,
+        "t_ms": 222337,
+        "dbfs": -115.13671875,
+        "vad": false
+      },
+      {
+        "row": 9985,
+        "t_ms": 222425,
+        "dbfs": -112.65038299560547,
+        "vad": false
+      },
+      {
+        "row": 9986,
+        "t_ms": 222425,
+        "dbfs": -117.87483978271484,
+        "vad": false
+      },
+      {
+        "row": 9987,
+        "t_ms": 222510,
+        "dbfs": -119.22868347167969,
+        "vad": false
+      },
+      {
+        "row": 9988,
+        "t_ms": 222510,
+        "dbfs": -127.87415313720703,
+        "vad": false
+      },
+      {
+        "row": 9989,
+        "t_ms": 222593,
+        "dbfs": -109.29300689697266,
+        "vad": false
+      },
+      {
+        "row": 9990,
+        "t_ms": 222593,
+        "dbfs": -104.83818054199219,
+        "vad": false
+      },
+      {
+        "row": 9991,
+        "t_ms": 222679,
+        "dbfs": -113.04529571533203,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [
+      {
+        "row": 9938,
+        "t_ms": 220087,
+        "words": 11,
+        "source": "asr_final"
+      }
+    ],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 9992,
+        "kind": "post_aec_level",
+        "t_ms": 222767,
+        "dbfs": -40.13167953491211,
+        "vad": false
+      },
+      {
+        "row": 9993,
+        "kind": "post_aec_level",
+        "t_ms": 222767,
+        "dbfs": -52.26345443725586,
+        "vad": false
+      },
+      {
+        "row": 9994,
+        "kind": "post_aec_level",
+        "t_ms": 222848,
+        "dbfs": -94.83751678466797,
+        "vad": false
+      },
+      {
+        "row": 9995,
+        "kind": "post_aec_level",
+        "t_ms": 222848,
+        "dbfs": -117.29510498046875,
+        "vad": false
+      },
+      {
+        "row": 9996,
+        "kind": "post_aec_level",
+        "t_ms": 222935,
+        "dbfs": -117.95067596435547,
+        "vad": false
+      },
+      {
+        "row": 9997,
+        "kind": "post_aec_level",
+        "t_ms": 223019,
+        "dbfs": -114.5813217163086,
+        "vad": false
+      },
+      {
+        "row": 9998,
+        "kind": "post_aec_level",
+        "t_ms": 223019,
+        "dbfs": -120.56001281738281,
+        "vad": false
+      },
+      {
+        "row": 9999,
+        "kind": "post_aec_level",
+        "t_ms": 223109,
+        "dbfs": -128.8179931640625,
+        "vad": false
+      },
+      {
+        "row": 10000,
+        "kind": "post_aec_level",
+        "t_ms": 223109,
+        "dbfs": -127.80049133300781,
+        "vad": false
+      },
+      {
+        "row": 10001,
+        "kind": "post_aec_level",
+        "t_ms": 223190,
+        "dbfs": -129.3808135986328,
+        "vad": false
+      },
+      {
+        "row": 10002,
+        "kind": "post_aec_level",
+        "t_ms": 223276,
+        "dbfs": -124.96080780029297,
+        "vad": false
+      },
+      {
+        "row": 10003,
+        "kind": "post_aec_level",
+        "t_ms": 223276,
+        "dbfs": -127.21376037597656,
+        "vad": false
+      },
+      {
+        "row": 10004,
+        "kind": "post_aec_level",
+        "t_ms": 223360,
+        "dbfs": -124.39169311523438,
+        "vad": false
+      },
+      {
+        "row": 10005,
+        "kind": "post_aec_level",
+        "t_ms": 223360,
+        "dbfs": -127.78376007080078,
+        "vad": false
+      },
+      {
+        "row": 10006,
+        "kind": "post_aec_level",
+        "t_ms": 223447,
+        "dbfs": -128.00880432128906,
+        "vad": false
+      },
+      {
+        "row": 10007,
+        "kind": "post_aec_level",
+        "t_ms": 223447,
+        "dbfs": -128.92530822753906,
+        "vad": false
+      },
+      {
+        "row": 10008,
+        "kind": "post_aec_level",
+        "t_ms": 223533,
+        "dbfs": -126.84388732910156,
+        "vad": false
+      },
+      {
+        "row": 10009,
+        "kind": "post_aec_level",
+        "t_ms": 223618,
+        "dbfs": -130.56715393066406,
+        "vad": false
+      },
+      {
+        "row": 10010,
+        "kind": "post_aec_level",
+        "t_ms": 223618,
+        "dbfs": -134.9178466796875,
+        "vad": false
+      },
+      {
+        "row": 10011,
+        "kind": "post_aec_level",
+        "t_ms": 223706,
+        "dbfs": -131.91246032714844,
+        "vad": false
+      },
+      {
+        "row": 10012,
+        "kind": "post_aec_level",
+        "t_ms": 223707,
+        "dbfs": -135.1840362548828,
+        "vad": false
+      },
+      {
+        "row": 10013,
+        "kind": "post_aec_level",
+        "t_ms": 223788,
+        "dbfs": -134.9488067626953,
+        "vad": false
+      },
+      {
+        "row": 10014,
+        "kind": "post_aec_level",
+        "t_ms": 223873,
+        "dbfs": -132.5672149658203,
+        "vad": false
+      },
+      {
+        "row": 10015,
+        "kind": "post_aec_level",
+        "t_ms": 223873,
+        "dbfs": -135.96092224121094,
+        "vad": false
+      },
+      {
+        "row": 10016,
+        "kind": "post_aec_level",
+        "t_ms": 223960,
+        "dbfs": -135.8829803466797,
+        "vad": false
+      },
+      {
+        "row": 10017,
+        "kind": "post_aec_level",
+        "t_ms": 223960,
+        "dbfs": -135.7058563232422,
+        "vad": false
+      },
+      {
+        "row": 10018,
+        "kind": "post_aec_level",
+        "t_ms": 224046,
+        "dbfs": -138.5124969482422,
+        "vad": false
+      },
+      {
+        "row": 10019,
+        "kind": "post_aec_level",
+        "t_ms": 224046,
+        "dbfs": -137.2080535888672,
+        "vad": false
+      },
+      {
+        "row": 10020,
+        "kind": "post_aec_level",
+        "t_ms": 224128,
+        "dbfs": -135.0276641845703,
+        "vad": false
+      },
+      {
+        "row": 10021,
+        "kind": "post_aec_level",
+        "t_ms": 224216,
+        "dbfs": -128.2078094482422,
+        "vad": false
+      },
+      {
+        "row": 10022,
+        "kind": "post_aec_level",
+        "t_ms": 224216,
+        "dbfs": -134.3185577392578,
+        "vad": false
+      },
+      {
+        "row": 10023,
+        "kind": "post_aec_level",
+        "t_ms": 224300,
+        "dbfs": -133.33352661132812,
+        "vad": false
+      },
+      {
+        "row": 10024,
+        "kind": "post_aec_level",
+        "t_ms": 224300,
+        "dbfs": -136.256591796875,
+        "vad": false
+      },
+      {
+        "row": 10025,
+        "kind": "post_aec_level",
+        "t_ms": 224388,
+        "dbfs": -136.70553588867188,
+        "vad": false
+      },
+      {
+        "row": 10026,
+        "kind": "post_aec_level",
+        "t_ms": 224471,
+        "dbfs": -137.0817413330078,
+        "vad": false
+      },
+      {
+        "row": 10027,
+        "kind": "post_aec_level",
+        "t_ms": 224472,
+        "dbfs": -140.14935302734375,
+        "vad": false
+      },
+      {
+        "row": 10028,
+        "kind": "post_aec_level",
+        "t_ms": 224555,
+        "dbfs": -142.09352111816406,
+        "vad": false
+      },
+      {
+        "row": 10029,
+        "kind": "post_aec_level",
+        "t_ms": 224555,
+        "dbfs": -111.30257415771484,
+        "vad": false
+      },
+      {
+        "row": 10030,
+        "kind": "post_aec_level",
+        "t_ms": 224641,
+        "dbfs": -120.39960479736328,
+        "vad": false
+      },
+      {
+        "row": 10031,
+        "kind": "post_aec_level",
+        "t_ms": 224725,
+        "dbfs": -112.65663146972656,
+        "vad": false
+      },
+      {
+        "row": 10032,
+        "kind": "post_aec_level",
+        "t_ms": 224725,
+        "dbfs": -120.32408905029297,
+        "vad": false
+      },
+      {
+        "row": 10033,
+        "kind": "post_aec_level",
+        "t_ms": 224810,
+        "dbfs": -130.88003540039062,
+        "vad": false
+      },
+      {
+        "row": 10034,
+        "kind": "post_aec_level",
+        "t_ms": 224810,
+        "dbfs": -132.1621856689453,
+        "vad": false
+      },
+      {
+        "row": 10035,
+        "kind": "post_aec_level",
+        "t_ms": 224897,
+        "dbfs": -135.0723419189453,
+        "vad": false
+      },
+      {
+        "row": 10036,
+        "kind": "post_aec_level",
+        "t_ms": 224897,
+        "dbfs": -136.695556640625,
+        "vad": false
+      },
+      {
+        "row": 10037,
+        "kind": "post_aec_level",
+        "t_ms": 224985,
+        "dbfs": -137.35055541992188,
+        "vad": false
+      },
+      {
+        "row": 10038,
+        "kind": "post_aec_level",
+        "t_ms": 225068,
+        "dbfs": -136.83363342285156,
+        "vad": false
+      },
+      {
+        "row": 10039,
+        "kind": "post_aec_level",
+        "t_ms": 225068,
+        "dbfs": -140.56881713867188,
+        "vad": false
+      },
+      {
+        "row": 10040,
+        "kind": "post_aec_level",
+        "t_ms": 225152,
+        "dbfs": -140.91815185546875,
+        "vad": false
+      },
+      {
+        "row": 10041,
+        "kind": "post_aec_level",
+        "t_ms": 225152,
+        "dbfs": -143.90304565429688,
+        "vad": false
+      },
+      {
+        "row": 10042,
+        "kind": "post_aec_level",
+        "t_ms": 225239,
+        "dbfs": -143.0465545654297,
+        "vad": false
+      },
+      {
+        "row": 10043,
+        "kind": "post_aec_level",
+        "t_ms": 225324,
+        "dbfs": -134.5120849609375,
+        "vad": false
+      },
+      {
+        "row": 10044,
+        "kind": "post_aec_level",
+        "t_ms": 225324,
+        "dbfs": -132.50990295410156,
+        "vad": false
+      },
+      {
+        "row": 10045,
+        "kind": "post_aec_level",
+        "t_ms": 225407,
+        "dbfs": -140.15444946289062,
+        "vad": false
+      },
+      {
+        "row": 10046,
+        "kind": "post_aec_level",
+        "t_ms": 225407,
+        "dbfs": -141.7100067138672,
+        "vad": false
+      },
+      {
+        "row": 10047,
+        "kind": "post_aec_level",
+        "t_ms": 225494,
+        "dbfs": -142.480224609375,
+        "vad": false
+      },
+      {
+        "row": 10048,
+        "kind": "post_aec_level",
+        "t_ms": 225494,
+        "dbfs": -144.09425354003906,
+        "vad": false
+      },
+      {
+        "row": 10049,
+        "kind": "post_aec_level",
+        "t_ms": 225580,
+        "dbfs": -59.074249267578125,
+        "vad": false
+      },
+      {
+        "row": 10050,
+        "kind": "post_aec_level",
+        "t_ms": 225666,
+        "dbfs": -41.68397903442383,
+        "vad": false
+      },
+      {
+        "row": 10051,
+        "kind": "post_aec_level",
+        "t_ms": 225666,
+        "dbfs": -57.03691482543945,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 643,
+    "decision_t_ms": 226606.750166,
+    "first_held_t_ms": 226605,
+    "action": "HOLD",
+    "p_floor": 0.6310913562774658,
+    "p_bc": 0.34898290038108826,
+    "capture_actual": [
+      {
+        "row": 10060,
+        "t_ms": 226176,
+        "dbfs": -139.49696350097656,
+        "vad": false
+      },
+      {
+        "row": 10061,
+        "t_ms": 226176,
+        "dbfs": -139.66357421875,
+        "vad": false
+      },
+      {
+        "row": 10062,
+        "t_ms": 226264,
+        "dbfs": -137.86947631835938,
+        "vad": false
+      },
+      {
+        "row": 10063,
+        "t_ms": 226264,
+        "dbfs": -132.41488647460938,
+        "vad": false
+      },
+      {
+        "row": 10064,
+        "t_ms": 226348,
+        "dbfs": -137.08482360839844,
+        "vad": false
+      },
+      {
+        "row": 10065,
+        "t_ms": 226348,
+        "dbfs": -141.09388732910156,
+        "vad": false
+      },
+      {
+        "row": 10066,
+        "t_ms": 226432,
+        "dbfs": -129.30470275878906,
+        "vad": false
+      },
+      {
+        "row": 10067,
+        "t_ms": 226518,
+        "dbfs": -126.07551574707031,
+        "vad": false
+      },
+      {
+        "row": 10068,
+        "t_ms": 226518,
+        "dbfs": -117.90592956542969,
+        "vad": false
+      },
+      {
+        "row": 10069,
+        "t_ms": 226605,
+        "dbfs": -95.05406951904297,
+        "vad": false
+      },
+      {
+        "row": 10070,
+        "t_ms": 226605,
+        "dbfs": -37.77491760253906,
+        "vad": true
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 10071,
+        "kind": "post_aec_level",
+        "t_ms": 226689,
+        "dbfs": -59.27086639404297,
+        "vad": false
+      },
+      {
+        "row": 10072,
+        "kind": "post_aec_level",
+        "t_ms": 226773,
+        "dbfs": -70.1869888305664,
+        "vad": false
+      },
+      {
+        "row": 10073,
+        "kind": "post_aec_level",
+        "t_ms": 226773,
+        "dbfs": -65.17649841308594,
+        "vad": false
+      },
+      {
+        "row": 10074,
+        "kind": "post_aec_level",
+        "t_ms": 226859,
+        "dbfs": -54.54826354980469,
+        "vad": false
+      },
+      {
+        "row": 10075,
+        "kind": "post_aec_level",
+        "t_ms": 226859,
+        "dbfs": -51.74346160888672,
+        "vad": false
+      },
+      {
+        "row": 10076,
+        "kind": "post_aec_level",
+        "t_ms": 226944,
+        "dbfs": -81.54178619384766,
+        "vad": false
+      },
+      {
+        "row": 10077,
+        "kind": "post_aec_level",
+        "t_ms": 226944,
+        "dbfs": -49.24806213378906,
+        "vad": false
+      },
+      {
+        "row": 10078,
+        "kind": "post_aec_level",
+        "t_ms": 227027,
+        "dbfs": -37.049739837646484,
+        "vad": true
+      },
+      {
+        "row": 10079,
+        "kind": "post_aec_level",
+        "t_ms": 227117,
+        "dbfs": -41.69817352294922,
+        "vad": false
+      },
+      {
+        "row": 10080,
+        "kind": "post_aec_level",
+        "t_ms": 227117,
+        "dbfs": -68.67066192626953,
+        "vad": false
+      },
+      {
+        "row": 10081,
+        "kind": "post_aec_level",
+        "t_ms": 227201,
+        "dbfs": -104.7392349243164,
+        "vad": false
+      },
+      {
+        "row": 10082,
+        "kind": "post_aec_level",
+        "t_ms": 227201,
+        "dbfs": -128.927978515625,
+        "vad": false
+      },
+      {
+        "row": 10083,
+        "kind": "post_aec_level",
+        "t_ms": 227288,
+        "dbfs": -130.74884033203125,
+        "vad": false
+      },
+      {
+        "row": 10084,
+        "kind": "post_aec_level",
+        "t_ms": 227372,
+        "dbfs": -131.13995361328125,
+        "vad": false
+      },
+      {
+        "row": 10085,
+        "kind": "post_aec_level",
+        "t_ms": 227372,
+        "dbfs": -131.8433074951172,
+        "vad": false
+      },
+      {
+        "row": 10086,
+        "kind": "post_aec_level",
+        "t_ms": 227457,
+        "dbfs": -138.20130920410156,
+        "vad": false
+      },
+      {
+        "row": 10087,
+        "kind": "post_aec_level",
+        "t_ms": 227457,
+        "dbfs": -130.6866912841797,
+        "vad": false
+      },
+      {
+        "row": 10088,
+        "kind": "post_aec_level",
+        "t_ms": 227544,
+        "dbfs": -134.550048828125,
+        "vad": false
+      },
+      {
+        "row": 10089,
+        "kind": "post_aec_level",
+        "t_ms": 227544,
+        "dbfs": -132.25608825683594,
+        "vad": false
+      },
+      {
+        "row": 10090,
+        "kind": "post_aec_level",
+        "t_ms": 227628,
+        "dbfs": -126.50875091552734,
+        "vad": false
+      },
+      {
+        "row": 10091,
+        "kind": "post_aec_level",
+        "t_ms": 227712,
+        "dbfs": -123.08802032470703,
+        "vad": false
+      },
+      {
+        "row": 10092,
+        "kind": "post_aec_level",
+        "t_ms": 227712,
+        "dbfs": -126.88919067382812,
+        "vad": false
+      },
+      {
+        "row": 10093,
+        "kind": "post_aec_level",
+        "t_ms": 227798,
+        "dbfs": -129.11920166015625,
+        "vad": false
+      },
+      {
+        "row": 10094,
+        "kind": "post_aec_level",
+        "t_ms": 227798,
+        "dbfs": -129.16659545898438,
+        "vad": false
+      },
+      {
+        "row": 10095,
+        "kind": "post_aec_level",
+        "t_ms": 227884,
+        "dbfs": -132.4833984375,
+        "vad": false
+      },
+      {
+        "row": 10096,
+        "kind": "post_aec_level",
+        "t_ms": 227972,
+        "dbfs": -127.76818084716797,
+        "vad": false
+      },
+      {
+        "row": 10097,
+        "kind": "post_aec_level",
+        "t_ms": 227972,
+        "dbfs": -135.28713989257812,
+        "vad": false
+      },
+      {
+        "row": 10098,
+        "kind": "post_aec_level",
+        "t_ms": 228057,
+        "dbfs": -141.7810516357422,
+        "vad": false
+      },
+      {
+        "row": 10099,
+        "kind": "post_aec_level",
+        "t_ms": 228057,
+        "dbfs": -138.65618896484375,
+        "vad": false
+      },
+      {
+        "row": 10100,
+        "kind": "post_aec_level",
+        "t_ms": 228138,
+        "dbfs": -139.78671264648438,
+        "vad": false
+      },
+      {
+        "row": 10101,
+        "kind": "post_aec_level",
+        "t_ms": 228226,
+        "dbfs": -140.96205139160156,
+        "vad": false
+      },
+      {
+        "row": 10102,
+        "kind": "post_aec_level",
+        "t_ms": 228226,
+        "dbfs": -140.1163787841797,
+        "vad": false
+      },
+      {
+        "row": 10103,
+        "kind": "post_aec_level",
+        "t_ms": 228312,
+        "dbfs": -144.02833557128906,
+        "vad": false
+      },
+      {
+        "row": 10104,
+        "kind": "post_aec_level",
+        "t_ms": 228312,
+        "dbfs": -141.18011474609375,
+        "vad": false
+      },
+      {
+        "row": 10105,
+        "kind": "post_aec_level",
+        "t_ms": 228398,
+        "dbfs": -139.9317169189453,
+        "vad": false
+      },
+      {
+        "row": 10106,
+        "kind": "post_aec_level",
+        "t_ms": 228398,
+        "dbfs": -141.94656372070312,
+        "vad": false
+      },
+      {
+        "row": 10107,
+        "kind": "post_aec_level",
+        "t_ms": 228483,
+        "dbfs": -143.50442504882812,
+        "vad": false
+      },
+      {
+        "row": 10108,
+        "kind": "post_aec_level",
+        "t_ms": 228569,
+        "dbfs": -143.1134033203125,
+        "vad": false
+      },
+      {
+        "row": 10109,
+        "kind": "post_aec_level",
+        "t_ms": 228569,
+        "dbfs": -143.76805114746094,
+        "vad": false
+      },
+      {
+        "row": 10110,
+        "kind": "post_aec_level",
+        "t_ms": 228653,
+        "dbfs": -141.11492919921875,
+        "vad": false
+      },
+      {
+        "row": 10111,
+        "kind": "post_aec_level",
+        "t_ms": 228653,
+        "dbfs": -144.82061767578125,
+        "vad": false
+      },
+      {
+        "row": 10112,
+        "kind": "post_aec_level",
+        "t_ms": 228739,
+        "dbfs": -136.31527709960938,
+        "vad": false
+      },
+      {
+        "row": 10113,
+        "kind": "post_aec_level",
+        "t_ms": 228826,
+        "dbfs": -135.38772583007812,
+        "vad": false
+      },
+      {
+        "row": 10114,
+        "kind": "post_aec_level",
+        "t_ms": 228826,
+        "dbfs": -135.92962646484375,
+        "vad": false
+      },
+      {
+        "row": 10115,
+        "kind": "post_aec_level",
+        "t_ms": 228907,
+        "dbfs": -137.5586395263672,
+        "vad": false
+      },
+      {
+        "row": 10116,
+        "kind": "post_aec_level",
+        "t_ms": 228907,
+        "dbfs": -138.5280303955078,
+        "vad": false
+      },
+      {
+        "row": 10117,
+        "kind": "post_aec_level",
+        "t_ms": 228995,
+        "dbfs": -104.72859191894531,
+        "vad": false
+      },
+      {
+        "row": 10118,
+        "kind": "post_aec_level",
+        "t_ms": 228995,
+        "dbfs": -119.69519805908203,
+        "vad": false
+      },
+      {
+        "row": 10119,
+        "kind": "post_aec_level",
+        "t_ms": 229079,
+        "dbfs": -134.49453735351562,
+        "vad": false
+      },
+      {
+        "row": 10120,
+        "kind": "post_aec_level",
+        "t_ms": 229168,
+        "dbfs": -136.43783569335938,
+        "vad": false
+      },
+      {
+        "row": 10121,
+        "kind": "post_aec_level",
+        "t_ms": 229168,
+        "dbfs": -135.90528869628906,
+        "vad": false
+      },
+      {
+        "row": 10122,
+        "kind": "post_aec_level",
+        "t_ms": 229251,
+        "dbfs": -134.26593017578125,
+        "vad": false
+      },
+      {
+        "row": 10123,
+        "kind": "post_aec_level",
+        "t_ms": 229251,
+        "dbfs": -135.5944061279297,
+        "vad": false
+      },
+      {
+        "row": 10124,
+        "kind": "post_aec_level",
+        "t_ms": 229335,
+        "dbfs": -140.11935424804688,
+        "vad": false
+      },
+      {
+        "row": 10125,
+        "kind": "post_aec_level",
+        "t_ms": 229421,
+        "dbfs": -138.0192108154297,
+        "vad": false
+      },
+      {
+        "row": 10126,
+        "kind": "post_aec_level",
+        "t_ms": 229421,
+        "dbfs": -138.43617248535156,
+        "vad": false
+      },
+      {
+        "row": 10127,
+        "kind": "post_aec_level",
+        "t_ms": 229508,
+        "dbfs": -139.4777374267578,
+        "vad": false
+      },
+      {
+        "row": 10128,
+        "kind": "post_aec_level",
+        "t_ms": 229508,
+        "dbfs": -130.29881286621094,
+        "vad": false
+      },
+      {
+        "row": 10129,
+        "kind": "post_aec_level",
+        "t_ms": 229593,
+        "dbfs": -140.4308624267578,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 799,
+    "decision_t_ms": 368771.823333,
+    "first_held_t_ms": 368856,
+    "action": "HOLD",
+    "p_floor": 0.21886897087097168,
+    "p_bc": 0.16340279579162598,
+    "capture_actual": [
+      {
+        "row": 12939,
+        "t_ms": 368343,
+        "dbfs": -122.770751953125,
+        "vad": false
+      },
+      {
+        "row": 12940,
+        "t_ms": 368343,
+        "dbfs": -124.55122375488281,
+        "vad": false
+      },
+      {
+        "row": 12941,
+        "t_ms": 368427,
+        "dbfs": -131.85183715820312,
+        "vad": false
+      },
+      {
+        "row": 12942,
+        "t_ms": 368514,
+        "dbfs": -132.88473510742188,
+        "vad": false
+      },
+      {
+        "row": 12943,
+        "t_ms": 368514,
+        "dbfs": -134.46128845214844,
+        "vad": false
+      },
+      {
+        "row": 12944,
+        "t_ms": 368600,
+        "dbfs": -122.19686126708984,
+        "vad": false
+      },
+      {
+        "row": 12945,
+        "t_ms": 368600,
+        "dbfs": -115.24840545654297,
+        "vad": false
+      },
+      {
+        "row": 12946,
+        "t_ms": 368687,
+        "dbfs": -113.85710906982422,
+        "vad": false
+      },
+      {
+        "row": 12947,
+        "t_ms": 368770,
+        "dbfs": -98.36239624023438,
+        "vad": false
+      },
+      {
+        "row": 12948,
+        "t_ms": 368770,
+        "dbfs": -46.15852355957031,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 12949,
+        "kind": "post_aec_level",
+        "t_ms": 368856,
+        "dbfs": -41.23033905029297,
+        "vad": false
+      },
+      {
+        "row": 12950,
+        "kind": "post_aec_level",
+        "t_ms": 368856,
+        "dbfs": -75.73875427246094,
+        "vad": false
+      },
+      {
+        "row": 12951,
+        "kind": "post_aec_level",
+        "t_ms": 368941,
+        "dbfs": -86.41924285888672,
+        "vad": false
+      },
+      {
+        "row": 12952,
+        "kind": "post_aec_level",
+        "t_ms": 369028,
+        "dbfs": -80.84817504882812,
+        "vad": false
+      },
+      {
+        "row": 12953,
+        "kind": "post_aec_level",
+        "t_ms": 369028,
+        "dbfs": -67.48095703125,
+        "vad": false
+      },
+      {
+        "row": 12954,
+        "kind": "post_aec_level",
+        "t_ms": 369112,
+        "dbfs": -88.94752502441406,
+        "vad": false
+      },
+      {
+        "row": 12955,
+        "kind": "post_aec_level",
+        "t_ms": 369112,
+        "dbfs": -94.11239624023438,
+        "vad": false
+      },
+      {
+        "row": 12956,
+        "kind": "post_aec_level",
+        "t_ms": 369196,
+        "dbfs": -123.69322204589844,
+        "vad": false
+      },
+      {
+        "row": 12957,
+        "kind": "post_aec_level",
+        "t_ms": 369196,
+        "dbfs": -123.96232604980469,
+        "vad": false
+      },
+      {
+        "row": 12958,
+        "kind": "post_aec_level",
+        "t_ms": 369283,
+        "dbfs": -127.18868255615234,
+        "vad": false
+      },
+      {
+        "row": 12959,
+        "kind": "post_aec_level",
+        "t_ms": 369368,
+        "dbfs": -126.21965789794922,
+        "vad": false
+      },
+      {
+        "row": 12960,
+        "kind": "post_aec_level",
+        "t_ms": 369368,
+        "dbfs": -130.92813110351562,
+        "vad": false
+      },
+      {
+        "row": 12961,
+        "kind": "post_aec_level",
+        "t_ms": 369453,
+        "dbfs": -134.52291870117188,
+        "vad": false
+      },
+      {
+        "row": 12962,
+        "kind": "post_aec_level",
+        "t_ms": 369453,
+        "dbfs": -127.416015625,
+        "vad": false
+      },
+      {
+        "row": 12963,
+        "kind": "post_aec_level",
+        "t_ms": 369539,
+        "dbfs": -127.00146484375,
+        "vad": false
+      },
+      {
+        "row": 12964,
+        "kind": "post_aec_level",
+        "t_ms": 369625,
+        "dbfs": -129.13771057128906,
+        "vad": false
+      },
+      {
+        "row": 12965,
+        "kind": "post_aec_level",
+        "t_ms": 369625,
+        "dbfs": -138.14295959472656,
+        "vad": false
+      },
+      {
+        "row": 12966,
+        "kind": "post_aec_level",
+        "t_ms": 369708,
+        "dbfs": -134.1287078857422,
+        "vad": false
+      },
+      {
+        "row": 12967,
+        "kind": "post_aec_level",
+        "t_ms": 369708,
+        "dbfs": -127.07803344726562,
+        "vad": false
+      },
+      {
+        "row": 12968,
+        "kind": "post_aec_level",
+        "t_ms": 369794,
+        "dbfs": -125.96408081054688,
+        "vad": false
+      },
+      {
+        "row": 12969,
+        "kind": "post_aec_level",
+        "t_ms": 369794,
+        "dbfs": -136.8067626953125,
+        "vad": false
+      },
+      {
+        "row": 12970,
+        "kind": "post_aec_level",
+        "t_ms": 369880,
+        "dbfs": -138.1887664794922,
+        "vad": false
+      },
+      {
+        "row": 12971,
+        "kind": "post_aec_level",
+        "t_ms": 369967,
+        "dbfs": -139.0403289794922,
+        "vad": false
+      },
+      {
+        "row": 12972,
+        "kind": "post_aec_level",
+        "t_ms": 369967,
+        "dbfs": -138.1763153076172,
+        "vad": false
+      },
+      {
+        "row": 12973,
+        "kind": "post_aec_level",
+        "t_ms": 370051,
+        "dbfs": -137.99400329589844,
+        "vad": false
+      },
+      {
+        "row": 12974,
+        "kind": "post_aec_level",
+        "t_ms": 370051,
+        "dbfs": -141.33746337890625,
+        "vad": false
+      },
+      {
+        "row": 12975,
+        "kind": "post_aec_level",
+        "t_ms": 370136,
+        "dbfs": -134.63247680664062,
+        "vad": false
+      },
+      {
+        "row": 12976,
+        "kind": "post_aec_level",
+        "t_ms": 370220,
+        "dbfs": -129.98275756835938,
+        "vad": false
+      },
+      {
+        "row": 12977,
+        "kind": "post_aec_level",
+        "t_ms": 370220,
+        "dbfs": -145.0271759033203,
+        "vad": false
+      },
+      {
+        "row": 12978,
+        "kind": "post_aec_level",
+        "t_ms": 370307,
+        "dbfs": -144.5691680908203,
+        "vad": false
+      },
+      {
+        "row": 12979,
+        "kind": "post_aec_level",
+        "t_ms": 370307,
+        "dbfs": -127.103271484375,
+        "vad": false
+      },
+      {
+        "row": 12980,
+        "kind": "post_aec_level",
+        "t_ms": 370389,
+        "dbfs": -138.66078186035156,
+        "vad": false
+      },
+      {
+        "row": 12981,
+        "kind": "post_aec_level",
+        "t_ms": 370478,
+        "dbfs": -138.9610137939453,
+        "vad": false
+      },
+      {
+        "row": 12982,
+        "kind": "post_aec_level",
+        "t_ms": 370478,
+        "dbfs": -138.70713806152344,
+        "vad": false
+      },
+      {
+        "row": 12983,
+        "kind": "post_aec_level",
+        "t_ms": 370560,
+        "dbfs": -138.52261352539062,
+        "vad": false
+      },
+      {
+        "row": 12984,
+        "kind": "post_aec_level",
+        "t_ms": 370560,
+        "dbfs": -124.99958801269531,
+        "vad": false
+      },
+      {
+        "row": 12985,
+        "kind": "post_aec_level",
+        "t_ms": 370649,
+        "dbfs": -125.06829071044922,
+        "vad": false
+      },
+      {
+        "row": 12986,
+        "kind": "post_aec_level",
+        "t_ms": 370649,
+        "dbfs": -115.7835922241211,
+        "vad": false
+      },
+      {
+        "row": 12987,
+        "kind": "post_aec_level",
+        "t_ms": 370736,
+        "dbfs": -127.08149719238281,
+        "vad": false
+      },
+      {
+        "row": 12988,
+        "kind": "post_aec_level",
+        "t_ms": 370818,
+        "dbfs": -132.11474609375,
+        "vad": false
+      },
+      {
+        "row": 12989,
+        "kind": "post_aec_level",
+        "t_ms": 370818,
+        "dbfs": -126.48727416992188,
+        "vad": false
+      },
+      {
+        "row": 12990,
+        "kind": "post_aec_level",
+        "t_ms": 370905,
+        "dbfs": -132.8253173828125,
+        "vad": false
+      },
+      {
+        "row": 12991,
+        "kind": "post_aec_level",
+        "t_ms": 370905,
+        "dbfs": -133.0960235595703,
+        "vad": false
+      },
+      {
+        "row": 12992,
+        "kind": "post_aec_level",
+        "t_ms": 370989,
+        "dbfs": -129.25628662109375,
+        "vad": false
+      },
+      {
+        "row": 12993,
+        "kind": "post_aec_level",
+        "t_ms": 371074,
+        "dbfs": -129.75418090820312,
+        "vad": false
+      },
+      {
+        "row": 12994,
+        "kind": "post_aec_level",
+        "t_ms": 371074,
+        "dbfs": -135.00161743164062,
+        "vad": false
+      },
+      {
+        "row": 12995,
+        "kind": "post_aec_level",
+        "t_ms": 371159,
+        "dbfs": -133.6102752685547,
+        "vad": false
+      },
+      {
+        "row": 12996,
+        "kind": "post_aec_level",
+        "t_ms": 371159,
+        "dbfs": -134.09007263183594,
+        "vad": false
+      },
+      {
+        "row": 12997,
+        "kind": "post_aec_level",
+        "t_ms": 371245,
+        "dbfs": -133.958740234375,
+        "vad": false
+      },
+      {
+        "row": 12998,
+        "kind": "post_aec_level",
+        "t_ms": 371245,
+        "dbfs": -132.83372497558594,
+        "vad": false
+      },
+      {
+        "row": 12999,
+        "kind": "post_aec_level",
+        "t_ms": 371328,
+        "dbfs": -139.6288604736328,
+        "vad": false
+      },
+      {
+        "row": 13000,
+        "kind": "post_aec_level",
+        "t_ms": 371418,
+        "dbfs": -133.90847778320312,
+        "vad": false
+      },
+      {
+        "row": 13001,
+        "kind": "post_aec_level",
+        "t_ms": 371418,
+        "dbfs": -138.64503479003906,
+        "vad": false
+      },
+      {
+        "row": 13002,
+        "kind": "post_aec_level",
+        "t_ms": 371503,
+        "dbfs": -138.46873474121094,
+        "vad": false
+      },
+      {
+        "row": 13003,
+        "kind": "post_aec_level",
+        "t_ms": 371503,
+        "dbfs": -138.15966796875,
+        "vad": false
+      },
+      {
+        "row": 13004,
+        "kind": "post_aec_level",
+        "t_ms": 371587,
+        "dbfs": -145.8693389892578,
+        "vad": false
+      },
+      {
+        "row": 13005,
+        "kind": "post_aec_level",
+        "t_ms": 371672,
+        "dbfs": -146.15834045410156,
+        "vad": false
+      },
+      {
+        "row": 13006,
+        "kind": "post_aec_level",
+        "t_ms": 371672,
+        "dbfs": -142.31063842773438,
+        "vad": false
+      },
+      {
+        "row": 13007,
+        "kind": "post_aec_level",
+        "t_ms": 371757,
+        "dbfs": -142.90167236328125,
+        "vad": false
+      },
+      {
+        "row": 13008,
+        "kind": "post_aec_level",
+        "t_ms": 371757,
+        "dbfs": -145.85418701171875,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 817,
+    "decision_t_ms": 382940.104666,
+    "first_held_t_ms": 382937,
+    "action": "HOLD",
+    "p_floor": 0.5582256317138672,
+    "p_bc": 0.2654935419559479,
+    "capture_actual": [
+      {
+        "row": 13225,
+        "t_ms": 382510,
+        "dbfs": -53.66561508178711,
+        "vad": false
+      },
+      {
+        "row": 13226,
+        "t_ms": 382510,
+        "dbfs": -53.99481201171875,
+        "vad": false
+      },
+      {
+        "row": 13227,
+        "t_ms": 382596,
+        "dbfs": -98.48809814453125,
+        "vad": false
+      },
+      {
+        "row": 13228,
+        "t_ms": 382596,
+        "dbfs": -106.8202133178711,
+        "vad": false
+      },
+      {
+        "row": 13229,
+        "t_ms": 382681,
+        "dbfs": -118.18451690673828,
+        "vad": false
+      },
+      {
+        "row": 13231,
+        "t_ms": 382768,
+        "dbfs": -119.5301513671875,
+        "vad": false
+      },
+      {
+        "row": 13232,
+        "t_ms": 382768,
+        "dbfs": -108.0484390258789,
+        "vad": false
+      },
+      {
+        "row": 13233,
+        "t_ms": 382851,
+        "dbfs": -114.57923889160156,
+        "vad": false
+      },
+      {
+        "row": 13234,
+        "t_ms": 382851,
+        "dbfs": -75.2589340209961,
+        "vad": false
+      },
+      {
+        "row": 13235,
+        "t_ms": 382937,
+        "dbfs": -37.73587417602539,
+        "vad": true
+      }
+    ],
+    "asr_actual_prior_3s": [
+      {
+        "row": 13230,
+        "t_ms": 382759,
+        "words": 0,
+        "source": "asr_partial"
+      }
+    ],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 13236,
+        "kind": "post_aec_level",
+        "t_ms": 383020,
+        "dbfs": -44.33613967895508,
+        "vad": false
+      },
+      {
+        "row": 13237,
+        "kind": "post_aec_level",
+        "t_ms": 383020,
+        "dbfs": -54.546775817871094,
+        "vad": false
+      },
+      {
+        "row": 13238,
+        "kind": "post_aec_level",
+        "t_ms": 383109,
+        "dbfs": -59.77923583984375,
+        "vad": false
+      },
+      {
+        "row": 13239,
+        "kind": "post_aec_level",
+        "t_ms": 383109,
+        "dbfs": -50.25715255737305,
+        "vad": false
+      },
+      {
+        "row": 13240,
+        "kind": "post_aec_level",
+        "t_ms": 383189,
+        "dbfs": -58.780094146728516,
+        "vad": false
+      },
+      {
+        "row": 13241,
+        "kind": "post_aec_level",
+        "t_ms": 383278,
+        "dbfs": -78.58568572998047,
+        "vad": false
+      },
+      {
+        "row": 13242,
+        "kind": "post_aec_level",
+        "t_ms": 383278,
+        "dbfs": -95.56346893310547,
+        "vad": false
+      },
+      {
+        "row": 13243,
+        "kind": "post_aec_level",
+        "t_ms": 383363,
+        "dbfs": -118.12161254882812,
+        "vad": false
+      },
+      {
+        "row": 13244,
+        "kind": "post_aec_level",
+        "t_ms": 383363,
+        "dbfs": -131.6737060546875,
+        "vad": false
+      },
+      {
+        "row": 13245,
+        "kind": "post_aec_level",
+        "t_ms": 383449,
+        "dbfs": -131.78237915039062,
+        "vad": false
+      },
+      {
+        "row": 13246,
+        "kind": "post_aec_level",
+        "t_ms": 383449,
+        "dbfs": -135.4995880126953,
+        "vad": false
+      },
+      {
+        "row": 13247,
+        "kind": "post_aec_level",
+        "t_ms": 383533,
+        "dbfs": -133.27162170410156,
+        "vad": false
+      },
+      {
+        "row": 13248,
+        "kind": "post_aec_level",
+        "t_ms": 383619,
+        "dbfs": -134.3006134033203,
+        "vad": false
+      },
+      {
+        "row": 13249,
+        "kind": "post_aec_level",
+        "t_ms": 383619,
+        "dbfs": -129.4215087890625,
+        "vad": false
+      },
+      {
+        "row": 13250,
+        "kind": "post_aec_level",
+        "t_ms": 383705,
+        "dbfs": -129.52691650390625,
+        "vad": false
+      },
+      {
+        "row": 13251,
+        "kind": "post_aec_level",
+        "t_ms": 383705,
+        "dbfs": -137.38900756835938,
+        "vad": false
+      },
+      {
+        "row": 13252,
+        "kind": "post_aec_level",
+        "t_ms": 383789,
+        "dbfs": -140.70123291015625,
+        "vad": false
+      },
+      {
+        "row": 13253,
+        "kind": "post_aec_level",
+        "t_ms": 383873,
+        "dbfs": -135.7999725341797,
+        "vad": false
+      },
+      {
+        "row": 13254,
+        "kind": "post_aec_level",
+        "t_ms": 383873,
+        "dbfs": -130.36996459960938,
+        "vad": false
+      },
+      {
+        "row": 13255,
+        "kind": "post_aec_level",
+        "t_ms": 383959,
+        "dbfs": -132.65701293945312,
+        "vad": false
+      },
+      {
+        "row": 13256,
+        "kind": "post_aec_level",
+        "t_ms": 383959,
+        "dbfs": -136.4738311767578,
+        "vad": false
+      },
+      {
+        "row": 13257,
+        "kind": "post_aec_level",
+        "t_ms": 384047,
+        "dbfs": -138.52748107910156,
+        "vad": false
+      },
+      {
+        "row": 13258,
+        "kind": "post_aec_level",
+        "t_ms": 384047,
+        "dbfs": -138.9455108642578,
+        "vad": false
+      },
+      {
+        "row": 13259,
+        "kind": "post_aec_level",
+        "t_ms": 384129,
+        "dbfs": -133.73605346679688,
+        "vad": false
+      },
+      {
+        "row": 13260,
+        "kind": "post_aec_level",
+        "t_ms": 384215,
+        "dbfs": -131.74229431152344,
+        "vad": false
+      },
+      {
+        "row": 13261,
+        "kind": "post_aec_level",
+        "t_ms": 384215,
+        "dbfs": -138.3537139892578,
+        "vad": false
+      },
+      {
+        "row": 13262,
+        "kind": "post_aec_level",
+        "t_ms": 384300,
+        "dbfs": -146.0801239013672,
+        "vad": false
+      },
+      {
+        "row": 13263,
+        "kind": "post_aec_level",
+        "t_ms": 384300,
+        "dbfs": -140.94149780273438,
+        "vad": false
+      },
+      {
+        "row": 13264,
+        "kind": "post_aec_level",
+        "t_ms": 384386,
+        "dbfs": -141.29116821289062,
+        "vad": false
+      },
+      {
+        "row": 13265,
+        "kind": "post_aec_level",
+        "t_ms": 384471,
+        "dbfs": -145.85882568359375,
+        "vad": false
+      },
+      {
+        "row": 13266,
+        "kind": "post_aec_level",
+        "t_ms": 384471,
+        "dbfs": -143.6874542236328,
+        "vad": false
+      },
+      {
+        "row": 13267,
+        "kind": "post_aec_level",
+        "t_ms": 384556,
+        "dbfs": -144.66925048828125,
+        "vad": false
+      },
+      {
+        "row": 13268,
+        "kind": "post_aec_level",
+        "t_ms": 384556,
+        "dbfs": -146.0361785888672,
+        "vad": false
+      },
+      {
+        "row": 13269,
+        "kind": "post_aec_level",
+        "t_ms": 384642,
+        "dbfs": -146.28305053710938,
+        "vad": false
+      },
+      {
+        "row": 13270,
+        "kind": "post_aec_level",
+        "t_ms": 384728,
+        "dbfs": -143.4661407470703,
+        "vad": false
+      },
+      {
+        "row": 13271,
+        "kind": "post_aec_level",
+        "t_ms": 384728,
+        "dbfs": -143.68385314941406,
+        "vad": false
+      },
+      {
+        "row": 13272,
+        "kind": "post_aec_level",
+        "t_ms": 384811,
+        "dbfs": -144.86473083496094,
+        "vad": false
+      },
+      {
+        "row": 13273,
+        "kind": "post_aec_level",
+        "t_ms": 384811,
+        "dbfs": -142.56690979003906,
+        "vad": false
+      },
+      {
+        "row": 13274,
+        "kind": "post_aec_level",
+        "t_ms": 384898,
+        "dbfs": -141.7974853515625,
+        "vad": false
+      },
+      {
+        "row": 13275,
+        "kind": "post_aec_level",
+        "t_ms": 384898,
+        "dbfs": -142.44659423828125,
+        "vad": false
+      },
+      {
+        "row": 13276,
+        "kind": "post_aec_level",
+        "t_ms": 384984,
+        "dbfs": -139.3675994873047,
+        "vad": false
+      },
+      {
+        "row": 13277,
+        "kind": "post_aec_level",
+        "t_ms": 385069,
+        "dbfs": -139.3628692626953,
+        "vad": false
+      },
+      {
+        "row": 13278,
+        "kind": "post_aec_level",
+        "t_ms": 385069,
+        "dbfs": -139.51431274414062,
+        "vad": false
+      },
+      {
+        "row": 13279,
+        "kind": "post_aec_level",
+        "t_ms": 385155,
+        "dbfs": -139.36135864257812,
+        "vad": false
+      },
+      {
+        "row": 13280,
+        "kind": "post_aec_level",
+        "t_ms": 385155,
+        "dbfs": -136.12081909179688,
+        "vad": false
+      },
+      {
+        "row": 13281,
+        "kind": "post_aec_level",
+        "t_ms": 385239,
+        "dbfs": -140.2184295654297,
+        "vad": false
+      },
+      {
+        "row": 13282,
+        "kind": "post_aec_level",
+        "t_ms": 385323,
+        "dbfs": -141.88369750976562,
+        "vad": false
+      },
+      {
+        "row": 13283,
+        "kind": "post_aec_level",
+        "t_ms": 385323,
+        "dbfs": -137.08062744140625,
+        "vad": false
+      },
+      {
+        "row": 13284,
+        "kind": "post_aec_level",
+        "t_ms": 385406,
+        "dbfs": -123.89051055908203,
+        "vad": false
+      },
+      {
+        "row": 13285,
+        "kind": "post_aec_level",
+        "t_ms": 385406,
+        "dbfs": -138.87083435058594,
+        "vad": false
+      },
+      {
+        "row": 13286,
+        "kind": "post_aec_level",
+        "t_ms": 385495,
+        "dbfs": -133.3557586669922,
+        "vad": false
+      },
+      {
+        "row": 13287,
+        "kind": "post_aec_level",
+        "t_ms": 385495,
+        "dbfs": -126.0363540649414,
+        "vad": false
+      },
+      {
+        "row": 13288,
+        "kind": "post_aec_level",
+        "t_ms": 385580,
+        "dbfs": -141.54440307617188,
+        "vad": false
+      },
+      {
+        "row": 13289,
+        "kind": "post_aec_level",
+        "t_ms": 385666,
+        "dbfs": -131.3434600830078,
+        "vad": false
+      },
+      {
+        "row": 13290,
+        "kind": "post_aec_level",
+        "t_ms": 385666,
+        "dbfs": -140.6602325439453,
+        "vad": false
+      },
+      {
+        "row": 13291,
+        "kind": "post_aec_level",
+        "t_ms": 385751,
+        "dbfs": -139.62733459472656,
+        "vad": false
+      },
+      {
+        "row": 13292,
+        "kind": "post_aec_level",
+        "t_ms": 385751,
+        "dbfs": -144.42010498046875,
+        "vad": false
+      },
+      {
+        "row": 13293,
+        "kind": "post_aec_level",
+        "t_ms": 385836,
+        "dbfs": -143.53367614746094,
+        "vad": false
+      },
+      {
+        "row": 13294,
+        "kind": "post_aec_level",
+        "t_ms": 385923,
+        "dbfs": -142.7684326171875,
+        "vad": false
+      },
+      {
+        "row": 13295,
+        "kind": "post_aec_level",
+        "t_ms": 385923,
+        "dbfs": -129.9495849609375,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 824,
+    "decision_t_ms": 391643.117333,
+    "first_held_t_ms": 391728,
+    "action": "HOLD",
+    "p_floor": 0.4484294652938843,
+    "p_bc": 0.5459105968475342,
+    "capture_actual": [
+      {
+        "row": 13400,
+        "t_ms": 391211,
+        "dbfs": -108.29192352294922,
+        "vad": false
+      },
+      {
+        "row": 13401,
+        "t_ms": 391211,
+        "dbfs": -114.8879623413086,
+        "vad": false
+      },
+      {
+        "row": 13402,
+        "t_ms": 391298,
+        "dbfs": -116.14119720458984,
+        "vad": false
+      },
+      {
+        "row": 13403,
+        "t_ms": 391298,
+        "dbfs": -115.8059310913086,
+        "vad": false
+      },
+      {
+        "row": 13404,
+        "t_ms": 391385,
+        "dbfs": -119.05216979980469,
+        "vad": false
+      },
+      {
+        "row": 13405,
+        "t_ms": 391472,
+        "dbfs": -118.38480377197266,
+        "vad": false
+      },
+      {
+        "row": 13406,
+        "t_ms": 391472,
+        "dbfs": -119.8641357421875,
+        "vad": false
+      },
+      {
+        "row": 13407,
+        "t_ms": 391555,
+        "dbfs": -124.65182495117188,
+        "vad": false
+      },
+      {
+        "row": 13408,
+        "t_ms": 391555,
+        "dbfs": -44.29201126098633,
+        "vad": false
+      },
+      {
+        "row": 13409,
+        "t_ms": 391641,
+        "dbfs": -49.40636444091797,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 13410,
+        "kind": "post_aec_level",
+        "t_ms": 391728,
+        "dbfs": -75.27613830566406,
+        "vad": false
+      },
+      {
+        "row": 13411,
+        "kind": "post_aec_level",
+        "t_ms": 391728,
+        "dbfs": -69.3847885131836,
+        "vad": false
+      },
+      {
+        "row": 13412,
+        "kind": "post_aec_level",
+        "t_ms": 391810,
+        "dbfs": -85.77510070800781,
+        "vad": false
+      },
+      {
+        "row": 13413,
+        "kind": "post_aec_level",
+        "t_ms": 391810,
+        "dbfs": -83.83136749267578,
+        "vad": false
+      },
+      {
+        "row": 13414,
+        "kind": "post_aec_level",
+        "t_ms": 391896,
+        "dbfs": -95.6657943725586,
+        "vad": false
+      },
+      {
+        "row": 13415,
+        "kind": "post_aec_level",
+        "t_ms": 391896,
+        "dbfs": -101.60794067382812,
+        "vad": false
+      },
+      {
+        "row": 13416,
+        "kind": "post_aec_level",
+        "t_ms": 391981,
+        "dbfs": -105.8621597290039,
+        "vad": false
+      },
+      {
+        "row": 13417,
+        "kind": "post_aec_level",
+        "t_ms": 392067,
+        "dbfs": -110.27569580078125,
+        "vad": false
+      },
+      {
+        "row": 13418,
+        "kind": "post_aec_level",
+        "t_ms": 392067,
+        "dbfs": -118.9433822631836,
+        "vad": false
+      },
+      {
+        "row": 13419,
+        "kind": "post_aec_level",
+        "t_ms": 392150,
+        "dbfs": -117.287109375,
+        "vad": false
+      },
+      {
+        "row": 13420,
+        "kind": "post_aec_level",
+        "t_ms": 392150,
+        "dbfs": -127.1258544921875,
+        "vad": false
+      },
+      {
+        "row": 13421,
+        "kind": "post_aec_level",
+        "t_ms": 392237,
+        "dbfs": -133.76666259765625,
+        "vad": false
+      },
+      {
+        "row": 13422,
+        "kind": "post_aec_level",
+        "t_ms": 392322,
+        "dbfs": -140.00131225585938,
+        "vad": false
+      },
+      {
+        "row": 13423,
+        "kind": "post_aec_level",
+        "t_ms": 392322,
+        "dbfs": -137.94192504882812,
+        "vad": false
+      },
+      {
+        "row": 13424,
+        "kind": "post_aec_level",
+        "t_ms": 392409,
+        "dbfs": -136.10255432128906,
+        "vad": false
+      },
+      {
+        "row": 13425,
+        "kind": "post_aec_level",
+        "t_ms": 392409,
+        "dbfs": -137.7222137451172,
+        "vad": false
+      },
+      {
+        "row": 13426,
+        "kind": "post_aec_level",
+        "t_ms": 392493,
+        "dbfs": -140.9105682373047,
+        "vad": false
+      },
+      {
+        "row": 13427,
+        "kind": "post_aec_level",
+        "t_ms": 392579,
+        "dbfs": -142.79759216308594,
+        "vad": false
+      },
+      {
+        "row": 13428,
+        "kind": "post_aec_level",
+        "t_ms": 392579,
+        "dbfs": -139.84141540527344,
+        "vad": false
+      },
+      {
+        "row": 13429,
+        "kind": "post_aec_level",
+        "t_ms": 392662,
+        "dbfs": -142.3758544921875,
+        "vad": false
+      },
+      {
+        "row": 13430,
+        "kind": "post_aec_level",
+        "t_ms": 392662,
+        "dbfs": -123.20475006103516,
+        "vad": false
+      },
+      {
+        "row": 13431,
+        "kind": "post_aec_level",
+        "t_ms": 392751,
+        "dbfs": -108.25814056396484,
+        "vad": false
+      },
+      {
+        "row": 13432,
+        "kind": "post_aec_level",
+        "t_ms": 392751,
+        "dbfs": -111.13013458251953,
+        "vad": false
+      },
+      {
+        "row": 13433,
+        "kind": "post_aec_level",
+        "t_ms": 392835,
+        "dbfs": -97.92293548583984,
+        "vad": false
+      },
+      {
+        "row": 13434,
+        "kind": "post_aec_level",
+        "t_ms": 392919,
+        "dbfs": -124.95508575439453,
+        "vad": false
+      },
+      {
+        "row": 13435,
+        "kind": "post_aec_level",
+        "t_ms": 392919,
+        "dbfs": -130.1396942138672,
+        "vad": false
+      },
+      {
+        "row": 13436,
+        "kind": "post_aec_level",
+        "t_ms": 393008,
+        "dbfs": -129.6274871826172,
+        "vad": false
+      },
+      {
+        "row": 13437,
+        "kind": "post_aec_level",
+        "t_ms": 393008,
+        "dbfs": -135.63150024414062,
+        "vad": false
+      },
+      {
+        "row": 13438,
+        "kind": "post_aec_level",
+        "t_ms": 393089,
+        "dbfs": -141.60360717773438,
+        "vad": false
+      },
+      {
+        "row": 13439,
+        "kind": "post_aec_level",
+        "t_ms": 393176,
+        "dbfs": -141.9744110107422,
+        "vad": false
+      },
+      {
+        "row": 13440,
+        "kind": "post_aec_level",
+        "t_ms": 393176,
+        "dbfs": -140.04783630371094,
+        "vad": false
+      },
+      {
+        "row": 13441,
+        "kind": "post_aec_level",
+        "t_ms": 393260,
+        "dbfs": -142.3904266357422,
+        "vad": false
+      },
+      {
+        "row": 13442,
+        "kind": "post_aec_level",
+        "t_ms": 393260,
+        "dbfs": -145.8027801513672,
+        "vad": false
+      },
+      {
+        "row": 13443,
+        "kind": "post_aec_level",
+        "t_ms": 393347,
+        "dbfs": -144.66903686523438,
+        "vad": false
+      },
+      {
+        "row": 13444,
+        "kind": "post_aec_level",
+        "t_ms": 393347,
+        "dbfs": -146.50521850585938,
+        "vad": false
+      },
+      {
+        "row": 13445,
+        "kind": "post_aec_level",
+        "t_ms": 393432,
+        "dbfs": -149.74075317382812,
+        "vad": false
+      },
+      {
+        "row": 13446,
+        "kind": "post_aec_level",
+        "t_ms": 393516,
+        "dbfs": -152.425537109375,
+        "vad": false
+      },
+      {
+        "row": 13447,
+        "kind": "post_aec_level",
+        "t_ms": 393516,
+        "dbfs": -151.50914001464844,
+        "vad": false
+      },
+      {
+        "row": 13448,
+        "kind": "post_aec_level",
+        "t_ms": 393600,
+        "dbfs": -143.3001708984375,
+        "vad": false
+      },
+      {
+        "row": 13449,
+        "kind": "post_aec_level",
+        "t_ms": 393600,
+        "dbfs": -105.00702667236328,
+        "vad": false
+      },
+      {
+        "row": 13450,
+        "kind": "post_aec_level",
+        "t_ms": 393690,
+        "dbfs": -121.79808807373047,
+        "vad": false
+      },
+      {
+        "row": 13451,
+        "kind": "post_aec_level",
+        "t_ms": 393774,
+        "dbfs": -140.7683868408203,
+        "vad": false
+      },
+      {
+        "row": 13452,
+        "kind": "post_aec_level",
+        "t_ms": 393774,
+        "dbfs": -131.91842651367188,
+        "vad": false
+      },
+      {
+        "row": 13453,
+        "kind": "post_aec_level",
+        "t_ms": 393858,
+        "dbfs": -133.7353057861328,
+        "vad": false
+      },
+      {
+        "row": 13454,
+        "kind": "post_aec_level",
+        "t_ms": 393858,
+        "dbfs": -135.18734741210938,
+        "vad": false
+      },
+      {
+        "row": 13455,
+        "kind": "post_aec_level",
+        "t_ms": 393944,
+        "dbfs": -72.43623352050781,
+        "vad": false
+      },
+      {
+        "row": 13456,
+        "kind": "post_aec_level",
+        "t_ms": 393944,
+        "dbfs": -105.4043197631836,
+        "vad": false
+      },
+      {
+        "row": 13457,
+        "kind": "post_aec_level",
+        "t_ms": 394030,
+        "dbfs": -129.72369384765625,
+        "vad": false
+      },
+      {
+        "row": 13458,
+        "kind": "post_aec_level",
+        "t_ms": 394114,
+        "dbfs": -127.78255462646484,
+        "vad": false
+      },
+      {
+        "row": 13459,
+        "kind": "post_aec_level",
+        "t_ms": 394114,
+        "dbfs": -133.26113891601562,
+        "vad": false
+      },
+      {
+        "row": 13460,
+        "kind": "post_aec_level",
+        "t_ms": 394199,
+        "dbfs": -93.33541107177734,
+        "vad": false
+      },
+      {
+        "row": 13461,
+        "kind": "post_aec_level",
+        "t_ms": 394199,
+        "dbfs": -62.77831268310547,
+        "vad": false
+      },
+      {
+        "row": 13462,
+        "kind": "post_aec_level",
+        "t_ms": 394288,
+        "dbfs": -108.22566986083984,
+        "vad": false
+      },
+      {
+        "row": 13463,
+        "kind": "post_aec_level",
+        "t_ms": 394370,
+        "dbfs": -130.7840576171875,
+        "vad": false
+      },
+      {
+        "row": 13464,
+        "kind": "post_aec_level",
+        "t_ms": 394370,
+        "dbfs": -120.46601104736328,
+        "vad": false
+      },
+      {
+        "row": 13465,
+        "kind": "post_aec_level",
+        "t_ms": 394456,
+        "dbfs": -113.06348419189453,
+        "vad": false
+      },
+      {
+        "row": 13466,
+        "kind": "post_aec_level",
+        "t_ms": 394456,
+        "dbfs": -118.97886657714844,
+        "vad": false
+      },
+      {
+        "row": 13467,
+        "kind": "post_aec_level",
+        "t_ms": 394540,
+        "dbfs": -128.2014617919922,
+        "vad": false
+      },
+      {
+        "row": 13468,
+        "kind": "post_aec_level",
+        "t_ms": 394627,
+        "dbfs": -127.85961151123047,
+        "vad": false
+      },
+      {
+        "row": 13469,
+        "kind": "post_aec_level",
+        "t_ms": 394627,
+        "dbfs": -128.35067749023438,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 826,
+    "decision_t_ms": 395485.41795800003,
+    "first_held_t_ms": 395566,
+    "action": "HOLD",
+    "p_floor": 0.3701566457748413,
+    "p_bc": 0.6108661890029907,
+    "capture_actual": [
+      {
+        "row": 13477,
+        "t_ms": 395053,
+        "dbfs": -109.68863677978516,
+        "vad": false
+      },
+      {
+        "row": 13478,
+        "t_ms": 395053,
+        "dbfs": -130.20611572265625,
+        "vad": false
+      },
+      {
+        "row": 13479,
+        "t_ms": 395141,
+        "dbfs": -131.96473693847656,
+        "vad": false
+      },
+      {
+        "row": 13480,
+        "t_ms": 395226,
+        "dbfs": -136.70205688476562,
+        "vad": false
+      },
+      {
+        "row": 13481,
+        "t_ms": 395226,
+        "dbfs": -131.33839416503906,
+        "vad": false
+      },
+      {
+        "row": 13482,
+        "t_ms": 395312,
+        "dbfs": -121.1972427368164,
+        "vad": false
+      },
+      {
+        "row": 13483,
+        "t_ms": 395312,
+        "dbfs": -115.3183364868164,
+        "vad": false
+      },
+      {
+        "row": 13484,
+        "t_ms": 395392,
+        "dbfs": -95.01465606689453,
+        "vad": false
+      },
+      {
+        "row": 13485,
+        "t_ms": 395392,
+        "dbfs": -54.189552307128906,
+        "vad": false
+      },
+      {
+        "row": 13486,
+        "t_ms": 395483,
+        "dbfs": -39.63186264038086,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 13487,
+        "kind": "post_aec_level",
+        "t_ms": 395566,
+        "dbfs": -56.60491943359375,
+        "vad": false
+      },
+      {
+        "row": 13488,
+        "kind": "post_aec_level",
+        "t_ms": 395566,
+        "dbfs": -52.08253860473633,
+        "vad": false
+      },
+      {
+        "row": 13489,
+        "kind": "post_aec_level",
+        "t_ms": 395649,
+        "dbfs": -50.82654571533203,
+        "vad": false
+      },
+      {
+        "row": 13490,
+        "kind": "post_aec_level",
+        "t_ms": 395649,
+        "dbfs": -60.08111572265625,
+        "vad": false
+      },
+      {
+        "row": 13491,
+        "kind": "post_aec_level",
+        "t_ms": 395738,
+        "dbfs": -84.72749328613281,
+        "vad": false
+      },
+      {
+        "row": 13492,
+        "kind": "post_aec_level",
+        "t_ms": 395822,
+        "dbfs": -104.91850280761719,
+        "vad": false
+      },
+      {
+        "row": 13493,
+        "kind": "post_aec_level",
+        "t_ms": 395822,
+        "dbfs": -113.98464965820312,
+        "vad": false
+      },
+      {
+        "row": 13494,
+        "kind": "post_aec_level",
+        "t_ms": 395910,
+        "dbfs": -117.67511749267578,
+        "vad": false
+      },
+      {
+        "row": 13495,
+        "kind": "post_aec_level",
+        "t_ms": 395910,
+        "dbfs": -128.9311065673828,
+        "vad": false
+      },
+      {
+        "row": 13496,
+        "kind": "post_aec_level",
+        "t_ms": 395995,
+        "dbfs": -129.44195556640625,
+        "vad": false
+      },
+      {
+        "row": 13497,
+        "kind": "post_aec_level",
+        "t_ms": 396077,
+        "dbfs": -132.63168334960938,
+        "vad": false
+      },
+      {
+        "row": 13498,
+        "kind": "post_aec_level",
+        "t_ms": 396077,
+        "dbfs": -135.35482788085938,
+        "vad": false
+      },
+      {
+        "row": 13499,
+        "kind": "post_aec_level",
+        "t_ms": 396161,
+        "dbfs": -128.53985595703125,
+        "vad": false
+      },
+      {
+        "row": 13500,
+        "kind": "post_aec_level",
+        "t_ms": 396161,
+        "dbfs": -132.95420837402344,
+        "vad": false
+      },
+      {
+        "row": 13501,
+        "kind": "post_aec_level",
+        "t_ms": 396248,
+        "dbfs": -134.9101104736328,
+        "vad": false
+      },
+      {
+        "row": 13502,
+        "kind": "post_aec_level",
+        "t_ms": 396248,
+        "dbfs": -133.59671020507812,
+        "vad": false
+      },
+      {
+        "row": 13503,
+        "kind": "post_aec_level",
+        "t_ms": 396331,
+        "dbfs": -134.54344177246094,
+        "vad": false
+      },
+      {
+        "row": 13504,
+        "kind": "post_aec_level",
+        "t_ms": 396421,
+        "dbfs": -134.32981872558594,
+        "vad": false
+      },
+      {
+        "row": 13505,
+        "kind": "post_aec_level",
+        "t_ms": 396421,
+        "dbfs": -134.39306640625,
+        "vad": false
+      },
+      {
+        "row": 13506,
+        "kind": "asr_words",
+        "t_ms": 396467,
+        "words": 1,
+        "source": "asr_final",
+        "test_text": "synthetic novel non-echo final when recorded words > 0; actual text unknown"
+      },
+      {
+        "row": 13507,
+        "kind": "post_aec_level",
+        "t_ms": 396507,
+        "dbfs": -134.3973388671875,
+        "vad": false
+      },
+      {
+        "row": 13508,
+        "kind": "post_aec_level",
+        "t_ms": 396507,
+        "dbfs": -133.68560791015625,
+        "vad": false
+      },
+      {
+        "row": 13509,
+        "kind": "post_aec_level",
+        "t_ms": 396592,
+        "dbfs": -138.1369171142578,
+        "vad": false
+      },
+      {
+        "row": 13510,
+        "kind": "post_aec_level",
+        "t_ms": 396673,
+        "dbfs": -136.51663208007812,
+        "vad": false
+      },
+      {
+        "row": 13511,
+        "kind": "post_aec_level",
+        "t_ms": 396673,
+        "dbfs": -136.4221954345703,
+        "vad": false
+      },
+      {
+        "row": 13512,
+        "kind": "post_aec_level",
+        "t_ms": 396761,
+        "dbfs": -133.79127502441406,
+        "vad": false
+      },
+      {
+        "row": 13513,
+        "kind": "post_aec_level",
+        "t_ms": 396761,
+        "dbfs": -132.68017578125,
+        "vad": false
+      },
+      {
+        "row": 13514,
+        "kind": "post_aec_level",
+        "t_ms": 396849,
+        "dbfs": -133.57662963867188,
+        "vad": false
+      },
+      {
+        "row": 13515,
+        "kind": "post_aec_level",
+        "t_ms": 396849,
+        "dbfs": -137.8870086669922,
+        "vad": false
+      },
+      {
+        "row": 13516,
+        "kind": "post_aec_level",
+        "t_ms": 396932,
+        "dbfs": -134.18914794921875,
+        "vad": false
+      },
+      {
+        "row": 13517,
+        "kind": "post_aec_level",
+        "t_ms": 397017,
+        "dbfs": -138.84446716308594,
+        "vad": false
+      },
+      {
+        "row": 13518,
+        "kind": "post_aec_level",
+        "t_ms": 397017,
+        "dbfs": -140.41900634765625,
+        "vad": false
+      },
+      {
+        "row": 13519,
+        "kind": "post_aec_level",
+        "t_ms": 397102,
+        "dbfs": -144.27622985839844,
+        "vad": false
+      },
+      {
+        "row": 13520,
+        "kind": "post_aec_level",
+        "t_ms": 397102,
+        "dbfs": -135.5596466064453,
+        "vad": false
+      },
+      {
+        "row": 13521,
+        "kind": "post_aec_level",
+        "t_ms": 397189,
+        "dbfs": -139.1382293701172,
+        "vad": false
+      },
+      {
+        "row": 13522,
+        "kind": "post_aec_level",
+        "t_ms": 397272,
+        "dbfs": -94.4028549194336,
+        "vad": false
+      },
+      {
+        "row": 13523,
+        "kind": "post_aec_level",
+        "t_ms": 397272,
+        "dbfs": -120.95454406738281,
+        "vad": false
+      },
+      {
+        "row": 13524,
+        "kind": "post_aec_level",
+        "t_ms": 397359,
+        "dbfs": -129.80606079101562,
+        "vad": false
+      },
+      {
+        "row": 13525,
+        "kind": "post_aec_level",
+        "t_ms": 397359,
+        "dbfs": -111.13707733154297,
+        "vad": false
+      },
+      {
+        "row": 13526,
+        "kind": "post_aec_level",
+        "t_ms": 397442,
+        "dbfs": -119.63798522949219,
+        "vad": false
+      },
+      {
+        "row": 13527,
+        "kind": "post_aec_level",
+        "t_ms": 397531,
+        "dbfs": -121.32954406738281,
+        "vad": false
+      },
+      {
+        "row": 13528,
+        "kind": "post_aec_level",
+        "t_ms": 397531,
+        "dbfs": -127.11756896972656,
+        "vad": false
+      },
+      {
+        "row": 13529,
+        "kind": "post_aec_level",
+        "t_ms": 397613,
+        "dbfs": -119.69712829589844,
+        "vad": false
+      },
+      {
+        "row": 13530,
+        "kind": "post_aec_level",
+        "t_ms": 397613,
+        "dbfs": -119.217041015625,
+        "vad": false
+      },
+      {
+        "row": 13531,
+        "kind": "post_aec_level",
+        "t_ms": 397700,
+        "dbfs": -119.46562957763672,
+        "vad": false
+      },
+      {
+        "row": 13532,
+        "kind": "post_aec_level",
+        "t_ms": 397700,
+        "dbfs": -122.94847106933594,
+        "vad": false
+      },
+      {
+        "row": 13533,
+        "kind": "post_aec_level",
+        "t_ms": 397788,
+        "dbfs": -117.37445831298828,
+        "vad": false
+      },
+      {
+        "row": 13534,
+        "kind": "post_aec_level",
+        "t_ms": 397870,
+        "dbfs": -109.1939697265625,
+        "vad": false
+      },
+      {
+        "row": 13535,
+        "kind": "post_aec_level",
+        "t_ms": 397870,
+        "dbfs": -115.00643157958984,
+        "vad": false
+      },
+      {
+        "row": 13536,
+        "kind": "post_aec_level",
+        "t_ms": 397956,
+        "dbfs": -118.46443939208984,
+        "vad": false
+      },
+      {
+        "row": 13537,
+        "kind": "post_aec_level",
+        "t_ms": 397956,
+        "dbfs": -123.47428131103516,
+        "vad": false
+      },
+      {
+        "row": 13538,
+        "kind": "post_aec_level",
+        "t_ms": 398039,
+        "dbfs": -130.7127685546875,
+        "vad": false
+      },
+      {
+        "row": 13539,
+        "kind": "post_aec_level",
+        "t_ms": 398126,
+        "dbfs": -132.45606994628906,
+        "vad": false
+      },
+      {
+        "row": 13540,
+        "kind": "post_aec_level",
+        "t_ms": 398126,
+        "dbfs": -125.58544158935547,
+        "vad": false
+      },
+      {
+        "row": 13541,
+        "kind": "post_aec_level",
+        "t_ms": 398210,
+        "dbfs": -128.06541442871094,
+        "vad": false
+      },
+      {
+        "row": 13542,
+        "kind": "post_aec_level",
+        "t_ms": 398210,
+        "dbfs": -128.38775634765625,
+        "vad": false
+      },
+      {
+        "row": 13543,
+        "kind": "post_aec_level",
+        "t_ms": 398296,
+        "dbfs": -128.50086975097656,
+        "vad": false
+      },
+      {
+        "row": 13544,
+        "kind": "post_aec_level",
+        "t_ms": 398296,
+        "dbfs": -129.28521728515625,
+        "vad": false
+      },
+      {
+        "row": 13545,
+        "kind": "post_aec_level",
+        "t_ms": 398381,
+        "dbfs": -127.20692443847656,
+        "vad": false
+      },
+      {
+        "row": 13546,
+        "kind": "post_aec_level",
+        "t_ms": 398468,
+        "dbfs": -135.10244750976562,
+        "vad": false
+      },
+      {
+        "row": 13547,
+        "kind": "post_aec_level",
+        "t_ms": 398468,
+        "dbfs": -132.34213256835938,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 829,
+    "decision_t_ms": 400262.713916,
+    "first_held_t_ms": 400260,
+    "action": "HOLD",
+    "p_floor": 0.3703593611717224,
+    "p_bc": 0.6150740385055542,
+    "capture_actual": [
+      {
+        "row": 13574,
+        "t_ms": 399833,
+        "dbfs": -116.04297637939453,
+        "vad": false
+      },
+      {
+        "row": 13575,
+        "t_ms": 399917,
+        "dbfs": -114.98473358154297,
+        "vad": false
+      },
+      {
+        "row": 13576,
+        "t_ms": 399917,
+        "dbfs": -123.56452941894531,
+        "vad": false
+      },
+      {
+        "row": 13577,
+        "t_ms": 400003,
+        "dbfs": -119.5385513305664,
+        "vad": false
+      },
+      {
+        "row": 13578,
+        "t_ms": 400003,
+        "dbfs": -105.51693725585938,
+        "vad": false
+      },
+      {
+        "row": 13579,
+        "t_ms": 400089,
+        "dbfs": -85.74635314941406,
+        "vad": false
+      },
+      {
+        "row": 13580,
+        "t_ms": 400173,
+        "dbfs": -110.24755096435547,
+        "vad": false
+      },
+      {
+        "row": 13581,
+        "t_ms": 400173,
+        "dbfs": -102.40805053710938,
+        "vad": false
+      },
+      {
+        "row": 13582,
+        "t_ms": 400260,
+        "dbfs": -49.887657165527344,
+        "vad": false
+      },
+      {
+        "row": 13583,
+        "t_ms": 400260,
+        "dbfs": -36.054290771484375,
+        "vad": true
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 13584,
+        "kind": "post_aec_level",
+        "t_ms": 400343,
+        "dbfs": -37.812767028808594,
+        "vad": true
+      },
+      {
+        "row": 13585,
+        "kind": "post_aec_level",
+        "t_ms": 400343,
+        "dbfs": -66.9085693359375,
+        "vad": false
+      },
+      {
+        "row": 13586,
+        "kind": "post_aec_level",
+        "t_ms": 400430,
+        "dbfs": -88.97080993652344,
+        "vad": false
+      },
+      {
+        "row": 13587,
+        "kind": "post_aec_level",
+        "t_ms": 400516,
+        "dbfs": -85.05924224853516,
+        "vad": false
+      },
+      {
+        "row": 13588,
+        "kind": "post_aec_level",
+        "t_ms": 400516,
+        "dbfs": -83.28752899169922,
+        "vad": false
+      },
+      {
+        "row": 13589,
+        "kind": "post_aec_level",
+        "t_ms": 400597,
+        "dbfs": -94.49706268310547,
+        "vad": false
+      },
+      {
+        "row": 13590,
+        "kind": "post_aec_level",
+        "t_ms": 400597,
+        "dbfs": -107.26095581054688,
+        "vad": false
+      },
+      {
+        "row": 13591,
+        "kind": "post_aec_level",
+        "t_ms": 400689,
+        "dbfs": -102.1383056640625,
+        "vad": false
+      },
+      {
+        "row": 13592,
+        "kind": "post_aec_level",
+        "t_ms": 400770,
+        "dbfs": -115.9048080444336,
+        "vad": false
+      },
+      {
+        "row": 13593,
+        "kind": "post_aec_level",
+        "t_ms": 400770,
+        "dbfs": -122.58647918701172,
+        "vad": false
+      },
+      {
+        "row": 13594,
+        "kind": "post_aec_level",
+        "t_ms": 400855,
+        "dbfs": -126.75907897949219,
+        "vad": false
+      },
+      {
+        "row": 13595,
+        "kind": "post_aec_level",
+        "t_ms": 400855,
+        "dbfs": -131.37339782714844,
+        "vad": false
+      },
+      {
+        "row": 13596,
+        "kind": "post_aec_level",
+        "t_ms": 400941,
+        "dbfs": -103.3856430053711,
+        "vad": false
+      },
+      {
+        "row": 13597,
+        "kind": "post_aec_level",
+        "t_ms": 401027,
+        "dbfs": -107.67891693115234,
+        "vad": false
+      },
+      {
+        "row": 13598,
+        "kind": "post_aec_level",
+        "t_ms": 401027,
+        "dbfs": -120.02549743652344,
+        "vad": false
+      },
+      {
+        "row": 13599,
+        "kind": "post_aec_level",
+        "t_ms": 401111,
+        "dbfs": -125.45162200927734,
+        "vad": false
+      },
+      {
+        "row": 13600,
+        "kind": "post_aec_level",
+        "t_ms": 401111,
+        "dbfs": -136.0520477294922,
+        "vad": false
+      },
+      {
+        "row": 13601,
+        "kind": "post_aec_level",
+        "t_ms": 401197,
+        "dbfs": -138.7108154296875,
+        "vad": false
+      },
+      {
+        "row": 13602,
+        "kind": "post_aec_level",
+        "t_ms": 401197,
+        "dbfs": -138.9811553955078,
+        "vad": false
+      },
+      {
+        "row": 13603,
+        "kind": "post_aec_level",
+        "t_ms": 401283,
+        "dbfs": -136.00950622558594,
+        "vad": false
+      },
+      {
+        "row": 13604,
+        "kind": "post_aec_level",
+        "t_ms": 401370,
+        "dbfs": -143.67811584472656,
+        "vad": false
+      },
+      {
+        "row": 13605,
+        "kind": "post_aec_level",
+        "t_ms": 401370,
+        "dbfs": -145.8236083984375,
+        "vad": false
+      },
+      {
+        "row": 13606,
+        "kind": "post_aec_level",
+        "t_ms": 401455,
+        "dbfs": -126.0805435180664,
+        "vad": false
+      },
+      {
+        "row": 13607,
+        "kind": "post_aec_level",
+        "t_ms": 401455,
+        "dbfs": -134.91702270507812,
+        "vad": false
+      },
+      {
+        "row": 13608,
+        "kind": "post_aec_level",
+        "t_ms": 401537,
+        "dbfs": -134.411376953125,
+        "vad": false
+      },
+      {
+        "row": 13609,
+        "kind": "post_aec_level",
+        "t_ms": 401625,
+        "dbfs": -144.44908142089844,
+        "vad": false
+      },
+      {
+        "row": 13610,
+        "kind": "post_aec_level",
+        "t_ms": 401625,
+        "dbfs": -133.3521728515625,
+        "vad": false
+      },
+      {
+        "row": 13611,
+        "kind": "post_aec_level",
+        "t_ms": 401708,
+        "dbfs": -137.93301391601562,
+        "vad": false
+      },
+      {
+        "row": 13612,
+        "kind": "post_aec_level",
+        "t_ms": 401708,
+        "dbfs": -140.56076049804688,
+        "vad": false
+      },
+      {
+        "row": 13613,
+        "kind": "post_aec_level",
+        "t_ms": 401795,
+        "dbfs": -127.24352264404297,
+        "vad": false
+      },
+      {
+        "row": 13614,
+        "kind": "post_aec_level",
+        "t_ms": 401795,
+        "dbfs": -138.18800354003906,
+        "vad": false
+      },
+      {
+        "row": 13615,
+        "kind": "post_aec_level",
+        "t_ms": 401882,
+        "dbfs": -139.77639770507812,
+        "vad": false
+      },
+      {
+        "row": 13616,
+        "kind": "post_aec_level",
+        "t_ms": 401968,
+        "dbfs": -139.51429748535156,
+        "vad": false
+      },
+      {
+        "row": 13617,
+        "kind": "post_aec_level",
+        "t_ms": 401968,
+        "dbfs": -143.93463134765625,
+        "vad": false
+      },
+      {
+        "row": 13618,
+        "kind": "post_aec_level",
+        "t_ms": 402048,
+        "dbfs": -143.76992797851562,
+        "vad": false
+      },
+      {
+        "row": 13619,
+        "kind": "post_aec_level",
+        "t_ms": 402048,
+        "dbfs": -143.9603271484375,
+        "vad": false
+      },
+      {
+        "row": 13620,
+        "kind": "post_aec_level",
+        "t_ms": 402135,
+        "dbfs": -148.87442016601562,
+        "vad": false
+      },
+      {
+        "row": 13621,
+        "kind": "post_aec_level",
+        "t_ms": 402220,
+        "dbfs": -157.47872924804688,
+        "vad": false
+      },
+      {
+        "row": 13622,
+        "kind": "post_aec_level",
+        "t_ms": 402220,
+        "dbfs": -149.6328582763672,
+        "vad": false
+      },
+      {
+        "row": 13623,
+        "kind": "post_aec_level",
+        "t_ms": 402307,
+        "dbfs": -136.47979736328125,
+        "vad": false
+      },
+      {
+        "row": 13624,
+        "kind": "post_aec_level",
+        "t_ms": 402307,
+        "dbfs": -87.76619720458984,
+        "vad": false
+      },
+      {
+        "row": 13625,
+        "kind": "post_aec_level",
+        "t_ms": 402390,
+        "dbfs": -67.07169342041016,
+        "vad": false
+      },
+      {
+        "row": 13626,
+        "kind": "post_aec_level",
+        "t_ms": 402478,
+        "dbfs": -87.08961486816406,
+        "vad": false
+      },
+      {
+        "row": 13627,
+        "kind": "post_aec_level",
+        "t_ms": 402478,
+        "dbfs": -80.94379425048828,
+        "vad": false
+      },
+      {
+        "row": 13628,
+        "kind": "post_aec_level",
+        "t_ms": 402567,
+        "dbfs": -101.26276397705078,
+        "vad": false
+      },
+      {
+        "row": 13629,
+        "kind": "post_aec_level",
+        "t_ms": 402567,
+        "dbfs": -100.08256530761719,
+        "vad": false
+      },
+      {
+        "row": 13630,
+        "kind": "post_aec_level",
+        "t_ms": 402650,
+        "dbfs": -113.61011505126953,
+        "vad": false
+      },
+      {
+        "row": 13631,
+        "kind": "post_aec_level",
+        "t_ms": 402650,
+        "dbfs": -112.49589538574219,
+        "vad": false
+      },
+      {
+        "row": 13632,
+        "kind": "post_aec_level",
+        "t_ms": 402732,
+        "dbfs": -118.16793823242188,
+        "vad": false
+      },
+      {
+        "row": 13633,
+        "kind": "post_aec_level",
+        "t_ms": 402821,
+        "dbfs": -127.59160614013672,
+        "vad": false
+      },
+      {
+        "row": 13634,
+        "kind": "post_aec_level",
+        "t_ms": 402821,
+        "dbfs": -121.2491226196289,
+        "vad": false
+      },
+      {
+        "row": 13635,
+        "kind": "post_aec_level",
+        "t_ms": 402905,
+        "dbfs": -126.14543914794922,
+        "vad": false
+      },
+      {
+        "row": 13636,
+        "kind": "post_aec_level",
+        "t_ms": 402905,
+        "dbfs": -131.52452087402344,
+        "vad": false
+      },
+      {
+        "row": 13637,
+        "kind": "post_aec_level",
+        "t_ms": 402993,
+        "dbfs": -138.6180877685547,
+        "vad": false
+      },
+      {
+        "row": 13638,
+        "kind": "post_aec_level",
+        "t_ms": 403074,
+        "dbfs": -116.24198150634766,
+        "vad": false
+      },
+      {
+        "row": 13639,
+        "kind": "post_aec_level",
+        "t_ms": 403074,
+        "dbfs": -132.25717163085938,
+        "vad": false
+      },
+      {
+        "row": 13640,
+        "kind": "post_aec_level",
+        "t_ms": 403158,
+        "dbfs": -131.83570861816406,
+        "vad": false
+      },
+      {
+        "row": 13641,
+        "kind": "post_aec_level",
+        "t_ms": 403158,
+        "dbfs": -120.79551696777344,
+        "vad": false
+      },
+      {
+        "row": 13642,
+        "kind": "post_aec_level",
+        "t_ms": 403245,
+        "dbfs": -125.37450408935547,
+        "vad": false
+      },
+      {
+        "row": 13643,
+        "kind": "post_aec_level",
+        "t_ms": 403245,
+        "dbfs": -118.39643096923828,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 868,
+    "decision_t_ms": 430040.917041,
+    "first_held_t_ms": 430126,
+    "action": "HOLD",
+    "p_floor": 0.640098512172699,
+    "p_bc": 0.29110342264175415,
+    "capture_actual": [
+      {
+        "row": 14178,
+        "t_ms": 429609,
+        "dbfs": -126.1259765625,
+        "vad": false
+      },
+      {
+        "row": 14179,
+        "t_ms": 429609,
+        "dbfs": -121.1644058227539,
+        "vad": false
+      },
+      {
+        "row": 14180,
+        "t_ms": 429696,
+        "dbfs": -114.43924713134766,
+        "vad": false
+      },
+      {
+        "row": 14181,
+        "t_ms": 429696,
+        "dbfs": -114.54940795898438,
+        "vad": false
+      },
+      {
+        "row": 14182,
+        "t_ms": 429785,
+        "dbfs": -114.5800552368164,
+        "vad": false
+      },
+      {
+        "row": 14183,
+        "t_ms": 429869,
+        "dbfs": -116.19363403320312,
+        "vad": false
+      },
+      {
+        "row": 14184,
+        "t_ms": 429869,
+        "dbfs": -63.189273834228516,
+        "vad": false
+      },
+      {
+        "row": 14185,
+        "t_ms": 429955,
+        "dbfs": -98.43116760253906,
+        "vad": false
+      },
+      {
+        "row": 14186,
+        "t_ms": 429955,
+        "dbfs": -65.6419677734375,
+        "vad": false
+      },
+      {
+        "row": 14187,
+        "t_ms": 430039,
+        "dbfs": -39.26254653930664,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 14188,
+        "kind": "post_aec_level",
+        "t_ms": 430126,
+        "dbfs": -39.176490783691406,
+        "vad": false
+      },
+      {
+        "row": 14189,
+        "kind": "post_aec_level",
+        "t_ms": 430126,
+        "dbfs": -39.46944808959961,
+        "vad": false
+      },
+      {
+        "row": 14190,
+        "kind": "post_aec_level",
+        "t_ms": 430209,
+        "dbfs": -43.08183288574219,
+        "vad": false
+      },
+      {
+        "row": 14191,
+        "kind": "post_aec_level",
+        "t_ms": 430209,
+        "dbfs": -40.01929473876953,
+        "vad": false
+      },
+      {
+        "row": 14192,
+        "kind": "post_aec_level",
+        "t_ms": 430295,
+        "dbfs": -53.410762786865234,
+        "vad": false
+      },
+      {
+        "row": 14193,
+        "kind": "post_aec_level",
+        "t_ms": 430295,
+        "dbfs": -86.8907241821289,
+        "vad": false
+      },
+      {
+        "row": 14194,
+        "kind": "post_aec_level",
+        "t_ms": 430379,
+        "dbfs": -90.81388854980469,
+        "vad": false
+      },
+      {
+        "row": 14195,
+        "kind": "post_aec_level",
+        "t_ms": 430468,
+        "dbfs": -101.81993103027344,
+        "vad": false
+      },
+      {
+        "row": 14196,
+        "kind": "post_aec_level",
+        "t_ms": 430468,
+        "dbfs": -111.40624237060547,
+        "vad": false
+      },
+      {
+        "row": 14197,
+        "kind": "post_aec_level",
+        "t_ms": 430551,
+        "dbfs": -122.15787506103516,
+        "vad": false
+      },
+      {
+        "row": 14198,
+        "kind": "post_aec_level",
+        "t_ms": 430551,
+        "dbfs": -127.71044158935547,
+        "vad": false
+      },
+      {
+        "row": 14199,
+        "kind": "post_aec_level",
+        "t_ms": 430635,
+        "dbfs": -131.0341033935547,
+        "vad": false
+      },
+      {
+        "row": 14200,
+        "kind": "post_aec_level",
+        "t_ms": 430723,
+        "dbfs": -135.97137451171875,
+        "vad": false
+      },
+      {
+        "row": 14201,
+        "kind": "post_aec_level",
+        "t_ms": 430723,
+        "dbfs": -127.9228515625,
+        "vad": false
+      },
+      {
+        "row": 14202,
+        "kind": "post_aec_level",
+        "t_ms": 430809,
+        "dbfs": -127.7817611694336,
+        "vad": false
+      },
+      {
+        "row": 14203,
+        "kind": "post_aec_level",
+        "t_ms": 430809,
+        "dbfs": -130.888671875,
+        "vad": false
+      },
+      {
+        "row": 14204,
+        "kind": "post_aec_level",
+        "t_ms": 430893,
+        "dbfs": -129.46588134765625,
+        "vad": false
+      },
+      {
+        "row": 14205,
+        "kind": "post_aec_level",
+        "t_ms": 430978,
+        "dbfs": -132.95758056640625,
+        "vad": false
+      },
+      {
+        "row": 14206,
+        "kind": "post_aec_level",
+        "t_ms": 430978,
+        "dbfs": -129.76173400878906,
+        "vad": false
+      },
+      {
+        "row": 14207,
+        "kind": "asr_words",
+        "t_ms": 431041,
+        "words": 1,
+        "source": "asr_final",
+        "test_text": "synthetic novel non-echo final when recorded words > 0; actual text unknown"
+      },
+      {
+        "row": 14208,
+        "kind": "post_aec_level",
+        "t_ms": 431065,
+        "dbfs": -135.93606567382812,
+        "vad": false
+      },
+      {
+        "row": 14209,
+        "kind": "post_aec_level",
+        "t_ms": 431065,
+        "dbfs": -140.2149658203125,
+        "vad": false
+      },
+      {
+        "row": 14210,
+        "kind": "post_aec_level",
+        "t_ms": 431148,
+        "dbfs": -139.0963897705078,
+        "vad": false
+      },
+      {
+        "row": 14211,
+        "kind": "post_aec_level",
+        "t_ms": 431148,
+        "dbfs": -136.54571533203125,
+        "vad": false
+      },
+      {
+        "row": 14212,
+        "kind": "post_aec_level",
+        "t_ms": 431234,
+        "dbfs": -134.78021240234375,
+        "vad": false
+      },
+      {
+        "row": 14213,
+        "kind": "post_aec_level",
+        "t_ms": 431318,
+        "dbfs": -109.10469818115234,
+        "vad": false
+      },
+      {
+        "row": 14214,
+        "kind": "post_aec_level",
+        "t_ms": 431318,
+        "dbfs": -132.34068298339844,
+        "vad": false
+      },
+      {
+        "row": 14215,
+        "kind": "post_aec_level",
+        "t_ms": 431409,
+        "dbfs": -136.0638885498047,
+        "vad": false
+      },
+      {
+        "row": 14216,
+        "kind": "post_aec_level",
+        "t_ms": 431409,
+        "dbfs": -136.21604919433594,
+        "vad": false
+      },
+      {
+        "row": 14217,
+        "kind": "post_aec_level",
+        "t_ms": 431490,
+        "dbfs": -131.96876525878906,
+        "vad": false
+      },
+      {
+        "row": 14218,
+        "kind": "post_aec_level",
+        "t_ms": 431576,
+        "dbfs": -128.56455993652344,
+        "vad": false
+      },
+      {
+        "row": 14219,
+        "kind": "post_aec_level",
+        "t_ms": 431576,
+        "dbfs": -133.50645446777344,
+        "vad": false
+      },
+      {
+        "row": 14220,
+        "kind": "post_aec_level",
+        "t_ms": 431660,
+        "dbfs": -138.73329162597656,
+        "vad": false
+      },
+      {
+        "row": 14221,
+        "kind": "post_aec_level",
+        "t_ms": 431660,
+        "dbfs": -144.5976104736328,
+        "vad": false
+      },
+      {
+        "row": 14222,
+        "kind": "post_aec_level",
+        "t_ms": 431748,
+        "dbfs": -142.1612548828125,
+        "vad": false
+      },
+      {
+        "row": 14223,
+        "kind": "post_aec_level",
+        "t_ms": 431748,
+        "dbfs": -141.60768127441406,
+        "vad": false
+      },
+      {
+        "row": 14224,
+        "kind": "post_aec_level",
+        "t_ms": 431831,
+        "dbfs": -141.6616973876953,
+        "vad": false
+      },
+      {
+        "row": 14225,
+        "kind": "post_aec_level",
+        "t_ms": 431921,
+        "dbfs": -140.8488006591797,
+        "vad": false
+      },
+      {
+        "row": 14226,
+        "kind": "post_aec_level",
+        "t_ms": 431921,
+        "dbfs": -146.15933227539062,
+        "vad": false
+      },
+      {
+        "row": 14227,
+        "kind": "post_aec_level",
+        "t_ms": 432004,
+        "dbfs": -138.30775451660156,
+        "vad": false
+      },
+      {
+        "row": 14228,
+        "kind": "post_aec_level",
+        "t_ms": 432004,
+        "dbfs": -131.05270385742188,
+        "vad": false
+      },
+      {
+        "row": 14229,
+        "kind": "post_aec_level",
+        "t_ms": 432089,
+        "dbfs": -102.5818862915039,
+        "vad": false
+      },
+      {
+        "row": 14230,
+        "kind": "post_aec_level",
+        "t_ms": 432171,
+        "dbfs": -129.51348876953125,
+        "vad": false
+      },
+      {
+        "row": 14231,
+        "kind": "post_aec_level",
+        "t_ms": 432171,
+        "dbfs": -137.76268005371094,
+        "vad": false
+      },
+      {
+        "row": 14232,
+        "kind": "post_aec_level",
+        "t_ms": 432257,
+        "dbfs": -137.72348022460938,
+        "vad": false
+      },
+      {
+        "row": 14233,
+        "kind": "post_aec_level",
+        "t_ms": 432257,
+        "dbfs": -133.98199462890625,
+        "vad": false
+      },
+      {
+        "row": 14234,
+        "kind": "post_aec_level",
+        "t_ms": 432345,
+        "dbfs": -139.3557586669922,
+        "vad": false
+      },
+      {
+        "row": 14235,
+        "kind": "post_aec_level",
+        "t_ms": 432345,
+        "dbfs": -140.03074645996094,
+        "vad": false
+      },
+      {
+        "row": 14236,
+        "kind": "post_aec_level",
+        "t_ms": 432428,
+        "dbfs": -140.03504943847656,
+        "vad": false
+      },
+      {
+        "row": 14237,
+        "kind": "post_aec_level",
+        "t_ms": 432512,
+        "dbfs": -143.2991485595703,
+        "vad": false
+      },
+      {
+        "row": 14238,
+        "kind": "post_aec_level",
+        "t_ms": 432512,
+        "dbfs": -145.43649291992188,
+        "vad": false
+      },
+      {
+        "row": 14239,
+        "kind": "post_aec_level",
+        "t_ms": 432597,
+        "dbfs": -146.61865234375,
+        "vad": false
+      },
+      {
+        "row": 14240,
+        "kind": "post_aec_level",
+        "t_ms": 432597,
+        "dbfs": -144.2894287109375,
+        "vad": false
+      },
+      {
+        "row": 14241,
+        "kind": "post_aec_level",
+        "t_ms": 432686,
+        "dbfs": -144.3738250732422,
+        "vad": false
+      },
+      {
+        "row": 14242,
+        "kind": "post_aec_level",
+        "t_ms": 432769,
+        "dbfs": -132.71827697753906,
+        "vad": false
+      },
+      {
+        "row": 14243,
+        "kind": "post_aec_level",
+        "t_ms": 432769,
+        "dbfs": -124.21084594726562,
+        "vad": false
+      },
+      {
+        "row": 14244,
+        "kind": "post_aec_level",
+        "t_ms": 432856,
+        "dbfs": -134.84019470214844,
+        "vad": false
+      },
+      {
+        "row": 14245,
+        "kind": "post_aec_level",
+        "t_ms": 432856,
+        "dbfs": -141.56114196777344,
+        "vad": false
+      },
+      {
+        "row": 14246,
+        "kind": "post_aec_level",
+        "t_ms": 432939,
+        "dbfs": -141.05914306640625,
+        "vad": false
+      },
+      {
+        "row": 14247,
+        "kind": "post_aec_level",
+        "t_ms": 433030,
+        "dbfs": -142.93978881835938,
+        "vad": false
+      },
+      {
+        "row": 14248,
+        "kind": "post_aec_level",
+        "t_ms": 433030,
+        "dbfs": -142.5201416015625,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "No additional model candidate invented. Actual noise terminal (and absence of any YIELD) retains HOLD-only pending; original positive model assumption at entry is unchanged."
+  },
+  {
+    "journal_row": 504,
+    "decision_t_ms": 81711.756291,
+    "first_held_t_ms": null,
+    "action": "YIELD",
+    "p_floor": 0.702086865901947,
+    "p_bc": 0.2750294804573059,
+    "capture_actual": [
+      {
+        "row": 7125,
+        "t_ms": 81283,
+        "dbfs": -124.75210571289062,
+        "vad": false
+      },
+      {
+        "row": 7126,
+        "t_ms": 81372,
+        "dbfs": -117.73329162597656,
+        "vad": false
+      },
+      {
+        "row": 7127,
+        "t_ms": 81372,
+        "dbfs": -49.43621826171875,
+        "vad": false
+      },
+      {
+        "row": 7128,
+        "t_ms": 81454,
+        "dbfs": -45.83082962036133,
+        "vad": false
+      },
+      {
+        "row": 7129,
+        "t_ms": 81454,
+        "dbfs": -60.019100189208984,
+        "vad": false
+      },
+      {
+        "row": 7130,
+        "t_ms": 81538,
+        "dbfs": -85.71500396728516,
+        "vad": false
+      },
+      {
+        "row": 7131,
+        "t_ms": 81624,
+        "dbfs": -33.59520721435547,
+        "vad": true
+      },
+      {
+        "row": 7132,
+        "t_ms": 81624,
+        "dbfs": -31.128108978271484,
+        "vad": true
+      },
+      {
+        "row": 7133,
+        "t_ms": 81709,
+        "dbfs": -41.108543395996094,
+        "vad": false
+      },
+      {
+        "row": 7134,
+        "t_ms": 81709,
+        "dbfs": -73.61235809326172,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 7135,
+        "kind": "post_aec_level",
+        "t_ms": 81794,
+        "dbfs": -64.9198989868164,
+        "vad": false
+      },
+      {
+        "row": 7136,
+        "kind": "post_aec_level",
+        "t_ms": 81794,
+        "dbfs": -49.01089859008789,
+        "vad": false
+      },
+      {
+        "row": 7137,
+        "kind": "post_aec_level",
+        "t_ms": 81881,
+        "dbfs": -48.09932327270508,
+        "vad": false
+      },
+      {
+        "row": 7138,
+        "kind": "post_aec_level",
+        "t_ms": 81966,
+        "dbfs": -49.02526092529297,
+        "vad": false
+      },
+      {
+        "row": 7139,
+        "kind": "post_aec_level",
+        "t_ms": 81966,
+        "dbfs": -39.65521240234375,
+        "vad": false
+      },
+      {
+        "row": 7140,
+        "kind": "post_aec_level",
+        "t_ms": 82050,
+        "dbfs": -39.849761962890625,
+        "vad": false
+      },
+      {
+        "row": 7141,
+        "kind": "post_aec_level",
+        "t_ms": 82050,
+        "dbfs": -47.53142166137695,
+        "vad": false
+      },
+      {
+        "row": 7142,
+        "kind": "post_aec_level",
+        "t_ms": 82135,
+        "dbfs": -60.41178894042969,
+        "vad": false
+      },
+      {
+        "row": 7143,
+        "kind": "post_aec_level",
+        "t_ms": 82220,
+        "dbfs": -93.88367462158203,
+        "vad": false
+      },
+      {
+        "row": 7144,
+        "kind": "post_aec_level",
+        "t_ms": 82220,
+        "dbfs": -105.9040756225586,
+        "vad": false
+      },
+      {
+        "row": 7145,
+        "kind": "post_aec_level",
+        "t_ms": 82307,
+        "dbfs": -108.08473205566406,
+        "vad": false
+      },
+      {
+        "row": 7146,
+        "kind": "post_aec_level",
+        "t_ms": 82307,
+        "dbfs": -123.64131927490234,
+        "vad": false
+      },
+      {
+        "row": 7147,
+        "kind": "post_aec_level",
+        "t_ms": 82390,
+        "dbfs": -123.59761810302734,
+        "vad": false
+      },
+      {
+        "row": 7148,
+        "kind": "post_aec_level",
+        "t_ms": 82479,
+        "dbfs": -128.35499572753906,
+        "vad": false
+      },
+      {
+        "row": 7149,
+        "kind": "post_aec_level",
+        "t_ms": 82479,
+        "dbfs": -137.88600158691406,
+        "vad": false
+      },
+      {
+        "row": 7150,
+        "kind": "post_aec_level",
+        "t_ms": 82565,
+        "dbfs": -138.63792419433594,
+        "vad": false
+      },
+      {
+        "row": 7151,
+        "kind": "post_aec_level",
+        "t_ms": 82565,
+        "dbfs": -135.70460510253906,
+        "vad": false
+      },
+      {
+        "row": 7152,
+        "kind": "post_aec_level",
+        "t_ms": 82653,
+        "dbfs": -136.6619873046875,
+        "vad": false
+      },
+      {
+        "row": 7153,
+        "kind": "post_aec_level",
+        "t_ms": 82653,
+        "dbfs": -137.91563415527344,
+        "vad": false
+      },
+      {
+        "row": 7154,
+        "kind": "post_aec_level",
+        "t_ms": 82735,
+        "dbfs": -141.25686645507812,
+        "vad": false
+      },
+      {
+        "row": 7155,
+        "kind": "post_aec_level",
+        "t_ms": 82817,
+        "dbfs": -145.83250427246094,
+        "vad": false
+      },
+      {
+        "row": 7156,
+        "kind": "post_aec_level",
+        "t_ms": 82817,
+        "dbfs": -141.9347686767578,
+        "vad": false
+      },
+      {
+        "row": 7157,
+        "kind": "post_aec_level",
+        "t_ms": 82904,
+        "dbfs": -139.92184448242188,
+        "vad": false
+      },
+      {
+        "row": 7158,
+        "kind": "post_aec_level",
+        "t_ms": 82904,
+        "dbfs": -135.06919860839844,
+        "vad": false
+      },
+      {
+        "row": 7159,
+        "kind": "post_aec_level",
+        "t_ms": 82990,
+        "dbfs": -133.15882873535156,
+        "vad": false
+      },
+      {
+        "row": 7160,
+        "kind": "post_aec_level",
+        "t_ms": 83075,
+        "dbfs": -132.85147094726562,
+        "vad": false
+      },
+      {
+        "row": 7161,
+        "kind": "post_aec_level",
+        "t_ms": 83075,
+        "dbfs": -131.32742309570312,
+        "vad": false
+      },
+      {
+        "row": 7162,
+        "kind": "post_aec_level",
+        "t_ms": 83159,
+        "dbfs": -133.95703125,
+        "vad": false
+      },
+      {
+        "row": 7163,
+        "kind": "post_aec_level",
+        "t_ms": 83159,
+        "dbfs": -136.2342529296875,
+        "vad": false
+      },
+      {
+        "row": 7164,
+        "kind": "post_aec_level",
+        "t_ms": 83250,
+        "dbfs": -139.5046844482422,
+        "vad": false
+      },
+      {
+        "row": 7165,
+        "kind": "post_aec_level",
+        "t_ms": 83250,
+        "dbfs": -143.55775451660156,
+        "vad": false
+      },
+      {
+        "row": 7166,
+        "kind": "post_aec_level",
+        "t_ms": 83332,
+        "dbfs": -144.5243682861328,
+        "vad": false
+      },
+      {
+        "row": 7167,
+        "kind": "post_aec_level",
+        "t_ms": 83414,
+        "dbfs": -140.7061767578125,
+        "vad": false
+      },
+      {
+        "row": 7168,
+        "kind": "post_aec_level",
+        "t_ms": 83414,
+        "dbfs": -139.19725036621094,
+        "vad": false
+      },
+      {
+        "row": 7169,
+        "kind": "post_aec_level",
+        "t_ms": 83498,
+        "dbfs": -137.4374542236328,
+        "vad": false
+      },
+      {
+        "row": 7170,
+        "kind": "post_aec_level",
+        "t_ms": 83498,
+        "dbfs": -144.102294921875,
+        "vad": false
+      },
+      {
+        "row": 7171,
+        "kind": "post_aec_level",
+        "t_ms": 83587,
+        "dbfs": -141.22579956054688,
+        "vad": false
+      },
+      {
+        "row": 7172,
+        "kind": "post_aec_level",
+        "t_ms": 83672,
+        "dbfs": -135.34791564941406,
+        "vad": false
+      },
+      {
+        "row": 7173,
+        "kind": "post_aec_level",
+        "t_ms": 83672,
+        "dbfs": -140.64512634277344,
+        "vad": false
+      },
+      {
+        "row": 7174,
+        "kind": "post_aec_level",
+        "t_ms": 83756,
+        "dbfs": -128.6868896484375,
+        "vad": false
+      },
+      {
+        "row": 7175,
+        "kind": "post_aec_level",
+        "t_ms": 83756,
+        "dbfs": -127.5038833618164,
+        "vad": false
+      },
+      {
+        "row": 7176,
+        "kind": "post_aec_level",
+        "t_ms": 83845,
+        "dbfs": -117.07735443115234,
+        "vad": false
+      },
+      {
+        "row": 7177,
+        "kind": "post_aec_level",
+        "t_ms": 83932,
+        "dbfs": -87.1465835571289,
+        "vad": false
+      },
+      {
+        "row": 7178,
+        "kind": "post_aec_level",
+        "t_ms": 83932,
+        "dbfs": -100.08811950683594,
+        "vad": false
+      },
+      {
+        "row": 7179,
+        "kind": "post_aec_level",
+        "t_ms": 84012,
+        "dbfs": -133.411376953125,
+        "vad": false
+      },
+      {
+        "row": 7180,
+        "kind": "post_aec_level",
+        "t_ms": 84012,
+        "dbfs": -92.7720947265625,
+        "vad": false
+      },
+      {
+        "row": 7181,
+        "kind": "post_aec_level",
+        "t_ms": 84098,
+        "dbfs": -111.49481964111328,
+        "vad": false
+      },
+      {
+        "row": 7182,
+        "kind": "post_aec_level",
+        "t_ms": 84098,
+        "dbfs": -100.92459869384766,
+        "vad": false
+      },
+      {
+        "row": 7183,
+        "kind": "post_aec_level",
+        "t_ms": 84183,
+        "dbfs": -122.87256622314453,
+        "vad": false
+      },
+      {
+        "row": 7184,
+        "kind": "post_aec_level",
+        "t_ms": 84268,
+        "dbfs": -128.85194396972656,
+        "vad": false
+      },
+      {
+        "row": 7185,
+        "kind": "post_aec_level",
+        "t_ms": 84268,
+        "dbfs": -129.78335571289062,
+        "vad": false
+      },
+      {
+        "row": 7186,
+        "kind": "post_aec_level",
+        "t_ms": 84357,
+        "dbfs": -132.96609497070312,
+        "vad": false
+      },
+      {
+        "row": 7187,
+        "kind": "post_aec_level",
+        "t_ms": 84357,
+        "dbfs": -53.66324996948242,
+        "vad": false
+      },
+      {
+        "row": 7188,
+        "kind": "post_aec_level",
+        "t_ms": 84441,
+        "dbfs": -47.220882415771484,
+        "vad": false
+      },
+      {
+        "row": 7189,
+        "kind": "post_aec_level",
+        "t_ms": 84526,
+        "dbfs": -53.926326751708984,
+        "vad": false
+      },
+      {
+        "row": 7190,
+        "kind": "post_aec_level",
+        "t_ms": 84526,
+        "dbfs": -65.74373626708984,
+        "vad": false
+      },
+      {
+        "row": 7191,
+        "kind": "post_aec_level",
+        "t_ms": 84610,
+        "dbfs": -89.12194061279297,
+        "vad": false
+      },
+      {
+        "row": 7192,
+        "kind": "post_aec_level",
+        "t_ms": 84610,
+        "dbfs": -106.90890502929688,
+        "vad": false
+      },
+      {
+        "row": 7193,
+        "kind": "post_aec_level",
+        "t_ms": 84696,
+        "dbfs": -107.64540100097656,
+        "vad": false
+      },
+      {
+        "row": 7194,
+        "kind": "post_aec_level",
+        "t_ms": 84696,
+        "dbfs": -105.629150390625,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "Original positive YIELD candidate retained pending independent corroboration, which this replay still requires."
+  },
+  {
+    "journal_row": 745,
+    "decision_t_ms": 307333.647875,
+    "first_held_t_ms": null,
+    "action": "YIELD",
+    "p_floor": 0.7383115887641907,
+    "p_bc": 0.23857921361923218,
+    "capture_actual": [
+      {
+        "row": 11696,
+        "t_ms": 306905,
+        "dbfs": -51.51398849487305,
+        "vad": false
+      },
+      {
+        "row": 11697,
+        "t_ms": 306905,
+        "dbfs": -67.80213928222656,
+        "vad": false
+      },
+      {
+        "row": 11698,
+        "t_ms": 306988,
+        "dbfs": -69.37603759765625,
+        "vad": false
+      },
+      {
+        "row": 11699,
+        "t_ms": 307074,
+        "dbfs": -77.31389617919922,
+        "vad": false
+      },
+      {
+        "row": 11700,
+        "t_ms": 307074,
+        "dbfs": -72.6407470703125,
+        "vad": false
+      },
+      {
+        "row": 11701,
+        "t_ms": 307159,
+        "dbfs": -101.40464782714844,
+        "vad": false
+      },
+      {
+        "row": 11702,
+        "t_ms": 307159,
+        "dbfs": -38.96186065673828,
+        "vad": false
+      },
+      {
+        "row": 11703,
+        "t_ms": 307247,
+        "dbfs": -30.06673812866211,
+        "vad": true
+      },
+      {
+        "row": 11704,
+        "t_ms": 307247,
+        "dbfs": -44.0105094909668,
+        "vad": false
+      },
+      {
+        "row": 11705,
+        "t_ms": 307329,
+        "dbfs": -42.56368637084961,
+        "vad": false
+      }
+    ],
+    "asr_actual_prior_3s": [
+      {
+        "row": 11659,
+        "t_ms": 305069,
+        "words": 0,
+        "source": "asr_partial"
+      }
+    ],
+    "model_vad_assumption": "synthetic: >=0.5 for two frames; NOT recorded",
+    "pcm": "not available; no acoustic replay",
+    "post_entry_actual": [
+      {
+        "row": 11706,
+        "kind": "post_aec_level",
+        "t_ms": 307418,
+        "dbfs": -64.07930755615234,
+        "vad": false
+      },
+      {
+        "row": 11707,
+        "kind": "post_aec_level",
+        "t_ms": 307418,
+        "dbfs": -56.75811004638672,
+        "vad": false
+      },
+      {
+        "row": 11708,
+        "kind": "post_aec_level",
+        "t_ms": 307500,
+        "dbfs": -50.58949279785156,
+        "vad": false
+      },
+      {
+        "row": 11709,
+        "kind": "post_aec_level",
+        "t_ms": 307500,
+        "dbfs": -45.146602630615234,
+        "vad": false
+      },
+      {
+        "row": 11710,
+        "kind": "post_aec_level",
+        "t_ms": 307587,
+        "dbfs": -39.55223846435547,
+        "vad": false
+      },
+      {
+        "row": 11711,
+        "kind": "post_aec_level",
+        "t_ms": 307672,
+        "dbfs": -34.57546615600586,
+        "vad": true
+      },
+      {
+        "row": 11712,
+        "kind": "post_aec_level",
+        "t_ms": 307672,
+        "dbfs": -55.72488784790039,
+        "vad": false
+      },
+      {
+        "row": 11713,
+        "kind": "post_aec_level",
+        "t_ms": 307755,
+        "dbfs": -94.9499740600586,
+        "vad": false
+      },
+      {
+        "row": 11714,
+        "kind": "post_aec_level",
+        "t_ms": 307755,
+        "dbfs": -116.94294738769531,
+        "vad": false
+      },
+      {
+        "row": 11715,
+        "kind": "post_aec_level",
+        "t_ms": 307841,
+        "dbfs": -126.93739318847656,
+        "vad": false
+      },
+      {
+        "row": 11716,
+        "kind": "post_aec_level",
+        "t_ms": 307930,
+        "dbfs": -129.73826599121094,
+        "vad": false
+      },
+      {
+        "row": 11717,
+        "kind": "post_aec_level",
+        "t_ms": 307930,
+        "dbfs": -133.76426696777344,
+        "vad": false
+      },
+      {
+        "row": 11718,
+        "kind": "post_aec_level",
+        "t_ms": 308014,
+        "dbfs": -136.9164581298828,
+        "vad": false
+      },
+      {
+        "row": 11719,
+        "kind": "post_aec_level",
+        "t_ms": 308014,
+        "dbfs": -124.5453109741211,
+        "vad": false
+      },
+      {
+        "row": 11720,
+        "kind": "post_aec_level",
+        "t_ms": 308098,
+        "dbfs": -133.21229553222656,
+        "vad": false
+      },
+      {
+        "row": 11721,
+        "kind": "post_aec_level",
+        "t_ms": 308098,
+        "dbfs": -134.7368621826172,
+        "vad": false
+      },
+      {
+        "row": 11722,
+        "kind": "post_aec_level",
+        "t_ms": 308184,
+        "dbfs": -139.34829711914062,
+        "vad": false
+      },
+      {
+        "row": 11723,
+        "kind": "post_aec_level",
+        "t_ms": 308268,
+        "dbfs": -143.04425048828125,
+        "vad": false
+      },
+      {
+        "row": 11724,
+        "kind": "post_aec_level",
+        "t_ms": 308268,
+        "dbfs": -142.54248046875,
+        "vad": false
+      },
+      {
+        "row": 11725,
+        "kind": "post_aec_level",
+        "t_ms": 308354,
+        "dbfs": -137.020263671875,
+        "vad": false
+      },
+      {
+        "row": 11726,
+        "kind": "post_aec_level",
+        "t_ms": 308354,
+        "dbfs": -133.54043579101562,
+        "vad": false
+      },
+      {
+        "row": 11727,
+        "kind": "post_aec_level",
+        "t_ms": 308439,
+        "dbfs": -136.98574829101562,
+        "vad": false
+      },
+      {
+        "row": 11728,
+        "kind": "post_aec_level",
+        "t_ms": 308527,
+        "dbfs": -137.1845245361328,
+        "vad": false
+      },
+      {
+        "row": 11729,
+        "kind": "post_aec_level",
+        "t_ms": 308527,
+        "dbfs": -138.7147979736328,
+        "vad": false
+      },
+      {
+        "row": 11730,
+        "kind": "post_aec_level",
+        "t_ms": 308609,
+        "dbfs": -137.872802734375,
+        "vad": false
+      },
+      {
+        "row": 11731,
+        "kind": "post_aec_level",
+        "t_ms": 308609,
+        "dbfs": -136.06263732910156,
+        "vad": false
+      },
+      {
+        "row": 11732,
+        "kind": "post_aec_level",
+        "t_ms": 308696,
+        "dbfs": -141.42251586914062,
+        "vad": false
+      },
+      {
+        "row": 11733,
+        "kind": "post_aec_level",
+        "t_ms": 308696,
+        "dbfs": -140.31338500976562,
+        "vad": false
+      },
+      {
+        "row": 11734,
+        "kind": "post_aec_level",
+        "t_ms": 308778,
+        "dbfs": -137.48121643066406,
+        "vad": false
+      },
+      {
+        "row": 11735,
+        "kind": "post_aec_level",
+        "t_ms": 308867,
+        "dbfs": -137.52978515625,
+        "vad": false
+      },
+      {
+        "row": 11736,
+        "kind": "post_aec_level",
+        "t_ms": 308867,
+        "dbfs": -138.80126953125,
+        "vad": false
+      },
+      {
+        "row": 11737,
+        "kind": "post_aec_level",
+        "t_ms": 308951,
+        "dbfs": -136.62855529785156,
+        "vad": false
+      },
+      {
+        "row": 11738,
+        "kind": "post_aec_level",
+        "t_ms": 308951,
+        "dbfs": -141.1177520751953,
+        "vad": false
+      },
+      {
+        "row": 11739,
+        "kind": "post_aec_level",
+        "t_ms": 309036,
+        "dbfs": -140.4607391357422,
+        "vad": false
+      },
+      {
+        "row": 11740,
+        "kind": "post_aec_level",
+        "t_ms": 309124,
+        "dbfs": -141.616943359375,
+        "vad": false
+      },
+      {
+        "row": 11741,
+        "kind": "post_aec_level",
+        "t_ms": 309124,
+        "dbfs": -142.43772888183594,
+        "vad": false
+      },
+      {
+        "row": 11742,
+        "kind": "post_aec_level",
+        "t_ms": 309210,
+        "dbfs": -139.46743774414062,
+        "vad": false
+      },
+      {
+        "row": 11743,
+        "kind": "post_aec_level",
+        "t_ms": 309210,
+        "dbfs": -139.53843688964844,
+        "vad": false
+      },
+      {
+        "row": 11744,
+        "kind": "post_aec_level",
+        "t_ms": 309295,
+        "dbfs": -133.4678192138672,
+        "vad": false
+      },
+      {
+        "row": 11745,
+        "kind": "post_aec_level",
+        "t_ms": 309380,
+        "dbfs": -135.78665161132812,
+        "vad": false
+      },
+      {
+        "row": 11746,
+        "kind": "post_aec_level",
+        "t_ms": 309380,
+        "dbfs": -139.4698944091797,
+        "vad": false
+      },
+      {
+        "row": 11747,
+        "kind": "post_aec_level",
+        "t_ms": 309463,
+        "dbfs": -138.28561401367188,
+        "vad": false
+      },
+      {
+        "row": 11748,
+        "kind": "post_aec_level",
+        "t_ms": 309463,
+        "dbfs": -141.88230895996094,
+        "vad": false
+      },
+      {
+        "row": 11749,
+        "kind": "post_aec_level",
+        "t_ms": 309548,
+        "dbfs": -139.84559631347656,
+        "vad": false
+      },
+      {
+        "row": 11750,
+        "kind": "post_aec_level",
+        "t_ms": 309548,
+        "dbfs": -139.22357177734375,
+        "vad": false
+      },
+      {
+        "row": 11751,
+        "kind": "post_aec_level",
+        "t_ms": 309636,
+        "dbfs": -142.12437438964844,
+        "vad": false
+      },
+      {
+        "row": 11752,
+        "kind": "post_aec_level",
+        "t_ms": 309718,
+        "dbfs": -136.6658477783203,
+        "vad": false
+      },
+      {
+        "row": 11753,
+        "kind": "post_aec_level",
+        "t_ms": 309718,
+        "dbfs": -137.98519897460938,
+        "vad": false
+      },
+      {
+        "row": 11754,
+        "kind": "post_aec_level",
+        "t_ms": 309806,
+        "dbfs": -145.11741638183594,
+        "vad": false
+      },
+      {
+        "row": 11755,
+        "kind": "post_aec_level",
+        "t_ms": 309806,
+        "dbfs": -144.19696044921875,
+        "vad": false
+      },
+      {
+        "row": 11756,
+        "kind": "post_aec_level",
+        "t_ms": 309889,
+        "dbfs": -93.83377075195312,
+        "vad": false
+      },
+      {
+        "row": 11757,
+        "kind": "post_aec_level",
+        "t_ms": 309975,
+        "dbfs": -114.22383117675781,
+        "vad": false
+      },
+      {
+        "row": 11758,
+        "kind": "post_aec_level",
+        "t_ms": 309975,
+        "dbfs": -133.84432983398438,
+        "vad": false
+      },
+      {
+        "row": 11759,
+        "kind": "post_aec_level",
+        "t_ms": 310060,
+        "dbfs": -141.42144775390625,
+        "vad": false
+      },
+      {
+        "row": 11760,
+        "kind": "post_aec_level",
+        "t_ms": 310060,
+        "dbfs": -121.5844497680664,
+        "vad": false
+      },
+      {
+        "row": 11761,
+        "kind": "post_aec_level",
+        "t_ms": 310150,
+        "dbfs": -139.53689575195312,
+        "vad": false
+      },
+      {
+        "row": 11762,
+        "kind": "post_aec_level",
+        "t_ms": 310150,
+        "dbfs": -139.45281982421875,
+        "vad": false
+      },
+      {
+        "row": 11763,
+        "kind": "post_aec_level",
+        "t_ms": 310233,
+        "dbfs": -142.73202514648438,
+        "vad": false
+      },
+      {
+        "row": 11764,
+        "kind": "post_aec_level",
+        "t_ms": 310318,
+        "dbfs": -143.51405334472656,
+        "vad": false
+      },
+      {
+        "row": 11765,
+        "kind": "post_aec_level",
+        "t_ms": 310318,
+        "dbfs": -141.33583068847656,
+        "vad": false
+      }
+    ],
+    "post_entry_model_assumption": "Original positive YIELD candidate retained pending independent corroboration, which this replay still requires."
+  }
+]

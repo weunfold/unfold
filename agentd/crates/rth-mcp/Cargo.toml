@@ -1,0 +1,21 @@
+[package]
+name = "rth-mcp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Delegation P1: MCP servers as parts. Each configured server is one part (Streamable HTTP or stdio) with its own on/off, allowed and denied tools, timeouts, per-tool approval and effect, pinned to a digest of its config and served tool list."
+
+[dependencies]
+rth-tools = { path = "../rth-tools" }
+serde.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["process"] }
+url = "2"
+libc = "0.2"
+process-wrap = { version = "=10.0.1", default-features = false, features = ["tokio1", "process-group"] }
+rmcp = { version = "=3.7.0", default-features = false, features = ["client", "transport-streamable-http-client-reqwest", "transport-child-process"] }
+
+[dev-dependencies]
+rmcp = { version = "=3.7.0", default-features = false, features = ["client", "server", "transport-streamable-http-client-reqwest", "transport-child-process", "transport-streamable-http-server"] }
+axum = { version = "=0.8.9", default-features = false, features = ["http1", "tokio"] }
+tokio-util = "0.7"

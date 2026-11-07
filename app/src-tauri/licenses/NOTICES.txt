@@ -1,0 +1,42 @@
+Unfold: open-source notices for the speech engines it ships
+
+sherpa-onnx 2.0.0 (k2-fsa, Apache License 2.0)
+  Contents/Frameworks/libsherpa-onnx-c-api.dylib
+  Licence: sherpa-onnx-LICENSE.txt (https://github.com/k2-fsa/sherpa-onnx, tag v2.0.0)
+
+Compiled into libsherpa-onnx-c-api.dylib, at the versions sherpa-onnx v2.0.0's cmake/ pins:
+  kaldi-native-fbank 1.22.4 (Apache License 2.0): kaldi-native-fbank-LICENSE.txt
+  KISS FFT, commit febd4cae (BSD 3-Clause): kissfft-LICENSE.txt
+  kaldi-decoder 0.3.0 (Apache License 2.0): kaldi-decoder-LICENSE.txt
+  kaldifst 1.8.0 (Apache License 2.0): kaldifst-LICENSE.txt
+  OpenFst 1.8.5 (Apache License 2.0): openfst-COPYING.txt
+  Eigen 5.0.1 (Mozilla Public License 2.0; source: https://gitlab.com/libeigen/eigen/-/tree/5.0.1): eigen-COPYING.MPL2.txt
+  simple-sentencepiece 0.7 (Apache License 2.0): simple-sentencepiece-LICENSE.txt
+  darts-clone 0.32 (BSD 2-Clause): darts-clone-LICENSE.txt
+  utf8proc 2.12.0 (MIT License, Unicode data licence): utf8proc-LICENSE.txt
+  nlohmann/json 3.12.0 (MIT License): nlohmann-json-LICENSE.txt
+  hclust-cpp / fastcluster (BSD 2-Clause): hclust-cpp-LICENSE.txt
+
+ONNX Runtime 1.28.2 (Microsoft, MIT License)
+  Contents/Frameworks/libonnxruntime.dylib
+  Licence: onnxruntime-LICENSE.txt (https://github.com/microsoft/onnxruntime, tag v1.28.2)
+  Third-party notices: onnxruntime-ThirdPartyNotices.txt (same tag)
+
+NeMo-Speech.cpp (NVIDIA, Apache License 2.0)
+  Contents/Resources/nemo-speech/
+  Licence and notices: Contents/Resources/nemo-speech/licenses/
+
+Both libraries are the unmodified official sherpa-onnx v2.0.0 macOS arm64 shared-library build.
+
+Smart Turn v3.2 fp32, CPU execution (Pipecat AI, BSD-2-Clause)
+  Bundled turn-models/smart-turn-v3.2-cpu.onnx; revision f766f81d3cfdf7737ac64aad813d91bbfd56bf93.
+  Local cpu filename aliases upstream smart-turn-v3.2-gpu.onnx (fp32); no GPU provider.
+  Licence: smart-turn-LICENSE.txt; upstream https://huggingface.co/pipecat-ai/smart-turn-v3
+Silero VAD (Silero Team, MIT)
+  Bundled turn-models/silero_vad.onnx; revision 066409f3d9db45a30d21dfcbf9147826ffdd7052.
+  Licence: silero-vad-LICENSE.txt; upstream https://github.com/snakers4/silero-vad
+
+Pipecat backchannel detector int8 (Pipecat AI, BSD-2-Clause)
+  Bundled turn-models/backchannel-int8.onnx; revision 4896f4774cdf1a9c5b581b0cd4a0c4000e8bb854.
+  Licence and attribution: backchannel-LICENSE.txt.
+  Source: https://huggingface.co/pipecat-ai/backchannel-detector

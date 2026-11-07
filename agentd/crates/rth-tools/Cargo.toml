@@ -1,0 +1,18 @@
+[package]
+name = "rth-tools"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Delegation S2: worker profiles, folder grants, confined file reads, GET-only web fetch, tool-call receipts and the read worker's tool loop. agentd is the executor; the model only proposes."
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+sha2 = "=0.10.9"
+libc = "0.2"
+url = "2"
+tokio-rustls = { version = "=0.26.6", default-features = false, features = ["ring", "tls12", "logging"] }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+rustls-native-certs = "0.8"
+rustls-pki-types = { version = "1", features = ["std"] }

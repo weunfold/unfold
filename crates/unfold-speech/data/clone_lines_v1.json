@@ -1,0 +1,38 @@
+{
+ "version": 1,
+ "about": "Read-along lines for recording a voice clone's mood references: one line per mood and language, 12-20 words (about 5-9 s at a natural pace). The line is the reference's transcript, so the take must say it; the page lets the person correct the text after recording. Numbers spelled out, no real people, pt-BR gender-neutral.",
+ "lines": {
+  "neutral": {
+   "en": "I'm reading this line in my everyday voice, the same way I'd talk with a friend over coffee.",
+   "pt-BR": "Estou lendo esta frase com a minha voz de sempre, do jeito que eu converso no dia a dia."
+  },
+  "calm": {
+   "en": "It's all right. Take a slow breath, there's no hurry at all, we have the whole afternoon.",
+   "pt-BR": "Tá tudo bem. Respira devagar, não tem pressa nenhuma, a gente tem a tarde inteira pela frente."
+  },
+  "joy": {
+   "en": "That's wonderful news! I'm so happy for you, this is exactly what we were hoping for!",
+   "pt-BR": "Que notícia maravilhosa! Que alegria, era exatamente isso que a gente estava esperando, deu tudo certo!"
+  },
+  "serious": {
+   "en": "This part really matters, so let's slow down and go through each step carefully, one at a time.",
+   "pt-BR": "Essa parte é importante de verdade, então vamos com calma e ver cada passo com cuidado, um de cada vez."
+  },
+  "question": {
+   "en": "Did you get a chance to look at it yet? What did you think, would you change anything?",
+   "pt-BR": "Você conseguiu dar uma olhada? O que você achou? Mudaria alguma coisa ou deixaria do jeito que está?"
+  },
+  "surprised": {
+   "en": "Wait, really? I didn't expect that at all! How did that even happen so fast?",
+   "pt-BR": "Espera, sério mesmo? Eu não esperava por isso de jeito nenhum! Como isso aconteceu tão rápido?"
+  },
+  "tired": {
+   "en": "What a long day. I think I'll just sit down for a minute and take it slow tonight.",
+   "pt-BR": "Que dia longo. Acho que vou só sentar um pouquinho e levar esta noite bem devagar."
+  },
+  "tender": {
+   "en": "Hey, I'm right here. Whatever you need, we'll figure it out together, one little step at a time.",
+   "pt-BR": "Ei, tô aqui com você. Do que você precisar, a gente resolve junto, um passinho de cada vez."
+  }
+ }
+}

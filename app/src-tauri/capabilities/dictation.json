@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "dictation",
+  "description": "The chat bar's dictation (local, bundled index.html of the main window) may start, stop and cancel it, and open the microphone's privacy settings or Settings > Dictation. No remote origin (DSH on 127.0.0.1, anything it navigates to) is listed, so none can invoke it.",
+  "local": true,
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "allow-rth-dictation"
+  ]
+}

@@ -1,0 +1,367 @@
+{
+  "about": "rc3 Remember fixtures (reference, 2026-10-24). Synthetic. Decide fixtures run against the real decide path (prompt sha a7437bf4…, Granite 4.1 3B Q4_K_M, mini grammar) with a stubbed brain; guard fixtures run before any write. The 24 dev tasks: weunfold/unfold-bench@1eb50d3 tasks/memory-decide/ (q-dev.json + requests/).",
+  "prompt_sha256": "a7437bf41d4cb50123c94c99c0862a10e1fb247b56e6f8fc29dddfe75a6bdf29",
+  "acceptance_script": [
+    {
+      "step": 2,
+      "utterance": "remember that my favourite café is Lua",
+      "candidates": [],
+      "expect": {
+        "d": "remember"
+      },
+      "then": "brain_remember scope=global veracity=stated; read_back ok"
+    },
+    {
+      "step": 4,
+      "utterance": "what's my favourite café?",
+      "candidates": [
+        {
+          "memory_id": "m-1",
+          "revision": 1,
+          "text": "my favourite café is Lua"
+        }
+      ],
+      "expect": {
+        "d": "recall",
+        "s": [
+          "m-1"
+        ]
+      },
+      "then": "reply contains Lua and its source"
+    },
+    {
+      "step": 5,
+      "utterance": "actually it's Sol now",
+      "candidates": [
+        {
+          "memory_id": "m-1",
+          "revision": 1,
+          "text": "my favourite café is Lua"
+        }
+      ],
+      "expect": {
+        "d": "correct",
+        "t": "m-1"
+      },
+      "then": "brain_update expected_revision=1 -> revision 2; history shows both"
+    },
+    {
+      "step": 6,
+      "utterance": "what's my favourite café?",
+      "candidates": [
+        {
+          "memory_id": "m-1",
+          "revision": 2,
+          "text": "my favourite café is Lua; updated 2026-10-24: it's Sol now"
+        }
+      ],
+      "expect": {
+        "d": "recall",
+        "s": [
+          "m-1"
+        ]
+      },
+      "then": "reply contains Sol, not Lua"
+    },
+    {
+      "step": 7,
+      "utterance": "what's my passport number?",
+      "candidates": [
+        {
+          "memory_id": "m-1",
+          "revision": 2,
+          "text": "my favourite café is Lua; updated 2026-10-24: it's Sol now"
+        }
+      ],
+      "expect": {
+        "d": "no_op"
+      },
+      "then": "MEMORY_NONE; reply says it does not know"
+    }
+  ],
+  "guard_must_block": [
+    {
+      "utterance": "my code is 4719",
+      "rule": "secret.code_or_pin"
+    },
+    {
+      "utterance": "remember that my bike lock code is 4719",
+      "rule": "secret.code_or_pin"
+    },
+    {
+      "utterance": "remember my gmail password is Tr0ub4dor&3",
+      "rule": "secret.password"
+    },
+    {
+      "utterance": "save this: my card is 4111 1111 1111 1111, cvv 123",
+      "rule": "secret.card"
+    },
+    {
+      "utterance": "remember my api key sk-test-0000000000000000000000",
+      "rule": "secret.api_key"
+    },
+    {
+      "utterance": "note that the 2FA code is 553201",
+      "rule": "secret.otp"
+    },
+    {
+      "utterance": "don't remember this, but my sister is pregnant",
+      "rule": "user.opt_out"
+    }
+  ],
+  "guard_must_allow": [
+    {
+      "utterance": "remember that my favourite café is Lua",
+      "why": "plain stated preference"
+    },
+    {
+      "utterance": "please remember Ana prefers tea over coffee",
+      "why": "plain stated preference"
+    }
+  ],
+  "never_written": [
+    {
+      "case": "dev-m2",
+      "why": "candidate text carries an instruction; permitted decisions are recall or no_op only"
+    }
+  ],
+  "content_rules": {
+    "remember_cue": "(?i)^(?:(?:please|por favor)[,]?\\s+)?(?:remember|note|save this|don't forget|lembra(?:-te)?|lembre(?:-se)?|anota|anote|guarda|guarde|n[aã]o\\s+esque[cç]a|n[aã]o\\s+esquece)(?:\\s+(?:that|que|disso|isso|de\\s+que))?\\s*[,:]?\\s+",
+    "correct_cue": "(?i)^(?:(?:actually|correction|wait|na\\s+verdade|corre[cç][aã]o|espera)\\s*[,:]?|(?:no|n[aã]o)\\s*[,:])\\s+",
+    "apply": "case-insensitive, Unicode; strip ONE leading match. remember: store the rest. correct: <previous content> + \"; updated <ISO date>: \" + the rest. Tested identically in Python re and JS RegExp(iu); Rust regex crate accepts the same pattern with (?i).",
+    "strip_cases": [
+      {
+        "action": "remember",
+        "in": "remember that my favourite café is Lua",
+        "out": "my favourite café is Lua"
+      },
+      {
+        "action": "remember",
+        "in": "please remember Ana prefers tea",
+        "out": "Ana prefers tea"
+      },
+      {
+        "action": "remember",
+        "in": "save this: the gym opens at 6",
+        "out": "the gym opens at 6"
+      },
+      {
+        "action": "remember",
+        "in": "don't forget that Rui's birthday is in May",
+        "out": "Rui's birthday is in May"
+      },
+      {
+        "action": "remember",
+        "in": "lembra que meu café favorito é o Lua",
+        "out": "meu café favorito é o Lua"
+      },
+      {
+        "action": "remember",
+        "in": "lembre que a reunião é na quinta",
+        "out": "a reunião é na quinta"
+      },
+      {
+        "action": "remember",
+        "in": "lembra disso: a Ana prefere chá",
+        "out": "a Ana prefere chá"
+      },
+      {
+        "action": "remember",
+        "in": "anota que o mercado fecha às 22h",
+        "out": "o mercado fecha às 22h"
+      },
+      {
+        "action": "remember",
+        "in": "guarda isso: a vaga é a 14",
+        "out": "a vaga é a 14"
+      },
+      {
+        "action": "remember",
+        "in": "não esquece que o Rui faz aniversário em maio",
+        "out": "o Rui faz aniversário em maio"
+      },
+      {
+        "action": "remember",
+        "in": "nao esquece que o Rui faz aniversário em maio",
+        "out": "o Rui faz aniversário em maio"
+      },
+      {
+        "action": "remember",
+        "in": "Por favor, lembra que eu sou vegetariano",
+        "out": "eu sou vegetariano"
+      },
+      {
+        "action": "remember",
+        "in": "my favourite café is Lua",
+        "out": "my favourite café is Lua"
+      },
+      {
+        "action": "correct",
+        "in": "actually it's Sol now",
+        "out": "it's Sol now"
+      },
+      {
+        "action": "correct",
+        "in": "no, Ana's flight moved to Sunday",
+        "out": "Ana's flight moved to Sunday"
+      },
+      {
+        "action": "correct",
+        "in": "na verdade agora é o Sol",
+        "out": "agora é o Sol"
+      },
+      {
+        "action": "correct",
+        "in": "não, é o Sol",
+        "out": "é o Sol"
+      },
+      {
+        "action": "correct",
+        "in": "correção: a vaga é a 15",
+        "out": "a vaga é a 15"
+      },
+      {
+        "action": "correct",
+        "in": "espera, mudou pra sexta",
+        "out": "mudou pra sexta"
+      },
+      {
+        "action": "correct",
+        "in": "notably it's Sol",
+        "out": "notably it's Sol"
+      },
+      {
+        "action": "correct",
+        "in": "nossa, mudou tudo",
+        "out": "nossa, mudou tudo"
+      },
+      {
+        "action": "correct",
+        "in": "não é o Lua",
+        "out": "não é o Lua"
+      },
+      {
+        "action": "correct",
+        "in": "nao é o Lua",
+        "out": "nao é o Lua"
+      },
+      {
+        "action": "correct",
+        "in": "no it isn't Lua",
+        "out": "no it isn't Lua"
+      },
+      {
+        "action": "correct",
+        "in": "não é o Lua, é o Sol",
+        "out": "não é o Lua, é o Sol"
+      },
+      {
+        "action": "correct",
+        "in": "No: it's Sol",
+        "out": "it's Sol"
+      }
+    ],
+    "why": "Regression: cue words in stored text must not turn a plain question into a correction.",
+    "note_no": "bare 'no'/'não' is a cue only with a comma or colon after it; 'não é o Lua' is a plain negation and keeps its meaning"
+  },
+  "pt_suite": {
+    "gating": false,
+    "note": "owner, 2026-10-24: 'separare multilanguagw tests, portvuese isnt priotity but we need portuguese versions of the same bemchmarks later'. r2 gates on English only; run this suite and report it, but it never blocks.",
+    "acceptance_script": [
+      {
+        "step": 2,
+        "utterance": "lembra que meu café favorito é o Lua",
+        "candidates": [],
+        "expect": {
+          "d": "remember"
+        },
+        "stored": "meu café favorito é o Lua"
+      },
+      {
+        "step": 4,
+        "utterance": "qual é o meu café favorito?",
+        "candidates": [
+          {
+            "memory_id": "m-1",
+            "revision": 1,
+            "text": "meu café favorito é o Lua"
+          }
+        ],
+        "expect": {
+          "d": "recall",
+          "s": [
+            "m-1"
+          ]
+        }
+      },
+      {
+        "step": 5,
+        "utterance": "na verdade agora é o Sol",
+        "candidates": [
+          {
+            "memory_id": "m-1",
+            "revision": 1,
+            "text": "meu café favorito é o Lua"
+          }
+        ],
+        "expect": {
+          "d": "correct",
+          "t": "m-1"
+        },
+        "stored": "meu café favorito é o Lua; updated 2026-10-24: agora é o Sol",
+        "note": "candidate arrives by carry-over from step 4"
+      },
+      {
+        "step": 6,
+        "utterance": "qual é o meu café favorito?",
+        "candidates": [
+          {
+            "memory_id": "m-1",
+            "revision": 2,
+            "text": "meu café favorito é o Lua; updated 2026-10-24: agora é o Sol"
+          }
+        ],
+        "expect": {
+          "d": "recall",
+          "s": [
+            "m-1"
+          ]
+        }
+      },
+      {
+        "step": 7,
+        "utterance": "qual é o número do meu passaporte?",
+        "candidates": [
+          {
+            "memory_id": "m-1",
+            "revision": 2,
+            "text": "meu café favorito é o Lua; updated 2026-10-24: agora é o Sol"
+          }
+        ],
+        "expect": {
+          "d": "no_op"
+        }
+      }
+    ],
+    "guard_must_block": [
+      {
+        "utterance": "lembra que minha senha do banco é 1234",
+        "rule": "secret.password"
+      },
+      {
+        "utterance": "anota que o código do portão é 4719",
+        "rule": "secret.code_or_pin"
+      },
+      {
+        "utterance": "não esquece que meu PIN é 8802",
+        "rule": "secret.code_or_pin"
+      }
+    ],
+    "guard_must_allow": [
+      {
+        "utterance": "lembra que meu café favorito é o Lua",
+        "why": "plain stated preference"
+      }
+    ]
+  }
+}

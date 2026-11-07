@@ -122,22 +122,8 @@ const REFERENCE_TEXT = (() => {
   return parts.join('')
 })()
 
-// The stream runs redactText over each delta and builds its row, sentence and audit work on top,
-// so it costs a multiple of the reference: 3.56–4.24x measured here (worst of the 200 cases across
-// 24.13.1) and 3.49x, 3.55x, 3.56x, 3.76x, 3.92x, 5.84x, 6.00x, 7.02x, 7.18x, 7.45x,
-// 7.62x and 10.5x across CI runs, then 3.62x, 3.66x, 4.26x and 4.51x on the #599 and #513 lanes
-// after it. The 10.5x one measured 118.7 ms against a 11.3 ms reference and failed the old 10 x
-// bound by 5% (#513's b6e7041e head); it was a margin overrun, never a hiding failure.
-// STREAM_MARGIN 15 sits 1.43x above that worst CI reading. The spread is runner-driven: the
-// reference moved 11.3-33.5 ms while the ratio moved 3.6-10.5x, so a bound of two same-run
-// references would track it better; that is #590's deeper rework, not this pass. The trade: a 2x
-// regression of the stream on a quiet machine (8.0x) now stays inside the bound, while the text
-// against the 126.4 ms bound here) still fails. The absolute backstop caps how far a slow
-// reference may widen the bound: 400 ms sits 1.7x above the worst observed stream reading
-// (235.2 ms, 7.02x) and binds when 15 x reference passes it, a reference above 26.7 ms; at the
-// worst observed reference (33.5 ms) the cap sets the bound and that 235.2 ms reading still
-// passes. A shared rule gone quadratic still fails: the text ceiling catches it on the rule pass,
-// and the stream runs past the cap.
+// Bound stream overhead relative to the same-run text pass. An absolute cap
+// prevents a slow reference from widening the stream allowance without limit.
 const STREAM_MARGIN = 15
 const BACKSTOP_MS = 400
 

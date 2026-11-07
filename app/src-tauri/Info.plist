@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Merged into the app's Info.plist by tauri-build. The microphone is opened natively, only
+	     by the app itself while a dictation runs (dictation.rs, transcribed on this Mac). The
+	     webview's media requests stay denied by the app's native permission handler. No camera or
+	     screen strings. The Portuguese prompt is pt-BR.lproj/InfoPlist.strings (dictation/lproj). -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Unfold uses the microphone only while you dictate into the chat bar (transcribed on this Mac; the audio never leaves it).</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>pt-BR</string>
+	</array>
+</dict>
+</plist>

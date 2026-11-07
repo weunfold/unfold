@@ -1,0 +1,2 @@
+/* Settings > Privacy: what the microphone prompt says (Info.plist NSMicrophoneUsageDescription). */
+"NSMicrophoneUsageDescription" = "Unfold usa o microfone só enquanto você dita na barra de conversa (a transcrição é feita no seu Mac e o áudio não sai do seu Mac).";

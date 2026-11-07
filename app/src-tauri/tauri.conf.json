@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Unfold",
+  "version": "0.4.12",
+  "identifier": "ai.namastex.rth.desktop",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'",
+      "capabilities": [
+        "welcome",
+        "settings",
+        "dictation"
+      ]
+    },
+    "macOSPrivateApi": true
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "app"
+    ],
+    "category": "Productivity",
+    "shortDescription": "Unfold",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.png"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "13.0",
+      "frameworks": ["gen/frameworks/libsherpa-onnx-c-api.dylib", "gen/frameworks/libonnxruntime.dylib"]
+    },
+    "resources": {
+      "gen/turn-models/": "turn-models/",
+      "dictation/lproj/en.lproj/": "en.lproj/",
+      "dictation/lproj/pt-BR.lproj/": "pt-BR.lproj/", "licenses/": "licenses/"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJGQjIwNzYyMTAzNDQ0MTcKUldRWFJEUVFZZ2V5TCswUVRBaXBjU0FtdmhyZzRad1duQnBXZVpwYytNazBLcXVJclRuQzJza3QK",
+      "endpoints": [
+        "https://github.com/weunfold/unfold/releases/latest/download/latest.json"
+      ],
+      "requireSignedVersion": true
+    }
+  }
+}

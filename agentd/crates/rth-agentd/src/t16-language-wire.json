@@ -1,0 +1,30 @@
+[
+  {
+    "source_row": 439,
+    "wire": "[Unfold was interrupted. Complete speech segments rendered before interruption: \"Deixa eu pensar. A frase ficou pela metade,\". Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\nEu falei muito bom, pode continuar.",
+    "assistant_source_row": 441,
+    "assistant_result_text": "Got it, I'll continue from where the line about Saturn stopped. Saturn is famous for its rings, made of ice and rock, and it's the second largest planet. It's also a gas giant, with density so low that, in theory, it would float in water. Among its moons, Titan has a thick atmosphere and lakes of methane.\n\nUranus and Neptune are the ice giants, farther out and very cold. Uranus rotates almost on its side, with its axis tilted nearly ninety degrees, which creates extreme seasons. Neptune is the farthest from the Sun, has extremely strong winds, and was the first planet discovered by calculation, before it was ever observed.\n\nPluto is left out: since 2006 it's classified as a dwarf planet, along with other bodies in the Kuiper Belt. Want me to go into detail on any of them, or talk about the moons and rings?"
+  },
+  {
+    "source_row": 442,
+    "wire": "[Unfold was interrupted. Complete speech segments rendered before interruption: \"Got it, I'll continue from where the line about Saturn stopped.\". Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\nPor que você começou a falar inglês?",
+    "assistant_source_row": 444,
+    "assistant_result_text": "You're right, I slipped. Your last messages were in Portuguese, so I should have kept answering in Portuguese. I'll stay in it from here on.\n\nQuer que eu retome de Saturno, falando das luas e dos anéis, ou você prefere outro assunto?"
+  },
+  {
+    "source_row": 448,
+    "wire": "[Unfold was interrupted. Complete speech segments rendered before interruption: \"\". Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\nOlha a capital da Austrália.",
+    "assistant_source_row": 450,
+    "assistant_result_text": "The capital of Australia is Canberra. It's not Sydney or Melbourne, which are the two biggest cities, but a planned city built between them, chosen as a compromise in 1908 and designed largely by Walter Burley Griffin. So if you want one name: Canberra."
+  },
+  {
+    "source_row": 451,
+    "wire": "[Unfold was interrupted. Complete speech segments rendered before interruption: \"The capital of Australia is Canberra.\". Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\ne da Nova Zelândia.",
+    "assistant_source_row": 453,
+    "assistant_result_text": "The capital of New Zealand is Wellington. It sits at the southern end of the North Island, and it's a smaller city than Auckland, which is the country's largest."
+  },
+  {
+    "source_row": 454,
+    "wire": "[Unfold was interrupted. Complete speech segments rendered before interruption: \"\". Any partial final segment is omitted; the rest of the generated reply was not rendered. This is a playout observation, not a correction of saved history.]\n\nValeu!"
+  }
+]

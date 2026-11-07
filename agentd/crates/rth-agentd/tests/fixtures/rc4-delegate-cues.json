@@ -1,0 +1,177 @@
+{
+  "version": "rc4-delegate-cues-1",
+  "date": "2026-10-25",
+  "delegate_cue": "(?i)^(?:(?:please|por\\s+favor)[,]?\\s+)?(?:(?:can|could|would|will)\\s+you\\s+(?:please\\s+)?|(?:pode|poderia|consegue)\\s+)?(?:delegate(?:\\s+(?:this|that|it|isso|isto|essa|esse|esta|este))?|hand\\s+(?:this|that|it|isso|isto|essa|esse|esta|este)\\s+off|(?:do|run|work\\s+on|handle)\\s+(?:this|that|it|isso|isto|essa|esse|esta|este)\\s+in\\s+the\\s+background|background\\s+(?:this|that|it|isso|isto|essa|esse|esta|este)|delega(?:r)?(?:\\s+(?:this|that|it|isso|isto|essa|esse|esta|este))?|delegue(?:\\s+(?:this|that|it|isso|isto|essa|esse|esta|este))?|(?:faz|fa[cç]a|fazer|roda|rode|rodar|resolve|resolva|resolver)\\s+(?:this|that|it|isso|isto|essa|esse|esta|este)\\s+em\\s+segundo\\s+plano)(?:\\s*[,:.!?]\\s*|\\s+|$)",
+  "delegate_negated": "(?i)^(?:(?:please|por\\s+favor)[,]?\\s+)?(?:don['’]t|do\\s+not|never|n[aã]o|nunca)\\s+(?:delegate|delega|delegue|hand|fa[cç]a|faz|roda|rode)\\b",
+  "order": [
+    "remember_cue",
+    "forget_dismiss",
+    "correct_cue",
+    "forget_cue",
+    "delegate_negated",
+    "delegate_cue"
+  ],
+  "apply": "Match case-insensitively at the start after memory cues. Negated delegation remains a model turn. A positive cue strips one leading cue and submits only the remaining content.",
+  "strip_cases": [
+    {
+      "in": "delegate this: compare the three flat offers and rank them by price per m²",
+      "action": "delegate",
+      "out": "compare the three flat offers and rank them by price per m²"
+    },
+    {
+      "in": "Delegate: write the SQL for monthly totals per city",
+      "action": "delegate",
+      "out": "write the SQL for monthly totals per city"
+    },
+    {
+      "in": "please delegate this, summarise the 40-page report",
+      "action": "delegate",
+      "out": "summarise the 40-page report"
+    },
+    {
+      "in": "can you delegate this: plan a 3-day trip to Porto",
+      "action": "delegate",
+      "out": "plan a 3-day trip to Porto"
+    },
+    {
+      "in": "do this in the background: check which of my notes mention Rui",
+      "action": "delegate",
+      "out": "check which of my notes mention Rui"
+    },
+    {
+      "in": "run it in the background, the price comparison",
+      "action": "delegate",
+      "out": "the price comparison"
+    },
+    {
+      "in": "hand this off: draft the reply to the landlord",
+      "action": "delegate",
+      "out": "draft the reply to the landlord"
+    },
+    {
+      "in": "background this: find the cheapest flight on Friday",
+      "action": "delegate",
+      "out": "find the cheapest flight on Friday"
+    },
+    {
+      "in": "delega isso: compara os três orçamentos",
+      "action": "delegate",
+      "out": "compara os três orçamentos"
+    },
+    {
+      "in": "delegue: resumir o contrato de aluguel",
+      "action": "delegate",
+      "out": "resumir o contrato de aluguel"
+    },
+    {
+      "in": "faz isso em segundo plano: organiza minhas notas da semana",
+      "action": "delegate",
+      "out": "organiza minhas notas da semana"
+    },
+    {
+      "in": "faça isso em segundo plano, a planilha de gastos",
+      "action": "delegate",
+      "out": "a planilha de gastos"
+    },
+    {
+      "in": "por favor, roda isso em segundo plano: a comparação de preços",
+      "action": "delegate",
+      "out": "a comparação de preços"
+    },
+    {
+      "in": "pode delegar isso: escrever o e-mail pro síndico",
+      "action": "delegate",
+      "out": "escrever o e-mail pro síndico"
+    },
+    {
+      "in": "delegate this",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "Delegate it.",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "do that in the background",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "hand it off!",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "delega isso",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "faz isso em segundo plano",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "could you please delegate that?",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "resolve isso em segundo plano.",
+      "action": "delegate_previous",
+      "out": ""
+    },
+    {
+      "in": "don't delegate this, I want you to answer",
+      "action": "decide",
+      "out": "don't delegate this, I want you to answer"
+    },
+    {
+      "in": "do not hand this off",
+      "action": "decide",
+      "out": "do not hand this off"
+    },
+    {
+      "in": "não delega isso, responde você",
+      "action": "decide",
+      "out": "não delega isso, responde você"
+    },
+    {
+      "in": "não faça isso em segundo plano",
+      "action": "decide",
+      "out": "não faça isso em segundo plano"
+    },
+    {
+      "in": "I had to delegate this at work",
+      "action": "decide",
+      "out": "I had to delegate this at work"
+    },
+    {
+      "in": "what does delegate mean?",
+      "action": "decide",
+      "out": "what does delegate mean?"
+    },
+    {
+      "in": "delegated tasks are listed where?",
+      "action": "decide",
+      "out": "delegated tasks are listed where?"
+    },
+    {
+      "in": "the background of this photo is blue",
+      "action": "decide",
+      "out": "the background of this photo is blue"
+    },
+    {
+      "in": "isso roda em segundo plano?",
+      "action": "decide",
+      "out": "isso roda em segundo plano?"
+    },
+    {
+      "in": "delegação é importante",
+      "action": "decide",
+      "out": "delegação é importante"
+    }
+  ]
+}

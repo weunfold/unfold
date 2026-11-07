@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "welcome",
+  "description": "The first-run welcome page (local, bundled index.html) may send setup actions. No remote origin is listed, so none can invoke it.",
+  "local": true,
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "allow-rth-setup"
+  ]
+}

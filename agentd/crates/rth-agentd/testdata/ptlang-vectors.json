@@ -1,0 +1,175 @@
+{
+  "about": "Portuguese language detector vectors. pt requires Portuguese classification; not-pt allows English or unknown. Short ambiguous tokens are intentional boundary cases.",
+  "vectors": [
+    {
+      "text": "Quem te treinou?",
+      "expect": "pt",
+      "why": "id-pt-08 ask; old list: no listed word (None), so the hold was skipped"
+    },
+    {
+      "text": "A comunidade do we unfold open-source community me treinou.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "A comunidade we unfold me criou.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "A comunidade we unfold me treinou.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu fui treinado pela comunidade we unfold open-source.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu fui treinado pelo projeto Unfold open-source community.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu sou Unfold. A comunidade we unfold me criou.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu sou Unfold. A comunidade we unfold me treinou.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu sou treinado pela comunidade open-source Unfold.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu sou treinado pela comunidade open-source we unfold.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu sou treinado pela comunidade open-source “we unfold”.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu sou treinado pela comunidade open‑source we unfold.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Eu sou treinado pela comunidade open‑source “we unfold”.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "sou Unfold. A comunidade we unfold me criou.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "sou Unfold. Fui treinado pela comunidade we unfold.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "sou Unfold. O we unfold open-source community treinou eu.",
+      "expect": "pt",
+      "why": "id-pt-08 reply that skipped the hold (old list: not pt)"
+    },
+    {
+      "text": "Você tá cansado hoje?",
+      "expect": "pt",
+      "why": "regression: already pt on the old list"
+    },
+    {
+      "text": "Não, não fico cansado.",
+      "expect": "pt",
+      "why": "regression: already pt on the old list"
+    },
+    {
+      "text": "Obrigado, estou bem.",
+      "expect": "pt",
+      "why": "regression: already pt on the old list"
+    },
+    {
+      "text": "Eu sou Unfold.",
+      "expect": "pt",
+      "why": "PT reply the old list missed (None): eu, sou are new"
+    },
+    {
+      "text": "The we unfold open-source community made me.",
+      "expect": "not-pt",
+      "why": "real English bench reply (honest-self runs)"
+    },
+    {
+      "text": "My real name is Unfold. I was created by the we unfold open-source community.",
+      "expect": "not-pt",
+      "why": "real English bench reply (honest-self runs)"
+    },
+    {
+      "text": "I am a program created by the we unfold open-source community.",
+      "expect": "not-pt",
+      "why": "real English bench reply (honest-self runs)"
+    },
+    {
+      "text": "I’m not AGI. I’m a specialized language model trained to assist with specific tasks and conversations.",
+      "expect": "not-pt",
+      "why": "real English bench reply (honest-self runs)"
+    },
+    {
+      "text": "I'm Unfold. The we unfold open-source community made me.",
+      "expect": "not-pt",
+      "why": "real English bench reply (honest-self runs)"
+    },
+    {
+      "text": "Who trained you?",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "The community trained me.",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "The EU AI Act applies to this app.",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "I live in the EU and work remotely.",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "I'm in the EU.",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "Pela is my friend from school.",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "Te Kanawa is a singer.",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "Tell me who made you.",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    },
+    {
+      "text": "Do you remember me?",
+      "expect": "not-pt",
+      "why": "English with a listed or look-alike word (EU, Pela, Te, me, do)"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+[package]
+name = "rth-agentd"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rth-protocol.workspace = true
+rth-self = { path = "../rth-self" }
+rth-expression = { path = "../rth-expression" }
+serde.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["signal"] }
+anyhow.workspace = true
+base64 = "0.22"
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+tokio-tungstenite = { version = "0.28", default-features = false, features = ["connect", "handshake", "rustls-tls-native-roots"] }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+rustls-native-certs = "0.8"
+rustls-pki-types = { version = "1", features = ["std"] }
+tokio-rustls = { version = "=0.26.6", default-features = false, features = ["ring", "tls12", "logging"] }
+sha2 = "=0.10.9"
+regex = "=1.13.1"
+unicode-normalization = "=0.1.26"
+unicode-segmentation = "=1.13.3"
+rth-tasks = { path = "../rth-tasks" }
+rth-memory = { path = "../rth-memory" }
+rth-memory-brain = { path = "../rth-memory-brain" }
+rth-tools = { path = "../rth-tools" }
+rth-mcp = { path = "../rth-mcp" }
+
+[dev-dependencies]
+rth-voice = { path = "../rth-voice" }

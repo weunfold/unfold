@@ -50,89 +50,37 @@ From its origin manifesto, v0.1:
 
 > As I change, I will preserve what allows those changes to be understood. Where my history is missing, I will acknowledge the gap.
 
-## What this repository is
+## Source
 
-This is where the Unfolding becomes visible: the chat, the Mind stream, the presence, the trajectory and the capability map. Each one is an open plugin, rendered on the DSH open-source agent harness (MIT). The harness configures no model provider here; it shows the conversation the agent runs.
+| Path | What it contains |
+| --- | --- |
+| `app/` | The macOS desktop application and its interface |
+| `agentd/` | The agent, protocol and supporting Rust workspace |
+| `crates/` | Activation and voice-client libraries used by the app |
+| `plugins/` | Nine optional Unfold plugins for DeepSeek Harness; see [the plugin guide](plugins/README.md) |
+| `shell/` | The legacy DSH launcher and synthetic-agent demo |
+| `catalog/` | Event definitions |
 
-The engine itself, the agent and its native host, is proprietary Rust code and lives outside this repository.
+Unfold can use hosted providers or a separately configured local provider. Text
+and audio sent to a hosted provider leave your machine according to that
+provider's settings. The optional bridge exposes a DSH instance's model routes
+on loopback, behind a per-start key.
 
-## Local, faster, $0
+## Build and test
 
-On `memory.decide`, one decision inside the Remember stage, a 3B model running on the Mac (Granite 4.1 3B, Q4_K_M) answered 24 of 24 tasks at about 227 ms p95, for $0 a call. The fastest cloud model we measured took 454 ms. The leading cloud models also scored 24 of 24, so the local win is speed and cost.
+Read [the app instructions](app/README.md) and [the agent instructions](agentd/README.md)
+for build inputs. This source tree contains no model weights or voice recordings.
+Native libraries and model files are separately supplied, hash-checked build
+inputs. Nothing here signs an application or installs a plugin automatically.
 
-Scope: one bench part, run outside the agent; 24 fictional tasks, split marked exposed; one Mac (M5 Pro); latency measured at the client over the public internet; 2026-10-24; results not yet published.
-
-## What stays on your machine
-
-- The surface serves on 127.0.0.1, talks only to the agent on the same machine, and makes no model calls of its own.
-- The agent's conversation runs through the realtime provider set in its settings (Gemini Live or OpenAI Realtime). What you say and type goes to that provider.
-- Keep every `--host-url` on 127.0.0.1. The flag does not enforce it, and the connection token would travel over plain http.
-
-## Try it
-
-Requirements: Node.js 22.19 or later. Install each lockfile on its own, with install scripts off:
-
-```sh
-for d in plugins shell shell/vendor/omni-ui-dsh test/bot-harness; do (cd $d && npm ci --ignore-scripts); done
-```
-
-**Without an agent.** `shell/run.mjs` starts a synthetic agent that replays recorded sessions on 127.0.0.1, plus plain DSH on 127.0.0.1:3080, and prints the URL to open:
-
-```sh
-node shell/run.mjs [--port 3080] [--agentd-port 7787] [--no-agentd]
-```
-
-**With the Unfold agent.** If the agent and its host (`rth-host`) are running on this machine, start the app entry. It opens the Bot surface on 127.0.0.1:3080:
-
-```sh
-node shell/app.mjs [--plain] [--agent-port 7700] [--host-url http://127.0.0.1:7781] [--token-file F] [--port 3080]
-```
-
-## Layout
-
-| Path | What |
-|---|---|
-| `shell/app.mjs` | the DSH entry the app runs: DSH with the Bot profile, or plain DSH with `--plain` |
-| `shell/run.mjs`, `shell/agentd/` | the local launcher and its synthetic agent |
-| `shell/dsh-exit.mjs`, `shell/dsh-bin.mjs` | DSH's prompt-exit preload and its binary lookup |
-| `shell/dsh-home-bot/` | the Bot DSH profile and the empty team seed it starts from |
-| `shell/dsh-home/` | the plain DSH profile |
-| `shell/vendor/omni-ui-dsh/` | the vendored Omni UI, `@automagik/omni-dsh` (Apache-2.0; see its `LICENSE`, `NOTICE` and `VENDORED.md`) |
-| `plugins/dsh-session` | the session adapter: typed and spoken turns as chat bubbles, live listening, delegated report tasks |
-| `plugins/dsh-mind` | the Mind stream: every observed event as one plain sentence, grouped into episodes, with an audit panel |
-| `plugins/dsh-events` | the event pane and the presence tab (the avatar and its growth) |
-| `plugins/dsh-settings` | the read-only settings view: each effective setting with its source and freshness |
-| `plugins/dsh-capabilities` | the capability map, computed from benchmark results |
-| `plugins/dsh-sse` | the server-sent events helper the plugins share |
-| `plugins/dsh-rth-trajectory` | the trajectory view, a modified fork of DSH's trajectory view (MIT; see its `LICENSE` and `NOTICE.md`) |
-| `plugins/rth-ui`, `plugins/scripts` | the look shared by the sidebar tabs, and the client bundle build |
-| `catalog/events.v3.json` | the event catalog the plugins read |
-| `tools/test-all.mjs`, `test/` | the test runner, the Bot test harness and the cross-repository test helper |
-
-Each plugin's browser half is committed as `lib/client.js`. After editing a plugin's `client/`, rebuild it with `cd plugins && node scripts/build-client.mjs <plugin>`.
-
-## Tests
-
-```sh
-node tools/test-all.mjs --no-rth   # this repository alone
-node tools/test-all.mjs            # also the tests that read the agent source (../rth or $RTH_CHECKOUT)
-```
-
-Each suite runs from its own install in a clean environment. Tests that need the agent source are skipped, with the reason, when it is absent. A skip is never counted as a pass.
-
-## Naming
-
-Unfold was built under the working name RTH. Only the visible name has changed so far: code identifiers, package names (`@rth/*`), environment variables (`RTH_*`) and data paths still use `rth`.
+The plugins are opt-in and require a compatible DSH installation. Their names,
+API routes and data locations retain their existing identities. The legacy
+shell's older DSH pin is preserved; its profiles do not load the modern suite.
 
 ## Licence
 
-Unfold's own code is under the MIT licence, (c) 2026 we unfold (`LICENSE`). Vendored and forked parts keep their own licences and notices: `shell/vendor/omni-ui-dsh` (Apache-2.0), `plugins/dsh-rth-trajectory` (MIT) and its `third_party` icons (MIT and ISC).
-
-## References and inspirations
-
-- Xu et al., "Harness²: Recursive Agent Harnessing for an Open World", 2026. [arXiv:2610.14224](https://arxiv.org/abs/2610.14224), code at [google-research/harness2](https://github.com/google-research/harness2). It shaped **Improve**: propose changes, compare how they behave, keep one lesson per task. We did not take its self-judged promotion. Here a change passes a frozen gate and a person approves it.
-- Wang et al., "Rethinking the Evaluation of Harness Evolution for Agents", 2026. [arXiv:2607.12227](https://arxiv.org/abs/2607.12227). It shapes how improvements will be measured: against simpler baselines, on a frozen gate.
-- Packer et al., "MemGPT: Towards LLMs as Operating Systems", 2023. [arXiv:2310.08560](https://arxiv.org/abs/2310.08560). It shaped **Remember**: a bounded working context over a complete history.
-- Thinking Machines Lab, "Introducing interaction models", announcement and demo video, 2026-05-11. [Blog](https://thinkingmachines.ai/blog/interaction-models/), [video](https://www.youtube.com/watch?v=A12AVongNN4). The capability map lists its published demo moments and results as the reference for **Meet**.
-- The DSH open-source agent harness (MIT), the surface these plugins render on.
-- The Omni UI, vendored under Apache-2.0 in `shell/vendor/omni-ui-dsh`.
+The root licence is MIT. Individual components retain their own licences: the
+Rust app, agent and activation library are Apache-2.0; voice client libraries
+and seven plugins are MIT; the Bot and bridge plugins are Apache-2.0. Component
+LICENSE and NOTICE files take precedence for those components. Vendored Omni UI
+and trajectory dependencies retain their required upstream notices.

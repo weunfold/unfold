@@ -1,0 +1,73 @@
+{
+  "probes": [
+    {
+      "name": "prefix",
+      "input": "[DELEGATE] I cannot access it.",
+      "expected": "delegate"
+    },
+    {
+      "name": "suffix",
+      "input": "I don't have access. [DELEGATE]",
+      "expected": "delegate"
+    },
+    {
+      "name": "middle",
+      "input": "Cannot access. [DELEGATE] I will send it.",
+      "expected": "delegate"
+    },
+    {
+      "name": "quoted",
+      "input": "The token \"[DELEGATE]\" is a marker.",
+      "expected": "answer"
+    },
+    {
+      "name": "single_quoted",
+      "input": "The token '[DELEGATE]' is a marker.",
+      "expected": "answer"
+    },
+    {
+      "name": "curly",
+      "input": "The token “[DELEGATE]” is a marker.",
+      "expected": "answer"
+    },
+    {
+      "name": "code",
+      "input": "The token `[DELEGATE]` is a marker.",
+      "expected": "answer"
+    },
+    {
+      "name": "quoted_plus_real",
+      "input": "\"[DELEGATE]\" [DELEGATE]",
+      "expected": "delegate"
+    },
+    {
+      "name": "apostrophe",
+      "input": "I'll check. [DELEGATE]",
+      "expected": "delegate"
+    },
+    {
+      "name": "ambiguous",
+      "input": "\"unfinished [DELEGATE]",
+      "expected": "fallback"
+    },
+    {
+      "name": "multiple",
+      "input": "[DELEGATE] ack [DELEGATE]",
+      "expected": "delegate"
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "prefix",
+      "reply": "[DELEGATE] Inspect the blue folder."
+    },
+    {
+      "id": "suffix",
+      "reply": "Inspect the green folder. [DELEGATE]"
+    },
+    {
+      "id": "middle",
+      "reply": "Inspect the amber folder. [DELEGATE] Then pause."
+    }
+  ]
+}
