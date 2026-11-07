@@ -111,10 +111,10 @@ pub fn find_marks(bytes: &[u8]) -> Vec<(u16, u16)> {
     let mut found = Vec::new();
     let mut i = 0;
     while i + MARK_LEN <= bytes.len() {
-        if &bytes[i..i + MARK_PREFIX.len()] == MARK_PREFIX {
-            if let Some(m) = parse_mark(&bytes[i..i + MARK_LEN]) {
-                found.push(m);
-            }
+        if &bytes[i..i + MARK_PREFIX.len()] == MARK_PREFIX
+            && let Some(m) = parse_mark(&bytes[i..i + MARK_LEN])
+        {
+            found.push(m);
         }
         i += 1;
     }
