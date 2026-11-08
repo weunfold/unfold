@@ -1,0 +1,9 @@
+# Mounts Unfold's capability map; the browser half is discovered through the package's dsh.client
+# manifest and ./client export.
+#
+# The row's Config (index.js) names the capability registry and the bench results to read; with
+# neither, the map is empty and says so. Installed into someone's own DSH, this patch adds that row
+# and changes nothing of theirs: the plugin only reads the files its config names.
+- insert:
+    - id: unfold-capabilities
+      name: '@automagik/unfold-capabilities-dsh'

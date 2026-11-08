@@ -1,0 +1,87 @@
+{
+  "name": "@automagik/unfold-events-dsh",
+  "version": "3.90.7",
+  "description": "What Unfold's agent is doing, inside DSH: a right-sidebar tab with every event the agent sends, named in plain words and newest first, and Unfold's presence tab. It only watches: it attaches to the agent as a read-only observer through the address Unfold publishes for its own instance, and opens no port",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "events"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-events-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-events-dsh"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./observer": "./src/observer.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "catalog/",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --import ./test/harness-resolve.mjs --test --test-force-exit \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "dependencies": {
+    "zod": "4.6.5"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold events"
+      },
+      "description": {
+        "en": "See what Unfold's agent is doing, inside the Unfold instance's DSH. Adds two right-sidebar tabs: Unfold events, every event the agent sends in plain words, newest first; and Unfold, its presence, which says what it is doing right now. It only watches: it attaches to the agent read-only, through the address Unfold publishes for its own instance, and opens no port. Outside an Unfold instance it has nothing to show. Part of Unfold; works with the Unfold app."
+      },
+      "category": "automagik",
+      "keywords": [
+        "unfold",
+        "events",
+        "presence",
+        "observer"
+      ]
+    }
+  }
+}

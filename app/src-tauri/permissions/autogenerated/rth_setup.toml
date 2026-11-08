@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-rth-setup"
+description = "Enables the rth_setup command without any pre-configured scope."
+commands.allow = ["rth_setup"]
+
+[[permission]]
+identifier = "deny-rth-setup"
+description = "Denies the rth_setup command without any pre-configured scope."
+commands.deny = ["rth_setup"]

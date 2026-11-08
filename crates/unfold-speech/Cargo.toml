@@ -1,0 +1,15 @@
+[package]
+name = "unfold-speech"
+version = "0.1.0"
+edition = "2021"
+description = "Unfold's client for LocalFleet's TTS API: streamed speech events, re-split on truncation, a local voice catalogue"
+license = "MIT"
+
+[dependencies]
+speech-markup = { path = "../speech-markup" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+sha2 = "0.10"
+
+[workspace]

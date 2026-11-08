@@ -1,0 +1,15 @@
+[workspace]
+members = ["crates/rth-protocol", "crates/rth", "crates/rth-agentd", "crates/rth-bench", "crates/rth-voice", "crates/rth-deploy", "crates/rth-tasks", "crates/rth-memory", "crates/rth-memory-brain", "crates/rth-tools", "crates/rth-mcp", "crates/rth-self", "crates/rth-expression"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+
+[workspace.dependencies]
+rth-protocol = { path = "crates/rth-protocol", features = ["io"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1.47", features = ["rt-multi-thread", "macros", "net", "io-util", "time", "sync", "fs"] }
+anyhow = "1"

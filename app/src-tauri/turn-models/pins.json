@@ -1,0 +1,22 @@
+[
+  {
+    "name": "smart-turn-v3.2-cpu.onnx",
+    "url": "https://huggingface.co/pipecat-ai/smart-turn-v3/resolve/f766f81d3cfdf7737ac64aad813d91bbfd56bf93/smart-turn-v3.2-gpu.onnx",
+    "sha256": "ab8dc64b88713f90b571c15b714bd1330e6c883cad8763dacf65c9376dc539be",
+    "bytes": 32411198,
+    "variant": "fp32 weights (upstream gpu filename), CPU provider only"
+  },
+  {
+    "name": "silero_vad.onnx",
+    "url": "https://raw.githubusercontent.com/snakers4/silero-vad/066409f3d9db45a30d21dfcbf9147826ffdd7052/src/silero_vad/data/silero_vad.onnx",
+    "sha256": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3",
+    "bytes": 2327524
+  },
+  {
+    "name": "backchannel-int8.onnx",
+    "bytes": 2330269,
+    "sha256": "668506592e7d8e115bcd7b9e6cd6bb17b058b1cbfeac33a2996d0a59e80c6d6c",
+    "url": "https://huggingface.co/pipecat-ai/backchannel-detector/resolve/4896f4774cdf1a9c5b581b0cd4a0c4000e8bb854/backchannel-int8.onnx",
+    "license": "BSD-2-Clause"
+  }
+]

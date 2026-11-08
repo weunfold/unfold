@@ -1,0 +1,11 @@
+[package]
+name = "rth-voice"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+
+[dependencies]
+rth-protocol.workspace = true
+base64 = "0.22"
+sha2 = "=0.10.9"

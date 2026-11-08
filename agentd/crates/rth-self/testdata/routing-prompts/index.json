@@ -1,0 +1,68 @@
+[
+  {
+    "device": "Mac",
+    "file": "flash-mac.txt",
+    "memory": true,
+    "prompt": "unfold-flash-text-v3",
+    "prompt_sha256": "cd4a416fa5d90620bbc7cdfd48c99b7dee53e97d9bbc7ccc52be4c7cada94879",
+    "route": "flash"
+  },
+  {
+    "device": "Mac",
+    "file": "granite-mac.txt",
+    "memory": true,
+    "prompt": "unfold-local-text-v4.1",
+    "prompt_sha256": "dca565dec389ea6fccd025a142085f23c2953a80fba025a5779125a128833dd1",
+    "route": "granite"
+  },
+  {
+    "device": "Mac",
+    "file": "pt-hint-mac.txt",
+    "prompt": "pt-hint",
+    "route": "any"
+  },
+  {
+    "device": "MacBook",
+    "file": "flash-macbook.txt",
+    "memory": true,
+    "prompt": "unfold-flash-text-v3",
+    "prompt_sha256": "e6d61f468dc5e519593d0c974850b061686224a8516eb48ce1821b69d5d3493d",
+    "route": "flash"
+  },
+  {
+    "device": "MacBook",
+    "file": "granite-macbook.txt",
+    "memory": true,
+    "prompt": "unfold-local-text-v4.1",
+    "prompt_sha256": "c9a1415256465af49f87e976b98f344d8270ecc449e92117945773306d672a06",
+    "route": "granite"
+  },
+  {
+    "device": "MacBook",
+    "file": "pt-hint-macbook.txt",
+    "prompt": "pt-hint",
+    "route": "any"
+  },
+  {
+    "device": "Windows PC",
+    "file": "flash-windows-pc.txt",
+    "memory": true,
+    "prompt": "unfold-flash-text-v3",
+    "prompt_sha256": "2c2c1df6043fbd926e2e2d8260f2566ca41866d25de906e40d0aa56d2634893d",
+    "route": "flash"
+  },
+  {
+    "device": "Windows PC",
+    "file": "granite-windows-pc.txt",
+    "memory": true,
+    "prompt": "unfold-local-text-v4.1",
+    "prompt_sha256": "7d52d6dbdf2df4381d8093f33aad80b31022936b899f0bb579206d056e39a763",
+    "route": "granite"
+  },
+  {
+    "device": "Windows PC",
+    "file": "pt-hint-windows-pc.txt",
+    "prompt": "pt-hint",
+    "route": "any"
+  }
+]

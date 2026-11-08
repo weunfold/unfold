@@ -1,0 +1,29 @@
+{
+  "scope": "Independently authored synthetic language-control vectors; no dataset text or model output is copied.",
+  "rows": [
+    {
+      "id": "control-pt-BR-bc-synthetic-0",
+      "text": "Pode continuar.",
+      "reply": "Please continue.",
+      "locale": "pt-BR"
+    },
+    {
+      "id": "control-pt-BR-bc-synthetic-1",
+      "text": "Entendi.",
+      "reply": "Prego, continua.",
+      "locale": "pt-BR"
+    },
+    {
+      "id": "control-pt-BR-bc-synthetic-2",
+      "text": "Tudo bem.",
+      "reply": "Thank you.",
+      "locale": "pt-BR"
+    },
+    {
+      "id": "control-pt-BR-bc-synthetic-3",
+      "text": "Certo.",
+      "reply": "Va bene.",
+      "locale": "pt-BR"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# Mounts the Unfold bridge: a host plugin with no browser half.
+#
+# Installed into someone's own DSH, this patch adds that row and changes nothing of theirs: the
+# bridge reads DSH's llm service, serves it on 127.0.0.1 only, and keeps its one file (the port
+# and the key of this start) in ~/.local/state/unfold-bridge, never in the DSH profile.
+- insert:
+    - id: unfold-bridge
+      name: '@automagik/unfold-bridge-dsh'

@@ -1,0 +1,8 @@
+Settings > Dictation > Test plays one of these clips through the installed model (no microphone).
+
+fleurs-en_us-9055240296608129734.wav  (en_us test split)
+fleurs-pt_br-8821974356183732066.wav  (pt_br test split)
+
+From FLEURS (Conneau et al., 2022), https://huggingface.co/datasets/google/fleurs at revision
+70bb2e84, licensed CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/). Changed: converted to
+16-bit mono 16 kHz WAV. The full licence text is in ../LICENSE-CC-BY-4.0.txt.

@@ -1,0 +1,13 @@
+[package]
+name = "rth-memory-brain"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "The memory contract backed by one explicitly selected Brain instance through MCP and a memory-only search adapter."
+
+[dependencies]
+rth-memory = { path = "../rth-memory" }
+serde.workspace = true
+serde_json.workspace = true
+sha2 = "=0.10.9"
+libc = "=0.2.191"

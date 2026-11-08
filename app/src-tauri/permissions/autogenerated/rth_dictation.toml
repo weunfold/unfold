@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-rth-dictation"
+description = "Enables the rth_dictation command without any pre-configured scope."
+commands.allow = ["rth_dictation"]
+
+[[permission]]
+identifier = "deny-rth-dictation"
+description = "Denies the rth_dictation command without any pre-configured scope."
+commands.deny = ["rth_dictation"]

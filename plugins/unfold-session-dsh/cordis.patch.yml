@@ -1,0 +1,4 @@
+# Installs the host plugin; DSH discovers its browser half through dsh.client.
+- insert:
+    - id: unfold-session
+      name: '@automagik/unfold-session-dsh'

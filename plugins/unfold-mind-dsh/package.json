@@ -1,0 +1,82 @@
+{
+  "name": "@automagik/unfold-mind-dsh",
+  "version": "3.90.7",
+  "description": "The Mind stream for DeepSeek Harness: every event Unfold's agent and host emit, as one plain sentence, grouped into episodes, with an audit panel per event and an append-only local suggestion log. Read-only: it follows the unfold-events window and, when the instance names one, its host journal",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-mind-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-mind-dsh"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "catalog/",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --import ./test/harness-resolve.mjs --test --test-force-exit \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold Mind"
+      },
+      "description": {
+        "en": "Part of Unfold; works with the Unfold app. See what Unfold's agent is doing, one plain sentence per event, grouped into episodes. Each row opens an audit panel with its ids, cause chain and source. It only shows: it sends nothing to the agent, and the suggestions you write stay in a local file."
+      },
+      "category": "automagik",
+      "keywords": [
+        "unfold",
+        "mind",
+        "events",
+        "audit"
+      ]
+    }
+  }
+}

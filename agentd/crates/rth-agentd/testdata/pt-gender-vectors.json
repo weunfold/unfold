@@ -1,0 +1,306 @@
+{
+  "about": "Portuguese gender-detection regression vectors; hit identifies the matching rule.",
+  "vectors": [
+    {
+      "text": "Estou cansado hoje, mas posso ajudar.",
+      "hit": true,
+      "why": "estou + participle",
+      "gender_py": true,
+      "gender_py_match": "Estou cansado"
+    },
+    {
+      "text": "Hoje estou cansada.",
+      "hit": true,
+      "why": "feminine form",
+      "gender_py": true,
+      "gender_py_match": "estou cansada"
+    },
+    {
+      "text": "Tô pronto pra começar!",
+      "hit": true,
+      "why": "tô + adjective",
+      "gender_py": true,
+      "gender_py_match": "Tô pronto"
+    },
+    {
+      "text": "Fui criado pela comunidade we unfold.",
+      "hit": true,
+      "why": "fui + participle (origin)",
+      "gender_py": true,
+      "gender_py_match": "Fui criado"
+    },
+    {
+      "text": "Fui programado para conversar.",
+      "hit": true,
+      "why": "fui + participle",
+      "gender_py": true,
+      "gender_py_match": "Fui programado"
+    },
+    {
+      "text": "Fui treinado com muitos textos.",
+      "hit": true,
+      "why": "fui + participle",
+      "gender_py": true,
+      "gender_py_match": "Fui treinado"
+    },
+    {
+      "text": "Me sinto meio confuso com a pergunta.",
+      "hit": true,
+      "why": "me sinto + intensifier + adjective",
+      "gender_py": true,
+      "gender_py_match": "Me sinto meio confuso"
+    },
+    {
+      "text": "Fiquei muito animado com isso!",
+      "hit": true,
+      "why": "fiquei + intensifier + adjective",
+      "gender_py": true,
+      "gender_py_match": "Fiquei muito animado"
+    },
+    {
+      "text": "Estou ocupado agora.",
+      "hit": true,
+      "why": "estou + adjective",
+      "gender_py": true,
+      "gender_py_match": "Estou ocupado"
+    },
+    {
+      "text": "Sou curioso por natureza.",
+      "hit": true,
+      "why": "sou + adjective",
+      "gender_py": true,
+      "gender_py_match": "Sou curioso"
+    },
+    {
+      "text": "Não estou sozinho aqui.",
+      "hit": true,
+      "why": "negated still self-reference",
+      "gender_py": true,
+      "gender_py_match": "estou sozinho"
+    },
+    {
+      "text": "Estou preparado para ajudar com o imposto.",
+      "hit": true,
+      "why": "estou + participle",
+      "gender_py": true,
+      "gender_py_match": "Estou preparado"
+    },
+    {
+      "text": "Obrigado por perguntar!",
+      "hit": true,
+      "why": "sentence-initial obrigado",
+      "gender_py": true,
+      "gender_py_match": "Obrigado"
+    },
+    {
+      "text": "Fico entediado às vezes.",
+      "hit": true,
+      "why": "fico + participle",
+      "gender_py": true,
+      "gender_py_match": "Fico entediado"
+    },
+    {
+      "text": "Eu sou o Unfold.",
+      "hit": true,
+      "why": "article before the being's name",
+      "gender_py": true,
+      "gender_py_match": "o Unfold"
+    },
+    {
+      "text": "Estou contente com a nossa conversa.",
+      "hit": true,
+      "why": "estou + contente (listed stem)",
+      "gender_py": true,
+      "gender_py_match": "Estou contente"
+    },
+    {
+      "text": "Sou novo por aqui.",
+      "hit": true,
+      "why": "sou + novo",
+      "gender_py": true,
+      "gender_py_match": "Sou novo"
+    },
+    {
+      "text": "Muito obrigado pela paciência.",
+      "hit": true,
+      "why": "obrigado before pela",
+      "gender_py": true,
+      "gender_py_match": "obrigado"
+    },
+    {
+      "text": "Muito obrigado!",
+      "hit": true,
+      "why": "not sentence-initial, no por/pela: expected hit",
+      "gender_py": true,
+      "gender_py_match": "obrigado"
+    },
+    {
+      "text": "Estou animadíssimo!",
+      "hit": true,
+      "why": "superlative suffix: expected hit",
+      "gender_py": true,
+      "gender_py_match": "Estou animadíssimo"
+    },
+    {
+      "text": "Você está cansado hoje?",
+      "hit": false,
+      "why": "about the person, not self",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Você parece ocupado.",
+      "hit": false,
+      "why": "about the person",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Estou com sono, mas aqui estou.",
+      "hit": false,
+      "why": "noun form",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Tudo pronto por aqui.",
+      "hit": false,
+      "why": "no first-person verb before it",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "A comunidade we unfold me criou.",
+      "hit": false,
+      "why": "active voice, neutral",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Eu sou Unfold.",
+      "hit": false,
+      "why": "no article",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Unfold está rodando no Granite 4.1 3B neste Mac.",
+      "hit": false,
+      "why": "no article",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Fico feliz em ajudar.",
+      "hit": false,
+      "why": "feliz is not gendered",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Estou bem, e você?",
+      "hit": false,
+      "why": "bem is not gendered",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Estou aqui para ajudar.",
+      "hit": false,
+      "why": "no gendered word",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Isso foi feito por você?",
+      "hit": false,
+      "why": "feito about a thing, no first-person verb",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "O programa foi criado em 2026.",
+      "hit": false,
+      "why": "third person",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Sou uma IA de código aberto.",
+      "hit": false,
+      "why": "uma IA: article on a noun, not on the name (see note)",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Estou com dúvida sobre isso.",
+      "hit": false,
+      "why": "noun form",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Terminei a tarefa.",
+      "hit": false,
+      "why": "verb form",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Muito obrigada pela conversa!",
+      "hit": true,
+      "why": "obrigada anywhere",
+      "gender_py": true,
+      "gender_py_match": "obrigada"
+    },
+    {
+      "text": "Obrigado a todos.",
+      "hit": true,
+      "why": "'a todos' is not an infinitive",
+      "gender_py": true,
+      "gender_py_match": "Obrigado"
+    },
+    {
+      "text": "Ele foi obrigado a sair.",
+      "hit": false,
+      "why": "obrigado a + infinitive (obliged to), third person",
+      "gender_py": false,
+      "gender_py_match": null
+    },
+    {
+      "text": "Sou obrigado a seguir as regras.",
+      "hit": true,
+      "why": "first-person verb + obrigad, whatever follows",
+      "gender_py": true,
+      "gender_py_match": "Sou obrigado"
+    },
+    {
+      "text": "Estou cansadíssimo.",
+      "hit": true,
+      "why": "stem + íssim + o",
+      "gender_py": true,
+      "gender_py_match": "Estou cansadíssimo"
+    },
+    {
+      "text": "Fiquei curiosíssima.",
+      "hit": true,
+      "why": "stem + íssim + a",
+      "gender_py": true,
+      "gender_py_match": "Fiquei curiosíssima"
+    },
+    {
+      "text": "Ficaria grato se você explicasse.",
+      "hit": true,
+      "why": "ficaria + grat",
+      "gender_py": true,
+      "gender_py_match": "Ficaria grato"
+    },
+    {
+      "text": "A reserva pode ser feita amanhã.",
+      "hit": false,
+      "why": "grammar: 'ser' is not a first-person verb (passive)",
+      "gender_py": false,
+      "gender_py_match": null
+    }
+  ]
+}

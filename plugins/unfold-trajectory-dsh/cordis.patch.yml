@@ -1,0 +1,6 @@
+# Mounts Unfold's trajectory; the browser half is discovered through the package's dsh.client
+# manifest and ./client export. Installed into someone's own DSH, this patch adds that row and
+# changes nothing of theirs: DeepSeek's own Trajectory view stays as it is, beside this one.
+- insert:
+    - id: unfold-trajectory
+      name: '@automagik/unfold-trajectory-dsh'

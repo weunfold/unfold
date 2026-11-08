@@ -1,0 +1,10 @@
+[package]
+name = "rth-expression"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rth-self = { path = "../rth-self" }
+serde.workspace = true
+serde_json.workspace = true

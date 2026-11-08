@@ -1,0 +1,243 @@
+{
+  "version": 2,
+  "models": [
+    {
+      "id": "nemotron-3.5-streaming-0.6b-q8",
+      "name": "Nemotron Streaming (live)",
+      "name_pt": "Nemotron Streaming (ao vivo)",
+      "maker": "NVIDIA",
+      "engine": "nemo",
+      "kind": "online",
+      "live": true,
+      "lang_option": true,
+      "choice": "multi",
+      "itn": true,
+      "languages": "English, Portuguese and 40 more",
+      "languages_pt": "Português, inglês e mais 40",
+      "released": "2026-06-04",
+      "licence": "OpenMDW-1.1",
+      "licence_file": "LICENSE-OpenMDW-1.1.txt",
+      "licence_url": "https://openmdw.ai/license/1-1/",
+      "notice": "NVIDIA Nemotron 3.5 ASR Streaming 0.6B (https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b), by NVIDIA, licensed under OpenMDW-1.1 (LICENSE-OpenMDW-1.1.txt). This file is NVIDIA's own GGUF build (Q8_0) for NeMo-Speech.cpp, downloaded from that repository at revision ea30d66debe3740a08b573244286791d423d6b3e. Unfold did not change it.",
+      "repo": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+      "revision": "ea30d66debe3740a08b573244286791d423d6b3e",
+      "files": [
+        {
+          "name": "nemotron-3.5-asr-streaming-0.6b.q8_0.gguf",
+          "size": 742090464,
+          "sha256": "3fc991d3badad7277c11030a7519832cddaf2057aafed6d4b25147e953a070b1"
+        }
+      ]
+    },
+    {
+      "id": "parakeet-tdt-0.6b-v3-q8",
+      "name": "Parakeet v3 (most accurate)",
+      "name_pt": "Parakeet v3 (mais preciso)",
+      "maker": "NVIDIA",
+      "engine": "nemo",
+      "kind": "offline",
+      "live": false,
+      "lang_option": true,
+      "itn": true,
+      "languages": "English, Portuguese and 23 more European languages",
+      "languages_pt": "Português, inglês e mais 23 línguas europeias",
+      "released": "2025-08-14",
+      "licence": "CC-BY-4.0",
+      "licence_file": "LICENSE-CC-BY-4.0.txt",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+      "notice": "NVIDIA Parakeet TDT 0.6B v3 (https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3), by NVIDIA, licensed under the Creative Commons Attribution 4.0 International licence (LICENSE-CC-BY-4.0.txt). This file is NVIDIA's own GGUF build (Q8_0) for NeMo-Speech.cpp, downloaded from that repository at revision 541d1f99c6b0c3cd0b11a95167540bb8edefd82b. Unfold did not change it.",
+      "repo": "nvidia/parakeet-tdt-0.6b-v3",
+      "revision": "541d1f99c6b0c3cd0b11a95167540bb8edefd82b",
+      "files": [
+        {
+          "name": "parakeet-tdt-0.6b-v3.q8_0.gguf",
+          "size": 713975456,
+          "sha256": "e3880d0aaaaf2c308ea2c35016b2b895c423eb3fda924c1b463d1c19b7f4d32e"
+        }
+      ]
+    },
+    {
+      "id": "parakeet-tdt_ctc-110m-en",
+      "name": "Parakeet Small (English only)",
+      "name_pt": "Parakeet Small (só inglês)",
+      "maker": "NVIDIA",
+      "engine": "sherpa",
+      "kind": "offline_ctc",
+      "live": false,
+      "choice": "en",
+      "languages": "English only",
+      "languages_pt": "Só inglês",
+      "released": "2024-09",
+      "licence": "CC-BY-4.0",
+      "licence_file": "LICENSE-CC-BY-4.0.txt",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+      "notice": "NVIDIA Parakeet TDT-CTC 110M English (https://huggingface.co/nvidia/parakeet-tdt_ctc-110m), by NVIDIA, licensed under the Creative Commons Attribution 4.0 International licence (LICENSE-CC-BY-4.0.txt). These files are converted: an ONNX conversion (CTC head) by the sherpa-onnx project (k2-fsa), downloaded from its release https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models (or the same files at https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet_tdt_ctc_110m-en-36000, revision 3af92f152d32c836acabf38f4c993bc96b80eb2d). Unfold did not change them further.",
+      "repo": "csukuangfj/sherpa-onnx-nemo-parakeet_tdt_ctc_110m-en-36000",
+      "revision": "3af92f152d32c836acabf38f4c993bc96b80eb2d",
+      "files": [
+        {
+          "name": "model.onnx",
+          "size": 458161021,
+          "sha256": "936806cf3dd0db5aba53f8c7410bb5632d7a8ad6b2c51009f5e4fc0890ec76bf"
+        },
+        {
+          "name": "tokens.txt",
+          "size": 9953,
+          "sha256": "450e56bd2f036fe5b6aa821865838cc5aa9d8b0106134ce9a9ba0664abe6cd10"
+        }
+      ],
+      "archive": {
+        "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-nemo-parakeet_tdt_ctc_110m-en-36000.tar.bz2",
+        "size": 434206949,
+        "sha256": "c3305c7f9ca024ede34c091dba69a2970152553af49c68035f72a942bbfbe645",
+        "dir": "sherpa-onnx-nemo-parakeet_tdt_ctc_110m-en-36000"
+      }
+    },
+    {
+      "id": "nemotron-3.5-streaming-0.6b-int8",
+      "name": "Nemotron Streaming, CPU version (live)",
+      "name_pt": "Nemotron Streaming, versão para CPU (ao vivo)",
+      "maker": "NVIDIA",
+      "kind": "online_transducer",
+      "live": true,
+      "languages": "English, Portuguese and 40 more",
+      "languages_pt": "Português, inglês e mais 40",
+      "released": "2026-06-04",
+      "licence": "OpenMDW-1.1",
+      "licence_file": "LICENSE-OpenMDW-1.1.txt",
+      "licence_url": "https://openmdw.ai/license/1-1/",
+      "notice": "NVIDIA Nemotron 3.5 ASR Streaming 0.6B (https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b), by NVIDIA, released under the OpenMDW License Agreement, version 1.1 (LICENSE-OpenMDW-1.1.txt). These files are an ONNX conversion (int8, 160 ms chunks) of NVIDIA's weights by the sherpa-onnx project (k2-fsa), downloaded from its release https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models (or the same files at https://huggingface.co/csukuangfj2/sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-160ms-int8-2026-06-11, revision b3a4dbde84fba1a13cb4270e6730b525ac6a2db6). Unfold did not change them.",
+      "repo": "csukuangfj2/sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-160ms-int8-2026-06-11",
+      "revision": "b3a4dbde84fba1a13cb4270e6730b525ac6a2db6",
+      "files": [
+        {
+          "name": "encoder.int8.onnx",
+          "size": 657601518,
+          "sha256": "e1b39e5e16bef578a54ed2fba5f031438e000cc36c3ea2ca49d55699d5baebd4"
+        },
+        {
+          "name": "decoder.int8.onnx",
+          "size": 14978075,
+          "sha256": "19f9c98fc6d0a2c33a65a43b36fdb2e914c26c0aa9764be3aebc502a1e982fb0"
+        },
+        {
+          "name": "joiner.int8.onnx",
+          "size": 9504438,
+          "sha256": "4101c7c679a0bc30483794b27a059e34e79232aa2068d78d51231a22c8b0d7ce"
+        },
+        {
+          "name": "tokens.txt",
+          "size": 131440,
+          "sha256": "729cc103155bafa785f9cd45746cd41cabe97eab7182fc04d594129587958f8a"
+        }
+      ],
+      "lang_option": true,
+      "archive": {
+        "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-160ms-int8-2026-06-11.tar.bz2",
+        "size": 475273363,
+        "sha256": "a81909a1780d84cff16d73c15e13e67d9d81d8839faf14870d507d8499f7a61a",
+        "dir": "sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-160ms-int8-2026-06-11"
+      },
+      "engine": "sherpa",
+      "fallback_for": "nemotron-3.5-streaming-0.6b-q8"
+    },
+    {
+      "id": "parakeet-tdt-0.6b-v3-int8",
+      "name": "Parakeet v3, CPU version",
+      "name_pt": "Parakeet v3, versão para CPU",
+      "maker": "NVIDIA",
+      "kind": "offline_transducer",
+      "live": false,
+      "languages": "English, Portuguese and 23 more European languages",
+      "languages_pt": "Português, inglês e mais 23 línguas europeias",
+      "released": "2025-08-14",
+      "licence": "CC-BY-4.0",
+      "licence_file": "LICENSE-CC-BY-4.0.txt",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+      "notice": "NVIDIA Parakeet TDT 0.6B v3 (https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3), by NVIDIA, licensed under the Creative Commons Attribution 4.0 International licence (LICENSE-CC-BY-4.0.txt). These files are converted: an ONNX conversion (int8) by the sherpa-onnx project (k2-fsa), downloaded from its release https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models (or the same files at https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8, revision 2bda32ec70b097a55adaa07d9a7173915b43cc78). Unfold did not change them further.",
+      "repo": "csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+      "revision": "2bda32ec70b097a55adaa07d9a7173915b43cc78",
+      "files": [
+        {
+          "name": "encoder.int8.onnx",
+          "size": 652184281,
+          "sha256": "acfc2b4456377e15d04f0243af540b7fe7c992f8d898d751cf134c3a55fd2247"
+        },
+        {
+          "name": "decoder.int8.onnx",
+          "size": 11845275,
+          "sha256": "179e50c43d1a9de79c8a24149a2f9bac6eb5981823f2a2ed88d655b24248db4e"
+        },
+        {
+          "name": "joiner.int8.onnx",
+          "size": 6355277,
+          "sha256": "3164c13fc2821009440d20fcb5fdc78bff28b4db2f8d0f0b329101719c0948b3"
+        },
+        {
+          "name": "tokens.txt",
+          "size": 93939,
+          "sha256": "d58544679ea4bc6ac563d1f545eb7d474bd6cfa467f0a6e2c1dc1c7d37e3c35d"
+        }
+      ],
+      "archive": {
+        "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8.tar.bz2",
+        "size": 487170055,
+        "sha256": "5793d0fd397c5778d2cf2126994d58e9d56b1be7c04d13c7a15bb1b4eafb16bf",
+        "dir": "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
+      },
+      "engine": "sherpa",
+      "fallback_for": "parakeet-tdt-0.6b-v3-q8"
+    },
+    {
+      "id": "parakeet-unified-en-0.6b-int8",
+      "name": "Parakeet Unified (English only, live)",
+      "name_pt": "Parakeet Unified (só inglês, ao vivo)",
+      "maker": "NVIDIA",
+      "kind": "online_transducer",
+      "live": true,
+      "languages": "English only",
+      "languages_pt": "Só inglês",
+      "released": "2026-04-07",
+      "licence": "NVIDIA Open Model License",
+      "licence_file": "LICENSE-NVIDIA-Open-Model-License.txt",
+      "licence_url": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/",
+      "attribution": "Licensed by NVIDIA Corporation under the NVIDIA Open Model License",
+      "notice": "NVIDIA Parakeet Unified EN 0.6B (https://huggingface.co/nvidia/parakeet-unified-en-0.6b, revision fe53cd885760c96b6a5f51a0bfd362cb4584a98b), by NVIDIA. Licensed by NVIDIA Corporation under the NVIDIA Open Model License (LICENSE-NVIDIA-Open-Model-License.txt, https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/). These files are an ONNX conversion (int8, streaming, 1120 ms chunks) of NVIDIA's weights by the sherpa-onnx project (k2-fsa), downloaded from its release https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models (or the same files at https://huggingface.co/csukuangfj2/sherpa-onnx-nemo-parakeet-unified-en-0.6b-int8-streaming-1120ms, revision 615bf8c5ad39692dc96cf1105afde73ec3eb2a59). Unfold did not change them.",
+      "source": {
+        "repo": "nvidia/parakeet-unified-en-0.6b",
+        "revision": "fe53cd885760c96b6a5f51a0bfd362cb4584a98b"
+      },
+      "repo": "csukuangfj2/sherpa-onnx-nemo-parakeet-unified-en-0.6b-int8-streaming-1120ms",
+      "revision": "615bf8c5ad39692dc96cf1105afde73ec3eb2a59",
+      "files": [
+        {
+          "name": "encoder.int8.onnx",
+          "size": 654046391,
+          "sha256": "1c03f1192de41771384af22972ca10203613ba56197a024f275b86727cd35911"
+        },
+        {
+          "name": "decoder.int8.onnx",
+          "size": 7257777,
+          "sha256": "34fea72425d2506600772ba191a6d3f99c0710abdb68d9a3dc89fa8cb2aa473a"
+        },
+        {
+          "name": "joiner.int8.onnx",
+          "size": 1735860,
+          "sha256": "869f43f7d24595c55581ad3bf249a935fb8a71389fbdaa7504b9f46f93140f8a"
+        },
+        {
+          "name": "tokens.txt",
+          "size": 8952,
+          "sha256": "dc0b4584ab2e4ddbf888425c076c61b736e7356a015250db7d307e6f1a8188ff"
+        }
+      ],
+      "archive": {
+        "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-nemo-parakeet-unified-en-0.6b-int8-streaming-1120ms.tar.bz2",
+        "size": 501356335,
+        "sha256": "4788229a6dd03be33f8243ccee48e33a8d15df7b448cb99150b0ccddd1b02d74",
+        "dir": "sherpa-onnx-nemo-parakeet-unified-en-0.6b-int8-streaming-1120ms"
+      },
+      "engine": "sherpa"
+    }
+  ]
+}

@@ -3,3 +3,10 @@ node_modules
 # Local test output
 .test-logs/
 .DS_Store
+
+# Native build output
+**/target/
+app/src-tauri/gen/
+
+# Locally generated system-voice test audio
+agentd/crates/rth/testdata/voice-fixtures/*.wav

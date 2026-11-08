@@ -1,0 +1,2 @@
+/* Settings > Privacy: what the microphone prompt says (Info.plist NSMicrophoneUsageDescription). */
+"NSMicrophoneUsageDescription" = "Unfold uses the microphone only while you dictate into the chat bar (transcribed on this Mac; the audio never leaves it).";

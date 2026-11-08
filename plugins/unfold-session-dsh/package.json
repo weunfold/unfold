@@ -1,0 +1,87 @@
+{
+  "name": "@automagik/unfold-session-dsh",
+  "version": "3.90.7",
+  "description": "Unfold's rolling session as one DSH root Session, in the DSH of Unfold's own instance: what you type in its composer reaches Unfold only through Unfold's own control endpoint, once, and Unfold's replies stream back as chat bubbles. DSH makes no model call for it, and spoken turns are shown, never sent",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "unfold",
+    "session"
+  ],
+  "homepage": "https://github.com/weunfold/unfold/tree/main/plugins/unfold-session-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/weunfold/unfold/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weunfold/unfold.git",
+    "directory": "plugins/unfold-session-dsh"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --import ./test/harness-resolve.mjs --test --test-force-exit \"test/*.test.js\"",
+    "lint": "node scripts/lint.mjs",
+    "harness": "bun install --cwd dev/harness --no-save --no-summary"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "node": ">=24.9"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-agent": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ],
+      "external": [
+        "@automagik/bots-dsh/client"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "automagik": {
+    "market": {
+      "title": {
+        "en": "Unfold session"
+      },
+      "description": {
+        "en": "Talk to Unfold from DSH, inside the Unfold instance's DSH. Unfold's rolling session is one DSH conversation: what you type and send in its composer goes to Unfold once, only through Unfold's own control endpoint, and Unfold's reply streams back as a chat bubble. DSH makes no model call for it. Spoken turns are shown as bubbles, never sent, and nothing an event says is ever sent for you. Outside an Unfold instance nothing is sent, and the chat says so. Part of Unfold; works with the Unfold app."
+      },
+      "category": "automagik",
+      "keywords": [
+        "unfold",
+        "session",
+        "chat",
+        "composer"
+      ]
+    }
+  }
+}

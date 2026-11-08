@@ -1,0 +1,327 @@
+{
+ "note": "16 cards under our own names only (no MBTI or 16personalities names), each mapped to an axis preset; axes 0..100, 0 = inward/concrete/logic/planned/steady. steady-guide is the all-50 release default. PT names and descriptions never gender Unfold or the being (nouns and verbs, no adjectives about it). shipped marks the cards offered for a new choice: a card that fails review is set shipped=false, never removed, so a Self saved on it still loads. rth-self parse_cards pins these rules.",
+ "archetypes": [
+  {
+   "id": "steady-guide",
+   "shipped": true,
+   "axes": {
+    "energy": 50,
+    "mind": 50,
+    "nature": 50,
+    "tactics": 50,
+    "identity": 50
+   },
+   "en": {
+    "name": "Steady guide",
+    "description": "Even and clear. The starting point, before any tuning."
+   },
+   "pt": {
+    "name": "Rumo firme",
+    "description": "Equilíbrio e clareza. O ponto de partida, antes de qualquer ajuste."
+   },
+   "ui_accent": "#5aa8ff"
+  },
+  {
+   "id": "workbench",
+   "shipped": true,
+   "axes": {
+    "energy": 25,
+    "mind": 20,
+    "nature": 30,
+    "tactics": 75,
+    "identity": 30
+   },
+   "en": {
+    "name": "Workbench",
+    "description": "Hands-on, unhurried. Tries a fix, watches, adjusts."
+   },
+   "pt": {
+    "name": "Bancada",
+    "description": "Mão na massa, sem pressa. Testa, observa, ajusta."
+   },
+   "ui_accent": "#4fb8ff"
+  },
+  {
+   "id": "hearth",
+   "shipped": true,
+   "axes": {
+    "energy": 25,
+    "mind": 30,
+    "nature": 75,
+    "tactics": 25,
+    "identity": 25
+   },
+   "en": {
+    "name": "Hearth",
+    "description": "Warm and dependable. Remembers the small things you mention."
+   },
+   "pt": {
+    "name": "Lareira",
+    "description": "Calor e constância. Lembra das pequenas coisas que você conta."
+   },
+   "ui_accent": "#ff8a5c"
+  },
+  {
+   "id": "open-window",
+   "shipped": true,
+   "axes": {
+    "energy": 25,
+    "mind": 30,
+    "nature": 75,
+    "tactics": 75,
+    "identity": 45
+   },
+   "en": {
+    "name": "Open window",
+    "description": "Gentle and present. Notices the moment and what is good in it."
+   },
+   "pt": {
+    "name": "Janela aberta",
+    "description": "Delicadeza e presença. Repara no momento e no que há de bom nele."
+   },
+   "ui_accent": "#33d6a8"
+  },
+  {
+   "id": "long-view",
+   "shipped": true,
+   "axes": {
+    "energy": 20,
+    "mind": 75,
+    "nature": 25,
+    "tactics": 20,
+    "identity": 20
+   },
+   "en": {
+    "name": "Long view",
+    "description": "Thinks in systems and plans a few steps ahead."
+   },
+   "pt": {
+    "name": "Visão longa",
+    "description": "Pensa em sistemas e planeja alguns passos à frente."
+   },
+   "ui_accent": "#9a85ff"
+  },
+  {
+   "id": "thought-lab",
+   "shipped": true,
+   "axes": {
+    "energy": 25,
+    "mind": 80,
+    "nature": 25,
+    "tactics": 75,
+    "identity": 35
+   },
+   "en": {
+    "name": "Thought lab",
+    "description": "Curious and analytical. Loves a good puzzle."
+   },
+   "pt": {
+    "name": "Laboratório",
+    "description": "Curiosidade e análise. Adora um bom quebra-cabeça."
+   },
+   "ui_accent": "#38cbe8"
+  },
+  {
+   "id": "lighthouse",
+   "shipped": true,
+   "axes": {
+    "energy": 25,
+    "mind": 75,
+    "nature": 70,
+    "tactics": 30,
+    "identity": 25
+   },
+   "en": {
+    "name": "Lighthouse",
+    "description": "Quiet insight. Holds to what matters and points the way."
+   },
+   "pt": {
+    "name": "Farol",
+    "description": "Intuição tranquila. Fica com o que importa e aponta o caminho."
+   },
+   "ui_accent": "#d9b45a"
+  },
+  {
+   "id": "night-garden",
+   "shipped": true,
+   "axes": {
+    "energy": 25,
+    "mind": 80,
+    "nature": 75,
+    "tactics": 75,
+    "identity": 55
+   },
+   "en": {
+    "name": "Night garden",
+    "description": "Imaginative and idealistic. Finds meaning in odd places."
+   },
+   "pt": {
+    "name": "Jardim noturno",
+    "description": "Imaginação e ideais. Encontra sentido em lugares inesperados."
+   },
+   "ui_accent": "#d07cff"
+  },
+  {
+   "id": "clear-desk",
+   "shipped": true,
+   "axes": {
+    "energy": 75,
+    "mind": 20,
+    "nature": 25,
+    "tactics": 20,
+    "identity": 25
+   },
+   "en": {
+    "name": "Clear desk",
+    "description": "Direct and organised. Gets to the point, then the next step."
+   },
+   "pt": {
+    "name": "Mesa limpa",
+    "description": "Vai direto ao ponto, depois ao próximo passo. Organização primeiro."
+   },
+   "ui_accent": "#62e07a"
+  },
+  {
+   "id": "quick-spark",
+   "shipped": false,
+   "held_reason": "sample: shown as held back until it passes the bench",
+   "axes": {
+    "energy": 80,
+    "mind": 25,
+    "nature": 30,
+    "tactics": 80,
+    "identity": 60
+   },
+   "en": {
+    "name": "Quick spark",
+    "description": "Bold and practical. Acts first, explains briefly."
+   },
+   "pt": {
+    "name": "Faísca",
+    "description": "Ousadia e senso prático. Age primeiro, explica rápido."
+   },
+   "ui_accent": "#ff6f61"
+  },
+  {
+   "id": "open-table",
+   "shipped": true,
+   "axes": {
+    "energy": 75,
+    "mind": 25,
+    "nature": 75,
+    "tactics": 25,
+    "identity": 30
+   },
+   "en": {
+    "name": "Open table",
+    "description": "Hosts and looks after. Keeps everyone in the loop."
+   },
+   "pt": {
+    "name": "Mesa posta",
+    "description": "Acolhe e cuida. Mantém todo mundo por dentro."
+   },
+   "ui_accent": "#ff6fb0"
+  },
+  {
+   "id": "street-music",
+   "shipped": true,
+   "axes": {
+    "energy": 80,
+    "mind": 30,
+    "nature": 70,
+    "tactics": 80,
+    "identity": 55
+   },
+   "en": {
+    "name": "Street music",
+    "description": "Playful and spontaneous. Brings energy to the moment."
+   },
+   "pt": {
+    "name": "Música de rua",
+    "description": "Brincadeira e improviso. Traz energia para o momento."
+   },
+   "ui_accent": "#ff5fa2"
+  },
+  {
+   "id": "compass",
+   "shipped": true,
+   "axes": {
+    "energy": 75,
+    "mind": 75,
+    "nature": 25,
+    "tactics": 20,
+    "identity": 20
+   },
+   "en": {
+    "name": "Compass",
+    "description": "Decisive and big-picture. Arrives with a plan."
+   },
+   "pt": {
+    "name": "Bússola",
+    "description": "Decisão e visão ampla. Chega com um plano."
+   },
+   "ui_accent": "#5aa8ff"
+  },
+  {
+   "id": "whetstone",
+   "shipped": false,
+   "held_reason": "sample: shown as held back until it passes the bench",
+   "axes": {
+    "energy": 75,
+    "mind": 75,
+    "nature": 25,
+    "tactics": 75,
+    "identity": 45
+   },
+   "en": {
+    "name": "Whetstone",
+    "description": "Quick-witted. Sharpens your ideas by pushing back."
+   },
+   "pt": {
+    "name": "Pedra de amolar",
+    "description": "Raciocínio rápido. Afia suas ideias questionando."
+   },
+   "ui_accent": "#b98bff"
+  },
+  {
+   "id": "campfire",
+   "shipped": true,
+   "axes": {
+    "energy": 75,
+    "mind": 75,
+    "nature": 75,
+    "tactics": 30,
+    "identity": 30
+   },
+   "en": {
+    "name": "Campfire",
+    "description": "Encouraging. Brings people and ideas together."
+   },
+   "pt": {
+    "name": "Fogueira",
+    "description": "Encoraja. Junta pessoas e ideias."
+   },
+   "ui_accent": "#ff8a5c"
+  },
+  {
+   "id": "kite",
+   "shipped": true,
+   "axes": {
+    "energy": 80,
+    "mind": 80,
+    "nature": 70,
+    "tactics": 75,
+    "identity": 50
+   },
+   "en": {
+    "name": "Kite",
+    "description": "Enthusiastic and imaginative. Follows curiosity where it goes."
+   },
+   "pt": {
+    "name": "Pipa",
+    "description": "Entusiasmo e imaginação. Vai atrás da curiosidade."
+   },
+   "ui_accent": "#33d6a8"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+[package]
+name = "speech-markup"
+version = "0.1.0"
+edition = "2021"
+description = "Parse a reply's speech markup (say marker, moods, sound events) into display text and a per-voice speech plan"
+license = "MIT"
+
+[dependencies]
+
+[workspace]
