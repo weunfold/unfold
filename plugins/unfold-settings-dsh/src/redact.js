@@ -96,7 +96,7 @@ const SECRET_TEXT = [
   // and yamlBlockEnd where the block ends. It runs before the name rules, so they leave its `|`
   // or `>` alone.
   [redactYamlBlocks, null, /:[\x00-\x09\x0B\x0C\x0E-\x20\x7F-\xA0\xAD\u061C\u1680\u180E\u2000-\u200F\u2028-\u202F\u205F-\u2064\u3000\uFEFF]*[&!>|]/],
-  [redactExplicitKeyValues, null, /(?:^|[\r\n])[ \t]*(?:-[ \t]+)*\?[ \t]/],
+  [redactExplicitKeyValues, null, /\\|(?:^|[\r\n])[ \t]*(?:-[ \t]+)*\?[ \t]/],
   // A credential key line that ends at its colon, or at up to two anchors and tags (`&a`, `!!str`),
   // a comment after them or not, continues on a later line (#396, #410). Blank lines and comment lines
   // are skipped, and so are lines of anchors and tags alone indented under the key. Then the first
@@ -375,8 +375,7 @@ function explicitLineValue(content) {
 }
 
 /** The `:` line's value: an inline one hidden in place, or the lines under it hidden whole. */
-function explicitColonHits(s, line, start, lineEnd) {
-  const at = line.indexOf(':')
+function explicitColonHits(s, line, start, lineEnd, at = line.indexOf(':')) {
   const blanks = /^[ \t]*/.exec(line.slice(at + 1))[0]
   const props = KEY_PROPS.exec(line.slice(at + 1 + blanks.length))[0]
   const rest = line.slice(at + 1 + blanks.length + props.length)
@@ -460,8 +459,34 @@ function explicitKeyHits(s) {
   return hits
 }
 
+// A quoted implicit name with an escape is opaque, just like an explicit name.
+// Keep the key as written; hide its scalar or block, and retain line-ended memory.
+function escapedKeyHits(s) {
+  if (!s.includes('\\')) return []
+  const hits = []
+  const keys = /(^|[\r\n]|[{[,])([ \t]*(?:-[ \t]+)*(?:\?[ \t]+)?(?:[&!][^\s"'`]*[ \t]+){0,2})("(?:[^"\\\r\n]|\\[^\r\n])*")[ \t]*:/g
+  for (const m of s.matchAll(keys)) {
+    if (!m[3].includes('\\')) continue
+    const start = m.index + m[1].length
+    let end = start
+    while (end < s.length && s[end] !== '\r' && s[end] !== '\n') end++
+    const line = s.slice(start, end)
+    const at = m[0].length - m[1].length - 1
+    if (/^[{[,]$/.test(m[1])) {
+      // A flow member's following comma belongs to its sibling, never to this scalar.
+      const rest = line.slice(at + 1)
+      const blanks = /^[ \t]*/.exec(rest)[0].length
+      const value = /^(?:"(?:[^"\\]|\\.)*(?:"|$)|'(?:[^']|'')*(?:'|$)|[^\s,}\]]+)/.exec(rest.slice(blanks))?.[0]
+      if (value) hits.push({ start: start + at + 1 + blanks, end: start + at + 1 + blanks + value.length, text: REDACTED, value: explicitLineValue(value), ended: end })
+    } else {
+      hits.push(...explicitColonHits(s, line, start, end, at))
+    }
+  }
+  return hits
+}
+
 function redactExplicitKeyValues(s) {
-  const hits = explicitKeyHits(s)
+  const hits = [...explicitKeyHits(s), ...escapedKeyHits(s)]
   if (!hits.length) return s
   hits.sort((a, b) => a.start - b.start)
   let out = ''
