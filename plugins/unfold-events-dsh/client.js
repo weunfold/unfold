@@ -1662,8 +1662,8 @@ function explicitKeyHits(s) {
       const line2 = s.slice(cursor, end);
       const lead = /^[ \t]*/.exec(line2)[0];
       const content = line2.slice(lead.length);
-      if (content && content[0] === ":" && lead.length >= keyIndent) {
-        if (seen || several || opaque) hits.push(...explicitColonHits(s, line2, cursor, end));
+      if (content && content[0] === ":") {
+        if (seen || several || opaque || lead.length < keyIndent) hits.push(...explicitColonHits(s, line2, cursor, end));
         break;
       }
       if (content && content[0] !== "#" && lead.length > keyIndent) {

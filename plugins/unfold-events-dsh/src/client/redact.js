@@ -403,8 +403,8 @@ function explicitKeyHits(s) {
       const line = s.slice(cursor, end)
       const lead = /^[ \t]*/.exec(line)[0]
       const content = line.slice(lead.length)
-      if (content && content[0] === ':' && lead.length >= keyIndent) {
-        if (seen || several || opaque) hits.push(...explicitColonHits(s, line, cursor, end))
+      if (content && content[0] === ':') {
+        if (seen || several || opaque || lead.length < keyIndent) hits.push(...explicitColonHits(s, line, cursor, end))
         break
       }
       if (content && content[0] !== '#' && lead.length > keyIndent) {
