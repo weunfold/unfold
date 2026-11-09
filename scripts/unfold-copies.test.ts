@@ -56,6 +56,7 @@ const BLOCKS: [string, string, string[]][] = [
   ['const YAML_KEY = [', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js', 'unfold-mind-dsh/src/mind.js']],
   ['function yamlBlockEnd(', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js', 'unfold-mind-dsh/src/mind.js']],
   ['function redactYamlBlocks(', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js']],
+  ['function redactMalformedExplicitKeys(s) {', 'unfold-mind-dsh/src/redact.js', REDACTION_COPIES],
   // #507's explicit-key value scan: hidden on every copy, and remembered where secretsIn exists.
   ...['const KEY_NAME_LOWER =', 'const KEY_NAME_CAMEL =', 'const KEY_PROPS =', 'const KEY_BLOCK =', 'function explicitKeyName(text) {', 'function credentialName(name) {', 'function explicitLineValue(content) {', 'function explicitColonHits(s, line, start, lineEnd) {', 'function explicitKeyHits(s) {', 'function redactExplicitKeyValues(s) {'].map(
     (declaration): [string, string, string[]] => [declaration, 'unfold-mind-dsh/src/redact.js', REDACTION_COPIES],
