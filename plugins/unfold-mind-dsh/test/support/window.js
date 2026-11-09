@@ -436,7 +436,7 @@ const SECRET_TEXT = [
   // and yamlBlockEnd where the block ends. It runs before the name rules, so they leave its `|`
   // or `>` alone.
   [redactYamlBlocks, null, /:[\x00-\x09\x0B\x0C\x0E-\x20\x7F-\xA0\xAD\u061C\u1680\u180E\u2000-\u200F\u2028-\u202F\u205F-\u2064\u3000\uFEFF]*[&!>|]/],
-  [redactExplicitKeyValues, null, /(?:^|[\r\n])[ \t]*(?:-[ \t]+)?\?[ \t]/],
+  [redactExplicitKeyValues, null, /(?:^|[\r\n])[ \t]*(?:-[ \t]+)*\?[ \t]/],
   // A credential key line that ends at its colon, or at up to two anchors and tags (`&a`, `!!str`),
   // a comment after them or not, continues on a later line (#396, #410). Blank lines and comment lines
   // are skipped, and so are lines of anchors and tags alone indented under the key. Then the first
@@ -624,7 +624,7 @@ function redactYamlBlocks(s) {
 // #590: the explicit-key guard in the name rules scans a bounded quote tail at every name. On a
 // text with no `? name` line the guard can never fail, so dropping it is exact; the rule is
 // compiled with and without it and chosen per text, keeping an unclosed quote run linear (#172).
-const EXPLICIT_KEY = /(?:^|[\r\n])[ \t]*(?:-[ \t]+)?\?[ \t]/
+const EXPLICIT_KEY = /(?:^|[\r\n])[ \t]*(?:-[ \t]+)*\?[ \t]/
 const GUARD_START = '(?!(?<=(?:^|[\\r\\n])[ \\t]{0,160}'
 const KEY_TAIL_START = String.raw`|(?<=(?:^|[\r\n])[ \t]{0,256}`
 const QUOTE_TAIL = String.raw`|(?:"[^"\r\n]{241,}|'[^'\r\n]{241,}`
@@ -757,7 +757,7 @@ function explicitColonHits(s, line, start, lineEnd) {
 function explicitKeyHits(s) {
   if (!s.includes('?')) return []
   const hits = []
-  const keyLine = /(^|[\r\n])([ \t]*)(?:-[ \t]+)?\?[ \t]([^\r\n]*)/g
+  const keyLine = /(^|[\r\n])([ \t]*)(?:-[ \t]+)*\?[ \t]([^\r\n]*)/g
   let covered = 0
   for (let m = keyLine.exec(s); m; m = keyLine.exec(s)) {
     if (m.index < covered) continue
@@ -771,6 +771,7 @@ function explicitKeyHits(s) {
     const plain = m[3].slice(KEY_PROPS.exec(m[3])[0].length).replace(/(?:^|[ \t])#.*$/, '')
     const several = !/^["']/.test(plain) && /\S[ \t]+\S/.test(plain)
     const opaque = explicitKeyName(m[3]).includes('\\')
+    const nested = /^(?:-[ \t]+){2}/.test(m[0].slice(m[1].length + m[2].length))
     const keyIndent = m[2].length
     let cursor = m.index + m[0].length
     if (s.startsWith('\r\n', cursor)) cursor += 2
@@ -784,11 +785,11 @@ function explicitKeyHits(s) {
       const lead = /^[ \t]*/.exec(line)[0]
       const content = line.slice(lead.length)
       if (content && content[0] === ':') {
-        if (seen || several || opaque || lead.length < m[0].length - m[1].length - m[3].length - 2) hits.push(...explicitColonHits(s, line, cursor, end))
+        if (seen || several || opaque || nested || lead.length < m[0].length - m[1].length - m[3].length - 2) hits.push(...explicitColonHits(s, line, cursor, end).map(hit => ({ ...hit, nested })))
         break
       }
       if (content && content[0] !== '#' && lead.length > keyIndent) {
-        hits.push({ start: cursor, end, text: `${lead}${REDACTED}`, value: explicitLineValue(content), ended: end })
+        hits.push({ start: cursor, end, text: `${lead}${REDACTED}`, value: explicitLineValue(content), ended: end, nested })
         seen = true
       } else if (content && content[0] !== '#' && lead.length <= keyIndent) break
       if (s.startsWith('\r\n', end)) cursor = end + 2
@@ -817,7 +818,7 @@ function redactExplicitKeyValues(s) {
 // line as an opaque name and hide any indented value and following colon value (#785).
 function redactMalformedExplicitKeys(s) {
   if (!/\?[ \t]/.test(s)) return s
-  const keys = /(^|\r\n|\r(?!\n)|\n)([ \t]*)(-[ \t]+)?\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g
+  const keys = /(^|\r\n|\r(?!\n)|\n)([ \t]*)((?:-[ \t]+)+)?\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g
   let done = ''
   let from = 0
   for (let m = keys.exec(s); m; m = keys.exec(s)) {
@@ -873,7 +874,7 @@ const NAME_STEM = /pass|secret|token|key|authorization/i
 // name is read whole, a colon inside it included. Its `:` line is what makes it a key line; the
 // name is read without its invisible characters here, before the rules look for it, so the value
 // under it is found. Only the name changes; a line with no credential stem stays.
-const INVISIBLE_EXPLICIT = /(^|\r\n|\r(?!\n)|\n)([ \t]*(?:-[ \t]+)?\?[ \t][^\r\n#]*?["']?)((?:[A-Za-z0-9_:-]|[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff]))+)(["']?[ \t]*(?:#[^\r\n]*)?(?=\r\n|\r(?!\n)|\n|$)|["']?[ \t]*:[^\r\n]*)/gu
+const INVISIBLE_EXPLICIT = /(^|\r\n|\r(?!\n)|\n)([ \t]*(?:-[ \t]+)*\?[ \t][^\r\n#]*?["']?)((?:[A-Za-z0-9_:-]|[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff]))+)(["']?[ \t]*(?:#[^\r\n]*)?(?=\r\n|\r(?!\n)|\n|$)|["']?[ \t]*:[^\r\n]*)/gu
 
 export function nameText(s) {
   if (!INVISIBLE_GATE.test(s)) return s
