@@ -5,13 +5,13 @@ Unfold for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (
 ## What it does
 
 - **In Unfold's own Automagik instance** (`AUTOMAGIK_HOST=unfold` or `AUTOMAGIK_PRELOAD=unfold`), the Unfold Bot is the team's Main Bot. The plugin hands the team a Main Bot maker (`mainBotMaker`), so the team's first Main Bot is Unfold and no default Bot is made beside it.
-- **Anywhere else** (the Automagik app, or a plain DSH where the welcome's Unfold card installs this plugin), Unfold joins as one more Bot. A team with no Main Bot yet makes its default one first, so the companion the person made in the welcome stays their Main Bot.
+- **Anywhere else** (the Automagik app, or a plain DSH where a person adds the Unfold plugins), Unfold joins as one more Bot. A team with no Main Bot yet makes its default one first, so the companion the person made in the welcome stays their Main Bot.
 - It makes the Bot once. An Unfold Bot that is there is kept, and one the person deleted isn't made again (`unfold.json` in the team's home).
 - The Bot's Session is titled with its name, so Unfold can watch it by that name through the Unfold bridge before it exists. Its greeting waits for a model, so Unfold sees it from its first turn.
 
 ## Its defaults
 
-The Unfold Bot type starts with the Unfold bridge and the six Unfold companion bundles (`UNFOLD_PLUGINS` in `src/host/unfold.js`). The bridge and all six companion bundles are in this repository and released together at its one version. The welcome installs their release tarballs, or their sibling paths when the welcome comes from a linked checkout or a pinned git source. The SSE library is shipped in the streaming bundles; it is released separately for reuse and is not installed as a DSH bundle.
+The Unfold Bot type starts with the Unfold bridge and the six Unfold companion bundles (`UNFOLD_PLUGINS` in `src/host/unfold.js`). The bridge and all six companion bundles are in this repository and released together at its one version. Install the release tarballs through DSH's plugin manager, or use sibling paths from a pinned git source. The SSE library is shipped in the streaming bundles; it is released separately for reuse and is not installed as a DSH bundle.
 
 | Plugin | What it brings |
 |---|---|

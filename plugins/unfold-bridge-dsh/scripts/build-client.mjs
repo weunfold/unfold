@@ -53,7 +53,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     let current = null
     try { current = readFileSync(OUTPUT, 'utf8') } catch { /* missing counts as stale */ }
     if (current !== next) {
-      console.error('client.js is stale: run `npm run build` in apps/unfold-bridge-dsh and commit the result')
+      console.error('client.js is stale: run `npm run build` in plugins/unfold-bridge-dsh and commit the result')
       process.exit(1)
     }
   } else {

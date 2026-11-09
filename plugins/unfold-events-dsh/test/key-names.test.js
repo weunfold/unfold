@@ -9,6 +9,7 @@ import { test } from 'node:test'
 import { loadCatalog } from '../src/catalog.js'
 import { EventWindow, redact, redactText } from '../src/window.js'
 import { redact as clientRedact, redactText as clientRedactText, secretsIn as clientSecretsIn } from '../src/client/redact.js'
+import { assertTextPath, guardCases } from '../../../scripts/redact-fuzz-guard.mjs'
 
 const WORDS = ['correct', 'horse', 'battery', 'staple']
 const PHRASE = WORDS.join(' ')
@@ -135,67 +136,16 @@ const FORMS = [
 ]
 const CASES = KEYS.flatMap((k) => FORMS.map(([form, text, bare]) => [`${k} (${form})`, (v = PHRASE) => text(k, v), bare]))
 const leaked = (text) => [...new Set(text.match(/[a-z]{3,}/gi) ?? [])].filter((t) => WORDS.some((w) => w.includes(t.toLowerCase()) || t.toLowerCase().includes(w)))
-// A sample uses CPU time, not wall clock: CI runs this package's test files side by side, and a
-// wall-clock sample includes the time this process waits for a CPU. The best of five runs drops one
-// that caught a background compile or a collection; noise can add CPU time, never remove it, so a
-// rule that is slow in every run stays slow in every sample.
-// The text paths keep the absolute ceiling: 100 ms sits 7.9x above the slowest healthy input here
-// (12.6 ms of CPU measured, Node 24.13.1), and a machine 4x slower lands at 50 ms.
-const FAST_MS = 100
-const FAST_TRIES = 5
-const sample = (fn) => {
-  const t0 = process.cpuUsage()
-  fn()
-  const used = process.cpuUsage(t0)
-  return (used.user + used.system) / 1000
-}
-const timed = (fn, ceiling = FAST_MS) => {
-  let best = Infinity
-  for (let i = 0; i < FAST_TRIES && best >= ceiling; i++) best = Math.min(best, sample(fn))
-  return best
-}
-// The reference sets a bound, so it always takes all five samples.
-const fixedWork = (fn) => Math.min(...Array.from({ length: FAST_TRIES }, () => sample(fn)))
-
-// The reference is a fixed amount of the same work: redactText over one 80k text of the fuzz's own
-// pieces, built once from a fixed seed. It runs the same code path over a fixed N pieces, never the
-// adversarial texts, so its cost is linear in that input (40k, 80k and 160k characters measured
-// 115, 112 and 110 ns per character). A slower machine or a slower clock raises the reference and
-// the window's bound together: it is not a time constant.
-const REFERENCE_PIECES = [
-  ' ', '\t', ' \t', '\n', '\n  ', 'password', 'db_password', 'DB_PASS', 'accessToken',
-  'ClientSecret', 'DbPass', 'API_TOKEN', '--token', '-pass', 'token', '=', ': ', ' = ', '":',
-  '\\":', ': |\n', ': >-\n', '"', "'", '`', '\\', '\\\\', '\\"', '\\"\\"', 'bearer ',
-  'basic ', 'Bearer ', 'x9', 'a', 'word ', '{"', '{\\"', '_', '-',
-]
-const REFERENCE_TEXT = (() => {
-  let state = 0x531 >>> 0
-  const rand = () => {
-    state = (state + 0x6d2b79f5) >>> 0
-    let t = Math.imul(state ^ (state >>> 15), state | 1)
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
-    return ((t ^ (t >>> 14)) >>> 0) / 4_294_967_296
-  }
-  const parts = []
-  for (let n = 0; n < 80_000; ) {
-    const piece = REFERENCE_PIECES[Math.floor(rand() * REFERENCE_PIECES.length)]
-    parts.push(piece)
-    n += piece.length
-  }
-  return parts.join('')
-})()
-
-// The window runs redactText over each delta and puts its rows and change payloads together on top,
-// so it costs a multiple of the reference: 1.29x measured here (worst of this adversarial set, Node
-// 24.13.1). The window reads only its keep, so a 160k input costs no more than a 16k one.
-// WINDOW_MARGIN matches the fuzz window's 8, the runner-driven constant: this path is the same
-// window, the fuzz window's worst CI reading is 6.32x (#513 head ee8595c8), and this path's own
-// measured 1.29x leaves 6.2x of headroom. The absolute backstop (400 ms, as in the fuzz guards)
-// caps how far a slow reference may widen the bound; a quadratic rule at 80k characters is 6.4e9
-// steps, seconds of CPU, far past the bound or the backstop. The text paths keep the absolute
-// ceiling: they are the plain rule pass over fixed-size inputs, with no per-path constant to scale.
+// The window runs redactText over each delta and puts its rows and change payloads together on
+// top, so it costs a multiple of the reference: 1.29x measured here (worst of this adversarial
+// set, Node 24.13.1). The window reads only its keep, so a 160k input costs no more than a 16k
+// one. WINDOW_MARGIN matches the fuzz window's 8, the runner-driven constant: this path is the
+// same window, the fuzz window's worst CI reading is 6.32x (#513 head ee8595c8), and this path's
+// own measured 1.29x leaves 6.2x of headroom. The shared 400 ms bound backstop caps how far a slow
+// reference may widen the bound; a quadratic rule at 80k characters is 6.4e9 steps, seconds of
+// CPU, far past the bound or the backstop. The text paths keep the shared absolute ceiling: they
+// are the plain rule pass over fixed-size inputs, with no per-path constant to scale.
 const WINDOW_MARGIN = 8
-const BACKSTOP_MS = 400
 
 const catalog = loadCatalog()
 let seq = 0
@@ -249,36 +199,16 @@ test('a scheme after a key name is hidden in any case, in the window and the bro
 })
 
 test('80k characters of adversarial input stay fast, in the window and the browser copy', () => {
-  const inputs = Object.entries(ADVERSARIAL)
-  // Warm-up, not measured: a cold process pays to compile the rules' regular expressions and climb
-  // V8's tiers once, and that setup is not an input's cost. The same inputs then run measured.
-  for (const [, text] of inputs) {
-    redactText(text)
-    clientRedactText(text)
-    clientSecretsIn(text)
-    rig().push(text)
-  }
-  const referenceMs = fixedWork(() => redactText(REFERENCE_TEXT))
-  // A zero sample would make the bound zero and pass a window that measured nothing.
-  assert.ok(referenceMs > 0, `reference sample is ${referenceMs} ms of CPU`)
-  const bound = Math.min(WINDOW_MARGIN * referenceMs, BACKSTOP_MS)
-  const margin = `${WINDOW_MARGIN} x reference ${referenceMs.toFixed(1)} ms`
-  const textPaths = [
-    ['the window rules', redactText],
-    ['the browser copy', clientRedactText],
-    ["the browser copy's values", clientSecretsIn],
-  ]
-  for (const [what, text] of inputs) {
-    for (const [path, run] of textPaths) {
-      const ms = timed(() => run(text))
-      const detail = `${what}: ${path}: ${ms.toFixed(1)} ms of CPU, ceiling ${FAST_MS} ms`
-      assert.ok(ms < FAST_MS, detail)
-    }
-    const windowMs = timed(() => rig().push(text), bound)
-    const detail = `${what}: the window: ${windowMs.toFixed(1)} ms of CPU, ` +
-      `bound ${bound.toFixed(1)} ms (${margin}; backstop ${BACKSTOP_MS} ms)`
-    assert.ok(windowMs <= bound, detail)
-  }
+  guardCases({
+    cases: Object.entries(ADVERSARIAL),
+    textPaths: [
+      ['the window rules', redactText],
+      ['the browser copy', clientRedactText],
+      ["the browser copy's values", clientSecretsIn],
+    ],
+    scaledPath: ['the window', (text) => rig().push(text), WINDOW_MARGIN],
+    reference: redactText,
+  })
 })
 
 test('fields named for a pass count are kept; fields named for a pass are hidden', () => {
@@ -357,6 +287,9 @@ test('a token after a bare scheme, streamed a character at a time: no prefix of 
 })
 
 test('one push of an 80k unbroken run past the 16 KiB bound, then a separator and whitespace, stays fast', () => {
-  const ms = timed(() => rig().push(`${'a'.repeat(80_000)}: = \t`))
-  assert.ok(ms < FAST_MS, `${ms.toFixed(1)} ms of CPU, ceiling ${FAST_MS} ms`)
+  assertTextPath({
+    path: 'the window',
+    shape: 'one push of an 80k unbroken run',
+    run: () => rig().push(`${'a'.repeat(80_000)}: = \t`),
+  })
 })

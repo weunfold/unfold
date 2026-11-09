@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { MindStream } from '../src/mind.js'
 import { redactText, secretsIn } from '../src/redact.js'
+import { assertLinearPaths, guardCases } from '../../../scripts/redact-fuzz-guard.mjs'
 
 // A seeded fuzz: 200 texts of up to 80k characters, each a random mix of the pieces a rule could
 // backtrack on (whitespace runs, key names in each case and form, separators, open and closed
@@ -73,59 +74,22 @@ function fuzzCases(seed = SEED, count = 200) {
 const [UPPER, LOWER] = ['s3cretPlantedUpper9', 's3cretPlantedLower9']
 const PLANTED = ` SVCTOKEN=${UPPER} db_password=${LOWER}`
 
-// A sample uses CPU time, not wall clock: CI runs this package's test files side by side, and a
-// wall-clock sample includes the time this process waits for a CPU, which a shared runner adds by
-// the hundred milliseconds. The best of five runs drops one that caught a background compile or a
-// collection; noise can add CPU time, never remove it, so a rule that is slow in every run stays
-// slow in every sample.
-// The text paths are the plain rule pass over one fixed-size piece, with no stream on top, so they
-// keep an absolute ceiling: 100 ms. The slowest measured was 58.9 ms of CPU on CI (events' #53
-// rule pass at 80k, against the old 50 ms ceiling); the browser copy costs 1.15-1.27x the rule
-// pass here, projecting 68-75 ms under the same inflation, so 100 keeps 1.3-1.5x headroom. A
-// machine 4x slower lands at 50 ms, and planted quadratic KEY= mutants measured 125-379.6 ms, so
-// they still fail.
-const TEXT_CEILING_MS = 100
-const FAST_TRIES = 5
-const sample = (fn) => {
-  const t0 = process.cpuUsage()
-  fn()
-  const used = process.cpuUsage(t0)
-  return (used.user + used.system) / 1000
-}
-const timed = (fn, ceiling = TEXT_CEILING_MS) => {
-  let best = Infinity
-  for (let i = 0; i < FAST_TRIES && best >= ceiling; i++) best = Math.min(best, sample(fn))
-  return best
-}
-// The reference sets a bound, so it always takes all five samples.
-const fixedWork = (fn) => Math.min(...Array.from({ length: FAST_TRIES }, () => sample(fn)))
-
-// The reference is a fixed amount of the same work: redactText over one 80k text of the fuzz's own
-// pieces, built once from a fixed seed. It runs the same code path over a fixed N pieces, never the
-// fuzz texts, so its cost is linear in that input (40k, 80k and 160k characters measured 117, 106
-// and 109 ns per character) and every run pays exactly that work. A slower machine or a slower
-// clock raises the reference and the stream's bound together: it is not a time constant.
-const REFERENCE_TEXT = (() => {
-  let state = 0x531 >>> 0
-  const rand = () => {
-    state = (state + 0x6d2b79f5) >>> 0
-    let t = Math.imul(state ^ (state >>> 15), state | 1)
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
-    return ((t ^ (t >>> 14)) >>> 0) / 4_294_967_296
-  }
-  const parts = []
-  for (let n = 0; n < 80_000; ) {
-    const piece = PIECES[Math.floor(rand() * PIECES.length)]
-    parts.push(piece)
-    n += piece.length
-  }
-  return parts.join('')
-})()
-
-// Bound stream overhead relative to the same-run text pass. An absolute cap
-// prevents a slow reference from widening the stream allowance without limit.
+// The stream runs redactText over each delta and builds its row, sentence and audit work on top,
+// so it costs a multiple of the reference: 3.56-4.24x measured here (worst of the 200 cases across
+// 24.13.1) and 3.49x, 3.55x, 3.56x, 3.76x, 3.92x, 5.84x, 6.00x, 7.02x, 7.18x, 7.45x, 7.62x and
+// 10.5x across CI runs, then 3.62x, 3.66x, 4.26x and 4.51x on the #599 and #513 lanes after it.
+// The 10.5x one measured 118.7 ms against a 11.3 ms reference and failed the old 10 x bound by
+// 5% (#513's b6e7041e head); it was a margin overrun, never a hiding failure. STREAM_MARGIN 15
+// sits 1.43x above that worst CI reading. The spread is runner-driven: the reference moved
+// 11.3-33.5 ms while the ratio moved 3.6-10.5x, so a bound of two same-run references would track
+// it better; that is #590's deeper rework, not this pass. The trade: a 2x regression of the stream
+// on a quiet machine (8.0x) now stays inside the bound, while a stream-only O(n^2) mutant
+// (measured 351.9 ms against the 126.4 ms bound here) still fails. The shared 400 ms bound
+// backstop caps how far a slow reference may widen the bound: it sits 1.7x above the worst
+// observed stream reading (235.2 ms, 7.02x) and binds when 15 x reference passes it, a reference
+// above 26.7 ms; at the worst observed reference (33.5 ms) the cap sets the bound and that
+// 235.2 ms reading still passes. A shared rule gone quadratic still fails on the text ceiling.
 const STREAM_MARGIN = 15
-const BACKSTOP_MS = 400
 
 function push(text) {
   const mind = new MindStream({ now: () => 1 })
@@ -134,60 +98,35 @@ function push(text) {
   mind.agentd({ v: 2, id: 'g:1', producer: 'g', seq: 1, t_ns: 1, source: 'guest', kind: 'agent_delta', response_id: 'rK', text }, { via: 'agentd journal', file: '/j', offset: 1 })
   return mind
 }
-const PATHS = [
-  ['redactText', redactText, (out) => [out]],
-  ['secretsIn', secretsIn, null],
-  ['the stream', push, (mind) => [JSON.stringify(mind.snapshot())]],
+const TEXT_PATHS = [
+  ['redactText', redactText],
+  ['secretsIn', secretsIn],
 ]
+const STREAM_PATH = ['the stream', push, STREAM_MARGIN]
 
 test('a seeded fuzz of 200 mixed texts up to 80k characters hides every planted secret, fast, on every path', (t) => {
-  const cases = fuzzCases()
-  // Warm-up, not measured: a cold process pays to compile each rule's regular expressions, grow
-  // its buffers and climb V8's tiers once, and that setup is not a text's cost. The pass runs the
-  // same texts through the same paths, so a rule that is slow on a shape is still slow on the
-  // measured pass; only the one-time cold cost of a new process is left out.
-  for (const [, plain] of cases) for (const [, run] of PATHS) run(plain + PLANTED)
-  const [streamPath, streamRun, streamShown] = PATHS[PATHS.length - 1]
-  const textPaths = PATHS.slice(0, -1)
-  const referenceMs = fixedWork(() => redactText(REFERENCE_TEXT))
-  // A zero sample would make the bound zero and pass a stream that measured nothing.
-  assert.ok(referenceMs > 0, `reference sample is ${referenceMs.toFixed(1)} ms of CPU`)
-  const bound = Math.min(STREAM_MARGIN * referenceMs, BACKSTOP_MS)
-  const margin = `${STREAM_MARGIN} x reference ${referenceMs.toFixed(1)} ms`
-  const slowest = new Map()
-  const noteSlowest = (path, ms, shape) => {
-    if (ms > (slowest.get(path)?.ms ?? 0)) slowest.set(path, { ms, shape })
-  }
-  for (const [shape, plain] of cases) {
-    const text = plain + PLANTED
-    for (const [path, run, shown] of textPaths) {
-      const note = `${path}: ${shape}`
-      if (shown) {
-        for (const out of shown(run(text))) for (const secret of [UPPER, LOWER]) assert.ok(!out.includes(secret), `${note} shows ${secret}`)
-      } else {
-        const found = run(text)
-        for (const secret of [UPPER, LOWER]) assert.ok(found.some((v) => v.includes(secret)), `${note} misses ${secret}`)
+  guardCases({
+    cases: fuzzCases(),
+    textPaths: TEXT_PATHS,
+    scaledPath: STREAM_PATH,
+    reference: redactText,
+    prepare: (plain) => plain + PLANTED,
+    check: (text, shape) => {
+      const hides = (path, out) => {
+        for (const secret of [UPPER, LOWER]) {
+          assert.ok(!out.includes(secret), `${path}: ${shape} shows ${secret}`)
+        }
       }
-      const ms = timed(() => run(text))
-      const detail = `${note}: ${ms.toFixed(1)} ms of CPU, ceiling ${TEXT_CEILING_MS} ms`
-      assert.ok(ms < TEXT_CEILING_MS, detail)
-      noteSlowest(path, ms, shape)
-    }
-    for (const out of streamShown(streamRun(text))) {
+      hides('redactText', redactText(text))
+      hides('the stream', JSON.stringify(push(text).snapshot()))
+      const found = secretsIn(text)
       for (const secret of [UPPER, LOWER]) {
-        assert.ok(!out.includes(secret), `${streamPath}: ${shape} shows ${secret}`)
+        const misses = `secretsIn: ${shape} misses ${secret}`
+        assert.ok(found.some((v) => v.includes(secret)), misses)
       }
-    }
-    const streamMs = timed(() => streamRun(text), bound)
-    const detail = `${streamPath}: ${shape}: ${streamMs.toFixed(1)} ms of CPU, ` +
-      `bound ${bound.toFixed(1)} ms (${margin}; backstop ${BACKSTOP_MS} ms)`
-    assert.ok(streamMs <= bound, detail)
-    noteSlowest(streamPath, streamMs, shape)
-  }
-  for (const [path, { ms, shape }] of slowest) {
-    t.diagnostic(`${path}: slowest ${ms.toFixed(1)} ms of CPU, ` +
-      `${(ms / referenceMs).toFixed(2)} times the reference — ${shape}`)
-  }
+    },
+    onDiagnostic: (line) => t.diagnostic(line),
+  })
 })
 
 // #590: the padded kept-tail shape of #172 as its own row, with its own reference. The reference
@@ -199,13 +138,9 @@ const QUOTE_RUN = '{"\\'.repeat(5462)
 const QUOTE_PAD_ROW = `${QUOTE_RUN.slice(0, 8192)}${' '.repeat(4096)}` +
   `${QUOTE_RUN.slice(0, 8176)}=ClientSecret: |\n DB_PASS`
 test('an unclosed quote run around a blank pad is linear against its own reference', () => {
-  const reference = 'x'.repeat(QUOTE_PAD_ROW.length)
-  const referenceMs = fixedWork(() => redactText(reference))
-  assert.ok(referenceMs > 0, `reference sample is ${referenceMs.toFixed(3)} ms of CPU`)
-  for (const [path, run] of [['redactText', redactText], ['secretsIn', secretsIn]]) {
-    const ms = fixedWork(() => run(QUOTE_PAD_ROW))
-    assert.ok(ms <= 40 * referenceMs,
-      `${path}: ${ms.toFixed(2)} ms of CPU on the quote run, ` +
-      `bound ${(40 * referenceMs).toFixed(2)} ms (40 x reference ${referenceMs.toFixed(3)} ms)`)
-  }
+  assertLinearPaths({
+    text: QUOTE_PAD_ROW,
+    reference: redactText,
+    runs: [['redactText', redactText], ['secretsIn', secretsIn]],
+  })
 })
