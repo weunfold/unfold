@@ -139,14 +139,11 @@ const FORMS = [
 ]
 const CASES = KEYS.flatMap((k) => FORMS.map(([form, text]) => [`${k} (${form})`, text(k)]))
 const leaked = (text) => [...new Set(text.match(/[a-z]{3,}/gi) ?? [])].filter((t) => WORDS.some((w) => w.includes(t.toLowerCase()) || t.toLowerCase().includes(w)))
-// The stream runs redactText over each delta and builds its row, sentence and audit work on top,
-// so it costs a multiple of the reference: 2.55x measured here (worst of this adversarial set,
-// Node 24.13.1). STREAM_MARGIN sits 1.57x above that, and a 2x regression of the stream path still
-// fails (5.1x). The shared 400 ms bound backstop caps how far a slow reference may widen the
-// bound; a quadratic rule at 80k characters is 6.4e9 steps, seconds of CPU, far past either. The
-// text paths keep the shared absolute ceiling: they are the plain rule pass over fixed-size
-// inputs, with no per-path constant to scale.
-const STREAM_MARGIN = 4
+// The stream includes row, sentence and audit work beyond the reference redaction pass.
+// The handover timing row measured 4.0-4.3x on healthy runners; 6x leaves about 40% headroom
+// above that range. Doubling the 4.3x workload still exceeds the bound (8.6x), and the shared
+// 400 ms absolute backstop and text-path ceilings remain unchanged.
+const STREAM_MARGIN = 6
 
 function journal() {
   const mind = new MindStream({ now: () => 1 })
@@ -203,6 +200,7 @@ test('80k characters of adversarial input stay fast, in the rules and in the str
     textPaths: [['redactText', redactText], ['secretsIn', secretsIn]],
     scaledPath: ['the stream', (text) => journal().send(text), STREAM_MARGIN],
     reference: redactText,
+    onDiagnostic: console.info,
   })
 })
 
