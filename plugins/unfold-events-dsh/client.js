@@ -1688,11 +1688,32 @@ function redactExplicitKeyValues(s) {
   }
   return out + s.slice(from);
 }
+function redactMalformedExplicitKeys(s) {
+  if (!/\?[ \t]/.test(s)) return s;
+  const keys = /(^|\r\n|\r(?!\n)|\n)([ \t]*)(-[ \t]+)?\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g;
+  let done = "";
+  let from = 0;
+  for (let m = keys.exec(s); m; m = keys.exec(s)) {
+    if (/^[ \t]*(?:#[^\r\n]*|:[^\r\n]*)?$/.test(m[5]) || !NAME_STEM.test(m[4] + m[5])) continue;
+    const indent = m[2] + (m[3] ? " ".repeat(m[3].length) : "");
+    const at = m.index + m[0].length;
+    let end = yamlBlockEnd(s, at, indent);
+    const colon = /^(?:(?:\r\n|\r(?!\n)|\n)[ \t]*(?:#[^\r\n]*)?)*(?:\r\n|\r(?!\n)|\n)([ \t]*):[^\r\n]*/.exec(s.slice(end));
+    if (colon && colon[1] === indent) {
+      end += colon[0].length;
+      end = yamlBlockEnd(s, end, indent);
+    }
+    const block = s.slice(at, end);
+    done += s.slice(from, at) + (/\S/.test(block) ? `${block.match(/^(?:\r\n|\r|\n)/)[0]}${indent}  ${REDACTED}` : block);
+    from = keys.lastIndex = end;
+  }
+  return done + s.slice(from);
+}
 function redactText(s, open = false) {
   const was = OPEN_END;
   OPEN_END = open;
   try {
-    let out = nameText(s);
+    let out = redactMalformedExplicitKeys(nameText(s));
     for (const [re, fn, gate] of SECRET_TEXT) if (!gate || gate.test(out)) out = typeof re === "function" ? re(out) : out.replace(re, fn);
     return out;
   } finally {

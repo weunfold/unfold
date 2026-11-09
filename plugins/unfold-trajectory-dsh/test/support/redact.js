@@ -602,7 +602,8 @@ for (let i = 0; i < SECRET_VALUES.length; i++) {
 export function secretsIn(s, open = false) {
   const out = new Set()
   const text = String(s)
-  for (const t of new Set([text, nameText(text)])) for (const entry of SECRET_VALUES) {
+  const normalized = nameText(text)
+  for (const t of new Set([text, normalized])) for (const entry of SECRET_VALUES) {
     const [re, gate, whole] = Array.isArray(entry) ? entry : [entry]
     if (gate && !gate.test(t)) continue
     for (const m of t.matchAll(re)) {
@@ -612,6 +613,34 @@ export function secretsIn(s, open = false) {
       if (whole === 'ended' && open && m.index + m[0].length >= t.length) continue
       const v = m.slice(1).findLast((x) => x !== undefined) // the quoted or the bare value, after a continued key's indent
       if (v && v.length >= 4 && v !== REDACTED) out.add(v)
+    }
+  }
+  // The malformed explicit-key fallback hides a block before the ordinary value rules run.
+  // A following colon selects its value; earlier indented text is part of the opaque name.
+  if (EXPLICIT_KEY.test(normalized)) {
+    const keys = /(^|\r\n|\r(?!\n)|\n)([ \t]*)(-[ \t]+)?\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g
+    for (const key of normalized.matchAll(keys)) {
+      if (/^[ \t]*(?:#[^\r\n]*|:[^\r\n]*)?$/.test(key[5]) || !NAME_STEM.test(key[4] + key[5])) continue
+      const indent = key[2] + (key[3] ? ' '.repeat(key[3].length) : '')
+      let from = key.index + key[0].length
+      let end = yamlBlockEnd(normalized, from, indent)
+      const colon = /^(?:(?:\r\n|\r(?!\n)|\n)[ \t]*(?:#[^\r\n]*)?)*(?:\r\n|\r(?!\n)|\n)([ \t]*):([^\r\n]*)/.exec(normalized.slice(end))
+      if (colon && colon[1] === indent) {
+        const lineEnd = end + colon[0].length
+        from = lineEnd - colon[2].length
+        end = yamlBlockEnd(normalized, lineEnd, indent)
+      }
+      for (const line of normalized.slice(from, end).matchAll(/[^\r\n]+/g)) {
+        if (open && from + line.index + line[0].length >= normalized.length) continue
+        const raw = line[0].trimStart()
+        if (!raw || /^[#&!|>]/.test(raw)) continue
+        const child = /^(?:"(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[^"'#:][^:]*):(?:[ \t]+|$)(.*)$/.exec(raw)
+        const value = child ? child[1].trimStart() : raw
+        if (/^[&!|>]/.test(value)) continue
+        const token = /^(?:"((?:[^"\\]|\\.)*)"|'((?:[^']|'')*)'|([^ \t"'#]+))/.exec(value)
+        const v = token?.slice(1).find((part) => part !== undefined)
+        if (v && v.length >= 4 && v !== REDACTED) out.add(v)
+      }
     }
   }
   for (const { value, ended } of explicitKeyHits(text)) {

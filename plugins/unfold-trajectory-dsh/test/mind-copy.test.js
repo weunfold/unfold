@@ -13,7 +13,7 @@ const PINNED = {
   'src/mind/moments.js': ['src/moments.js', '8cf3966723733950012457448fd9b8ce68f489236a949ee98d9d55c449d4f327'],
   'test/support/mind.js': ['src/mind.js', 'a15acae48af959eb62a8be2fd1b95b681ee11280090d80efe8c35b2ed00026f0'],
   'test/support/redact.js': [
-    'src/redact.js', '147fe1687b9a55445f8553a166363646777ced42a3e0abf7df631dbc93e8b3bf'],
+    'src/redact.js', '2510d7ac47cbc825641af3bbbea3770d544df4f94d884b4dcce7536ec02d65a8'],
   'test/support/sentences.js': ['src/sentences.js', 'b327b65802d386f0f57104f59960173057628f60ea93edaf97d071767f810641'],
   'test/support/display.js': ['src/display.js', '41aa8e7d2def996f7a1ffa1e516c7ddf814379d83ee6138740cc1015abae5c13'],
   'test/support/catalog.js': ['test/support/catalog.js', 'c3e93d3df9136234fff3649243cd5157d5731e7663f1030ce9bc0c29cdd4912e'],
