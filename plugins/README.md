@@ -48,6 +48,20 @@ Build scripts also require the package's declared developer dependencies.
 The tests use synthetic local services and do not call a model. Tests with
 additional CI-only cells report those cells as skipped in an ordinary run.
 
+The plugin CI installs each package independently with Bun 1.4.4 and Node
+24.13.1, installs its development harness, builds any browser client, and runs
+its Node tests with four test workers. The Bot and SSE packages have no browser
+client build. CI also verifies that rebuilding leaves committed bundles unchanged.
+
+Run the shared copy and delivery checks from the repository root:
+
+```sh
+bun test scripts/unfold-copies.test.ts scripts/sse-copies.test.ts scripts/plugin-delivery.test.ts
+```
+
+The shared redaction performance helper lives in `scripts/redact-fuzz-guard.mjs`.
+Changes to it run every plugin's CI row.
+
 After changing browser source, run that package's build command and commit its
 `client.js`. The trajectory package retains its upstream source and third-party
 notices so its client can be rebuilt.

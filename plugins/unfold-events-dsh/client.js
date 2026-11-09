@@ -1417,6 +1417,7 @@ ${indent}  ${REDACTED}${block.endsWith("\r") ? "\r" : ""}` : block}`, /:[ \t]*[&
   // and yamlBlockEnd where the block ends. It runs before the name rules, so they leave its `|`
   // or `>` alone.
   [redactYamlBlocks, null, /:[\x00-\x09\x0B\x0C\x0E-\x20\x7F-\xA0\xAD\u061C\u1680\u180E\u2000-\u200F\u2028-\u202F\u205F-\u2064\u3000\uFEFF]*[&!>|]/],
+  [redactExplicitKeyValues, null, /(?:^|[\r\n])[ \t]*(?:-[ \t]+)?\?[ \t]/],
   // A credential key line that ends at its colon, or at up to two anchors and tags (`&a`, `!!str`),
   // a comment after them or not, continues on a later line (#396, #410). Blank lines and comment lines
   // are skipped, and so are lines of anchors and tags alone indented under the key. Then the first
@@ -1498,9 +1499,11 @@ ${indent}  ${REDACTED}${block.endsWith("\r") ? "\r" : ""}` : block}`, /:[ \t]*[&
   [/(?=[A-Za-z0-9"'])(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))((?:(?<!\\)"(?=[^"\r\n]*?(?<![A-Za-z0-9_-])(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key)(?![A-Za-z0-9_-]))[^"\r\n]*"|(?<!\\)'(?=[^'\r\n]*?(?<![A-Za-z0-9_-])(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key)(?![A-Za-z0-9_-]))[^'\r\n]*')|(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key)(?:(?!:[ \t])[^ \t"'#\r\n]){0,16}|(?<=(?:^|[\r\n])[ \t]{0,256}(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]{1,40}){0,2}[ \t]{0,256})(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key)(?:(?!:[ \t])[^ \t"'#\r\n])*|(?:"[^"\r\n]{241,}|'[^'\r\n]{241,}|"[^"\r\n]{0,}(?=[ \t]{0,64}(?:#[^\r\n]*)?[\r\n])|'[^'\r\n]{0,}(?=[ \t]{0,64}(?:#[^\r\n]*)?[\r\n])))((?:["']?[ \t]*(?:#[^\r\n]*)?(?=[\r\n])(?<=(?:^|[\r\n])[ \t]*(?:-[ \t]+)?\?[ \t][^\r\n]*)(?:\r?\n|\r(?!\n))(?:[ \t]*(?:#[^\r\n]*)?(?:\r?\n|\r(?!\n)))*[ \t]*:(?!(?:[ \t]+[&!][^\s"'`]*){0,2}(?:[ \t]+#[^\r\n]*)?[ \t]*(?:[\r\n]|$)))[ \t]*)(?!(?:[&!][^\s"'`]*[ \t]+){3})(?!(?:[&!][^\s"'`]*[ \t]+)*[>|][-+0-9]*(?:[ \t]*#[^\r\n]*)?[ \t]*(?:[\r\n]|$))(?:(?<=:[ \t]*)(?:[&!][^\s"'`]*[ \t]+){1,2})?(?:(["'`])(?:(?!\3)[^\\]|\\[\s\S]|\\$)*(\3|$)|(Bearer|bearer|BEARER|Basic|basic|BASIC)\s+[A-Za-z0-9._~+/=-]+|(?![>|][-+0-9]*(?:[ \t]*#[^\r\n]*)?[ \t]*(?:[\r\n]|$))(?!(?:Bearer|bearer|BEARER|Basic|basic|BASIC)\b|\[redacted\])[^\s"',}]+)/g, (_, name, sep, q, close, scheme) => q ? `${name}${sep}${q}${REDACTED}${close}` : scheme ? `${name}${sep}${scheme} ${REDACTED}` : `${name}${sep}${REDACTED}`, /Token|Secret|Pass|Key|Authorization/],
   // An unclosed quoted explicit key with a no-space colon on its line (`? "password:hunter2`):
   // the tail reads as the value; mask it to the line end here, text only. The clean-close skip
-  // uses the opening quote only, so a mismatched quote cannot pass.
-  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=[^"'\r\n:]*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization))[^"'\r\n:]*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))([^\r\n]+)(?=[\r\n]|$)/g, (_, nl, prefix) => `${nl}${prefix}${REDACTED}`, /:/],
-  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=[^"'\r\n:]*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key))[^"'\r\n:]*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))([^\r\n]+)(?=[\r\n]|$)/g, (_, nl, prefix) => `${nl}${prefix}${REDACTED}`, /:/],
+  // uses the opening quote only, so a mismatched quote cannot pass. A quote of the other kind
+  // inside the name is part of it (`? "user's_password:hunter2`, #530): the scan before the
+  // credential and the `:` may cross it, or the line would serve its value.
+  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=(?:(?!\3)[^\r\n:])*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization))(?:(?!\3)[^\r\n:])*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))([^\r\n]+)(?=[\r\n]|$)/g, (_, nl, prefix) => `${nl}${prefix}${REDACTED}`, /:/],
+  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=(?:(?!\3)[^\r\n:])*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key))(?:(?!\3)[^\r\n:])*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))([^\r\n]+)(?=[\r\n]|$)/g, (_, nl, prefix) => `${nl}${prefix}${REDACTED}`, /:/],
   // JSON inside a JSON string (`{\"password\": \"…\"}`): the value runs to its escaped closing
   // quote, its own escapes doubled, or to a bare quote that ends the outer string.
   [/(?=[A-Za-z0-9])(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))((?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization))(\\"\s*:\s*)\\"((?:[^\\"]|\\[^\\"]|\\\\(?:\\[\s\S]|\\$|[^\\]|$)|\\$)*)(\\"|"|$)/gi, (_, name, sep, value, close) => `${name}${sep}\\"${REDACTED}${close}`, /\\"/],
@@ -1570,11 +1573,149 @@ function redactYamlBlocks(s) {
   }
   return out;
 }
+var KEY_NAME_LOWER = /(?:(?<![A-Za-z0-9_-])|(?<=[_-]))(?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization)(?![A-Za-z0-9_-])/i;
+var KEY_NAME_CAMEL = /(?:(?<![A-Za-z0-9_-])|(?<=[_-]))(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key)(?![A-Za-z0-9_-])/;
+var KEY_PROPS = /^(?:[&!][^\s"'`]*[ \t]+){0,2}/;
+var KEY_BLOCK = /^[>|][-+0-9]*[ \t]*(?:#[^\r\n]*)?$/;
+function explicitKeyName(text) {
+  const tail = text.slice(KEY_PROPS.exec(text)[0].length);
+  const quote = tail[0];
+  if (quote === '"' || quote === "'") {
+    for (let i = 1; i < tail.length; i++) {
+      if (quote === '"' && tail[i] === "\\") i++;
+      else if (tail[i] === quote && quote === "'" && tail[i + 1] === "'") i++;
+      else if (tail[i] === quote) return tail.slice(1, i);
+    }
+    return tail.slice(1);
+  }
+  return /^\S*/.exec(tail)[0];
+}
+function credentialName(name) {
+  if (name.includes("\\")) return true;
+  const plain = INVISIBLE_GATE.test(name) ? name.replace(INVISIBLE, "") : name;
+  return KEY_NAME_LOWER.test(plain) || KEY_NAME_CAMEL.test(plain);
+}
+function explicitLineValue(content) {
+  const item = content.replace(/^(?:-[ \t]+)+/, "");
+  const child = /^[^ \t"'][^:]*?:[ \t]+(\S.*)$/.exec(item);
+  const text = child ? child[1] : item;
+  const quoted = /^(["'`])((?:\\.|(?!\1)[^\\])*?)\1/.exec(text);
+  if (quoted) return quoted[2];
+  const first = /^(?:[&!][^\s"'`]*[ \t]+)*([^\s"'`]+)/.exec(text);
+  return first ? first[1] : "";
+}
+function explicitColonHits(s, line2, start, lineEnd) {
+  const at = line2.indexOf(":");
+  const blanks = /^[ \t]*/.exec(line2.slice(at + 1))[0];
+  const props = KEY_PROPS.exec(line2.slice(at + 1 + blanks.length))[0];
+  const rest = line2.slice(at + 1 + blanks.length + props.length);
+  const hits = [];
+  if (rest && rest[0] !== "#" && !KEY_BLOCK.test(rest)) {
+    hits.push({ start, end: lineEnd, text: `${line2.slice(0, at + 1)}${blanks}${REDACTED}`, value: explicitLineValue(rest), ended: lineEnd });
+    return hits;
+  }
+  let cursor = lineEnd;
+  if (s.startsWith("\r\n", cursor)) cursor += 2;
+  else if (s[cursor] === "\r" || s[cursor] === "\n") cursor += 1;
+  else return hits;
+  const indent = /^[ \t]*/.exec(line2)[0].length;
+  let first = true;
+  while (cursor < s.length) {
+    let end = cursor;
+    while (end < s.length && s[end] !== "\r" && s[end] !== "\n") end++;
+    const body = s.slice(cursor, end);
+    const lead = /^[ \t]*/.exec(body)[0];
+    const content = body.slice(lead.length);
+    if (!content || content[0] === "#") {
+    } else if (lead.length > indent) {
+      hits.push({ start: cursor, end, text: `${lead}${REDACTED}`, value: first ? explicitLineValue(content) : "", ended: end });
+      first = false;
+    } else break;
+    if (s.startsWith("\r\n", end)) cursor = end + 2;
+    else cursor = end + 1;
+  }
+  return hits;
+}
+function explicitKeyHits(s) {
+  if (!s.includes("?")) return [];
+  const hits = [];
+  const keyLine = /(^|[\r\n])([ \t]*)(?:-[ \t]+)?\?[ \t]([^\r\n]*)/g;
+  let covered = 0;
+  for (let m = keyLine.exec(s); m; m = keyLine.exec(s)) {
+    if (m.index < covered) continue;
+    if (!credentialName(explicitKeyName(m[3]))) {
+      const rest = m[3].slice(KEY_PROPS.exec(m[3])[0].length).replace(/(?:^|[ \t])#.*$/, "");
+      if (!credentialName(rest)) continue;
+    }
+    const plain = m[3].slice(KEY_PROPS.exec(m[3])[0].length).replace(/(?:^|[ \t])#.*$/, "");
+    const several = !/^["']/.test(plain) && /\S[ \t]+\S/.test(plain);
+    const opaque = explicitKeyName(m[3]).includes("\\");
+    const keyIndent = m[2].length;
+    let cursor = m.index + m[0].length;
+    if (s.startsWith("\r\n", cursor)) cursor += 2;
+    else if (s[cursor] === "\r" || s[cursor] === "\n") cursor += 1;
+    else continue;
+    let seen = false;
+    while (cursor < s.length) {
+      let end = cursor;
+      while (end < s.length && s[end] !== "\r" && s[end] !== "\n") end++;
+      const line2 = s.slice(cursor, end);
+      const lead = /^[ \t]*/.exec(line2)[0];
+      const content = line2.slice(lead.length);
+      if (content && content[0] === ":") {
+        if (seen || several || opaque || lead.length < m[0].length - m[1].length - m[3].length - 2) hits.push(...explicitColonHits(s, line2, cursor, end));
+        break;
+      }
+      if (content && content[0] !== "#" && lead.length > keyIndent) {
+        hits.push({ start: cursor, end, text: `${lead}${REDACTED}`, value: explicitLineValue(content), ended: end });
+        seen = true;
+      } else if (content && content[0] !== "#" && lead.length <= keyIndent) break;
+      if (s.startsWith("\r\n", end)) cursor = end + 2;
+      else cursor = end + 1;
+    }
+    if (hits.length) covered = Math.max(covered, hits[hits.length - 1].end);
+  }
+  return hits;
+}
+function redactExplicitKeyValues(s) {
+  const hits = explicitKeyHits(s);
+  if (!hits.length) return s;
+  hits.sort((a, b) => a.start - b.start);
+  let out = "";
+  let from = 0;
+  for (const hit of hits) {
+    if (hit.start < from) continue;
+    out += `${s.slice(from, hit.start)}${hit.text}`;
+    from = hit.end;
+  }
+  return out + s.slice(from);
+}
+function redactMalformedExplicitKeys(s) {
+  if (!/\?[ \t]/.test(s)) return s;
+  const keys = /(^|\r\n|\r(?!\n)|\n)([ \t]*)(-[ \t]+)?\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g;
+  let done = "";
+  let from = 0;
+  for (let m = keys.exec(s); m; m = keys.exec(s)) {
+    if (/^[ \t]*(?:#[^\r\n]*|:[^\r\n]*)?$/.test(m[5]) || !NAME_STEM.test(m[4] + m[5])) continue;
+    const indent = m[2] + (m[3] ? " ".repeat(m[3].length) : "");
+    const at = m.index + m[0].length;
+    let end = yamlBlockEnd(s, at, indent);
+    const colon = /^(?:(?:\r\n|\r(?!\n)|\n)[ \t]*(?:#[^\r\n]*)?)*(?:\r\n|\r(?!\n)|\n)([ \t]*):[^\r\n]*/.exec(s.slice(end));
+    if (colon && colon[1] === indent) {
+      end += colon[0].length;
+      end = yamlBlockEnd(s, end, indent);
+    }
+    const block = s.slice(at, end);
+    done += s.slice(from, at) + (/\S/.test(block) ? `${block.match(/^(?:\r\n|\r|\n)/)[0]}${indent}  ${REDACTED}` : block);
+    from = keys.lastIndex = end;
+  }
+  return done + s.slice(from);
+}
 function redactText(s, open = false) {
   const was = OPEN_END;
   OPEN_END = open;
   try {
-    let out = nameText(s);
+    let out = redactMalformedExplicitKeys(nameText(s));
     for (const [re, fn, gate] of SECRET_TEXT) if (!gate || gate.test(out)) out = typeof re === "function" ? re(out) : out.replace(re, fn);
     return out;
   } finally {
@@ -1613,8 +1754,8 @@ var SECRET_VALUES = [
   [/(?=[A-Za-z0-9])(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key)\\"\s*:\s*\\"((?:[^\\"]|\\[^\\"]|\\\\(?:\\[\s\S]|\\$|[^\\]|$)|\\$)+)/g, /\\"/],
   // The no-space tail is the value when no `:` line follows: remember its first token, so a
   // later bare occurrence is masked. A name line above a `:` line is S3's name tail.
-  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=[^"'\r\n:]*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization))[^"'\r\n:]*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))(?![^\r\n]*[\r\n](?:[ \t]*(?:#[^\r\n]*)?[\r\n])*[ \t]*:)(["']?([^ \t\r\n"']+(?:'+[^ \t\r\n"']+)*))/g, /:/],
-  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=[^"'\r\n:]*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key))[^"'\r\n:]*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))(?![^\r\n]*[\r\n](?:[ \t]*(?:#[^\r\n]*)?[\r\n])*[ \t]*:)(["']?([^ \t\r\n"']+(?:'+[^ \t\r\n"']+)*))/g, /:/]
+  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=(?:(?!\3)[^\r\n:])*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization))(?:(?!\3)[^\r\n:])*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))(?![^\r\n]*[\r\n](?:[ \t]*(?:#[^\r\n]*)?[\r\n])*[ \t]*:)(["']?([^ \t\r\n"']+(?:'+[^ \t\r\n"']+)*))/g, /:/],
+  [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=(?:(?!\3)[^\r\n:])*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key))(?:(?!\3)[^\r\n:])*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))(?![^\r\n]*[\r\n](?:[ \t]*(?:#[^\r\n]*)?[\r\n])*[ \t]*:)(["']?([^ \t\r\n"']+(?:'+[^ \t\r\n"']+)*))/g, /:/]
 ];
 var EXPLICIT_KEY = /(?:^|[\r\n])[ \t]*(?:-[ \t]+)?\?[ \t]/;
 var ANY_EXPLICIT_KEY = /\?[ \t]/;

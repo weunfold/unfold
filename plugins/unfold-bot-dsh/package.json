@@ -1,6 +1,6 @@
 {
   "name": "@automagik/unfold-bot-dsh",
-  "version": "3.90.7",
+  "version": "3.108.7",
   "description": "Unfold for DeepSeek Harness: the Unfold Bot on the Automagik Bot team, with the Unfold plugins and the Unfold bridge as its defaults",
   "keywords": [
     "dsh-plugin",
@@ -53,7 +53,7 @@
         "en": "Unfold"
       },
       "description": {
-        "en": "Unfold inside DSH, on the Automagik Bot team. Adds the Unfold Bot, drawn in Unfold's own clay, which follows and carries on the work you do with Unfold through the Unfold plugins and the Unfold bridge. Install it from the welcome's team step, which brings those plugins with it. Part of Unfold; works with the Unfold app."
+        "en": "Unfold inside DSH, on the Automagik Bot team. Adds the Unfold Bot, drawn in Unfold's own clay, which follows and carries on the work you do with Unfold through the Unfold plugins and the Unfold bridge. Part of Unfold; works with the Unfold app. Unfold's own release ships this plugin and the Unfold plugins."
       },
       "category": "automagik",
       "keywords": [

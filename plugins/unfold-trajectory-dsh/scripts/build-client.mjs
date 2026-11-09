@@ -90,7 +90,7 @@ const feather = JSON.parse(readFileSync(join(HERE, 'third_party/feather-icons-4.
 const diff = JSON.parse(readFileSync(join(HERE, 'third_party/diff-9.0.0/SOURCE.json'), 'utf8'))
 const header = `/*!
  * ${PACKAGE_NAME}: a fork of @deepseek-ai/dsh-client-ui-trajectory 0.2.1-rc.3
- * (upstream lib/client.js sha256 b11426f89d3b4302964b491d7826a29fe3de390be4bbfae325375f54fe6919ad).
+ * (upstream lib/client.js sha256 ${sha(readFileSync(UPSTREAM, 'utf8'))}).
  * Modified by the Automagik contributors; the changed regions are listed in NOTICE.md.
  * Upstream license:
  *
@@ -116,7 +116,7 @@ if (process.argv.includes('--check')) {
   let current = null
   try { current = readFileSync(OUTPUT, 'utf8') } catch { /* missing counts as stale */ }
   if (current !== next) {
-    console.error('client.js is stale: run `npm run build` in apps/unfold-trajectory-dsh and commit the result')
+    console.error('client.js is stale: run `npm run build` in plugins/unfold-trajectory-dsh and commit the result')
     process.exit(1)
   }
 } else {

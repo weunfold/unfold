@@ -38,7 +38,7 @@ test('the built bundle carries the license notice, the upstream pin and the icon
   assert.ok(header.startsWith('/*!'), 'a preserved (/*!) comment')
   assert.match(header, /Copyright \(c\) 2026 DeepSeek/)
   assert.match(header, /Permission is hereby granted, free of charge/)
-  assert.ok(header.includes('b11426f89d3b4302964b491d7826a29fe3de390be4bbfae325375f54fe6919ad'))
+  assert.ok(header.includes(UPSTREAM_FULL))
   assert.match(header, /NOTICE\.md/)
   assert.match(header, /Lucide/)
   assert.match(header, /ISC/)

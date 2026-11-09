@@ -1,6 +1,6 @@
 /*!
  * @automagik/unfold-trajectory-dsh: a fork of @deepseek-ai/dsh-client-ui-trajectory 0.2.1-rc.3
- * (upstream lib/client.js sha256 b11426f89d3b4302964b491d7826a29fe3de390be4bbfae325375f54fe6919ad).
+ * (upstream lib/client.js sha256 391740afdfde2e8db406b0ac22d02375e17772ff1dff4676d1b91efb591c6c96).
  * Modified by the Automagik contributors; the changed regions are listed in NOTICE.md.
  * Upstream license:
  *

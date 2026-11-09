@@ -457,9 +457,9 @@ const YAML_ROWS = [
     ['apiKey: >', (n) => `creds:${n}  apiKey: >${n}    ${SECRET}${n}    ${MORE}${n}`],
     ['db_password: |-', (n) => `db_password: |-${n}  ${SECRET}${n}  ${MORE}`],
   ].flatMap(([label, block]) => EOLS.map(([eol, n]) => ({ name: `${label}, a ${eol} block`, raw: block(n), lf: block('\n'), n }))),
-  // a lone CR inside an LF block is value (the reviewer's repro).
+  // Round 3: a lone CR inside an LF block is value (the reviewer's repro).
   { name: 'a lone CR inside an LF block', raw: `password: |\n  ${SECRET}\r${MORE}\nnext: 1`, after: '\nnext: 1' },
-  // each key line end with each stray it does not use, mid-line, at a line start, on a
+  // Round 4: each key line end with each stray it does not use, mid-line, at a line start, on a
   // blank line; the unindented line after the block is shown.
   ...STRAYS.flatMap(([keyEol, n, strayName, s]) =>
     [['password: |', ''], ['apiKey: >', '  '], ['db_password: |-', '']].flatMap(([key, i]) =>
@@ -470,9 +470,9 @@ const YAML_ROWS = [
       ].map(([where, raw]) => ({ name: `${key}, ${keyEol} key, a stray ${strayName} ${where}`, raw, after: `${n}${i}next: shown` })),
     ),
   ),
-  // the key's own line end comes first (an LF or CR key's \r\n): the line has ended.
+  // Round 4: the key's own line end comes first (an LF or CR key's \r\n): the line has ended.
   ...[['LF', '\n'], ['CR', '\r']].map(([keyEol, n]) => ({ name: `${keyEol} key, then \\r\\n`, raw: `password: |${n}  ${SECRET}\r\nnext: shown`, after: 'next: shown' })),
-  // a stray after part of a nested key's indent (the reviewer's repros, then 5 indents
+  // Round 5: a stray after part of a nested key's indent (the reviewer's repros, then 5 indents
   // around a stray for each of the 4 key/stray pairs).
   { name: 'nested key, a space then a stray CR then 3 spaces', raw: `  password: |\n \r   ${SECRET}\nnext: 1`, after: '\nnext: 1' },
   { name: 'nested key, its indent then a stray CR then 3 spaces, at the end', raw: `  password: |\n  \r   ${SECRET}` },
@@ -489,7 +489,7 @@ const YAML_ROWS = [
     raw: `config:${n}  password: |${n}    ${SECRET}${n}${n}    ${MORE}${n}next: shown`,
     exact: `config:${n}  password: |${n}    ${REDACTED}${n}next: shown`,
   })),
-  // the key line is untrusted text, not validated YAML (the reviewer's repros): a quoted
+  // Round 6: the key line is untrusted text, not validated YAML (the reviewer's repros): a quoted
   // key, an anchor and a tag in either order, a comment after the indicator, an explicit key.
   ...[
     ['a double-quoted key', `"password": |\n  ${SECRET}`],
@@ -504,12 +504,12 @@ const YAML_ROWS = [
     ['a comment after the indicator', `password: | # note\n  ${SECRET}`],
     ['a comment with no space', `password: |#note\n  ${SECRET}`],
     ['an explicit key', `? password\n: |\n  ${SECRET}`],
-    // comment and blank lines between `? key` and `: |`.
+    // Round 6 (explicit key with a gap): comment and blank lines between `? key` and `: |`.
     ['an explicit key, a comment line before its colon', `? password\n# note\n: |\n  ${SECRET}`],
     ['an explicit key, a blank line before its colon', `? password\n\n: |\n  ${SECRET}`],
     ['an explicit key, an indented comment before its colon', `? password\n  # note\n: |\n  ${SECRET}`],
   ].map(([name, raw]) => ({ name, raw })),
-  // a tab in a line's indent is value, never a terminator, and a NUL or another
+  // A tab in a line's indent is value, never a terminator, and a NUL or another
   // character that prints nothing on the key line does not stop the key from matching.
   { name: 'a tab as the indent under a nested key', raw: `  password: |\n\t${SECRET}\n  next: 1`, after: '\n  next: 1' },
   { name: 'a space then a tab under a nested key', raw: `  password: |\n \t${SECRET}\n  next: 1`, after: '\n  next: 1' },

@@ -9,6 +9,7 @@ import { test } from 'node:test'
 import { loadDefinitions } from '../src/definitions.js'
 import { MindStream } from '../src/mind.js'
 import { redact, redactText, secretsIn } from '../src/redact.js'
+import { guardCases } from '../../../scripts/redact-fuzz-guard.mjs'
 
 const WORDS = ['correct', 'horse', 'battery', 'staple']
 const PHRASE = WORDS.join(' ')
@@ -138,65 +139,11 @@ const FORMS = [
 ]
 const CASES = KEYS.flatMap((k) => FORMS.map(([form, text]) => [`${k} (${form})`, text(k)]))
 const leaked = (text) => [...new Set(text.match(/[a-z]{3,}/gi) ?? [])].filter((t) => WORDS.some((w) => w.includes(t.toLowerCase()) || t.toLowerCase().includes(w)))
-// A sample uses CPU time, not wall clock: CI runs this package's test files side by side, and a
-// wall-clock sample includes the time this process waits for a CPU. The best of five runs drops one
-// that caught a background compile or a collection; noise can add CPU time, never remove it, so a
-// rule that is slow in every run stays slow in every sample.
-// The text paths keep the absolute ceiling: 100 ms sits 9x above the slowest healthy input here
-// (11.1 ms of CPU measured, Node 24.13.1), and a machine 4x slower lands at 44 ms.
-const FAST_MS = 100
-const FAST_TRIES = 5
-const sample = (fn) => {
-  const t0 = process.cpuUsage()
-  fn()
-  const used = process.cpuUsage(t0)
-  return (used.user + used.system) / 1000
-}
-const timed = (fn, ceiling = FAST_MS) => {
-  let best = Infinity
-  for (let i = 0; i < FAST_TRIES && best >= ceiling; i++) best = Math.min(best, sample(fn))
-  return best
-}
-// The reference sets a bound, so it always takes all five samples.
-const fixedWork = (fn) => Math.min(...Array.from({ length: FAST_TRIES }, () => sample(fn)))
-
-// The reference is a fixed amount of the same work: redactText over one 80k text of the fuzz's own
-// pieces, built once from a fixed seed. It runs the same code path over a fixed N pieces, never the
-// adversarial texts, so its cost is linear in that input (40k, 80k and 160k characters measured
-// 117, 106 and 109 ns per character). A slower machine or a slower clock raises the reference and
-// the stream's bound together: it is not a time constant.
-const REFERENCE_PIECES = [
-  ' ', '\t', ' \t', '\n', '\n  ', 'password', 'db_password', 'DB_PASS', 'accessToken',
-  'ClientSecret', 'DbPass', 'API_TOKEN', '--token', '-pass', 'token', '=', ': ', ' = ', '":',
-  '\\":', ': |\n', ': >-\n', '"', "'", '`', '\\', '\\\\', '\\"', '\\"\\"', 'bearer ',
-  'basic ', 'Bearer ', 'x9', 'a', 'word ', '{"', '{\\"', '_', '-',
-]
-const REFERENCE_TEXT = (() => {
-  let state = 0x531 >>> 0
-  const rand = () => {
-    state = (state + 0x6d2b79f5) >>> 0
-    let t = Math.imul(state ^ (state >>> 15), state | 1)
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
-    return ((t ^ (t >>> 14)) >>> 0) / 4_294_967_296
-  }
-  const parts = []
-  for (let n = 0; n < 80_000; ) {
-    const piece = REFERENCE_PIECES[Math.floor(rand() * REFERENCE_PIECES.length)]
-    parts.push(piece)
-    n += piece.length
-  }
-  return parts.join('')
-})()
-
-// The stream runs redactText over each delta and builds its row, sentence and audit work on top,
-// so it costs a multiple of the reference: 2.55x measured here (worst of this adversarial set, Node
-// 24.13.1). STREAM_MARGIN sits 1.57x above that, and a 2x regression of the stream path still
-// fails (5.1x). The absolute backstop (400 ms, as in the fuzz guards) caps how far a slow reference
-// may widen the bound; a quadratic rule at 80k characters is 6.4e9 steps, seconds of CPU, far past
-// either. The text paths keep the absolute ceiling: they are the plain rule pass over fixed-size
-// inputs, with no per-path constant to scale.
-const STREAM_MARGIN = 4
-const BACKSTOP_MS = 400
+// The stream includes row, sentence and audit work beyond the reference redaction pass.
+// The handover timing row measured 4.0-4.3x on healthy runners; 6x leaves about 40% headroom
+// above that range. Doubling the 4.3x workload still exceeds the bound (8.6x), and the shared
+// 400 ms absolute backstop and text-path ceilings remain unchanged.
+const STREAM_MARGIN = 6
 
 function journal() {
   const mind = new MindStream({ now: () => 1 })
@@ -248,30 +195,13 @@ test('a scheme after a key name is hidden in any case, and the scheme word stays
 })
 
 test('80k characters of adversarial input stay fast, in the rules and in the stream', () => {
-  const inputs = Object.entries(ADVERSARIAL)
-  // Warm-up, not measured: a cold process pays to compile the rules' regular expressions and climb
-  // V8's tiers once, and that setup is not an input's cost. The same inputs then run measured.
-  for (const [, text] of inputs) {
-    redactText(text)
-    secretsIn(text)
-    journal().send(text)
-  }
-  const referenceMs = fixedWork(() => redactText(REFERENCE_TEXT))
-  // A zero sample would make the bound zero and pass a stream that measured nothing.
-  assert.ok(referenceMs > 0, `reference sample is ${referenceMs} ms of CPU`)
-  const bound = Math.min(STREAM_MARGIN * referenceMs, BACKSTOP_MS)
-  const margin = `${STREAM_MARGIN} x reference ${referenceMs.toFixed(1)} ms`
-  for (const [what, text] of inputs) {
-    for (const [path, run] of [['redactText', redactText], ['secretsIn', secretsIn]]) {
-      const ms = timed(() => run(text))
-      const detail = `${what}: ${path}: ${ms.toFixed(1)} ms of CPU, ceiling ${FAST_MS} ms`
-      assert.ok(ms < FAST_MS, detail)
-    }
-    const streamMs = timed(() => journal().send(text), bound)
-    const detail = `${what}: the stream: ${streamMs.toFixed(1)} ms of CPU, ` +
-      `bound ${bound.toFixed(1)} ms (${margin}; backstop ${BACKSTOP_MS} ms)`
-    assert.ok(streamMs <= bound, detail)
-  }
+  guardCases({
+    cases: Object.entries(ADVERSARIAL),
+    textPaths: [['redactText', redactText], ['secretsIn', secretsIn]],
+    scaledPath: ['the stream', (text) => journal().send(text), STREAM_MARGIN],
+    reference: redactText,
+    onDiagnostic: console.info,
+  })
 })
 
 test('fields named for a pass count are kept; fields named for a pass are hidden', () => {

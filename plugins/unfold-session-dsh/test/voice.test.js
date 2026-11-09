@@ -516,7 +516,10 @@ test('a spoken turn followed while the observer is still away waits for the end;
   const [d, rs, , , , done] = turn.evs
   ;[d, rs].forEach((e) => b.ingest(e))
   b.onLink('waiting') // the observer is away when the DSH turn starts
-  // Monotonic clock, 1 ms tolerance: a 60 ms timer may fire a millisecond early against the wall clock.
+  // Timers can fire a hair before their nominal delay against performance.now: this row measured
+  // 58.99 ms for its 60 ms sleep on PR #688's CI. Allow a 5 ms budget for that scheduling jitter.
+  // It cannot hide a shorter away window: the bridge's own gap wait in this row is 2000 ms.
+  const TIMER_SCHEDULING_SLACK_MS = 5
   const t0 = performance.now()
   const run = collect(b.runVoice(turn.rid))
   await new Promise((r) => setTimeout(r, 60))
@@ -525,6 +528,7 @@ test('a spoken turn followed while the observer is still away waits for the end;
   const final = (await run).at(-1)
   assert.equal(final.status, 'incomplete', 'its words were missed: never plain completed')
   assert.match(final.detail, /the reply ended \(completed\)/)
-  assert.ok(performance.now() - t0 >= 59, `waited ${performance.now() - t0} ms`)
+  const waited = performance.now() - t0
+  assert.ok(waited >= 60 - TIMER_SCHEDULING_SLACK_MS, `waited ${waited} ms`)
   assert.equal(host.calls.length, 0)
 })
