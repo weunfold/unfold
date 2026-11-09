@@ -1591,6 +1591,7 @@ function explicitKeyName(text) {
   return /^\S*/.exec(tail)[0];
 }
 function credentialName(name) {
+  if (name.includes("\\")) return true;
   const plain = INVISIBLE_GATE.test(name) ? name.replace(INVISIBLE, "") : name;
   return KEY_NAME_LOWER.test(plain) || KEY_NAME_CAMEL.test(plain);
 }
@@ -1648,6 +1649,7 @@ function explicitKeyHits(s) {
     }
     const plain = m[3].slice(KEY_PROPS.exec(m[3])[0].length).replace(/(?:^|[ \t])#.*$/, "");
     const several = !/^["']/.test(plain) && /\S[ \t]+\S/.test(plain);
+    const opaque = explicitKeyName(m[3]).includes("\\");
     const keyIndent = m[2].length;
     let cursor = m.index + m[0].length;
     if (s.startsWith("\r\n", cursor)) cursor += 2;
@@ -1661,7 +1663,7 @@ function explicitKeyHits(s) {
       const lead = /^[ \t]*/.exec(line2)[0];
       const content = line2.slice(lead.length);
       if (content && content[0] === ":" && lead.length >= keyIndent) {
-        if (seen || several) hits.push(...explicitColonHits(s, line2, cursor, end));
+        if (seen || several || opaque) hits.push(...explicitColonHits(s, line2, cursor, end));
         break;
       }
       if (content && content[0] !== "#" && lead.length > keyIndent) {
