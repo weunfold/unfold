@@ -27,10 +27,16 @@ const MEMORY_SHAPES = [
   ['indented gap before colon', (key) => `${key}\n  gapword\n: ${VALUE}`],
   ['map child', (key) => `${key}\n  childname: ${VALUE}`],
 ]
+const MEMORY_ROWS = [
+  ...FORMS.flatMap(([form, key]) => MEMORY_SHAPES.map(([shape, input]) => [form, key, shape, input])),
+  ...[['glued suffix', `? "db"_${CREDENTIAL}`], ['quoted credential name', `? "${CREDENTIAL}" extra`]].map(
+    ([form, key]) => [form, key, 'deeper colon', (name) => `${name}\n  : ${VALUE}`],
+  ),
+]
 const masked = (text, kept) => kept.reduce((out, value) => out.split(value).join('[redacted]'), text)
 
 for (const [path, secretsIn] of [['Events browser', clientSecrets]]) {
-  for (const [form, key] of FORMS) for (const [shape, input] of MEMORY_SHAPES) {
+  for (const [form, key, shape, input] of MEMORY_ROWS) {
     test(`#785: ${path} remembers only an ended value (${form}, ${shape})`, () => {
       const text = input(key)
       const kept = secretsIn(text)

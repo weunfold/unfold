@@ -622,7 +622,7 @@ export function secretsIn(s, open = false) {
       }
       for (const line of normalized.slice(from, end).matchAll(/[^\r\n]+/g)) {
         if (open && from + line.index + line[0].length >= normalized.length) continue
-        const raw = line[0].trimStart()
+        const raw = line[0].trimStart().replace(/^:(?:[ \t]+|$)/, '')
         if (!raw || /^[#&!|>]/.test(raw)) continue
         const child = /^(?:"(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[^"'#:][^:]*):(?:[ \t]+|$)(.*)$/.exec(raw)
         const value = child ? child[1].trimStart() : raw
@@ -633,8 +633,9 @@ export function secretsIn(s, open = false) {
       }
     }
   }
-  for (const { value, ended } of explicitKeyHits(text)) {
-    if (open && ended >= text.length) continue
+  const explicitSource = redactMalformedExplicitKeys(text)
+  for (const { value, ended } of explicitKeyHits(explicitSource)) {
+    if (open && ended >= explicitSource.length) continue
     if (value && value.length >= 4 && value !== REDACTED) out.add(value)
   }
   return [...out]
