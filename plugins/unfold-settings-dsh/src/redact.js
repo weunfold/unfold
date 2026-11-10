@@ -464,20 +464,22 @@ function explicitKeyHits(s) {
 function escapedKeyHits(s) {
   if (!s.includes('\\')) return []
   const hits = []
-  const keys = /(^|[\r\n]|[{[,])([ \t]*(?:-[ \t]+)*(?:\?[ \t]+)?(?:[&!][^\s"'`]*[ \t]+){0,2})("(?:[^"\\\r\n]|\\[^\r\n])*")[ \t]*:/g
+  let end = -1
+  const keys = /(^|[\r\n]|[{[,])([ \t]*(?:-[ \t]+)*(?:\?[ \t]+)?(?:[&!][^\s"'`,[\]{}]*[ \t]+){0,2})("(?:[^"\\\r\n]|\\[^\r\n])*")[ \t]*:/g
   for (const m of s.matchAll(keys)) {
     if (!m[3].includes('\\')) continue
     const start = m.index + m[1].length
-    let end = start
-    while (end < s.length && s[end] !== '\r' && s[end] !== '\n') end++
+    if (start > end) for (end = start; end < s.length && s[end] !== '\r' && s[end] !== '\n';) end++
     const line = s.slice(start, end)
     const at = m[0].length - m[1].length - 1
     if (/^[{[,]$/.test(m[1])) {
       // A flow member's following comma belongs to its sibling, never to this scalar.
       const rest = line.slice(at + 1)
       const blanks = /^[ \t]*/.exec(rest)[0].length
-      const value = /^(?:"(?:[^"\\]|\\.)*(?:"|$)|'(?:[^']|'')*(?:'|$)|[^\s,}\]]+)/.exec(rest.slice(blanks))?.[0]
-      if (value) hits.push({ start: start + at + 1 + blanks, end: start + at + 1 + blanks + value.length, text: REDACTED, value: explicitLineValue(value), ended: end })
+      const from = blanks + /^(?:[&!][^\s"'`,[\]{}]*[ \t]+){0,2}/.exec(rest.slice(blanks))[0].length
+      const value = rest[from] === '#' ? undefined : /^(?:"(?:[^"\\]|\\.)*(?:"|$)|'(?:[^']|'')*(?:'|$)|[^\s,}\]]+)/.exec(rest.slice(from))?.[0]
+      if (value) hits.push({ start: start + at + 1 + from, end: start + at + 1 + from + value.length, text: REDACTED, value: explicitLineValue(value), ended: end })
+      else hits.push(...explicitColonHits(s, line, start, end, at))
     } else {
       hits.push(...explicitColonHits(s, line, start, end, at))
     }
