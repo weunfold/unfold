@@ -493,11 +493,51 @@ function redactMalformedExplicitKeys(s) {
 }
 
 
+// A quoted explicit name may have a value on its question line. Keep the credential
+// word that gives later lines their context, but never serve the tail after it.
+function questionLineHits(s) {
+  if (!s.includes('?')) return []
+  const hits = []
+  const keys = /(^|[\r\n])([ \t]*(?:-[ \t]+)*\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2})("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g
+  const credential = text => {
+    const plain = INVISIBLE_GATE.test(text) ? text.replace(INVISIBLE, '') : text
+    return KEY_NAME_LOWER.test(plain) || KEY_NAME_CAMEL.test(plain)
+  }
+  for (const m of s.matchAll(keys)) {
+    const tail = m[4]
+    if (!tail.trim() || /^[ \t]*(?:#|:)/.test(tail)) continue
+    let keep = 0
+    if (!credential(m[3])) {
+      keep = -1
+      for (const word of tail.matchAll(/"(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[^ \t]+/g)) {
+        if (word[0].startsWith('#')) break
+        if (credential(word[0])) { keep = word.index + word[0].length; break }
+      }
+      if (keep < 0) continue
+    }
+    const rest = tail.slice(keep)
+    const blanks = /^[ \t]*/.exec(rest)[0].length
+    if (!rest.slice(blanks)) continue
+    const start = m.index + m[0].length - tail.length + keep + blanks
+    hits.push({ start, end: m.index + m[0].length, value: explicitLineValue(rest.slice(blanks)) })
+  }
+  return hits
+}
+
+function redactQuestionLines(s) {
+  let out = '', from = 0
+  for (const hit of questionLineHits(s)) {
+    out += s.slice(from, hit.start) + REDACTED
+    from = hit.end
+  }
+  return out + s.slice(from)
+}
+
 export function redactText(s, open = false) {
   const was = OPEN_END
   OPEN_END = open
   try {
-    let out = redactMalformedExplicitKeys(nameText(s))
+    let out = redactMalformedExplicitKeys(redactQuestionLines(nameText(s)))
     for (const [re, fn, gate] of SECRET_TEXT) if (!gate || gate.test(out)) out = typeof re === 'function' ? re(out) : out.replace(re, fn)
     return out
   } finally {
@@ -634,6 +674,10 @@ export function secretsIn(s, open = false) {
   const out = new Set()
   const text = String(s)
   const normalized = nameText(text)
+  for (const { value, end } of questionLineHits(normalized)) {
+    if (open && end >= normalized.length) continue
+    if (value && value.length >= 4 && value !== REDACTED) out.add(value)
+  }
   for (const t of new Set([text, normalized])) {
     const pendingValue = open && [...explicitKeyHits(t).filter(hit => hit.nested), ...escapedKeyHits(t)].some(hit => hit.ended >= t.length)
     const lastLine = Math.max(t.lastIndexOf('\n'), t.lastIndexOf('\r'))
