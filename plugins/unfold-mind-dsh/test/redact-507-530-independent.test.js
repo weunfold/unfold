@@ -99,7 +99,7 @@ test('#507(b): a gap line before an empty colon is hidden, the colon stays', () 
 })
 
 // C. #507(c): a map child under the name. The child's value is hidden and remembered; the line
-// itself is hidden whole.
+// label stays under policy B; only its leaf is hidden.
 const C_ROWS = [
   ['a double-quoted name', `? "${PASS}"\n  ${GAP}: ${VALUE}\n`, `? "${PASS}"`],
   ['an unquoted name', `? ${SNAKE}\n  ${GAP}: ${VALUE}\n`, `? ${SNAKE}`],
@@ -108,9 +108,9 @@ const C_ROWS = [
 for (const [what, input, head] of C_ROWS) {
   test(`#507(c): a map child under the name hides its value (${what})`, () => {
     const { served } = withheld(input, VALUE)
-    assert.ok(!served.includes(`${GAP}:`), 'the child line is hidden')
+    assert.ok(served.includes(`${GAP}:`), 'policy B keeps the child label')
     assert.equal(served.split('\n')[0], head, 'the `?` line stays')
-    assert.equal(served.split('\n')[1], `  ${REDACTED}`, 'the child line is hidden in place')
+    assert.equal(served.split('\n')[1], `  ${GAP}: ${REDACTED}`, 'the child leaf is hidden in place')
   })
 }
 
@@ -199,9 +199,9 @@ for (const [what, head] of ESC_NAMES) {
 
   test(`#507(c): an escaped-quote name hides a map child value (${what})`, () => {
     const { served } = withheld(`${head}\n  ${GAP}: ${VALUE}\n`, VALUE)
-    assert.ok(!served.includes(`${GAP}:`), 'the child line is hidden')
+    assert.ok(served.includes(`${GAP}:`), 'policy B keeps the child label')
     assert.equal(served.split('\n')[0], head, 'the `?` line stays')
-    assert.equal(served.split('\n')[1], `  ${REDACTED}`, 'the child line is hidden in place')
+    assert.equal(served.split('\n')[1], `  ${GAP}: ${REDACTED}`, 'the child leaf is hidden in place')
   })
 }
 
@@ -230,7 +230,7 @@ test('#507: a list item under an explicit key remembers the item, not its dash',
   assert.ok(kept.includes(VALUE), 'the item is remembered as the item')
   assert.ok(!kept.includes('-'), 'the dash is not the remembered value')
   assert.equal(served.split('\n')[0], `? ${PASS}`, 'the `?` line stays')
-  assert.equal(served.split('\n')[1], `  ${REDACTED}`, 'the list item is hidden in place')
+  assert.equal(served.split('\n')[1], `  - ${REDACTED}`, 'the list marker stays and its value is hidden')
 })
 
 // H. #530's credential-first plain multi-word name, the Reviewer's Medium on #507: the name has
@@ -300,9 +300,9 @@ for (const [what, name] of LATER_NAMED) {
 
   test(`#507(c): a map child under the name hides its value (${what})`, () => {
     const { served } = withheld(`? ${name}\n  ${GAP}: ${VALUE}\n`, VALUE)
-    assert.ok(!served.includes(`${GAP}:`), 'the child line is hidden')
+    assert.ok(served.includes(`${GAP}:`), 'policy B keeps the child label')
     assert.equal(served.split('\n')[0], `? ${name}`, 'the `?` line stays')
-    assert.equal(served.split('\n')[1], `  ${REDACTED}`, 'the child line is hidden in place')
+    assert.equal(served.split('\n')[1], `  ${GAP}: ${REDACTED}`, 'the child leaf is hidden in place')
   })
 }
 

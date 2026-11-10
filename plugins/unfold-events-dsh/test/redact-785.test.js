@@ -47,7 +47,10 @@ for (const [path, secretsIn] of [['Events browser', clientSecrets]]) {
       assert.ok(!kept.some((value) => value.includes('childname')), 'the child name is never remembered')
       assert.deepEqual(secretsIn(text, true), questionValue, 'an open value line is not remembered')
       assert.deepEqual(secretsIn(`${text}   `, true), questionValue, 'trailing spaces do not close the line')
-      assert.ok(secretsIn(`${text}\n`, true).includes(VALUE), 'a line break closes the value')
+      if (shape === 'map child') {
+        assert.ok(!secretsIn(`${text}\n`, true).includes(VALUE), 'policy B waits for the collection to close')
+        assert.ok(secretsIn(`${text}\nnext: shown`, true).includes(VALUE), 'dedent closes the collection')
+      } else assert.ok(secretsIn(`${text}\n`, true).includes(VALUE), 'a line break closes the scalar value')
       assert.ok(!masked(`later ${VALUE} stays`, kept).includes(VALUE), 'a bare repeat is masked')
     })
   }

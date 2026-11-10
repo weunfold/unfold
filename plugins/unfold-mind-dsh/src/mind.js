@@ -42,7 +42,7 @@
 // and counts the rest; union-find keys are counted per retained row and pruned as rows leave, so
 // a long-lived episode holds keys only for the rows it still has.
 import { createHash, randomBytes } from 'node:crypto'
-import { REDACTED, nameText, redact, redactText, secretsIn } from './redact.js'
+import { REDACTED, nameText, redact, redactText, secretsIn, collectionKeep } from './redact.js'
 import { sentence } from './sentences.js'
 
 export const HEARTBEAT_LEASE_MS = 5_000 // agentd heartbeats every 1 s; five missed is stale (unfold-events-dsh LEASE)
@@ -731,6 +731,7 @@ const LINE_END = /\r\n|\n|\r(?=[\s\S])/g
 
 /** A delta: appended to the open line while it has no terminator, else committed once. */
 function feedText(row, add, { cut = false } = {}) {
+  if (row.rawCollectionOpaque) return
   const s = String(add ?? '')
   if (row.rawText === undefined) row.rawText = ''
   if (row.rawOpen === undefined) row.rawOpen = ''
@@ -758,10 +759,12 @@ function feedText(row, add, { cut = false } = {}) {
   row.rawOver = null
   const full = nameText(`${row.rawText}${committed}`)
   remember(row, secretsIn(full, true))
-  row.rawText = keptTail(full)
+  const collection = full.length > TEXT_KEEP ? collectionKeep(full, TEXT_KEEP) : null
+  if (collection?.opaque) row.rawCollectionOpaque = true
+  row.rawText = keptTail(collection ? collection.raw : full)
   // A plain cut leaves a fragment at the head of what is kept; a key line or an open value's key
   // kept whole (not a tail of the text) starts none.
-  row.rawFragment = row.rawText !== full && full.endsWith(row.rawText)
+  row.rawFragment = !collection && row.rawText !== full && full.endsWith(row.rawText)
   row.rawOpen = s.slice(pos)
   if (row.rawOpen.length > PENDING_MAX) overflow(row)
   return renderText(row, cut)
@@ -793,6 +796,7 @@ function endText(row) {
 
 /** The served text: the committed text and the open line, redacted as a growing buffer, then cut. */
 function renderText(row, cut) {
+  if (row.rawCollectionOpaque) { row.text = REDACTED; return }
   const full = nameText(rawOf(row))
   // A growing reply: its last line may still be arriving, so a later-line value there is neither
   // hidden nor remembered until its line ends (#406 F-B).
@@ -904,7 +908,23 @@ function openKeyLine(raw, max) {
     ls.pop()
     return ls.length > 1 || (ls.length === 1 && from === 0) ? ls.at(-1).trimEnd() : undefined
   }
-  if (line.length < max && (KEY_LINE_OPEN.test(line.slice(-256)) || EX_COLON.test(line) || /^[ \t]*(?:-[ \t]+)?\?[ \t]/.test(line))) return `${end > 0 ? keyOf(line, lineAbove()) : ''}${line} `
+  const parentsOf = (child, lines) => {
+    let indent = /^[ \t]*/.exec(child)[0].length, size = child.length, out = ''
+    for (let i = lines.length - 1; i >= 0 && lines.length - i <= 64; i--) {
+      const parent = lines[i].trimEnd(), lead = /^[ \t]*/.exec(parent)[0].length
+      if (!parent || SKIPPED_LINE.test(parent) || lead >= indent) continue
+      if (!KEY_LINE_OPEN.test(parent.slice(-256)) || size + parent.length >= max / 2) break
+      out = `${parent}\n${out}`; size += parent.length + 1; indent = lead
+    }
+    return out
+  }
+  if (line.length < max && (KEY_LINE_OPEN.test(line.slice(-256)) || EX_COLON.test(line) || /^[ \t]*(?:-[ \t]+)?\?[ \t]/.test(line))) {
+    const above = end > 0 ? lineAbove() : undefined
+    // A credential parent's plain child still needs its parent after a pad is cut.
+    // Keeping an ordinary parent is harmless and preserves the same bounded context.
+    const parent = parentsOf(line, raw.slice(Math.max(0, end - 4096), end).split(/\r\n|\r|\n/).slice(0, -1))
+    return `${parent}${above ? keyOf(line, above) : ''}${line} `
+  }
   const under = (l) => PROPERTY_LINE.test(l.slice(-256)) || INDICATOR_LINE.test(l.slice(-256))
   if (end === 0 || (line && !SKIPPED_LINE.test(line) && !under(line))) return null
   // A blank run at the cut is the cut's padding, not text: the read starts 4 KiB back from the last
@@ -930,7 +950,7 @@ function openKeyLine(raw, max) {
     const deeper = (l) => l.startsWith(indent) && /^[ \t]/.test(l.slice(indent.length))
     if (!kept.every(deeper) || (line && !SKIPPED_LINE.test(line) && !deeper(line))) return null
     const cutLine = !line ? last.slice(0, indent.length + 1) : SKIPPED_LINE.test(line) ? `${line} ` : `${indent} ${line.trimStart()} `
-    const key = keyOf(above, i > 1 || (i === 1 && start === 0) ? lines[i - 1].trimEnd() : undefined)
+    const key = parentsOf(above, lines.slice(0, i)) + keyOf(above, i > 1 || (i === 1 && start === 0) ? lines[i - 1].trimEnd() : undefined)
     const out = [`${key}${above}`, ...kept.map((l) => `${indent} ${l.trimStart()}`), cutLine].join('\n')
     return out.length < max ? out : null
   }

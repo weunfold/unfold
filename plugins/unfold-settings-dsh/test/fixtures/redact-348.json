@@ -717,9 +717,9 @@
    "{parent}:\n  {name}: [redacted]"
   ],
   [
-   "G19: a parent anchor, then a plain child: the child line is kept",
+   "G19: a credential parent anchor: the plain child label stays and its leaf is hidden",
    "{parent}: &d\n  user: {value}",
-   "{parent}: &d\n  user: {value}"
+   "{parent}: &d\n  user: [redacted]"
   ],
   [
    "G05: a comment line names the key, then an indented line",
@@ -1059,9 +1059,9 @@
    "{parent}: &d\n  user {name}: [redacted]"
   ],
   [
-   "mid-child-key guard: a parent anchor, the cut inside a plain child key",
+   "mid-child-key guard: a credential parent keeps the plain child label and hides its leaf",
    "{parent}: &d\n  user{cut}_id: {value}",
-   "{parent}: &d\n  user_id: {value}"
+   "{parent}: &d\n  user_id: [redacted]"
   ]
  ],
  "split_forms": [

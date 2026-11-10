@@ -1774,11 +1774,272 @@ function redactQuestionLines(s) {
   }
   return out + s.slice(from);
 }
+function collectionQuote(s, at, limit) {
+  const quote = s[at];
+  let i = at + 1;
+  for (; i < limit; i++) {
+    if (quote === '"' && s[i] === "\\") i++;
+    else if (s[i] === quote && quote === "'" && s[i + 1] === "'") i++;
+    else if (s[i] === quote) return i + 1;
+  }
+  return -1;
+}
+function collectionProps(s, at, limit) {
+  while (at < limit) {
+    while (at < limit && /\s/.test(s[at])) at++;
+    if (s[at] !== "&" && s[at] !== "!") break;
+    while (at < limit && !/[\s{}[\],]/.test(s[at])) at++;
+  }
+  return at;
+}
+function collectionLeaf(s, start, end) {
+  while (end > start && /\s/.test(s[end - 1])) end--;
+  const quoted = s[start] === '"' || s[start] === "'";
+  return { start: start + (quoted ? 1 : 0), end: end - (quoted ? 1 : 0), value: s.slice(start + (quoted ? 1 : 0), end - (quoted ? 1 : 0)) };
+}
+function flowCollection(s, start, limit = s.length) {
+  if (s.startsWith(REDACTED, start)) return { end: start + REDACTED.length, leaves: [], complete: true };
+  const leaves = [], stack = [];
+  let at = start, valid = true;
+  const push = () => {
+    if (stack.length >= 128) {
+      valid = false;
+      return;
+    }
+    stack.push({ map: s[at] === "{", state: s[at] === "{" ? "key" : "value" });
+    at++;
+  };
+  push();
+  while (valid && stack.length && at < limit) {
+    while (at < limit && /\s/.test(s[at])) at++;
+    const frame = stack[stack.length - 1], char = s[at];
+    if (char === (frame.map ? "}" : "]") && (frame.state === "comma" || frame.state === "key" || !frame.map && frame.state === "value")) {
+      at++;
+      stack.pop();
+      continue;
+    }
+    if (frame.state === "comma") {
+      if (char !== ",") {
+        valid = false;
+        break;
+      }
+      frame.state = frame.map ? "key" : "value";
+      at++;
+      continue;
+    }
+    if (frame.state === "key") {
+      if (char === '"' || char === "'") at = collectionQuote(s, at, limit);
+      else {
+        const from2 = at;
+        while (at < limit && !/[:{},[\]\r\n]/.test(s[at])) at++;
+        if (!s.slice(from2, at).trim()) {
+          valid = false;
+          break;
+        }
+      }
+      if (at < 0) {
+        valid = false;
+        break;
+      }
+      while (at < limit && /\s/.test(s[at])) at++;
+      if (s[at] !== ":") {
+        valid = false;
+        break;
+      }
+      at++;
+      frame.state = "value";
+      continue;
+    }
+    at = collectionProps(s, at, limit);
+    if (s.startsWith(REDACTED, at)) {
+      at += REDACTED.length;
+      frame.state = "comma";
+      continue;
+    }
+    if (s[at] === "{" || s[at] === "[") {
+      frame.state = "comma";
+      push();
+      continue;
+    }
+    const from = at;
+    if (s[at] === '"' || s[at] === "'") at = collectionQuote(s, at, limit);
+    else while (at < limit && !/[,}\]\r\n]/.test(s[at])) at++;
+    if (at < 0 || at === from || !s.slice(from, at).trim()) {
+      valid = false;
+      break;
+    }
+    leaves.push(collectionLeaf(s, from, at));
+    frame.state = "comma";
+  }
+  if (valid && !stack.length) return { end: at, leaves, complete: true };
+  let depth = 0;
+  for (at = start; at < limit; at++) {
+    if (s[at] === '"' || s[at] === "'") {
+      const end = collectionQuote(s, at, limit);
+      if (end < 0) {
+        at = limit;
+        break;
+      }
+      at = end - 1;
+    } else if (s[at] === "{" || s[at] === "[") depth++;
+    else if ((s[at] === "}" || s[at] === "]") && --depth === 0) {
+      at++;
+      break;
+    }
+  }
+  return { end: at, leaves: [], complete: false };
+}
+function collectionBoundary(s, parsed, inFlow, limit = s.length) {
+  let at = parsed.end;
+  while (at < limit && (s[at] === " " || s[at] === "	")) at++;
+  if (at >= limit || /[\r\n#]/.test(s[at]) || inFlow && /[,}\]]/.test(s[at])) return parsed;
+  while (at < limit && s[at] !== "\r" && s[at] !== "\n") at++;
+  return { end: at, leaves: [], complete: false };
+}
+function blockCollection(s, lines, first, parentIndent, open) {
+  let last = first;
+  while (last < lines.length && (!lines[last].content || lines[last].content.startsWith("#") || lines[last].indent > parentIndent)) last++;
+  const end = last < lines.length ? lines[last].start : s.length;
+  const leaves = [];
+  let valid = !(open && last === lines.length), pending = -1;
+  for (let n = first; n < last; n++) {
+    const line2 = lines[n];
+    if (!line2.content || line2.content.startsWith("#")) continue;
+    const childValue = pending >= 0 && line2.indent > pending;
+    if (pending >= 0 && !childValue) valid = false;
+    pending = -1;
+    let at = line2.start + line2.indent;
+    const sequence = /^-(?:[ \t]+|$)/.exec(s.slice(at, line2.end));
+    if (sequence) at += sequence[0].length;
+    const keyStart = at;
+    let keyEnd = at;
+    if (s[at] === '"' || s[at] === "'") keyEnd = collectionQuote(s, at, line2.end);
+    else while (keyEnd < line2.end && s[keyEnd] !== ":") keyEnd++;
+    let colon = keyEnd;
+    while (colon >= 0 && colon < line2.end && /[ \t]/.test(s[colon])) colon++;
+    const member = keyEnd > keyStart && s[colon] === ":" && (colon + 1 === line2.end || /[ \t]/.test(s[colon + 1]));
+    if (member) at = colon + 1;
+    else if (!sequence && !childValue) {
+      valid = false;
+      continue;
+    }
+    at = collectionProps(s, at, line2.end);
+    if (at >= line2.end || s[at] === "#") {
+      pending = line2.indent;
+      continue;
+    }
+    if (s[at] === "{" || s[at] === "[") {
+      const flow = collectionBoundary(s, flowCollection(s, at, end), false, end);
+      valid &&= flow.complete;
+      for (const leaf of flow.leaves) leaves.push(leaf);
+      while (n + 1 < last && lines[n + 1].start < flow.end) n++;
+      continue;
+    }
+    let valueEnd = line2.end;
+    if (s[at] === '"' || s[at] === "'") {
+      valueEnd = collectionQuote(s, at, line2.end);
+      if (valueEnd < 0 || !/^[ \t]*(?:#.*)?$/.test(s.slice(valueEnd, line2.end))) {
+        valid = false;
+        continue;
+      }
+    } else {
+      const comment = /[ \t]+#/.exec(s.slice(at, line2.end));
+      if (comment) valueEnd = at + comment.index;
+      if (/^[|>]/.test(s[at])) {
+        valid = false;
+        continue;
+      }
+    }
+    leaves.push(collectionLeaf(s, at, valueEnd));
+  }
+  if (pending >= 0) valid = false;
+  return { end, leaves: valid ? leaves : [], complete: valid };
+}
+function credentialCollections(s, open) {
+  if (!/[{[]|[\r\n][ \t]+(?:-|["'A-Za-z_][^\r\n]*:)/.test(s)) return [];
+  const lines = [];
+  const readLines = () => {
+    for (const m of s.matchAll(/[^\r\n]*(?:\r\n|\r|\n|$)/g)) {
+      if (!m[0]) continue;
+      const text = m[0].replace(/[\r\n]+$/, ""), indent = /^[ \t]*/.exec(text)[0].length;
+      lines.push({ start: m.index, end: m.index + text.length, indent, content: text.slice(indent) });
+    }
+  };
+  const keys = /(^|[\r\n{[,])([ \t]*(?:-[ \t]+)*(?:[&!][^\s"'`,[\]{}]*[ \t]+){0,2})(?:\?([ \t]+[^\r\n]*)|((?:"(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*'|[A-Za-z_][A-Za-z0-9_ \t-]*))[ \t]*:[ \t]*)/g;
+  const regions = [];
+  let lineIndex = 0;
+  for (let m = keys.exec(s); m; m = keys.exec(s)) {
+    const explicit = m[3] !== void 0;
+    const name = explicit ? m[3].trimStart() : m[4];
+    if (!credentialName(explicit ? explicitKeyName(name) : name) && !(explicit && credentialName(name.replace(/(?:^|[ \t])#.*$/, "")))) continue;
+    const start = m.index + m[1].length;
+    const char = s[keys.lastIndex];
+    if (!explicit && (char === "{" || char === "[")) {
+      const parsed2 = collectionBoundary(s, flowCollection(s, keys.lastIndex), /^[{[,]$/.test(m[1]));
+      regions.push({ start, valueStart: keys.lastIndex, ...parsed2 });
+      keys.lastIndex = Math.max(keys.lastIndex, parsed2.end);
+      continue;
+    }
+    if (!explicit && char && !/[&!#\r\n]/.test(char)) continue;
+    if (!lines.length) readLines();
+    while (lineIndex + 1 < lines.length && lines[lineIndex + 1].start <= start) lineIndex++;
+    const line2 = lines[lineIndex];
+    let at = explicit ? line2.end : keys.lastIndex;
+    at = collectionProps(s, at, line2.end);
+    let parsed;
+    if (s[at] === "{" || s[at] === "[") parsed = collectionBoundary(s, flowCollection(s, at), /^[{[,]$/.test(m[1]));
+    else if (at >= line2.end || s[at] === "#") {
+      let first = lineIndex + 1;
+      while (first < lines.length && (!lines[first].content || lines[first].content.startsWith("#"))) first++;
+      if (explicit && lines[first]?.content.startsWith(":")) {
+        const colonLine = lines[first];
+        at = collectionProps(s, colonLine.start + colonLine.indent + 1, colonLine.end);
+        if (s[at] === "{" || s[at] === "[") parsed = collectionBoundary(s, flowCollection(s, at), /^[{[,]$/.test(m[1]));
+        else if (at >= colonLine.end || s[at] === "#") first++;
+        else continue;
+      }
+      if (!parsed) {
+        const child = lines[first];
+        if (!child || child.indent <= line2.indent || !/^(?:-(?:[ \t]+|$)|(?:"(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[^:#]+):(?:[ \t]+|$))/.test(child.content)) continue;
+        at = child.start + child.indent;
+        parsed = blockCollection(s, lines, first, line2.indent, open);
+      }
+    }
+    if (!parsed) continue;
+    regions.push({ start, valueStart: at, ...parsed });
+    keys.lastIndex = Math.max(keys.lastIndex, parsed.end);
+  }
+  return regions;
+}
+function collectionText(s, region) {
+  if (!region.complete) {
+    const ending = s.slice(region.valueStart, region.end).match(/(?:\r\n|\r|\n)$/)?.[0] || "";
+    return s.slice(region.start, region.valueStart) + REDACTED + ending;
+  }
+  let out = "", from = region.start;
+  for (const leaf of region.leaves) {
+    out += s.slice(from, leaf.start) + REDACTED;
+    from = leaf.end;
+  }
+  return out + s.slice(from, region.end);
+}
 function redactText(s, open = false) {
+  const text = redactQuestionLines(nameText(s)), regions = credentialCollections(text, open);
+  if (regions.length) {
+    let out = "", from = 0;
+    for (const region of regions) {
+      out += redactScalarText(text.slice(from, region.start), open) + collectionText(text, region);
+      from = region.end;
+    }
+    return out + redactScalarText(text.slice(from), open);
+  }
+  return redactScalarText(text, open);
+}
+function redactScalarText(s, open) {
   const was = OPEN_END;
   OPEN_END = open;
   try {
-    let out = redactMalformedExplicitKeys(redactQuestionLines(nameText(s)));
+    let out = redactMalformedExplicitKeys(s);
     for (const [re, fn, gate] of SECRET_TEXT) if (!gate || gate.test(out)) out = typeof re === "function" ? re(out) : out.replace(re, fn);
     return out;
   } finally {
