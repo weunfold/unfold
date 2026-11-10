@@ -1,6 +1,6 @@
 {
   "name": "@automagik/unfold-sse-dsh",
-  "version": "3.108.7",
+  "version": "3.109.0",
   "description": "Server-sent events for the Unfold DSH plugins: a snapshot baseline, then increments, honouring backpressure, with per-client pending bounds and a drain deadline. A library the Unfold plugins carry; it registers nothing in DSH by itself",
   "keywords": [
     "deepseek-harness",

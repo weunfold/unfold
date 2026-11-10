@@ -1370,7 +1370,7 @@ var INVISIBLE_GATE = /[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\u/u;
 var INVISIBLE = /[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff])/gu;
 var INVISIBLE_NAME = /(?<![A-Za-z0-9_-]|[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff]))(?:(?<!\\)|(?=[nrt]))((?:[A-Za-z0-9_-]|[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff]))+)((?:\\?["'])?[ \t]*[:=][ \t]*)((?:[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff]))*)/gu;
 var NAME_STEM = /pass|secret|token|key|authorization/i;
-var INVISIBLE_EXPLICIT = /(^|\r\n|\r(?!\n)|\n)([ \t]*(?:-[ \t]+)?\?[ \t][^\r\n#]*?["']?)((?:[A-Za-z0-9_:-]|[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff]))+)(["']?[ \t]*(?:#[^\r\n]*)?(?=\r\n|\r(?!\n)|\n|$)|["']?[ \t]*:[^\r\n]*)/gu;
+var INVISIBLE_EXPLICIT = /(^|\r\n|\r(?!\n)|\n)([ \t]*(?:-[ \t]+)*\?[ \t][^\r\n#]*?["']?)((?:[A-Za-z0-9_:-]|[\0-\x08\x0e-\x1f\x7f\p{Cf}\u2065]|\\{1,2}u(?:00(?:0[0-8EFef]|1[0-9A-Fa-f])|007[Ff]|00[Aa][Dd]|061[Cc]|180[Ee]|200[B-Fb-f]|202[A-Ea-e]|206[0-9A-Fa-f]|[Ff][Ee][Ff][Ff]))+)(["']?[ \t]*(?:#[^\r\n]*)?(?=\r\n|\r(?!\n)|\n|$)|["']?[ \t]*:[^\r\n]*)/gu;
 function nameText(s) {
   if (!INVISIBLE_GATE.test(s)) return s;
   return s.replace(INVISIBLE_NAME, (m, run, sep, after) => {
@@ -1417,7 +1417,7 @@ ${indent}  ${REDACTED}${block.endsWith("\r") ? "\r" : ""}` : block}`, /:[ \t]*[&
   // and yamlBlockEnd where the block ends. It runs before the name rules, so they leave its `|`
   // or `>` alone.
   [redactYamlBlocks, null, /:[\x00-\x09\x0B\x0C\x0E-\x20\x7F-\xA0\xAD\u061C\u1680\u180E\u2000-\u200F\u2028-\u202F\u205F-\u2064\u3000\uFEFF]*[&!>|]/],
-  [redactExplicitKeyValues, null, /(?:^|[\r\n])[ \t]*(?:-[ \t]+)?\?[ \t]/],
+  [redactExplicitKeyValues, null, /\\|(?:^|[\r\n])[ \t]*(?:-[ \t]+)*\?[ \t]/],
   // A credential key line that ends at its colon, or at up to two anchors and tags (`&a`, `!!str`),
   // a comment after them or not, continues on a later line (#396, #410). Blank lines and comment lines
   // are skipped, and so are lines of anchors and tags alone indented under the key. Then the first
@@ -1604,8 +1604,7 @@ function explicitLineValue(content) {
   const first = /^(?:[&!][^\s"'`]*[ \t]+)*([^\s"'`]+)/.exec(text);
   return first ? first[1] : "";
 }
-function explicitColonHits(s, line2, start, lineEnd) {
-  const at = line2.indexOf(":");
+function explicitColonHits(s, line2, start, lineEnd, at = line2.indexOf(":")) {
   const blanks = /^[ \t]*/.exec(line2.slice(at + 1))[0];
   const props = KEY_PROPS.exec(line2.slice(at + 1 + blanks.length))[0];
   const rest = line2.slice(at + 1 + blanks.length + props.length);
@@ -1639,7 +1638,7 @@ function explicitColonHits(s, line2, start, lineEnd) {
 function explicitKeyHits(s) {
   if (!s.includes("?")) return [];
   const hits = [];
-  const keyLine = /(^|[\r\n])([ \t]*)(?:-[ \t]+)?\?[ \t]([^\r\n]*)/g;
+  const keyLine = /(^|[\r\n])([ \t]*)(?:-[ \t]+)*\?[ \t]([^\r\n]*)/g;
   let covered = 0;
   for (let m = keyLine.exec(s); m; m = keyLine.exec(s)) {
     if (m.index < covered) continue;
@@ -1650,6 +1649,7 @@ function explicitKeyHits(s) {
     const plain = m[3].slice(KEY_PROPS.exec(m[3])[0].length).replace(/(?:^|[ \t])#.*$/, "");
     const several = !/^["']/.test(plain) && /\S[ \t]+\S/.test(plain);
     const opaque = explicitKeyName(m[3]).includes("\\");
+    const nested = /^(?:-[ \t]+){2}/.test(m[0].slice(m[1].length + m[2].length));
     const keyIndent = m[2].length;
     let cursor = m.index + m[0].length;
     if (s.startsWith("\r\n", cursor)) cursor += 2;
@@ -1663,11 +1663,11 @@ function explicitKeyHits(s) {
       const lead = /^[ \t]*/.exec(line2)[0];
       const content = line2.slice(lead.length);
       if (content && content[0] === ":") {
-        if (seen || several || opaque || lead.length < m[0].length - m[1].length - m[3].length - 2) hits.push(...explicitColonHits(s, line2, cursor, end));
+        if (seen || several || opaque || nested || lead.length < m[0].length - m[1].length - m[3].length - 2) hits.push(...explicitColonHits(s, line2, cursor, end).map((hit) => ({ ...hit, nested })));
         break;
       }
       if (content && content[0] !== "#" && lead.length > keyIndent) {
-        hits.push({ start: cursor, end, text: `${lead}${REDACTED}`, value: explicitLineValue(content), ended: end });
+        hits.push({ start: cursor, end, text: `${lead}${REDACTED}`, value: explicitLineValue(content), ended: end, nested });
         seen = true;
       } else if (content && content[0] !== "#" && lead.length <= keyIndent) break;
       if (s.startsWith("\r\n", end)) cursor = end + 2;
@@ -1677,8 +1677,32 @@ function explicitKeyHits(s) {
   }
   return hits;
 }
+function escapedKeyHits(s) {
+  if (!s.includes("\\")) return [];
+  const hits = [];
+  let end = -1;
+  const keys = /(^|[\r\n]|[{[,])([ \t]*(?:-[ \t]+)*(?:\?[ \t]+)?(?:[&!][^\s"'`,[\]{}]*[ \t]+){0,2})("(?:[^"\\\r\n]|\\[^\r\n])*")[ \t]*:/g;
+  for (const m of s.matchAll(keys)) {
+    if (!m[3].includes("\\")) continue;
+    const start = m.index + m[1].length;
+    if (start > end) for (end = start; end < s.length && s[end] !== "\r" && s[end] !== "\n"; ) end++;
+    const line2 = s.slice(start, end);
+    const at = m[0].length - m[1].length - 1;
+    if (/^[{[,]$/.test(m[1])) {
+      const rest = line2.slice(at + 1);
+      const blanks = /^[ \t]*/.exec(rest)[0].length;
+      const from = blanks + /^(?:[&!][^\s"'`,[\]{}]*[ \t]+){0,2}/.exec(rest.slice(blanks))[0].length;
+      const value = rest[from] === "#" ? void 0 : /^(?:"(?:[^"\\]|\\.)*(?:"|$)|'(?:[^']|'')*(?:'|$)|[^\s,}\]]+)/.exec(rest.slice(from))?.[0];
+      if (value) hits.push({ start: start + at + 1 + from, end: start + at + 1 + from + value.length, text: REDACTED, value: explicitLineValue(value), ended: end });
+      else hits.push(...explicitColonHits(s, line2, start, end, at));
+    } else {
+      hits.push(...explicitColonHits(s, line2, start, end, at));
+    }
+  }
+  return hits;
+}
 function redactExplicitKeyValues(s) {
-  const hits = explicitKeyHits(s);
+  const hits = [...explicitKeyHits(s), ...escapedKeyHits(s)];
   if (!hits.length) return s;
   hits.sort((a, b) => a.start - b.start);
   let out = "";
@@ -1692,7 +1716,7 @@ function redactExplicitKeyValues(s) {
 }
 function redactMalformedExplicitKeys(s) {
   if (!/\?[ \t]/.test(s)) return s;
-  const keys = /(^|\r\n|\r(?!\n)|\n)([ \t]*)(-[ \t]+)?\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g;
+  const keys = /(^|\r\n|\r(?!\n)|\n)([ \t]*)((?:-[ \t]+)+)?\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g;
   let done = "";
   let from = 0;
   for (let m = keys.exec(s); m; m = keys.exec(s)) {
@@ -1757,7 +1781,7 @@ var SECRET_VALUES = [
   [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=(?:(?!\3)[^\r\n:])*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization))(?:(?!\3)[^\r\n:])*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))(?![^\r\n]*[\r\n](?:[ \t]*(?:#[^\r\n]*)?[\r\n])*[ \t]*:)(["']?([^ \t\r\n"']+(?:'+[^ \t\r\n"']+)*))/g, /:/],
   [/(^|[\r\n])((?:[ \t]*(?:-[ \t]+)?\?[ \t](?:[&!][^\s"'`]{0,80}[ \t]+){0,2})(["'])(?=(?:(?!\3)[^\r\n:])*?(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))(?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key))(?:(?!\3)[^\r\n:])*:(?![ \t])(?![^"'\r\n]*(?<!\\)\3[ \t]*(?::[^\r\n]*|#[^\r\n]*)?(?=[\r\n]|$)))(?![^\r\n]*[\r\n](?:[ \t]*(?:#[^\r\n]*)?[\r\n])*[ \t]*:)(["']?([^ \t\r\n"']+(?:'+[^ \t\r\n"']+)*))/g, /:/]
 ];
-var EXPLICIT_KEY = /(?:^|[\r\n])[ \t]*(?:-[ \t]+)?\?[ \t]/;
+var EXPLICIT_KEY = /(?:^|[\r\n])[ \t]*(?:-[ \t]+)*\?[ \t]/;
 var ANY_EXPLICIT_KEY = /\?[ \t]/;
 var GUARD_START = "(?!(?<=(?:^|[\\r\\n])[ \\t]{0,160}";
 var KEY_TAIL_START = String.raw`|(?<=(?:^|[\r\n])[ \t]{0,256}`;
