@@ -41,7 +41,7 @@ function journal() {
 // and 17000 past the window's 16 KiB bound too) and every split (1, 10 and 100 characters, and the
 // whole payload as one delta). From the frame that brings the value's first character on (no frame
 // before it holds the value), no served frame holds the value, and the copies that remember values
-// remember a scalar from its ended line; policy B waits for a collection to close.
+// remember a scalar from its ended line; an explicit-list value waits for closure.
 // At rest the completed values are hidden and remembered.
 const SPLIT_PADS = [1000, 4096, 5000, 17000]
 const SPLIT_SIZES = [1, 10, 100, 'one delta']
@@ -62,7 +62,7 @@ function* splitCells(rows, slow) {
     const payload = splitPayload(template, pad)
     const at = payload.indexOf(SECRET)
     const end = payload.indexOf('\n', at + SECRET.length)
-    yield { name: `${what}, pad ${pad}, ${size === 'one delta' ? 'one delta' : `${size}-char deltas`}`, payload, at, end, collection: template.includes('{parent}') || template.includes('\n  - {value}'), step: size === 'one delta' ? payload.length : size }
+    yield { name: `${what}, pad ${pad}, ${size === 'one delta' ? 'one delta' : `${size}-char deltas`}`, payload, at, end, collection: template.includes('\n  - {value}'), step: size === 'one delta' ? payload.length : size }
   }
 }
 // The value on the key's own line (the plain form's second row) is remembered once it has closed

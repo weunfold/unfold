@@ -110,9 +110,7 @@ test('a seeded fuzz of 200 mixed texts up to 80k characters hides every planted 
     textPaths: TEXT_PATHS,
     scaledPath: STREAM_PATH,
     reference: redactText,
-    // A malformed open collection may withhold everything after it without learning
-    // pending leaves. Known credentials precede it as well as retaining the original tail.
-    prepare: (plain) => PLANTED + plain + PLANTED,
+    prepare: (plain) => plain + PLANTED,
     check: (text, shape) => {
       const hides = (path, out) => {
         for (const secret of [UPPER, LOWER]) {

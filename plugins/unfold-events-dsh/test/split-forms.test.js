@@ -48,7 +48,7 @@ function* splitCells(rows, slow) {
     const payload = splitPayload(template, pad)
     const at = payload.indexOf(SECRET)
     const end = payload.indexOf('\n', at + SECRET.length)
-    yield { name: `${what}, pad ${pad}, ${size === 'one delta' ? 'one delta' : `${size}-char deltas`}`, payload, at, end, collection: template.includes('{parent}') || template.includes('\n  - {value}'), step: size === 'one delta' ? payload.length : size }
+    yield { name: `${what}, pad ${pad}, ${size === 'one delta' ? 'one delta' : `${size}-char deltas`}`, payload, at, end, collection: template.includes('\n  - {value}'), step: size === 'one delta' ? payload.length : size }
   }
 }
 // The value on the key's own line (the plain form's second row) is remembered once it has closed

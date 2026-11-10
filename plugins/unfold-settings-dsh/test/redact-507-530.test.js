@@ -208,13 +208,13 @@ test('#507: a plain multi-word non-credential name still serves its indented lin
 
 // 10. #530: a plain name of several words whose credential word comes first, with its value on
 // the `:` line right under it and nothing in the gap: the value is hidden.
-const FIRST = ['password db', 'api_key prod', 'token for ci']
-for (const name of FIRST) {
+const FIRST = [['password db', `? password ${REDACTED}`], ['api_key prod', `? api_key ${REDACTED}`], ['token for ci', `? token ${REDACTED}`]]
+for (const [name, head] of FIRST) {
   test(`#530: a multi-word name with the credential word first hides its ':' line (${name})`, () => {
     const input = `? ${name}\n: ${VALUE}\n`
     const served = redactText(input)
     assert.ok(!served.includes(VALUE), 'the value is hidden')
-    assert.ok(served.includes(`? ${name}\n`), 'the question line is kept')
+    assert.ok(served.includes(`${head}\n`), 'the credential stays and its question-line tail is hidden')
   })
 }
 

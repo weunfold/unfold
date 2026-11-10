@@ -239,38 +239,38 @@ test('#507: a list item under an explicit key remembers the item, not its dash',
 // line, so the `:` line has to be taken by the explicit-key scan itself. The three names, then the
 // trailing comment, block indicator, empty colon and list item forms. Every row is hidden,
 // remembered, and masked in a later bare copy.
-const FIRST_NAMED = ['password db', 'api_key prod', 'token for ci']
-for (const name of FIRST_NAMED) {
+const FIRST_NAMED = [['password db', 'password'], ['api_key prod', 'api_key'], ['token for ci', 'token']]
+for (const [name, credential] of FIRST_NAMED) {
   test(`#530: a credential-first multi-word name hides its colon line (${name})`, () => {
     const { served } = withheld(`? ${name}\n: ${VALUE}\n`, VALUE)
-    assert.equal(served.split('\n')[0], `? ${name}`, 'the `?` line stays')
+    assert.equal(served.split('\n')[0], `? ${credential} ${REDACTED}`, 'the credential stays and its question-line tail is hidden')
     assert.equal(served.split('\n')[1], `: ${REDACTED}`, 'the colon-line value is hidden')
   })
 }
 
 test('#530: a comment after a credential-first multi-word name hides its colon line', () => {
   const { served } = withheld(`? password db # note\n: ${VALUE}\n`, VALUE)
-  assert.equal(served.split('\n')[0], '? password db # note', 'the `?` line stays with its comment')
+  assert.equal(served.split('\n')[0], `? password ${REDACTED}`, 'the credential stays and its question-line tail is hidden')
   assert.equal(served.split('\n')[1], `: ${REDACTED}`, 'the colon-line value is hidden')
 })
 
 test('#530: a block indicator under a credential-first multi-word name hides its block', () => {
   const { served } = withheld(`? password db\n: |\n  ${VALUE}\n`, VALUE)
-  assert.equal(served.split('\n')[0], '? password db', 'the `?` line stays')
+  assert.equal(served.split('\n')[0], `? password ${REDACTED}`, 'the credential stays and its question-line tail is hidden')
   assert.equal(served.split('\n')[1], ': |', 'the block indicator stays')
   assert.equal(served.split('\n')[2], `  ${REDACTED}`, 'the block value is hidden')
 })
 
 test('#530: an empty colon under a credential-first multi-word name hides its value', () => {
   const { served } = withheld(`? password db\n:\n  ${VALUE}\n`, VALUE)
-  assert.equal(served.split('\n')[0], '? password db', 'the `?` line stays')
+  assert.equal(served.split('\n')[0], `? password ${REDACTED}`, 'the credential stays and its question-line tail is hidden')
   assert.equal(served.split('\n')[1], ':', 'the empty colon stays')
   assert.equal(served.split('\n')[2], `  ${REDACTED}`, 'the indented value is hidden')
 })
 
 test('#530: a list item with a credential-first multi-word name hides its colon line', () => {
   const { served } = withheld(`- ? password db\n  : ${VALUE}\n`, VALUE)
-  assert.equal(served.split('\n')[0], '- ? password db', 'the list-item `?` line stays')
+  assert.equal(served.split('\n')[0], `- ? password ${REDACTED}`, 'the list-item credential stays and its tail is hidden')
   assert.equal(served.split('\n')[1], `  : ${REDACTED}`, 'the colon-line value is hidden')
 })
 
@@ -278,14 +278,14 @@ test('#530: a list item with a credential-first multi-word name hides its colon 
 // later (`? db password`), across the three #507 shapes. The comment and anchor variants ride the
 // `?` line, so every shape is rowed with each. Every row is hidden and remembered.
 const LATER_NAMED = [
-  ['a plain name', 'db password'],
-  ['a trailing comment', 'db password # note'],
-  ['an anchor', '&a db password'],
+  ['a plain name', 'db password', '? db password'],
+  ['a trailing comment', 'db password # note', `? db password ${REDACTED}`],
+  ['an anchor', '&a db password', '? &a db password'],
 ]
-for (const [what, name] of LATER_NAMED) {
+for (const [what, name, head] of LATER_NAMED) {
   test(`#507(a): no colon line hides the indented scalar (${what})`, () => {
     const { served } = withheld(`? ${name}\n  ${VALUE}\n`, VALUE)
-    assert.equal(served.split('\n')[0], `? ${name}`, 'the `?` line stays')
+    assert.equal(served.split('\n')[0], head, 'the credential context stays and its tail is hidden')
     assert.equal(served.split('\n')[1], `  ${REDACTED}`, 'the indented scalar is hidden')
   })
 
@@ -293,7 +293,7 @@ for (const [what, name] of LATER_NAMED) {
     const { served, kept } = withheld(`? ${name}\n  ${GAP}\n: ${VALUE}\n`, VALUE)
     assert.ok(!served.includes(GAP), 'the gap line is hidden')
     assert.ok(kept.includes(GAP), 'the gap line is remembered')
-    assert.equal(served.split('\n')[0], `? ${name}`, 'the `?` line stays')
+    assert.equal(served.split('\n')[0], head, 'the credential context stays and its tail is hidden')
     assert.equal(served.split('\n')[1], `  ${REDACTED}`, 'the gap line is hidden in place')
     assert.equal(served.split('\n')[2], `: ${REDACTED}`, 'the colon-line value is hidden')
   })
@@ -301,7 +301,7 @@ for (const [what, name] of LATER_NAMED) {
   test(`#507(c): a map child under the name hides its value (${what})`, () => {
     const { served } = withheld(`? ${name}\n  ${GAP}: ${VALUE}\n`, VALUE)
     assert.ok(served.includes(`${GAP}:`), 'policy B keeps the child label')
-    assert.equal(served.split('\n')[0], `? ${name}`, 'the `?` line stays')
+    assert.equal(served.split('\n')[0], head, 'the credential context stays and its tail is hidden')
     assert.equal(served.split('\n')[1], `  ${GAP}: ${REDACTED}`, 'the child leaf is hidden in place')
   })
 }

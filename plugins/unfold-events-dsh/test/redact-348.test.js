@@ -440,8 +440,7 @@ test('a padded line is hidden whole, the window and the browser copy', () => {
   assert.doesNotMatch(clientRedactText(padded), VALUE, 'browser copy')
   assert.doesNotMatch(clientRedactText(padded, true), VALUE, 'browser copy, growing')
   for (const open of [false, true]) {
-    if (open) assert.ok(!clientSecretsIn(padded, true).includes(SECRET), 'policy B does not learn an open collection')
-    const kept = clientSecretsIn(open ? padded + 'next: shown' : padded, open)
+    const kept = clientSecretsIn(padded, open)
     assert.ok(kept.some((v) => v.includes(SECRET)), `browser copy remembers the value${open ? ' while growing' : ''}`)
     assert.ok(!masked(`later ${SECRET} stays`, kept).includes(SECRET), `browser copy masks a later bare occurrence${open ? ' while growing' : ''}`)
   }

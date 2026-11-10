@@ -412,6 +412,16 @@ function laterLine(m, nl, indent, before, name, sep, props, tail, run, br, indic
 }
 // Each rule is [pattern, replacement, gate]: a rule with a gate runs only on a text the gate finds
 // something in, a literal its pattern cannot match without, so a text skips the rules it cannot meet.
+// These scalar rules need no parent-key context. Collection labels, properties and
+// comments remain subject to them even when the parent value is parsed separately.
+const CONTEXT_FREE_TEXT = [
+  [/\b([A-Z0-9_]+)=(?<=(?:TOKEN|SECRET|PASSWORD|API_KEY|APIKEY)[A-Z0-9_]*=)("(?:[^"\\]|\\[\s\S]|\\$)*(?:"|$)|'(?:[^'\\]|\\[\s\S]|\\$)*(?:'|$)|`(?:[^`\\]|\\[\s\S]|\\$)*(?:`|$)|\S+)/g, (_, name) => `${name}=${REDACTED}`, /=/],
+  [/\b(Bearer|Basic)\s+[A-Za-z0-9._~+/=-]+/g, (_, scheme) => `${scheme} ${REDACTED}`],
+  [/\b(bearer|basic)\s+(?=[A-Za-z0-9._~+/=-]*[0-9])[A-Za-z0-9._~+/=-]{16,}/gi, (_, scheme) => `${scheme} ${REDACTED}`],
+  [/\bAIza[0-9A-Za-z_-]{20,}/g, () => REDACTED],
+  [/(?:(?<![A-Za-z0-9_-])|(?<=\\[nrt]))sk-(?=[A-Za-z0-9_-]*[A-Z])(?=[A-Za-z0-9_-]*[a-z])(?=[A-Za-z0-9_-]*[0-9])[A-Za-z0-9_-]{20,}/g, () => REDACTED],
+]
+
 const SECRET_TEXT = [
   // Whole-value priority: a credential key's value is secret as ONE unit, whatever it
   // starts with ("Bearer ", "Basic ", even an already-redacted marker, which is untrusted input),
@@ -420,7 +430,7 @@ const SECRET_TEXT = [
   // trailing lone `\` is an escape still to come), or to the end while it is still open (a
   // streamed `KEY="…` is hidden until its quote arrives). The `=` is found first and the name
   // looked for behind it, so a long word of names is one pass, with or without a value after it.
-  [/\b([A-Z0-9_]+)=(?<=(?:TOKEN|SECRET|PASSWORD|API_KEY|APIKEY)[A-Z0-9_]*=)("(?:[^"\\]|\\[\s\S]|\\$)*(?:"|$)|'(?:[^'\\]|\\[\s\S]|\\$)*(?:'|$)|`(?:[^`\\]|\\[\s\S]|\\$)*(?:`|$)|\S+)/g, (_, name) => `${name}=${REDACTED}`, /=/],
+  CONTEXT_FREE_TEXT[0],
   // A block indicator with an anchor or tag before it (`password: &a |`, `!!str >-`,
   // `!<tag:yaml.org,2002:str> |`, one or two of them, each followed by a space or tab) hides
   // that property with the block: it serves as `password: |` and its block, the shape of the
@@ -528,16 +538,16 @@ const SECRET_TEXT = [
   // quote, its own escapes doubled, or to a bare quote that ends the outer string.
   [/(?=[A-Za-z0-9])(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))((?:[A-Za-z0-9]+[_-])*(?:passphrase|passw(?:or)?d|pass|secret(?:[_-](?:access[_-])?key)?|token|api[_-]?key|private[_-]?key|authorization))(\\"\s*:\s*)\\"((?:[^\\"]|\\[^\\"]|\\\\(?:\\[\s\S]|\\$|[^\\]|$)|\\$)*)(\\"|"|$)/gi, (_, name, sep, value, close) => `${name}${sep}\\"${REDACTED}${close}`, /\\"/],
   [/(?=[A-Za-z0-9])(?:(?<![A-Za-z0-9_-])|(?<=(?<![A-Za-z0-9_-])-{1,2})|(?<=\\[nrt]))((?:[A-Za-z][a-z0-9]*(?![a-z0-9])(?:[A-Z][a-z0-9]*(?![a-z0-9]))*?(?:Token|Secret(?:(?:Access)?Key)?|Passw(?:or)?d|Passphrase|Pass|ApiKey|PrivateKey|Authorization)|(?:api|private)Key))(\\"\s*:\s*)\\"((?:[^\\"]|\\[^\\"]|\\\\(?:\\[\s\S]|\\$|[^\\]|$)|\\$)*)(\\"|"|$)/g, (_, name, sep, value, close) => `${name}${sep}\\"${REDACTED}${close}`, /\\"/],
-  [/\b(Bearer|Basic)\s+[A-Za-z0-9._~+/=-]+/g, (_, scheme) => `${scheme} ${REDACTED}`],
+  CONTEXT_FREE_TEXT[1],
   // A scheme in another case with no name before it ("bearer x9…") hides only a token-shaped word:
   // 16+ characters of the token alphabet with a digit, so "bearer bonds" and "basic steps" stay
   // prose. A run still open at the end of the text is hidden until it closes, so a token streamed
   // in parts shows no prefix.
-  [/\b(bearer|basic)\s+(?=[A-Za-z0-9._~+/=-]*[0-9])[A-Za-z0-9._~+/=-]{16,}/gi, (_, scheme) => `${scheme} ${REDACTED}`],
+  CONTEXT_FREE_TEXT[2],
   [/\b(bearer|basic)\s+[A-Za-z0-9._~+/=-]+$/i, (_, scheme) => `${scheme} ${REDACTED}`],
-  [/\bAIza[0-9A-Za-z_-]{20,}/g, () => REDACTED],
+  CONTEXT_FREE_TEXT[3],
   // Standalone sk- credentials (the contract above): a whole key, then a still-open run at the end.
-  [/(?:(?<![A-Za-z0-9_-])|(?<=\\[nrt]))sk-(?=[A-Za-z0-9_-]*[A-Z])(?=[A-Za-z0-9_-]*[a-z])(?=[A-Za-z0-9_-]*[0-9])[A-Za-z0-9_-]{20,}/g, () => REDACTED],
+  CONTEXT_FREE_TEXT[4],
   [/(?:(?<![A-Za-z0-9_-])|(?<=\\[nrt]))sk-[A-Za-z0-9_-]+$/, () => REDACTED],
   // A line a cut padded with blanks (#406 F-B): a run of blanks as long as the keep is the cut's
   // padding, not text. Its head is gone — the name on it cannot be read (a child key arrives as
@@ -866,12 +876,12 @@ function redactMalformedExplicitKeys(s) {
   return done + s.slice(from)
 }
 
-// A quoted explicit name may have a value on its question line. Keep the credential
+// An explicit name may have a value on its question line. Keep the credential
 // word that gives later lines their context, but never serve the tail after it.
 function questionLineHits(s) {
   if (!s.includes('?')) return []
   const hits = []
-  const keys = /(^|[\r\n])([ \t]*(?:-[ \t]+)*\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2})("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*')([^\r\n]*)/g
+  const keys = /(^|[\r\n])([ \t]*(?:-[ \t]+)*\?[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2})("(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*'|[^ \t\r\n"'#]+)([^\r\n]*)/g
   const credential = text => {
     const plain = INVISIBLE_GATE.test(text) ? text.replace(INVISIBLE, '') : text
     return KEY_NAME_LOWER.test(plain) || KEY_NAME_CAMEL.test(plain)
@@ -1057,7 +1067,7 @@ function credentialCollections(s, open) {
       lines.push({ start: m.index, end: m.index + text.length, indent, content: text.slice(indent) })
     }
   }
-  const keys = /(^|[\r\n{[,])([ \t]*(?:-[ \t]+)*(?:[&!][^\s"'`,[\]{}]*[ \t]+){0,2})(?:\?([ \t]+[^\r\n]*)|((?:"(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*'|[A-Za-z_][A-Za-z0-9_ \t-]*))[ \t]*:[ \t]*)/g
+  const keys = /(^|[\r\n{[,])([ \t]*(?:-[ \t]+)*(?:[&!][^\s"'`,[\]{}]*[ \t]+){0,2})(?:\?([ \t]+[^\r\n]*)|((?:"(?:[^"\\\r\n]|\\[^\r\n])*"|'(?:[^'\r\n]|'')*'|[A-Za-z_](?:[A-Za-z0-9_-]|[ \t]+(?=[A-Za-z0-9_-]))*))[ \t]*:[ \t]*)/g
   const regions = []
   let lineIndex = 0
   for (let m = keys.exec(s); m; m = keys.exec(s)) {
@@ -1151,17 +1161,23 @@ export function collectionKeep(s, max) {
   return { raw: prefix + stack.join('') + quote + (escaped ? '\\' : '') + '\n' }
 }
 
+function redactCollectionSpan(s) {
+  for (const [re, fn, gate] of CONTEXT_FREE_TEXT) if (!gate || gate.test(s)) s = s.replace(re, fn)
+  return s
+}
+
 function collectionText(s, region) {
+  const kept = redactCollectionSpan
   if (!region.complete) {
     const ending = s.slice(region.valueStart, region.end).match(/(?:\r\n|\r|\n)$/)?.[0] || ''
-    return s.slice(region.start, region.valueStart) + REDACTED + ending
+    return kept(s.slice(region.start, region.valueStart)) + REDACTED + ending
   }
   let out = '', from = region.start
   for (const leaf of region.leaves) {
-    out += s.slice(from, leaf.start) + REDACTED
+    out += kept(s.slice(from, leaf.start)) + REDACTED
     from = leaf.end
   }
-  return out + s.slice(from, region.end)
+  return out + kept(s.slice(from, region.end))
 }
 
 

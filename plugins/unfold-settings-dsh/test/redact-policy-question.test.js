@@ -8,6 +8,11 @@ const SECOND = ['Olive', '9Peach'].join('')
 const WRAPS = [['LF', s => s], ['CRLF', s => s.replace(/\n/g, '\r\n')], ['CR', s => s.replace(/\n/g, '\r')], ['nested', s => 'outer:\n' + s.split('\n').map(line => '  ' + line).join('\n')]]
 
 const HEADS = [
+ ['unquoted first word', '? db password', '? db password'],
+ ['unquoted credential name', '? db_password', '? db_password'],
+ ['unquoted credential word', '? password', '? password'],
+ ['unquoted camel name', '? accessToken', '? accessToken'],
+
  ['quoted name then credential word', '? "db" password', '? "db" password'],
  ['credential quoted name', '? "password"', '? "password"'],
  ['single-quoted credential', "? 'token'", "? 'token'"],
