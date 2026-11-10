@@ -46,19 +46,21 @@ const BLOCKS: [string, string, string[]][] = [
   ['const SECRET_KEY =', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js']],
   ['let OPEN_END = false', 'unfold-mind-dsh/src/redact.js', REDACTION_COPIES],
   ['function laterLine(m, nl, indent, before, name, sep, props, tail, run, br, indicator, body, prefix, q, close, offset, string) {', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js']],
+  ['const CONTEXT_FREE_TEXT = [', 'unfold-mind-dsh/src/redact.js', REDACTION_COPIES],
   ['const SECRET_TEXT = [', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js']],
   ['const SECRET_VALUES = [', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js']],
   ...['const INVISIBLE_GATE =', 'const INVISIBLE =', 'const INVISIBLE_NAME =', 'const NAME_STEM =', 'const INVISIBLE_EXPLICIT =', 'export function nameText(s) {', 'export function redactText(s, open = false) {', "export function redact(value, key = '') {"].map(
     (declaration): [string, string, string[]] => [declaration, 'unfold-mind-dsh/src/redact.js', REDACTION_COPIES],
   ),
   ['export function secretsIn(s, open = false) {', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js']],
+  ['function withoutCollections(s, regions) {', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js']],
   ['const QUOTED_SECRET = [', 'unfold-events-dsh/src/window.js', ['unfold-mind-dsh/src/mind.js']],
   ['const YAML_KEY = [', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js', 'unfold-mind-dsh/src/mind.js']],
   ['function yamlBlockEnd(', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js', 'unfold-mind-dsh/src/mind.js']],
   ['function redactYamlBlocks(', 'unfold-mind-dsh/src/redact.js', ['unfold-events-dsh/src/client/redact.js', 'unfold-events-dsh/src/window.js', 'unfold-settings-dsh/src/redact.js']],
   ['function redactMalformedExplicitKeys(s) {', 'unfold-mind-dsh/src/redact.js', REDACTION_COPIES],
   // #507's explicit-key value scan: hidden on every copy, and remembered where secretsIn exists.
-  ...['const KEY_NAME_LOWER =', 'const KEY_NAME_CAMEL =', 'const KEY_PROPS =', 'const KEY_BLOCK =', 'function explicitKeyName(text) {', 'function credentialName(name) {', 'function explicitLineValue(content) {', 'function explicitColonHits(', 'function explicitKeyHits(s) {', 'function escapedKeyHits(s) {', 'function redactExplicitKeyValues(s) {'].map(
+  ...['const KEY_NAME_LOWER =', 'const KEY_NAME_CAMEL =', 'const KEY_PROPS =', 'const KEY_BLOCK =', 'function explicitKeyName(text) {', 'function credentialName(name) {', 'function explicitLineValue(content) {', 'function explicitColonHits(', 'function explicitKeyHits(s) {', 'function escapedKeyHits(s) {', 'function questionLineHits(s) {', 'function redactQuestionLines(s) {', 'function collectionQuote(s, at, limit) {', 'function collectionProps(s, at, limit) {', 'function collectionLeaf(s, start, end) {', 'function flowCollection(s, start, limit = s.length) {', 'function blockCollection(s, lines, first, parentIndent, open) {', 'function collectionBoundary(s, parsed, inFlow, limit = s.length) {', 'function credentialCollections(s, open) {', 'function collectionText(s, region) {', 'function redactCollectionSpan(s) {', 'export function collectionKeep(s, max) {', 'function redactScalarText(s, open) {', 'function redactExplicitKeyValues(s) {'].map(
     (declaration): [string, string, string[]] => [declaration, 'unfold-mind-dsh/src/redact.js', REDACTION_COPIES],
   ),
   ['const ESCAPED_SECRET = [', 'unfold-events-dsh/src/window.js', ['unfold-mind-dsh/src/mind.js']],

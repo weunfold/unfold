@@ -9,7 +9,7 @@ import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
 import { loadDefinitions } from '../src/definitions.js'
 import { MindStream } from '../src/mind.js'
-import { REDACTED, redact, redactText, secretsIn } from '../src/redact.js'
+import { REDACTED, redact, redactText, secretsIn, nameText} from '../src/redact.js'
 
 const TABLE = JSON.parse(readFileSync(new URL('./fixtures/redact-348.json', import.meta.url), 'utf8'))
 const VALUE = /hunter2/
@@ -126,7 +126,7 @@ const KEPT = CONTINUED.filter(([, , want]) => want.includes(SECRET))
 // A block indicator on a later line: its lines are not remembered, as under one on the key's line.
 const LATER_BLOCK = /^[ \t]+(?:[&!][^\s"'`]*[ \t]+){0,2}[|>][-+0-9]*(?:[ \t]*#[^\r\n]*)?[ \t]*$/m
 // The name a row's key line holds, served again after a cut.
-const nameOf = (input) => (input.includes(FILL['{camel}']) ? FILL['{camel}'] : FILL['{name}'])
+const nameOf = (input) => (nameText(input).includes(FILL['{camel}']) ? FILL['{camel}'] : nameText(input).includes(FILL['{name}']) ? FILL['{name}'] : FILL['{parent}'])
 // Where a cut can land before the value: the end of each line before it (a CRLF's CR), and right
 // before the value. A blank run there keeps each line as it reads: a key line or a line under it
 // gains trailing blanks, and a blank line stays blank.

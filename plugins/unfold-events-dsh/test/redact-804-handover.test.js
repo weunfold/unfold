@@ -38,7 +38,7 @@ for (const [path, redactor] of [['Events browser', source], ['Events window', wi
     if (redactor.secretsIn) {
       const kept = redactor.secretsIn(input)
       assert.ok(kept.includes(VALUE), 'the hidden value is remembered')
-      if (shape.startsWith('dash-column')) assert.deepEqual(redactor.secretsIn(input, true), [], 'an open value line is not remembered')
+      if (shape.startsWith('dash-column')) assert.deepEqual(redactor.secretsIn(input, true), input.includes('"password" extra') ? ['extra'] : [], 'an open value line is not remembered')
       assert.ok(!kept.reduce((text, value) => text.split(value).join('[redacted]'), `later ${VALUE}`).includes(VALUE), 'a later bare repeat is masked')
     }
   })

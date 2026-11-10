@@ -69,12 +69,16 @@ export function timed(fn, ceiling = TEXT_CEILING_MS) {
 // The reference pieces are the fuzz's shapes a redaction rule can backtrack on: whitespace runs,
 // key names in each form, separators, open and closed quotes, backslashes, escaped quotes, line
 // ends and schemes. The text is 80k characters from seed 0x531, built once; every run pays the
-// same work. It is the list #553 measured as linear in the input.
+// same work. Policy B withholds malformed credential collections as a whole, so random
+// flow openers would short-circuit this scalar reference. Their opening delimiters are x instead;
+// seed, size, samples, margins and ceilings stay fixed. Measured CPU at 80k: the original
+// reference 8.94 ms before the policy and 1.45 ms after it; this scalar reference 8.07/9.35 ms.
+// At 160k the scalar pass was 15.88/17.04 ms, retaining the linear work #553 requires.
 const REFERENCE_PIECES = [
   ' ', '\t', ' \t', '\n', '\n  ', 'password', 'db_password', 'DB_PASS', 'accessToken',
   'ClientSecret', 'DbPass', 'API_TOKEN', '--token', '-pass', 'token', '=', ': ', ' = ', '":',
   '\\":', ': |\n', ': >-\n', '"', "'", '`', '\\', '\\\\', '\\"', '\\"\\"', 'bearer ',
-  'basic ', 'Bearer ', 'x9', 'a', 'word ', '{"', '{\\"', '_', '-',
+  'basic ', 'Bearer ', 'x9', 'a', 'word ', 'x"', 'x\\"', '_', '-',
 ]
 const REFERENCE_SEED = 0x531
 const REFERENCE_SIZE = 80_000

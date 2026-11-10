@@ -39,13 +39,18 @@ for (const [path, secretsIn] of [['Events browser', clientSecrets]]) {
   for (const [form, key, shape, input] of MEMORY_ROWS) {
     test(`#785: ${path} remembers only an ended value (${form}, ${shape})`, () => {
       const text = input(key)
+      // Policy A also remembers the ended question-line value `extra`.
+      const questionValue = text.includes('"password" extra') ? ['extra'] : []
       const kept = secretsIn(text)
       assert.ok(kept.includes(VALUE), 'the hidden value is remembered')
       assert.ok(!kept.includes('gapword'), 'the gap word is never remembered')
       assert.ok(!kept.some((value) => value.includes('childname')), 'the child name is never remembered')
-      assert.deepEqual(secretsIn(text, true), [], 'an open value line is not remembered')
-      assert.deepEqual(secretsIn(`${text}   `, true), [], 'trailing spaces do not close the line')
-      assert.ok(secretsIn(`${text}\n`, true).includes(VALUE), 'a line break closes the value')
+      assert.deepEqual(secretsIn(text, true), questionValue, 'an open value line is not remembered')
+      assert.deepEqual(secretsIn(`${text}   `, true), questionValue, 'trailing spaces do not close the line')
+      if (shape === 'map child') {
+        assert.ok(!secretsIn(`${text}\n`, true).includes(VALUE), 'policy B waits for the collection to close')
+        assert.ok(secretsIn(`${text}\nnext: shown`, true).includes(VALUE), 'dedent closes the collection')
+      } else assert.ok(secretsIn(`${text}\n`, true).includes(VALUE), 'a line break closes the scalar value')
       assert.ok(!masked(`later ${VALUE} stays`, kept).includes(VALUE), 'a bare repeat is masked')
     })
   }
