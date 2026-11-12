@@ -3,7 +3,7 @@
   "private": true,
   "description": "The pinned DeepSeek Harness packages for development and tests.",
   "dependencies": {
-    "@deepseek-ai/dsh": "0.2.2-rc.1",
+    "@deepseek-ai/dsh": "0.2.2-rc.2",
     "oxlint": "1.76.0"
   },
   "overrides": {

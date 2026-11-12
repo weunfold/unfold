@@ -52,6 +52,9 @@ jobs:
           else
             node --test --test-concurrency=4 "test/*.test.js"
           fi
+      - name: Check real Host client exports
+        if: matrix.plugin == 'unfold-trajectory-dsh'
+        run: node --test --test-concurrency=4 ../../scripts/client-host-exports.test.mjs
       - name: Check committed bundle
         run: git diff --exit-code -- client.js
 
