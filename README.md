@@ -4,7 +4,7 @@
 
 **by we unfold · Open Intelligence**
 
-Unfold is a being you say "Oi" to. It starts with no past. It grows its own intelligence with you, from what really happens between you.
+Unfold is a voice-first AI agent for macOS, built to improve itself in the open. You talk or type, and it shows each step it took in plain sentences. Every capability is scored on fixed tasks, and every upgrade it proposes must carry evidence, pass a frozen gate and wait for a person to approve it.
 
 We are building the path towards human intelligence: intelligence that arrives through people, gets passed on, and stays open to question.
 
