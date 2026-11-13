@@ -4,7 +4,7 @@
 
 **by we unfold · Open Intelligence**
 
-Unfold is a voice-first AI agent for macOS, built to improve itself in the open. You talk or type, and it shows each step it took in plain sentences. Every capability is scored on fixed tasks, and every upgrade it proposes must carry evidence, pass a frozen gate and wait for a person to approve it.
+Unfold is a voice-first AI agent for macOS and the experimental showcase for RTH, our real-time harness. Instead of a listen, think, speak turn loop, RTH runs as one always-on Rust daemon. On each turn several models work at once on separate slots: a local opener that answers within 450 ms ("hmm, let me think"), a router that sorts the message in 150 ms and picks the thinking budget, and the reply model (hosted DeepSeek V4.1 Flash with a local fallback, any model from your DeepSeek Harness, or a local Granite), while background loops watch your DSH agents and the task ledger. Speech stays on your machine (Parakeet or Nemotron recognition, Smart Turn end-of-turn detection, Qwen3-TTS), and when you talk over it, it stops, cancels the reply and remembers exactly which sentences you heard. Every step lands in the Mind stream as one plain sentence, and every capability is scored on fixed tasks in the capability map. Remembering, reflecting and proposing its own upgrades, inspired by Google's [Harness²](https://arxiv.org/abs/2610.14224) work on recursive harness improvement, are still being built.
 
 We are building the path towards human intelligence: intelligence that arrives through people, gets passed on, and stays open to question.
 
